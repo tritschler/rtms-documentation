@@ -3,6 +3,7 @@ site_description: Documentation technique, d'architecture et de conformité de l
 site_author: 3TS Consulting SRL
 copyright: Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
 
+dev_addr: '127.0.0.1:8008'
 docs_dir: docs
 
 theme:

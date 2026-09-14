@@ -11,7 +11,7 @@ This repository serves as the **Single Source of Truth** for overall system arch
 To browse this documentation with the interactive, dark/light themed Material portal:
 
 ```bash
-# Start local live-reloading web server (http://127.0.0.1:8000)
+# Start local live-reloading web server (http://127.0.0.1:8008)
 uv run mkdocs serve
 
 # Build production static website (output: site/)
