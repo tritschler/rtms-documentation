@@ -1,0 +1,97 @@
+site_name: RTMS Documentation
+site_description: Documentation technique, d'architecture et de conformité de la plateforme RTMS (Real-Time Monitoring & Security).
+site_author: 3TS Consulting SRL
+copyright: Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: fr
+  palette:
+    # Mode sombre par défaut
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Passer au mode clair
+    # Mode clair
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Passer au mode sombre
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Accueil: index.md
+  - Architecture:
+      - Vue d'ensemble: architecture/overview.md
+      - Réseau & WireGuard: architecture/wireguard.md
+      - Modèles de données:
+          - Scanner Data Model: architecture/data_models/scanner_data_model.md
+          - NVD Data Model: architecture/data_models/nvd_data_model.md
+  - Composants:
+      - Scanner:
+          - Prérequis techniques (FR): components/scanner/technical_requirements_fr.md
+          - Prérequis techniques (EN): components/scanner/technical_requirements_en.md
+          - Mode Standalone: components/scanner/stand_alone.md
+          - Versions & Changelog: components/scanner/versions.md
+          - Docker & PyInstaller: components/scanner/docker.md
+          - Commandes Bettercap: components/scanner/bettercap_commands.md
+          - Ressources & Tests HTTP: components/scanner/resources.md
+      - Web:
+          - Documentation technique: components/web/technical_documentation.md
+          - Déploiement Nginx & Frontend: components/web/frontend_nginx_setup.md
+          - Guide SSO Keycloak & OIDC: components/web/sso_keycloak_guide.md
+          - Démarrage: components/web/startup.md
+      - Local Agent:
+          - Architecture technique: components/local-agent/technical_doc.md
+          - Guide d'installation: components/local-agent/install.md
+      - NVD Microservice:
+          - Documentation NVD: components/nvd/rtms_nvd_documentation.md
+          - Guide d'installation: components/nvd/install.md
+          - Démarrage & Ingestion: components/nvd/readme_startup.md
+          - Exportation de rapports CVE: components/nvd/readme_export_cve.md
+      - Admin:
+          - Guide d'administration: components/admin/admin_guide.md
+  - Plugins:
+      - Spécification & Développement: plugins/plugin_specification.md
+  - Conformité & Légal:
+      - Directive NIS2: compliance/nis2.md
+      - Stratégie de Release: compliance/release_strategy.md
+      - Licences: compliance/licenses.md
+      - Documents Légaux:
+          - EULA: compliance/legal/EULA.md
+          - Normes appliquées: compliance/legal/Applied_standards.md
+          - Déclaration UE: compliance/legal/EU_declaration_template.md
+          - Évaluation des risques: compliance/legal/risk_assessmnent.md
