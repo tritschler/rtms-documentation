@@ -246,6 +246,63 @@ To prevent misleading red "Stale / Offline" indicators on active infrastructure:
 - **Visual Design**: Rendered as an emerald green ring (stroke: `#10b981`, translucent emerald fill `rgba(16, 185, 129, 0.18)`, drop shadow) instead of a solid circle, visually denoting a deduced operational status.
 - **Filter Integration**: Presumed online excluded devices appear under the "Online" view filter and are excluded from the "Stale" filter.
 
+---
+
+## Scanner Bearer Token Lifecycle Management (`admin.scanner_tokens`)
+
+To adhere to Zero Trust principles and prevent distributed network probes from accessing the central PostgreSQL server directly (port 5432), RTMS implements a dedicated, decoupled **Scanner Token Lifecycle Management** subsystem.
+
+### Architecture & Security Model
+- **Decoupled REST API**: Network probes (`rtms-scanner`) connect to `rtms-web` exclusively over HTTPS (`TCP/443` or `TCP/8000`).
+- **Cryptographic Hashing**: Cleartext tokens are never stored in the database. When an administrator creates a token, the raw token string (prefixed `rtms_st_...`) is presented to the user **exactly once**. The backend calculates and stores only the `SHA-256` hash in `admin.scanner_tokens.token_hash`.
+- **Strict 365-Day Ceiling**: In alignment with enterprise key management standards and NIS2 access control requirements, token lifespans are strictly capped at a maximum of **365 days (1 year)**. Attempting to create or renew a token with an expiration exceeding 365 days results in an HTTP 422 validation error.
+- **Instant Revocation & Rotation**: Administrators can revoke compromised or decommissioned probes instantly from the web console, immediately terminating their access.
+
+### Database Schema (`admin.scanner_tokens`)
+```sql
+CREATE TABLE IF NOT EXISTS admin.scanner_tokens (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    token_hash VARCHAR(64) NOT NULL UNIQUE,
+    expires_at TIMESTAMPTZ NOT NULL,
+    last_used_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(100)
+);
+CREATE INDEX IF NOT EXISTS idx_scanner_tokens_hash ON admin.scanner_tokens(token_hash);
+```
+
+### REST API Endpoints (`backend/main.py`)
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/scanner/tokens` | List all registered scanner tokens with validity and expiration | Admin Only (JWT) |
+| `POST` | `/api/scanner/tokens` | Generate a new Bearer token (returns raw token once) | Admin Only (JWT, max 365 days) |
+| `DELETE` | `/api/scanner/tokens/{id}` | Revoke an existing token immediately | Admin Only (JWT) |
+| `POST` | `/api/scanner/renew-token` | Renew/rotate a scanner token before expiration | Scanner Bearer Auth (max 365 days) |
+| `POST` | `/api/scanner/heartbeat` | Report probe status, interface IPs, and active media policy | Scanner Bearer Auth |
+| `GET` | `/api/scanner/config` | Pull dynamic scanner configuration and polling interval | Scanner Bearer Auth |
+| `POST` | `/api/scanner/sync-results` | Ingest discovery scans, open ports, and security anomalies | Scanner Bearer Auth |
+
+---
+
+## Central VPS Support Ticketing Hub
+
+RTMS includes an integrated, enterprise-grade **Customer Support & Tele-Assistance Hub** directly accessible from the navigation menu (`/support`).
+
+### Architecture & Reverse Proxy Model
+- **Central Gateway**: 3TS Consulting maintains a high-availability support hub on an OVH Cloud VPS (`vps-054fcfa2.vps.ovh.net`).
+- **Reverse Proxy Protection**: The browser client does not communicate directly with the external VPS. Instead, the RTMS FastAPI backend acts as an authenticated proxy gateway:
+  - Validates the local user's JWT session.
+  - Injects tenant identification and license metadata into the support payload.
+  - Relays the request over mutual HTTPS with bearer authorization to the VPS ticketing hub.
+- **Data Protection**: Client diagnostic attachments (sanitized logs, screenshots) are transferred over encrypted TLS and linked to the customer's organization profile.
+
+### REST API Endpoints (`backend/main.py`)
+- `POST /api/support/tickets`: Accepts ticket category, subject, description, priority, and optional attachments, returning a unique support ticket ID (e.g. `TICK-2026-XXXX`).
+- `GET /api/support/tickets/history`: Retrieves the customer's historical ticket log, resolution status, and technician notes from the VPS hub.
+
+
 
 
 

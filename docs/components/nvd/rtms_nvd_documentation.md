@@ -76,3 +76,42 @@ Le processus de démarrage de `rtms-nvd` (via `main_rtms_nvd.py`) exécute séqu
 
 > [!NOTE]
 > Les tables de l'inventaire (`admin.tenant_assets`, `admin.tenant_asset_software`) sont requêtées à l'aide de vues complexes (telles que `admin.vulnerability_view`) afin d'établir un lien mathématique exact (CPE Matching) avec les tables NVD nouvellement peuplées lors de l'exécution de la méthode `correlate_cpes`.
+
+---
+
+## 3. Sécurité et Durcissement PostgreSQL (Principe du Moindre Privilège)
+
+### Justification de l'Accès Direct à la Base de Données
+Contrairement aux sondes distantes `rtms-scanner` qui sont découplées et dialoguent exclusivement via l'API REST HTTPS, le microservice `rtms-nvd` conserve une connexion SQL directe vers PostgreSQL. Ce choix d'ingénierie repose sur des impératifs stricts de volumétrie et de performance :
+1. **Volumétrie Massive** : La base NVD comporte plus de **250 000 vulnérabilités CVE** et plusieurs millions de critères CPE.
+2. **Streaming Haute Performance (Bulk COPY)** : L'amorçage initial injecte des archives compressées en flux continu (`COPY`) directement dans le moteur relationnel.
+3. **Corrélation Relationnelle Complexe (CPE Matching)** : Le croisement entre les critères CPE et les logiciels inventoriés sollicite les index GiST/GIN et les jointures SQL natives. Faire transiter ces données par des API REST intermédiaires introduirait une surcharge mémoire et une latence réseau inacceptables.
+
+### Script de Durcissement : `harden_nvd_user.sql`
+Afin d'appliquer le principe de moindre privilège (*Least Privilege*) et d'empêcher tout risque de compromission latérale, `rtms-nvd` utilise un utilisateur de base de données dédié : **`rtms_nvd_user`**.
+
+Le script `harden_nvd_user.sql` applique les règles de sécurité suivantes :
+
+```sql
+-- 1. Droits complets UNIQUEMENT sur le schéma nvd
+GRANT USAGE ON SCHEMA nvd TO rtms_nvd_user;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA nvd TO rtms_nvd_user;
+GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA nvd TO rtms_nvd_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA nvd GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO rtms_nvd_user;
+
+-- 2. Confinement du Search Path
+ALTER ROLE rtms_nvd_user SET search_path TO nvd;
+
+-- 3. Révocation STRICTE sur les schémas sensibles
+REVOKE ALL ON SCHEMA admin FROM rtms_nvd_user;
+REVOKE ALL ON SCHEMA scanner FROM rtms_nvd_user;
+REVOKE ALL ON SCHEMA public FROM rtms_nvd_user;
+REVOKE ALL ON ALL TABLES IN SCHEMA admin FROM rtms_nvd_user;
+REVOKE ALL ON ALL TABLES IN SCHEMA scanner FROM rtms_nvd_user;
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM rtms_nvd_user;
+```
+
+Grâce à ce durcissement :
+- `rtms_nvd_user` ne peut ni lire ni modifier les tables sensibles d'authentification (`admin.users`, hashs bcrypt, secrets MFA), ni la topologie des scans (`scanner.*`).
+- Même en cas de vulnérabilité applicative dans le traitement des flux NIST, la surface d'attaque reste strictement cantonnée aux tables publiques de vulnérabilités CVE du schéma `nvd`.
+

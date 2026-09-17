@@ -53,15 +53,21 @@ Pour les environnements où la conteneurisation n'est pas possible ou souhaitée
 Pour que RTMS puisse fonctionner et générer ses rapports de conformité NIS2, des flux réseaux spécifiques doivent être autorisés.
 
 ### Flux sortants (Outbound - Internet)
-Le serveur hébergeant RTMS doit pouvoir joindre internet (directement ou via un proxy d'entreprise) pour les services suivants :
-*   `TCP/443` vers `services.nvd.nist.gov` : Synchronisation incrémentale de la base de données des vulnérabilités.
+Le serveur hébergeant RTMS Web et les microservices doit pouvoir joindre internet (directement ou via un proxy d'entreprise) pour les services suivants :
+*   `TCP/443` vers `services.nvd.nist.gov` : Synchronisation incrémentale de la base de données des vulnérabilités NIST NVD (microservice `rtms-nvd`).
+*   `TCP/443` vers `vps-054fcfa2.vps.ovh.net` : Hub central de support technique et de télé-assistance (3TS Assistance).
 *   `TCP/443` vers le serveur iTop (si le module CMDB est activé).
 *   `TCP/587` (ou 465) vers le serveur SMTP défini par le client : Envoi des alertes critiques et des rapports PDF d'audit.
 
-### Flux internes (Inbound/Outbound - LAN)
-*   **Périmètre de scan :** Le serveur RTMS doit avoir des routes réseau actives vers tous les sous-réseaux (VLANs) qu'il est censé auditer.
-*   **Filtrage interne :** Il est recommandé de créer une exception dans les pare-feux internes (IDS/IPS) pour l'adresse IP du scanner RTMS, afin d'éviter que ses requêtes de découverte légitimes ne déclenchent de fausses alertes au sein du SOC local.
-*   **Accès Dashboard :** Ouverture du port `TCP/8501` (ou port personnalisé via reverse proxy) pour permettre aux administrateurs d'accéder à l'interface web locale.
+### Flux internes (Inbound/Outbound - LAN & Architecture Découplée)
+*   **Sondes de scan distribuées (`rtms-scanner`)** :
+    *   Les sondes distantes communiquent **exclusivement en HTTPS (`TCP/443` ou `TCP/8000`)** avec le serveur RTMS Web via l'API REST sécurisée par jeton Bearer (`RTMS_SERVER_URL` + `RTMS_SCANNER_TOKEN`).
+    *   **Aucun flux PostgreSQL (`TCP/5432`) n'est requis ni recommandé** entre les sondes et la base de données centrale.
+*   **Microservice NVD & Base de Données (`TCP/5432`)** :
+    *   Le flux PostgreSQL direct est strictement réservé au réseau interne/local hébergeant `rtms-nvd` (pour le streaming de 250k+ CVEs et la corrélation CPE), sécurisé par le rôle à moindres privilèges `rtms_nvd_user` (restreint au schéma `nvd`).
+*   **Périmètre de scan LAN :** Le serveur ou la sonde RTMS doit disposer d'interfaces ou de routes réseau actives vers tous les sous-réseaux (VLANs) à inventorier (ARP, ICMP, Nmap).
+*   **Filtrage interne :** Il est recommandé de créer une exception dans les pare-feux internes (IDS/IPS) pour l'adresse IP du scanner RTMS, afin d'éviter les faux positifs.
+*   **Accès Dashboard Console :** Ouverture du port `TCP/443` (ou `TCP/8080` / `TCP/80`) vers le serveur RTMS Web pour l'accès des administrateurs à la console React.
 
 ---
 

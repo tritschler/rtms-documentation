@@ -1,17 +1,30 @@
-# 3TS RTMS: Standalone Mode (Local Storage)
+# 3TS RTMS: Scanner Operational Modes & Standalone Storage
 
-## Overview
-The 3TS Real-Time Network Scanner (RTMS) can operate in a fully autonomous **Standalone Mode**. When the PostgreSQL database is disabled, the scanner automatically routes all discovered assets, open ports, and security alerts to local flat files (CSV, JSON, and LOG). 
+## Operational Modes Summary
 
-This mode is highly recommended for tactical deployments (e.g., running from a USB drive, a temporary virtual machine, or a lightweight sensor like a Raspberry Pi) where setting up a full database server is impractical or undesirable.
+The RTMS Scanner probe (`rtms-scanner`) supports three primary operating models:
 
-## Configuration
-To activate Standalone Mode, modify your main configuration file:
+| Mode | Communication / Storage | Network Requirements | Best Used For |
+| :--- | :--- | :--- | :--- |
+| **Decoupled API Mode (Recommended)** | Centralized `rtms-web` via HTTPS REST API (`/api/scanner/*`) | Port 443 / HTTPS to RTMS Web Server | Multi-VLAN enterprise probes, remote branch offices, zero-trust network segments. **No direct database access required.** |
+| **Direct Database Mode** | Direct PostgreSQL queries via `psycopg2` | Port 5432 to PostgreSQL Server | Co-located single-host installations where the scanner runs alongside the database. |
+| **Autonomous Standalone Mode** | Local flat files (`CSV`, `JSON`, and `LOG`) | 100% air-gapped / offline (Zero network egress) | Tactical deployments, pen-testing USB drives, air-gapped forensic audits, or lightweight Raspberry Pi sensors. |
+
+---
+
+## Autonomous Standalone Mode (Local Storage)
+
+When central servers and PostgreSQL are disabled, the scanner operates in fully autonomous **Standalone Mode**. It routes all discovered assets, open ports, and security alerts to local flat files on disk.
+
+### Configuration
+To activate Standalone Mode, disable database and API connectivity in `scanner.properties` or environment variables:
 
 ```properties
-# Disable PostgreSQL integration to force local file storage
+# Disable database and central server sync to force local file storage
 postgres.enabled=false
 ```
+
+Or omit `RTMS_SERVER_URL` and `ENV_POSTGRES_PASSWORD` when launching the daemon.
 
 ## Output Architecture
 Data is automatically organized hierarchically by Organization Name and Network CIDR to prevent data overlap across different environments. All files are generated inside the data/output/ directory.

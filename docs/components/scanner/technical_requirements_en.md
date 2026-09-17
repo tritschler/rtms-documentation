@@ -53,15 +53,21 @@ For environments where containerization is not possible or desired.
 For RTMS to function and generate its NIS2 compliance reports, specific network flows must be allowed.
 
 ### Outbound Flows (Internet)
-The server hosting RTMS must be able to reach the internet (directly or via a corporate proxy) for the following services:
-*   `TCP/443` to `services.nvd.nist.gov`: Incremental synchronization of the vulnerability database.
+The server hosting RTMS Web and microservices must be able to reach the internet (directly or via a corporate proxy) for the following services:
+*   `TCP/443` to `services.nvd.nist.gov`: Incremental synchronization of the NIST NVD vulnerability database (`rtms-nvd`).
+*   `TCP/443` to `vps-054fcfa2.vps.ovh.net`: Central technical support & ticketing gateway (3TS Assistance).
 *   `TCP/443` to the iTop server (if the CMDB module is enabled).
 *   `TCP/587` (or 465) to the SMTP server defined by the client: Sending critical alerts and PDF audit reports.
 
-### Internal Flows (Inbound/Outbound - LAN)
-*   **Scan Scope:** The RTMS server must have active network routes to all subnets (VLANs) it is expected to audit.
-*   **Internal Filtering:** It is recommended to create an exception in internal firewalls (IDS/IPS) for the RTMS scanner's IP address, to prevent its legitimate discovery requests from triggering false alerts within the local SOC.
-*   **Dashboard Access:** Open port `TCP/8501` (or custom port via reverse proxy) to allow administrators to access the local web interface.
+### Internal Flows (Inbound/Outbound - LAN & Decoupled Architecture)
+*   **Distributed Scanner Probes (`rtms-scanner`)**:
+    *   Remote probes communicate **exclusively over HTTPS (`TCP/443` or `TCP/8000`)** with the RTMS Web Server using Bearer token authentication (`RTMS_SERVER_URL` + `RTMS_SCANNER_TOKEN`).
+    *   **No PostgreSQL traffic (`TCP/5432`) is required or recommended** between network probes and the central database.
+*   **NVD Microservice & Database (`TCP/5432`)**:
+    *   Direct PostgreSQL traffic is strictly confined to the local internal server tier hosting `rtms-nvd` (for streaming 250k+ CVEs and fast CPE matching), hardened using the least-privilege role `rtms_nvd_user` (restricted to schema `nvd`).
+*   **Scan Scope:** The RTMS probe must have active network routes/interfaces to all subnets (VLANs) it is configured to audit.
+*   **Internal Filtering:** It is recommended to create an exception in internal firewalls (IDS/IPS) for the RTMS scanner's IP address, to prevent discovery requests from triggering false SOC alerts.
+*   **Dashboard Console Access:** Port `TCP/443` (or `TCP/8080` / `TCP/80` via reverse proxy) to allow operators and administrators to access the React web interface.
 
 ---
 
