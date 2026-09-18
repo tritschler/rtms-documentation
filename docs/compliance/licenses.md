@@ -56,7 +56,11 @@ During each verification, the validator runs the following DB-First algorithm:
 For a license (whether from the file or the database) to grant the `PRO` plan, it must pass three gates:
 
 * **Cryptographic Lock:** The RSA-2048 public key decrypts the Base64 signature and verifies that it matches the `raw_payload` byte-for-byte. If anyone modifies even a single character of the payload (e.g., trying to alter `max_hosts`), the signature is broken.
-* **Hardware Lock (Hardware Footprint):** The validator runs `sudo dmidecode -s system-uuid` and compares the resulting string with the `machine_id` stored in the license. If the strings do not match (e.g., in the case of a cloned VM or a disk image copied to another server), the license is rejected.
+* **Hardware Lock (Hardware Footprint):** The validator resolves the host machine's hardware identity:
+  * **Bare-metal Linux:** reads SMBIOS `product_uuid` from `/sys/class/dmi/id/product_uuid` (or `dmidecode`).
+  * **macOS:** reads `IOPlatformUUID` via `system_profiler SPHardwareDataType`.
+  * **VMware ESXi / Workstation:** normalizes SMBIOS 2.6+ Little-Endian byte-swapping with vCenter formats. Cloned/copied VMs generate new UUIDs and are rejected; legitimately moved VMs preserve their UUID.
+  * **Docker:** accesses the underlying host hardware through read-only host mounts (`/etc/host-machine-id` or `/sys/class/dmi/id/product_uuid`). Environment variable overrides (`RTMS_HARDWARE_ID`) are disallowed to prevent spoofing.
 * **Temporal Lock:** It compares the current time (in strict UTC) with the `expires_at` date. If the expiration date has passed by less than 15 days, it continues running while displaying a grace period warning (`Grace period active`). Beyond that, the license expires and `DEMO` mode is activated.
 
 ---
@@ -67,6 +71,7 @@ When a user uploads a new license via the Subscription interface, the backend pe
 
 ### Step 1: Schema Verification
 The uploaded JSON file is parsed, and the backend verifies that all mandatory fields are present: `tenant_id`, `license_key_id` (or `license_id`), `raw_payload`, `cryptographic_signature`, and `expires_at`.
+* Both individual license files and multi-license bundles (`{"licenses": [...]}`) are supported.
 * **If missing:** The server immediately rejects the file with a `400 Bad Request` ("Invalid license file schema").
 
 ### Step 2: Cryptographic Validation
@@ -79,3 +84,57 @@ The `raw_payload` is reformatted using strict canonical JSON encoding to ensure 
 
 ### What happens upon success?
 If the license passes both validation steps, the backend securely writes the new license into the `admin.product_license` database table and overwrites the `license.key` file on disk. The UI then automatically refreshes to display the newly activated license details and limits.
+
+---
+
+## 5. Automated Renewal & Upgrade Workflow
+
+RTMS provides an automated, end-to-end renewal cycle that eliminates the need for clients to manually re-run hardware extraction tools.
+
+```
+┌────────────────────────────────┐         Direct API / Email          ┌────────────────────────────────┐
+│   Client RTMS Web Portal       │ ──────────────────────────────────> │   3TS Central VPS Support Hub  │
+│  "Request Renewal / Upgrade"   │                                     │  (POST /api/v1/license-requests│
+└────────────────────────────────┘                                     └────────────────────────────────┘
+                │                                                                      │
+                │ Backup file download                                                 │ Admin review
+                ▼                                                                      ▼
+ ┌──────────────────────────────┐                                       ┌──────────────────────────────┐
+ │ rtms_renewal_request.json    │ ────────────────────────────────────> │  3TS Administrator Mac       │
+ │ (Auto-bound Hardware IDs)    │   python license_generator.py        │  (private_key.pem offline)   │
+ └──────────────────────────────┘   --request renewal_request.json     └──────────────────────────────┘
+                                                                                       │
+                                                                                       │ Signs keys
+                                                                                       ▼
+ ┌──────────────────────────────┐                                       ┌──────────────────────────────┐
+ │ RTMS Web: "Upload License"   │ <──────────────────────────────────── │ rtms_license_bundle.json     │
+ │ 1-Click Multi-Scanner Active │        Customer receives bundle       │ (or individual .key files)   │
+ └──────────────────────────────┘                                       └──────────────────────────────┘
+```
+
+### 1. Client Renewal Request Generation (RTMS Web)
+* From the **Subscription & License** page, clicking **"Request Early Upgrade"** or **"Upgrade License"** inspects PostgreSQL database records (`admin.service_registry`, `admin.agent_tokens`, `admin.tenant_infra`).
+* The system automatically attaches all known Hardware IDs for active Scanners, NVD Engine, and Local Agents.
+* Clicking **"Generate Request File"**:
+  1. Sends the request directly to the **3TS Central Support Hub VPS** (if configured via `support_vps_url`).
+  2. Simultaneously downloads a local backup copy named `rtms_renewal_request_<tenant_id>.json`.
+
+### 2. Central VPS Ingestion & Notification
+* The Central Support Hub (`vps-support-hub`) receives the request via `POST /api/v1/license-requests`.
+* It records the request in PostgreSQL (`license_requests`) and assigns a reference ID (`RTMS-LIC-YYYY-XXXX`).
+* An automated email alert is immediately sent to `support@3ts-consulting.com` detailing the requested plan, asset count, and all detected hardware footprints.
+
+### 3. Key Generation (3TS Admin Machine)
+* The 3TS administrator uses their offline workstation where `private_key.pem` is stored.
+* Generation is executed in 1 command without manual Hardware ID re-entry:
+  ```bash
+  python license_generator.py --request rtms_renewal_request_<tenant_id>.json
+  ```
+* The generator:
+  * Automatically matches target machines.
+  * Validates client payment records in `customers` DB.
+  * Produces individual `license-<id>.key` files and a unified `rtms_license_bundle_<tenant_id>.json`.
+
+### 4. Client Import & Activation
+* The customer receives the bundle file and clicks **"Upload New License"** on their RTMS Web portal.
+* The backend activates all renewed licenses in a single transaction, updating quotas and extending subscription validity across all registered scanners.

@@ -68,7 +68,10 @@ uv run python main.py add_payment
 
 ### Step 4: Generate the License
 
-This is the final step, where the physical `license.key` is generated for the client.
+This step generates cryptographically signed license keys using your offline RSA private key (`private_key.pem`). Two workflows are available:
+
+#### Mode A: Interactive Manual Creation
+Use this when issuing a license for a new customer or single machine manually.
 
 **Command:**
 ```bash
@@ -82,7 +85,22 @@ uv run python main.py create_license
    - You select a `Plan` (NVD, DISCOVERY, SECURE, COMPLIANCE) and `Max Hosts`.
    - The script interrogates the internal `pricing` table to calculate the exact price required.
    - **Strict Block:** If the payment amount is strictly lower than the expected price, generation is aborted.
-4. **Generation & Tracking:** The `license.key` file is successfully generated. The script securely records the license metadata in the `"3TS"` schema and updates the payment row to officially mark the payment as "consumed".
+4. **Generation & Tracking:** The `license.key` file is generated. The script securely records the license metadata in the `"3TS"` schema and updates the payment row to mark the payment as "consumed".
+
+#### Mode B: Ingest Customer Renewal / Upgrade Request (Automated)
+Use this when renewing existing client licenses or processing multi-scanner deployments without manual Hardware ID re-entry.
+
+**Command:**
+```bash
+python license_manager/license_generator.py --request rtms_renewal_request_<tenant_id>.json
+```
+
+**What happens:**
+1. **Request Ingestion:** The generator reads the JSON file exported from the customer's RTMS Web portal (or received via the Central VPS Support Hub).
+2. **Automatic Hardware Resolution:** Resolves all registered Hardware IDs for Scanners, NVD Engine, and Local Agents.
+3. **Database Validation:** Checks client status and unclaimed payments in the `customers` database.
+4. **Multi-License Generation:** Generates signed keys for each distinct hardware footprint and creates a unified bundle file `rtms_license_bundle_<tenant_id>.json`.
+5. **Customer Delivery:** Deliver the bundle file to the client; they upload it directly on their portal in 1 click.
 
 ---
 
