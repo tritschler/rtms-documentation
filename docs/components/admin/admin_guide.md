@@ -104,6 +104,29 @@ python license_manager/license_generator.py --request rtms_renewal_request_<tena
 
 ---
 
+### Step 5: Generate Client API Bearer Token (Support & Updates Hub)
+
+To allow the client's on-premises RTMS Web instance to connect to the Central Support Hub (VPS) for technical support tickets and automatic software updates, generate a dedicated per-tenant Bearer token.
+
+**Commands:**
+```bash
+# Generate a new token for a client / tenant
+uv run python main.py create_client_token [client_id]
+
+# List all issued tokens and their statuses
+uv run python main.py list_client_tokens [tenant_id]
+
+# Revoke a token
+uv run python main.py revoke_client_token <token_id_or_prefix>
+```
+
+**What happens:**
+1. **Cryptographic Generation:** A secure high-entropy token is generated: `rtms_tok_<tenant_id>_<random_hex>`.
+2. **Local Persistence:** The SHA-256 hash and public prefix are saved in the `"3TS".client_tokens` table.
+3. **VPS Support Hub Sync:** The SHA-256 fingerprint is automatically synchronized over HTTPS with the VPS Support Hub (`POST /api/v1/admin/client-tokens`).
+4. **One-Time Display:** The plaintext token is displayed once in the terminal. Provide it to the client administrator to configure in their RTMS Web interface (**Support & Diagnostic** -> **Configuration Clé d'API VPS**).
+
+
 ## Maintenance & Database Cleaning
 
 The administration tool includes commands for managing the lifecycle of licenses and performing database maintenance.
