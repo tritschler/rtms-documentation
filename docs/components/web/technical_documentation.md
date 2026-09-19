@@ -302,11 +302,14 @@ RTMS includes an integrated, enterprise-grade connection to the **3TS Central Su
   3. **Software Releases & Updates**: Dynamic version manifest discovery (`/version`) and secure download of signed component packages (`.tar.gz`) with SHA-256 integrity verification.
 
 ### Key REST API Endpoints (`backend/main.py`)
+- `GET /api/settings/support-hub`: Retrieves current Support VPS URL and masked Bearer token status for administrators.
+- `POST /api/settings/support-hub`: Saves Support VPS URL and Bearer API Token to `admin.system_config` with audit logging.
+- `POST /api/settings/support-hub/test`: Tests live connectivity and Bearer token validity against the VPS Support Hub.
 - `POST /api/support/tickets`: Accepts ticket category, subject, description, priority, and optional diagnostics, returning a unique support ticket ID (`RTMS-YYYY-XXXX`).
 - `GET /api/support/tickets/history`: Retrieves the customer's historical ticket log, resolution status, and technician notes.
 - `POST /api/subscription/license/request-renewal`: Automatically transmits hardware footprint request to `{support_vps_url}/api/v1/license-requests`.
-- `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub and displays target versions and package availability.
-- `POST /api/system/updates/apply`: Downloads `.tar.gz` packages from the VPS, validates their SHA-256 hash, and stages them for maintenance cycle application.
+- `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub using the Bearer token and displays target versions and package availability.
+- `POST /api/system/updates/apply`: Downloads signed `.tar.gz` packages from the VPS using the Bearer token, validates their SHA-256 hash, and stages them for maintenance cycle application.
 
 
 
