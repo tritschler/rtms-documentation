@@ -104,11 +104,28 @@ python license_manager/license_generator.py --request rtms_renewal_request_<tena
 
 ---
 
-### Step 5: Generate Client API Bearer Token (Support & Updates Hub)
+### Step 5: Authenticate Client Instance (Zero-Trust Ed25519 or Legacy Token)
 
-To allow the client's on-premises RTMS Web instance to connect to the Central Support Hub (VPS) for technical support tickets and automatic software updates, generate a dedicated per-tenant Bearer token.
+To allow the client's on-premises RTMS Web instance to connect to the Central Support Hub (VPS) for technical support tickets and automatic software updates, configure client authentication.
 
-**Commands:**
+#### Recommended: Ed25519 Public Key Enrollment (Zero-Trust)
+At installation time, the client's instance generates an Ed25519 keypair (`/opt/rtms/config/instance.key` and `/opt/rtms/config/instance.pub`). The private key **never leaves the client server**.
+
+1. **Client Action:** The client copies their public key (`instance.pub`) from their terminal or from the RTMS Web portal (**Support & Diagnostic** → **Identité Cryptographique d'Instance**).
+2. **Administrator Action (Web Portal):**
+   - Open **RTMS Admin** → **Tokens & Clés Client** (tab **Clés Asymétriques Ed25519**).
+   - Click **Enregistrer Clé Publique**, enter the `tenant_id` and paste the PEM public key.
+3. **Administrator Action (API):**
+   ```bash
+   curl -X POST https://support-api.3ts-consulting.com/api/v1/admin/tokens/keys \
+     -H "Authorization: Bearer <ADMIN_JWT>" \
+     -H "Content-Type: application/json" \
+     -d '{"tenant_id": "acme-corp", "public_key_pem": "-----BEGIN PUBLIC KEY-----\n..."}'
+   ```
+4. **Result:** The client instance immediately signs all outgoing requests using ephemeral 15-minute JWTs validated against this public key. No static secrets circulate on the wire, and no annual expiration renewal is required.
+
+#### Fallback: Legacy Static Bearer Tokens
+If the client is on an older version or prefers a static API key:
 ```bash
 # Generate a new token for a client / tenant
 uv run python main.py create_client_token [client_id]
@@ -119,12 +136,7 @@ uv run python main.py list_client_tokens [tenant_id]
 # Revoke a token
 uv run python main.py revoke_client_token <token_id_or_prefix>
 ```
-
-**What happens:**
-1. **Cryptographic Generation:** A secure high-entropy token is generated: `rtms_tok_<tenant_id>_<random_hex>`.
-2. **Local Persistence:** The SHA-256 hash and public prefix are saved in the `"3TS".client_tokens` table.
-3. **VPS Support Hub Sync:** The SHA-256 fingerprint is automatically synchronized over HTTPS with the VPS Support Hub (`POST /api/v1/admin/client-tokens`).
-4. **One-Time Display:** The plaintext token is displayed once in the terminal. Provide it to the client administrator to configure in their RTMS Web interface (**Support & Diagnostic** -> **Configuration Clé d'API VPS**).
+The plaintext token is displayed once in the terminal. Provide it to the client administrator to configure in their RTMS Web interface (**Support & Diagnostic** -> **Configuration Clé d'API VPS**).
 
 
 ## Maintenance & Database Cleaning

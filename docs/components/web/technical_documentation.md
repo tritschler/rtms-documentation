@@ -292,24 +292,28 @@ RTMS includes an integrated, enterprise-grade connection to the **3TS Central Su
 
 ### Architecture & Capabilities
 - **Central Gateway**: Provides a high-availability cloud interface (`rtms-admin/vps-support-hub`) for support ticketing, license renewals, and software releases.
-- **Reverse Proxy Protection**: The browser client does not communicate directly with the external VPS. The RTMS FastAPI backend acts as an authenticated proxy gateway:
-  - Validates the local user's JWT session.
-  - Injects tenant identification and license metadata into outgoing requests.
-  - Relays requests over HTTPS with Bearer API Token authorization (`RTMS_SUPPORT_VPS_API_KEY`).
+- **Zero-Trust Asymmetric Authentication (Ed25519)**:
+  - The local appliance holds a private key (`/opt/rtms/config/instance.key`, `chmod 0600`) generated at installation.
+  - Outgoing requests generate an ephemeral JWT (15-minute lifespan) signed via `EdDSA`.
+  - The VPS validates the JWT signature against the customer's enrolled public key (`"3TS".client_keys`).
+  - No permanent shared secrets circulate on the network, preventing credential replay or exfiltration risks.
+  - Automatic fallback to legacy static Bearer tokens (`RTMS_SUPPORT_VPS_API_KEY`) if asymmetric keys are not yet configured.
 - **Triple Purpose Integration**:
   1. **Support Ticketing**: Direct incident filing, diagnostic attachment ingestion, and real-time status tracking.
   2. **License Renewal Ingestion**: Automatic transmission of customer renewal requests containing hardware footprints for scanners, NVD engine, and local agents.
   3. **Software Releases & Updates**: Dynamic version manifest discovery (`/version`) and secure download of signed component packages (`.tar.gz`) with SHA-256 integrity verification.
 
 ### Key REST API Endpoints (`backend/main.py`)
-- `GET /api/settings/support-hub`: Retrieves current Support VPS URL and masked Bearer token status for administrators.
-- `POST /api/settings/support-hub`: Saves Support VPS URL and Bearer API Token to `admin.system_config` with audit logging.
-- `POST /api/settings/support-hub/test`: Tests live connectivity and Bearer token validity against the VPS Support Hub.
+- `GET /api/settings/support-hub`: Retrieves current Support VPS URL, masked legacy token status, and the appliance's **Ed25519 Cryptographic Instance Identity** (public key PEM and SHA-256 fingerprint).
+- `POST /api/settings/support-hub`: Saves Support VPS URL and optional legacy Bearer API Token to `admin.system_config` with audit logging.
+- `POST /api/settings/instance-identity/regenerate`: Performs cryptographic keypair rotation, generating a new Ed25519 keypair and updating system audit trails.
+- `POST /api/settings/support-hub/test`: Tests live connectivity and cryptographic handshake against the VPS Support Hub (`GET /api/v1/version`).
 - `POST /api/support/tickets`: Accepts ticket category, subject, description, priority, and optional diagnostics, returning a unique support ticket ID (`RTMS-YYYY-XXXX`).
 - `GET /api/support/tickets/history`: Retrieves the customer's historical ticket log, resolution status, and technician notes.
-- `POST /api/subscription/license/request-renewal`: Automatically transmits hardware footprint request to `{support_vps_url}/api/v1/license-requests`.
-- `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub using the Bearer token and displays target versions and package availability.
-- `POST /api/system/updates/apply`: Downloads signed `.tar.gz` packages from the VPS using the Bearer token, validates their SHA-256 hash, and stages them for maintenance cycle application.
+- `POST /api/subscription/license/request-renewal`: Automatically transmits hardware footprint request to `{support_vps_url}/api/v1/license-requests` authenticated via signed JWT.
+- `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub using signed JWT authentication and displays target versions and package availability.
+- `POST /api/system/updates/apply`: Downloads signed `.tar.gz` packages from the VPS, validates their SHA-256 hash, and stages them for maintenance cycle application.
+
 
 
 

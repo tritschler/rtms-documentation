@@ -116,7 +116,7 @@ RTMS provides an automated, end-to-end renewal cycle that eliminates the need fo
 * From the **Subscription & License** page, clicking **"Request Early Upgrade"** or **"Upgrade License"** inspects PostgreSQL database records (`admin.service_registry`, `admin.agent_tokens`, `admin.tenant_infra`).
 * The system automatically attaches all known Hardware IDs for active Scanners, NVD Engine, and Local Agents.
 * Clicking **"Generate Request File"**:
-  1. Sends the request directly to the **3TS Central Support Hub VPS** (if configured via `support_vps_url`).
+  1. Sends the request directly to the **3TS Central Support Hub VPS** (authenticated via the appliance's Ed25519 signed JWT, or fallback Bearer token).
   2. Simultaneously downloads a local backup copy named `rtms_renewal_request_<tenant_id>.json`.
 
 ### 2. Central VPS Ingestion & Notification

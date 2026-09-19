@@ -89,6 +89,11 @@ graph TD
 
 ### 4. Central Support Hub Integration (`rtms-web` -> OVH VPS)
 Centralized cloud gateway hosted on an OVH VPS (`rtms-admin/vps-support-hub`) fulfilling three core roles:
+* **Zero-Trust Asymmetric Authentication (Ed25519 + Short-Lived JWTs)** :
+  * **No permanent secrets on the network:** The client instance holds its private key (`/opt/rtms/config/instance.key`, `chmod 0600`) and never transmits it.
+  * **Ephemeral JWTs:** Each request to the VPS Support Hub generates an ephemeral JSON Web Token valid for **15 minutes** signed with the `EdDSA` (Ed25519) algorithm.
+  * **Public Key Enrollment:** The 3TS Support Hub validates incoming requests against the client's registered public key stored in `"3TS".client_keys`.
+  * **Legacy Compatibility:** Seamless fallback to static SHA-256 Bearer tokens for older deployments.
 * **Support & Incident Ticketing (`/api/v1/tickets`)** :
   * RTMS Web acts as an authenticated proxy (`/api/support/tickets`), allowing operators to submit support tickets, logs, and diagnostic screenshots directly from the web console with automatic SMTP notifications.
 * **Automated License Renewal & Upgrade Intake (`/api/v1/license-requests`)** :
