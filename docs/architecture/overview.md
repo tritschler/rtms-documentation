@@ -14,7 +14,7 @@ graph TD
     end
 
     subgraph External Cloud Infrastructure
-        OVH[OVH VPS Hub\nSupport Ticketing Gateway]
+        OVH[Central VPS Support Hub\nSupport, Licenses & Releases Gateway]
         NIST[NIST NVD API v2.0\nservices.nvd.nist.gov]
     end
 
@@ -42,7 +42,7 @@ graph TD
     NVD -->|Direct SQL / Bulk COPY & CPE Match\nRestricted to schema 'nvd'| DB
     NVD -->|Incremental CVE Sync TCP/443| NIST
     
-    WEB -->|Proxy Support Inquiries & Attachments| OVH
+    WEB -->|Support Tickets, License Renewals & Updates Sync| OVH
     ADMIN -->|Orchestration & Status| WEB
 ```
 
@@ -88,8 +88,15 @@ graph TD
 * The agent sends periodic heartbeats and inventories (packages, running processes, resource metrics) via authenticated HTTP POST endpoints.
 
 ### 4. Central Support Hub Integration (`rtms-web` -> OVH VPS)
-* Centralized customer assistance gateway hosted on a dedicated OVH VPS (`vps-054fcfa2.vps.ovh.net`).
-* RTMS Web acts as a secure authenticated reverse proxy (`/api/support/tickets`, `/api/support/tickets/history`), allowing operators to submit support tickets, logs, and diagnostic screenshots directly from the web console.
+Centralized cloud gateway hosted on an OVH VPS (`rtms-admin/vps-support-hub`) fulfilling three core roles:
+* **Support & Incident Ticketing (`/api/v1/tickets`)** :
+  * RTMS Web acts as an authenticated proxy (`/api/support/tickets`), allowing operators to submit support tickets, logs, and diagnostic screenshots directly from the web console with automatic SMTP notifications.
+* **Automated License Renewal & Upgrade Intake (`/api/v1/license-requests`)** :
+  * Ingests renewal requests directly from the client web portal with complete hardware footprints (scanners, NVD, and agents).
+  * Triggers notifications and stores requests ready for ingestion by `license_generator.py` on the 3TS management workstation.
+* **Software Update Distribution Gateway (`/api/v1/version`, `/api/v1/updates/packages/{package_name}`)** :
+  * Exposes the latest software manifest and semantic versions.
+  * Streams compiled component packages (`.tar.gz`) to client appliances with SHA-256 integrity verification, supporting seamless online upgrades as well as graceful offline fallbacks.
 
 ### 5. WireGuard VPN Tunneling (`rtms-admin`)
 * For multi-site deployments, remote scanners establish encrypted WireGuard tunnels back to the central server network.

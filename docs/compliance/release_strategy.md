@@ -61,3 +61,44 @@ Le projet RTMS adopte le format `Majeure.Mineure.Patch` (ex: `2.1.3`).
 *   **Majeure (ex: 2.0.0) :** Modification du socle technologique (changement de version Python) ou changements cassants dans l'API. Généralement associée à la release de Printemps.
 *   **Mineure (ex: 1.3.0) :** Ajout de nouvelles fonctionnalités au scanner, de manière rétrocompatible. Généralement associée à la release d'Automne.
 *   **Patch (ex: 1.2.4) :** Réservé exclusivement aux hotfixes et aux correctifs de sécurité (CVE). Zéro nouvelle fonctionnalité.
+
+---
+
+## 5. Distribution et Déploiement via le Central VPS Support Hub
+
+La distribution des paquets et manifestes de mise à jour s'appuie sur le service centralisé **VPS Support Hub** (`rtms-admin/vps-support-hub`) hébergé sur le cloud OVH.
+
+```
+┌─────────────────────────────────┐
+│   Poste de Build 3TS           │
+│   ./build_releases.sh           │
+└─────────────────────────────────┘
+                │
+                │ scp *.tar.gz & POST /api/v1/updates/releases
+                ▼
+┌─────────────────────────────────────────────────────────────┐
+│             RTMS Central VPS Support Hub                    │
+│   • packages/ (*.tar.gz archives)                           │
+│   • PostgreSQL: software_releases table                     │
+│   • GET /api/v1/version (Manifeste actif)                   │
+│   • GET /api/v1/updates/packages/{package_name}             │
+└─────────────────────────────────────────────────────────────┘
+                │
+                │ HTTPS REST API Polling / "Check for Updates"
+                ▼
+┌─────────────────────────────────────────────────────────────┐
+│             Instance Cliente RTMS Web                       │
+│   • /api/system/updates/status (détection v0.2.0)           │
+│   • /api/system/updates/apply (stage & SHA-256 validation)  │
+│   • updates/downloads/ (stockage sécurisé)                  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Étapes du Cycle de Release :
+1. **Compilation des Artefacts** : Exécution du script `build_releases.sh` dans `rtms-admin` produisant les archives compressées (`rtms-scanner-release.tar.gz`, `rtms-nvd-onprem-release.tar.gz`, etc.).
+2. **Dépôt sur le VPS Support Hub** : Les archives sont copiées dans `/opt/rtms-support-hub/packages/`.
+3. **Publication du Manifeste** : Un appel API authentifié `POST /api/v1/updates/releases` enregistre la version et la liste des composants cibles dans la base `software_releases`.
+4. **Détection et Application Client** :
+   * Les instances RTMS interrogent `GET /api/v1/version` pour comparer leur version locale (`APP_VERSION`).
+   * Lors du déclenchement de la mise à niveau, `POST /api/system/updates/apply` télécharge les archives, valide leur empreinte **SHA-256**, et journalise l'action dans `admin.system_audit`.
+5. **Résilience Hors-Ligne (Air-Gapped)** : Pour les environnements sans accès internet direct, les paquets `.tar.gz` peuvent être déposés manuellement sur l'appliance, le backend utilisant alors un mécanisme de staging local direct sans blocage.

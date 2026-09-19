@@ -286,21 +286,27 @@ CREATE INDEX IF NOT EXISTS idx_scanner_tokens_hash ON admin.scanner_tokens(token
 
 ---
 
-## Central VPS Support Ticketing Hub
+## Central VPS Support, Licensing & Distribution Hub
 
-RTMS includes an integrated, enterprise-grade **Customer Support & Tele-Assistance Hub** directly accessible from the navigation menu (`/support`).
+RTMS includes an integrated, enterprise-grade connection to the **3TS Central Support Hub** hosted on an OVH Cloud VPS (`vps-054fcfa2.vps.ovh.net` / `support-api.3ts-consulting.com`).
 
-### Architecture & Reverse Proxy Model
-- **Central Gateway**: 3TS Consulting maintains a high-availability support hub on an OVH Cloud VPS (`vps-054fcfa2.vps.ovh.net`).
-- **Reverse Proxy Protection**: The browser client does not communicate directly with the external VPS. Instead, the RTMS FastAPI backend acts as an authenticated proxy gateway:
+### Architecture & Capabilities
+- **Central Gateway**: Provides a high-availability cloud interface (`rtms-admin/vps-support-hub`) for support ticketing, license renewals, and software releases.
+- **Reverse Proxy Protection**: The browser client does not communicate directly with the external VPS. The RTMS FastAPI backend acts as an authenticated proxy gateway:
   - Validates the local user's JWT session.
-  - Injects tenant identification and license metadata into the support payload.
-  - Relays the request over mutual HTTPS with bearer authorization to the VPS ticketing hub.
-- **Data Protection**: Client diagnostic attachments (sanitized logs, screenshots) are transferred over encrypted TLS and linked to the customer's organization profile.
+  - Injects tenant identification and license metadata into outgoing requests.
+  - Relays requests over HTTPS with Bearer API Token authorization (`RTMS_SUPPORT_VPS_API_KEY`).
+- **Triple Purpose Integration**:
+  1. **Support Ticketing**: Direct incident filing, diagnostic attachment ingestion, and real-time status tracking.
+  2. **License Renewal Ingestion**: Automatic transmission of customer renewal requests containing hardware footprints for scanners, NVD engine, and local agents.
+  3. **Software Releases & Updates**: Dynamic version manifest discovery (`/version`) and secure download of signed component packages (`.tar.gz`) with SHA-256 integrity verification.
 
-### REST API Endpoints (`backend/main.py`)
-- `POST /api/support/tickets`: Accepts ticket category, subject, description, priority, and optional attachments, returning a unique support ticket ID (e.g. `TICK-2026-XXXX`).
-- `GET /api/support/tickets/history`: Retrieves the customer's historical ticket log, resolution status, and technician notes from the VPS hub.
+### Key REST API Endpoints (`backend/main.py`)
+- `POST /api/support/tickets`: Accepts ticket category, subject, description, priority, and optional diagnostics, returning a unique support ticket ID (`RTMS-YYYY-XXXX`).
+- `GET /api/support/tickets/history`: Retrieves the customer's historical ticket log, resolution status, and technician notes.
+- `POST /api/subscription/license/request-renewal`: Automatically transmits hardware footprint request to `{support_vps_url}/api/v1/license-requests`.
+- `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub and displays target versions and package availability.
+- `POST /api/system/updates/apply`: Downloads `.tar.gz` packages from the VPS, validates their SHA-256 hash, and stages them for maintenance cycle application.
 
 
 
