@@ -58,6 +58,7 @@ nav:
   - Architecture:
       - Vue d'ensemble: architecture/overview.md
       - Réseau & WireGuard: architecture/wireguard.md
+      - Modèle RBAC (Permissions): architecture/rbac.md
       - Modèles de données:
           - Scanner Data Model: architecture/data_models/scanner_data_model.md
           - NVD Data Model: architecture/data_models/nvd_data_model.md

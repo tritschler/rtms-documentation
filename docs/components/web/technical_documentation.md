@@ -78,10 +78,18 @@ RTMS strictly separates operational scan telemetry from persistent system config
 * **Factory Reset (`clean_schemas.sql` / `clean_app_data.sql`)**:
   * Empties all tables in `admin` and `scanner` schemas for a clean Setup Wizard re-initialization.
 
-## Security Considerations
-- The session timeout relies on the backend issuing valid JWTs with an expiration claim.
+## Security Considerations & Role-Based Access Control (RBAC)
+- The session timeout relies on the backend issuing valid JWTs with an expiration claim (`exp`).
 - The frontend timer acts as a proactive UX measure, forcing a logout when the token is known to have expired.
-- Backend authorization dependencies (`get_current_user`, `verify_admin`) validate the `access_token` on every protected route.
+- **Granular 4-Role RBAC Model**: Authorization is enforced on every API route via FastAPI dependency injection:
+  - `verify_admin`: Reserved for system administrators (user provisioning, system config, licenses, service lifecycle, orphan purge).
+  - `verify_security_analyst_or_admin`: Dedicated to SOC analysts and administrators (CVE risk triage & justification, security findings declaration & assignment, alert management, verification scans).
+  - `verify_operator_or_admin`: Dedicated to network/scanner operators and administrators (scanner restart `RESTART`, agent token revocation/reenrollment, subnet management, asset deletion).
+  - `verify_can_operate`: Allows operational read-write (`admin`, `security_analyst`, `operator`) for asset metadata editing and software inventory tracking.
+  - `verify_can_scan`: Allows triggering network discovery scans (`admin`, `security_analyst`, `operator`).
+  - `verify_can_view_audit`: Restricts audit log inspection (`/api/audit/*`) to compliance auditors (`viewer`), SOC analysts (`security_analyst`), and `admin`. Operators are explicitly denied (403) to prevent tampering.
+- **Root Admin Immobility**: The seeded `admin` account is hard-protected against deactivation or role downgrades.
+- Complete architectural specifications are available in the [Modèle RBAC (Permissions)](../../architecture/rbac.md) document.
 
 ## Database Schema Reset (Factory Reset)
 This section explains the application's behavior when selectively deleting database schemas. 
