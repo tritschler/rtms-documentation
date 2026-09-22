@@ -14,7 +14,7 @@ RTMS employs a **hybrid, multi-layered identity architecture** supporting Local 
 | :--- | :--- | :--- | :--- |
 | **Art. 21.2(j)** | **Multi-Factor Authentication (MFA)** for privileged / administrative access | Mandatory TOTP (6-digit RFC 6238) QR code enrollment for all `admin` accounts (Local & LDAP). Configurable for standard users. | **Compliant (100%)** |
 | **Art. 21.2(c)** | **Business Continuity & Crisis Management** | Local "Break-Glass" emergency administration accounts ensuring platform availability during Active Directory / network outages. | **Compliant (100%)** |
-| **Art. 21.2(a)** | **Risk Analysis & Credential Security** | Forced password renewal (`must_change_password`) on first login; real-time password complexity enforcement (min 8 chars, uppercase, lowercase, numbers); first-run setup wizard. | **Compliant (100%)** |
+| **Art. 21.2(a)** | **Risk Analysis & Credential Security** | Forced password renewal (`must_change_password`) on first login; real-time password complexity enforcement (min 8 chars, uppercase, lowercase, numbers); first-run setup wizard; **adaptive 90-day password expiration** for non-MFA accounts with **J-14 early warning**; full rotation exemption for MFA-secured accounts (NIST SP 800-63B / ISO 27001). | **Compliant (100%)** |
 | **Art. 21.2(g)** | **Cyber Hygiene & Cryptography** | Bcrypt hashing with dynamic salt for local credentials; PyJWT signed tokens with differential session timeouts (15 min for admins, 30 min for users); TLS 1.2/1.3 reverse proxy encryption for all transport data and bearer tokens. | **Compliant (100%)** |
 | **Art. 21.2(b)** | **Incident Handling, Audit & Logging** | Immutable audit trails in `admin.login_audit` and `admin.system_audit` recording source IP, timestamp, auth provider, status, and failure reason. | **Compliant (100%)** |
 
@@ -47,15 +47,18 @@ flowchart TD
 
     CheckMFA --> IsAdmin{User Role == 'admin'?}
     IsAdmin -- Yes --> RequireMFA[Force MFA TOTP Step]
-    IsAdmin -- No --> UserMFAReq{User MFA Required?}
+    IsAdmin -- No --> UserMFAReq{User MFA Required or Enabled?}
     UserMFAReq -- Yes --> RequireMFA
-    UserMFAReq -- No --> CheckPwdChange{must_change_password == True?}
+    UserMFAReq -- No --> CheckExpiry{Password Age >= 90 Days?}
     
     RequireMFA --> VerifyTOTP[Validate 6-Digit TOTP / QR Enrollment]
-    VerifyTOTP -- Valid --> CheckPwdChange
+    VerifyTOTP -- Valid --> CheckPwdChange{must_change_password == True?}
     VerifyTOTP -- Invalid --> Deny
     
-    CheckPwdChange -- Yes --> ForcePwdModal[Block Access: Force New Password]
+    CheckExpiry -- Yes (Expired No-MFA) --> ForcePwdModal[Block Access: Force New Password]
+    CheckExpiry -- No (Valid or J-14 Warning) --> CheckPwdChange
+    
+    CheckPwdChange -- Yes --> ForcePwdModal
     CheckPwdChange -- No --> IssueJWT[Generate JWT Token & Establish Session]
     ForcePwdModal -- Password Changed --> IssueJWT
 ```
@@ -71,6 +74,7 @@ flowchart TD
   2. **Forced Password Renewal**: Any seeded or newly created local account is flagged with `must_change_password = TRUE`.
   3. **Strict MFA Enforcement**: Local accounts with `role == 'admin'` cannot bypass MFA.
   4. **Cryptographic Storage**: Passwords are salted and hashed using **Bcrypt**.
+  5. **Adaptive Password Expiration & J-14 Preventive Alerting**: Local accounts without Multi-Factor Authentication (MFA) are subject to a 90-day password expiration policy (`password_expiry_no_mfa_days`). A preventive notification banner and badge are displayed at **J-14** (14 days before expiration) on the dashboard and user profile. At &ge; 90 days, access is locked at login until the password is changed. Accounts secured with MFA (TOTP) are permanently exempt from periodic expiration pursuant to **NIST SP 800-63B** and **ISO 27001**.
 
 ### B. Corporate Directory (LDAP / Active Directory)
 * **Purpose**: Centralized enterprise identity management and offboarding.
