@@ -90,6 +90,7 @@ nav:
       - Spécification & Développement: plugins/plugin_specification.md
   - Conformité & Légal:
       - Directive NIS2: compliance/nis2.md
+      - Cyber Resilience Act (CRA): compliance/cra.md
       - Stratégie de Release: compliance/release_strategy.md
       - Licences: compliance/licenses.md
       - Documents Légaux:
