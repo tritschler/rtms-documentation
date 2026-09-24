@@ -9,9 +9,12 @@
 * User: `rtms-nvd` with passwordless `sudo` privileges.
 
 ## Database
-* **PostgreSQL**: Version 18+
-* **User**: `rtms_user`
+* **PostgreSQL**: Version 16+
+* **User (Service)**: `rtms_nvd_user` (Accès restreint au schéma `nvd` + configuration & heartbeat dans `admin`)
+* **User (Owner/Migration)**: `rtms_user`
 * **Database**: `rtms_db`
+
+Pour la mise en place sécurisée et le durcissement conforme NIS 2, consultez le [Guide d'Installation & Durcissement PostgreSQL](../../deployment/postgres_hardening_guide.md).
 
 ## NIST API Key
 A valid NIST API key is required. You can request one from the [NVD Developers Portal](https://nvd.nist.gov/developers/request-an-api-key).

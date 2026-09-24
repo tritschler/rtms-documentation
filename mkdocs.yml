@@ -59,9 +59,12 @@ nav:
       - Vue d'ensemble: architecture/overview.md
       - Réseau & WireGuard: architecture/wireguard.md
       - Modèle RBAC (Permissions): architecture/rbac.md
+      - Sécurité & RBAC Base de Données: architecture/database_rbac.md
       - Modèles de données:
           - Scanner Data Model: architecture/data_models/scanner_data_model.md
           - NVD Data Model: architecture/data_models/nvd_data_model.md
+  - Déploiement & Installation:
+      - Guide Installation & Durcissement PostgreSQL: deployment/postgres_hardening_guide.md
   - Composants:
       - Scanner:
           - Prérequis techniques (FR): components/scanner/technical_requirements_fr.md
