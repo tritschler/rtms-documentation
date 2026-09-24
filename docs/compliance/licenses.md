@@ -138,3 +138,95 @@ RTMS provides an automated, end-to-end renewal cycle that eliminates the need fo
 ### 4. Client Import & Activation
 * The customer receives the bundle file and clicks **"Upload New License"** on their RTMS Web portal.
 * The backend activates all renewed licenses in a single transaction, updating quotas and extending subscription validity across all registered scanners.
+
+---
+
+## 6. License Expiration Lifecycle & Administrative Governance
+
+To ensure business continuity and eliminate blind spots when a subscription approaches its end date, RTMS implements an automated, role-aware **License Expiration Lifecycle Management** system with integrated accountability tracking and prioritized multi-channel dispatching.
+
+```mermaid
+flowchart TD
+    subgraph Periodic["Background Surveillance (Every 4h + Boot)"]
+        W["license_lifecycle_background_worker"] --> CHK{"Active License Expiration"}
+    end
+
+    CHK -->|"> 30 Days"| OK["Normal Operation"]
+    CHK -->|"<= 30 Days OR Expired"| SYNC["sync_license_expiration_finding()"]
+
+    subgraph RemediationTask["Remediation Task Synchronization (admin.security_findings)"]
+        SYNC --> REF["Lookup reference_id = 'LICENSE-EXPIRATION'"]
+        REF -->|"<= 30 Days"| SEV_HIGH["Severity: HIGH"]
+        REF -->|"<= 7 Days or Expired"| SEV_CRIT["Severity: CRITICAL"]
+        REF --> DUE["Due Date = Expiration Date"]
+        REF --> ASSIGN{"Determine Assignee"}
+        ASSIGN -->|"1. Configured"| DES["license_notification_recipient"]
+        ASSIGN -->|"2. Fallback"| ADM["Superadmin 'admin'"]
+        ASSIGN -->|"3. Fallback"| ACT["First Active Admin"]
+        ASSIGN -->|"4. Unassigned"| UNK["Unassigned (Admins Team Pool)"]
+    end
+
+    subgraph NotificationDispatch["Prioritized Multi-Channel Dispatch (license_expiring)"]
+        NOTIF["check_and_send_license_notification()"] --> MILESTONE{"Milestone Hit?<br/>J-30, J-15, J-7, J-1, J-0"}
+        MILESTONE -->|"No / Cooldown < 24h"| SKIP["Skip Notification"]
+        MILESTONE -->|"Yes"| SMTP{"Is SMTP Server Configured?"}
+        SMTP -->|"Yes"| EMAIL["1. Send Email (PRIORITY)<br/>Target: Assigned Admin / Admins Pool"]
+        EMAIL -->|"Success"| DONE["Dispatched"]
+        EMAIL -->|"Failure / Not Configured"| WEBHOOKS{"Teams / Slack Active?"}
+        SMTP -->|"No"| WEBHOOKS
+        WEBHOOKS -->|"Yes"| CHAT["2. Fallback to Microsoft Teams / Slack Webhook"]
+        WEBHOOKS -->|"No"| LOG["Log Warning: No Channel Available"]
+    end
+
+    subgraph RenewalAction["Resolution on Renewal"]
+        UPLOAD["New License Uploaded > 30 Days"] --> AUTO_RES["Auto-Resolve Finding: RESOLVED"]
+    end
+```
+
+### 1. Automated Background Worker
+- **Execution Frequency:** The asynchronous `license_lifecycle_background_worker` initiates 10 seconds after FastAPI startup (`@app.on_event("startup")`) and re-executes every **4 hours**.
+- **Post-Upload Trigger:** When an administrator successfully uploads a new license via `POST /api/license/upload`, lifecycle synchronization is executed immediately to refresh all states without waiting for the next periodic cycle.
+
+### 2. Security Finding & Remediation Task Synchronization (`admin.security_findings`)
+Rather than relying solely on transient banner alerts, expiration warnings are formalized into the system's compliance and audit framework:
+- **Reference Identifier:** Fixed reference ID `'LICENSE-EXPIRATION'` guarantees idempotency and audit traceability.
+- **Dynamic Severity Escalation:**
+  - **`HIGH`**: When expiration is $\le 30$ days.
+  - **`CRITICAL`**: When expiration is $\le 7$ days or already expired ($\le 0$ days).
+- **Due Date:** Automatically aligned with the exact timestamp of `expires_at`.
+- **Automatic Resolution:** As soon as a renewed license with $> 30$ days of validity is activated, the remediation task status is automatically transitioned from `OPEN` to `RESOLVED`, archiving the finding in compliance reports.
+
+### 3. Administrative Responsibility & Task Claiming
+To eliminate bystander effects across multi-administrator teams:
+- **Designated License Administrator:** Administrators can configure a dedicated license owner via `POST /api/license/recipient` (saved in `admin.system_config.license_notification_recipient`).
+- **Assignment Resolution Hierarchy:**
+  1. Configured designated administrator (`license_notification_recipient`).
+  2. Built-in superadministrator (`admin`).
+  3. First active administrator user in `admin.users`.
+  4. If no administrator is resolved, the task is marked as `"Unassigned"` (accessible to the administrative pool).
+- **1-Click Self-Assignment (Claim):** Any logged-in administrator can claim the renewal responsibility with a single click via **"Prendre en charge"** (`POST /api/license/claim-task`). This updates `assigned_to` across the database, banner alerts, and finding records.
+
+### 4. Prioritized Multi-Channel Notification Policy
+When dispatching expiration alerts for the `license_expiring` event, RTMS enforces a strict channel precedence:
+1. **Email Priority:** The system first evaluates whether an SMTP server is configured (`smtp_server` in `admin.system_config`). If configured, the alert is sent **exclusively via Email** to the assigned administrator (or all administrators if unassigned), even if Teams or Slack channels are active.
+2. **Fallback to Microsoft Teams & Slack:** If the SMTP server is unconfigured, or if email delivery encounters an unexpected network exception, the system automatically falls back to dispatching through active Microsoft Teams and/or Slack webhook connectors.
+3. **Anti-Spam Milestone Filtering & Cooldown:**
+   - Alerts are only triggered at decisive countdown milestones: **J-30**, **J-15**, **J-7**, **J-1**, and **J-0** (Expired).
+   - A minimum **24-hour cooldown** prevents alert fatigue if the system is restarted multiple times within the same day.
+
+### 5. Role-Based Dashboard Presentation (RBAC UX)
+- **NIS2 Overview Dashboard (`Nis2Overview.tsx`):**
+  - **Non-Administrators (`security_analyst`, `operator`, `viewer`):** Pending renewal warnings are completely hidden to avoid unnecessary operational friction. If the license has expired, a non-intrusive informative notice is shown without administrative action buttons.
+  - **Administrators (`admin`):** Full alert banner displaying days remaining, assignee identification (`👤 <admin>` or `⚠️ Non assignée`), direct **"Prendre en charge"** claim button, link to remediation findings (`/findings`), and direct shortcut to `/license`.
+- **Subscription & License Portal (`SubscriptionLicense.tsx`):**
+  - Dedicated **"Gestion & Responsabilité du Renouvellement"** card with real-time task status, direct claim capability, and designated license recipient selector.
+- **Alert Routing Matrix (`ScannerConfiguration.tsx`):**
+  - Includes the `license_expiring` event row allowing granular toggle of Email, Slack, and Teams destinations.
+
+### 6. REST API Endpoints
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/license/task` | Retrieves current expiration finding, assignee, and configured recipient | Admin Only (JWT) |
+| `POST` | `/api/license/claim-task` | Claims the license renewal task for the authenticated admin | Admin Only (JWT) |
+| `POST` | `/api/license/recipient` | Sets the designated administrator for future license alerts | Admin Only (JWT) |
+| `GET` | `/api/license/status` | Enriched with task presence, assignee, and expiration metrics | Authenticated (JWT) |

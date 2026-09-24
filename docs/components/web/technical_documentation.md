@@ -322,6 +322,50 @@ RTMS includes an integrated, enterprise-grade connection to the **3TS Central Su
 - `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub using signed JWT authentication and displays target versions and package availability.
 - `POST /api/system/updates/apply`: Downloads signed `.tar.gz` packages from the VPS, validates their SHA-256 hash, and stages them for maintenance cycle application.
 
+---
+
+## License Expiration Lifecycle & Alert Routing Architecture
+
+To guarantee timely renewals and avoid abrupt service degradation, RTMS incorporates an automated background lifecycle watcher coupled with administrative accountability and flexible multi-channel alert dispatching.
+
+### Background Lifecycle Watcher
+- **Implementation:** `license_lifecycle_background_worker` in `backend/main.py`.
+- **Schedule:** Runs 10 seconds post-startup, then repeats periodically every **4 hours**.
+- **On-Demand Trigger:** Automatically invoked upon successful license upload (`POST /api/license/upload`) to ensure immediate state consistency.
+
+### Remediation Finding Synchronization (`admin.security_findings`)
+- Expiration tracking is synchronized with the platform's native security findings table using the unique reference `LICENSE-EXPIRATION`.
+- **Severity Escalation:**
+  - `HIGH`: $\le 30$ days before expiration.
+  - `CRITICAL`: $\le 7$ days before expiration or expired ($\le 0$ days).
+- **Auto-Resolution:** Automatically transitions finding status to `RESOLVED` when an active license with $> 30$ days remaining is activated.
+
+### Administrative Responsibility & Task Claiming
+- Tracks the responsible administrator (`assigned_to`) on the finding.
+- **Assignment Resolution Hierarchy:**
+  1. Designated administrator set in `admin.system_config.license_notification_recipient`.
+  2. Fallback to default `admin`.
+  3. Fallback to first active administrator from `admin.users`.
+  4. Fallback to `"Unassigned"` (team pool).
+- **Claim Endpoint:** `POST /api/license/claim-task` enables any administrator to claim ownership with 1 click.
+- **Recipient Configuration:** `POST /api/license/recipient` designates the default owner.
+
+### Prioritized Multi-Channel Notification Engine
+- **Event:** `license_expiring` registered in `admin.alert_matrix` (`ScannerConfiguration.tsx`).
+- **Priority Dispatching Rule:**
+  1. **Email Priority:** If SMTP is configured in `admin.system_config`, email notifications are sent first to the assigned administrator (or all administrators if unassigned).
+  2. **Webhook Fallback:** If SMTP is missing or fails, alerts fall back to active **Microsoft Teams** and/or **Slack** webhooks.
+- **Milestone Filtering & Cooldown:** Dispatched at countdown milestones (**J-30**, **J-15**, **J-7**, **J-1**, **J-0**) with a 24-hour anti-spam cooldown window.
+
+### REST API Endpoints
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/license/task` | Returns current expiration finding, assignee, and configured recipient | Admin Only (JWT) |
+| `POST` | `/api/license/claim-task` | Claims the renewal task for the current authenticated admin | Admin Only (JWT) |
+| `POST` | `/api/license/recipient` | Sets the designated administrator for license notifications | Admin Only (JWT) |
+| `GET` | `/api/license/status` | Enriched with task status, assignee, and countdown metrics | Authenticated (JWT) |
+
+
 
 
 
