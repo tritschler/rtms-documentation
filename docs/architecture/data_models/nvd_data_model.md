@@ -33,6 +33,21 @@ Table de cache optimisant les requêtes et l'accès aux données CVE, utilisée 
 - **`last_sync`** (`TIMESTAMP WITH TIME ZONE`) : Date de la dernière synchronisation pour ce préfixe.
 - **`last_modified_cve`** (`TIMESTAMP WITH TIME ZONE`) : Date de dernière modification de la CVE dans le cache.
 
+### 4. `nvd.sync_history`
+Historique d'audit et télémétrie opérationnelle de chaque cycle de synchronisation du flux NVD NIST.
+- **`id`** (`SERIAL`, Clé Primaire) : Identifiant unique de l'exécution.
+- **`tenant_id`** (`VARCHAR(50)`) : Identifiant du tenant (par défaut `3TS`).
+- **`sync_start`** (`TIMESTAMP WITH TIME ZONE`) : Horodatage du début du cycle de synchronisation.
+- **`sync_end`** (`TIMESTAMP WITH TIME ZONE`) : Horodatage de fin du cycle.
+- **`duration_ms`** (`INTEGER`) : Durée d'exécution du cycle en millisecondes.
+- **`cve_count`** (`INTEGER`) : Nombre de CVEs insérées ou mises à jour lors de ce cycle.
+- **`cpe_count`** (`INTEGER`) : Nombre d'enregistrements CPE correspondants traités.
+- **`status`** (`VARCHAR(20)`) : Statut d'exécution (`RUNNING`, `SUCCESS`, `FAILED`).
+- **`error_message`** (`TEXT`) : Message d'erreur détaillé en cas d'échec d'ingestion.
+- **`cve_ids`** (`TEXT[]`) : Tableau des identifiants CVE téléchargés lors du cycle (jusqu'à 1 000 identifiants pour inspection unitaire).
+- **`impacted_inventory_count`** (`INTEGER`) : Nombre de vulnérabilités corrélées avec l'inventaire actif ou la Global Watchlist.
+- *Index* : `idx_sync_history_start ON nvd.sync_history (sync_start DESC)`
+
 ---
 
 ## Schéma `admin`

@@ -42,8 +42,9 @@ Le processus de démarrage de `rtms-nvd` (via `main_rtms_nvd.py`) exécute séqu
    - Calcul de la plage de temps nécessaire via la date de la dernière CVE modifiée.
    - Interrogation de l'API NIST pour rapatrier uniquement les nouvelles données ou celles mises à jour.
    - Mise à jour (Upsert) des CVEs et suppression/recréation des critères CPE associés.
-   - Corrélation avec l'inventaire IT (`correlate_cpes`) pour identifier les actifs internes menacés.
+   - Corrélation avec l'inventaire IT (`correlate_cpes`) pour identifier les actifs internes et logiciels de la Global Watchlist menacés.
    - Dispatch des alertes d'inventaire : Si de nouveaux assets sont menacés par des CVE critiques, des alertes sont émises sur les canaux webhooks après vérification anti-doublons.
+   - **Enregistrement de la télémétrie d'audit (`nvd.sync_history`)** : Horodatage précis, durée d'exécution (`duration_ms`), compteurs de CVEs et CPEs ingérées, tableau des CVE IDs traités et résultat de corrélation inventaire.
 
 9. **Boucle de Maintien en Condition Opérationnelle (Main Loop)**
    - Le programme entre dans une boucle infinie (`while True`), se mettant en pause pendant 60 secondes.
@@ -60,6 +61,7 @@ Le processus de démarrage de `rtms-nvd` (via `main_rtms_nvd.py`) exécute séqu
 | **`nvd.cve`** | - Vérification de son existence et comptage (`COUNT`) au démarrage pour déclencher ou non l'amorçage.<br>- Récupération de `MAX(last_modified_date)` pour déterminer le point de départ de la synchronisation incrémentale à chaque boucle. | - Insertion ou mise à jour (Upsert) des métadonnées de base d'une vulnérabilité : `cve_id`, `description`, `cvss_v3_score`, `cvss_v3_severity`, `published_date`, `last_modified_date`. |
 | **`nvd.cpe_match`** | - Utilisée indirectement par la vue `admin.vulnerability_view` lors du processus de corrélation (`correlate_cpes`) pour identifier si des équipements/logiciels correspondent aux critères d'une CVE. | - Stockage des critères CPE (produits et versions) : `cve_id`, `vulnerable`, `criteria`, `version_start_including/excluding`, `version_end_including/excluding`.<br>- *Note:* Lors d'une mise à jour de CVE, toutes les anciennes lignes CPE associées sont supprimées (`DELETE`) avant réinsertion. |
 | **`nvd.cve_cache`** | - N/A (Non lue directement par la boucle `rtms-nvd`, réservée pour d'autres usages ou micro-services de l'écosystème). | - Création structurelle de la table et de son index si elle n'existe pas via `db.create_cve_cache_table()`. |
+| **`nvd.sync_history`** | - Consultée par le backend web (`/api/nvd/sync-history`) pour afficher les métriques et auditer l'activité de synchronisation dans l'interface UI (modal d'inspection et badges télémétriques). | - Écriture systématique à la fin de chaque cycle de synchronisation incrémentale : `tenant_id`, `sync_start`, `sync_end`, `duration_ms`, `cve_count`, `cpe_count`, `status`, `cve_ids`, `impacted_inventory_count`. En cas d'échec, enregistrement d'un statut `FAILED` et de l'`error_message`. |
 
 ### Schéma `admin`
 

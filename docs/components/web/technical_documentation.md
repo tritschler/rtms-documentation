@@ -365,6 +365,43 @@ To guarantee timely renewals and avoid abrupt service degradation, RTMS incorpor
 | `POST` | `/api/license/recipient` | Sets the designated administrator for license notifications | Admin Only (JWT) |
 | `GET` | `/api/license/status` | Enriched with task status, assignee, and countdown metrics | Authenticated (JWT) |
 
+---
+
+## NVD Synchronization Telemetry, Impact Alerts & Live Threat Feed
+
+RTMS integrates a multi-layered telemetry and correlation suite connecting the `rtms-nvd` background engine with the web dashboard:
+
+### 1. Synchronization Telemetry & Audit Modal (Services Status)
+- **File:** `frontend/src/pages/ServicesStatus.tsx`
+- **Backend Endpoint:** `GET /api/nvd/sync-history`
+- **Features:**
+  - Real-time status badge on `rtms-nvd` service card: displays ingested CVE count, CPE records count, and execution duration in milliseconds.
+  - Dedicated **Sync Activity** button on both the service card and NVD category banner.
+  - **Inspection Modal:** Interactive split-view dialog featuring:
+    - Chronological list of sync runs with status badges (`SUCCESS` / `FAILED`), timestamps, and duration metrics.
+    - Selected cycle KPI cards: Ingested CVEs, Processed CPEs, Duration, and Inventory Impact.
+    - Searchable list of all ingested CVEs with direct links to NIST NVD, CVSS v3 score/severity badges, affected software component tags, and inventory impact status (`Affects your inventory` vs. `No impact on your inventory`).
+
+### 2. Recent NVD Scan Impact Notification (Software Inventory)
+- **File:** `frontend/src/pages/SoftwareInventory.tsx`
+- **Backend Endpoint:** `GET /api/cve/recent-impacts`
+- **Features:**
+  - Informative banner located at the top of the Software Inventory page.
+  - **Zero Impact Reassurance:** When no tracked components or hosts are affected by the latest sync, displays a reassurance banner with a direct link to service telemetry.
+  - **Immediate Incident Alert:** If newly ingested CVEs match installed packages or Global Watchlist components, renders a high-visibility warning banner with an immediate 1-click shortcut to filter and inspect the impacted CVEs.
+
+### 3. Live Global NVD Feed (CVE Database Lookup)
+- **File:** `frontend/src/pages/SoftwareInventory.tsx`
+- **Backend Endpoint:** `GET /api/cve/recent-feed`
+- **Features:**
+  - Replaces the blank initial state of the CVE Database Lookup tab with a real-time stream of the latest CVEs published or modified by NIST worldwide.
+  - Interactive severity filtering (`ALL`, `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`) and manual refresh capability.
+  - Correlates each CVE in real time against the tenant's assets and Global Watchlist.
+  - One-click operational shortcuts:
+    - **+ Surveiller dans la Global Watchlist**: Instantly adds the vulnerable component to the tenant's monitored watchlist.
+    - **Créer un Incident de Sécurité**: Directly creates an actionable ticket in the Security Findings module.
+
+
 
 
 
