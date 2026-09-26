@@ -401,10 +401,116 @@ RTMS integrates a multi-layered telemetry and correlation suite connecting the `
     - **+ Surveiller dans la Global Watchlist**: Instantly adds the vulnerable component to the tenant's monitored watchlist.
     - **Créer un Incident de Sécurité**: Directly creates an actionable ticket in the Security Findings module.
 
+---
 
+## Threat Exposure & Multi-Provider SOC/SIEM Telemetry Correlation Engine
 
+RTMS incorporates a unified **Threat & Exposure Correlation Subsystem** that connects vulnerability scans with live attack telemetry sourced from Security Operations Center (SOC), Security Information and Event Management (SIEM), and Network Intrusion Detection (IDS) platforms.
 
+### 1. Architectural Overview & Data Ingestion Flow
 
+Rather than treating vulnerability management and threat monitoring as isolated silos, RTMS bridges them using a dynamic correlation pipeline:
+
+```
+[ Security Infrastructure ]
+  ├── Splunk Enterprise / Cloud (REST / HEC)
+  ├── Wazuh / Elasticsearch / OpenSearch (REST API)
+  ├── Suricata Local IDS (EVE JSON log streaming)
+  ├── Microsoft Sentinel / Log Analytics (KQL & Entra ID OAuth2)
+  └── CrowdStrike Falcon (Cloud REST API OAuth2)
+                   │
+                   ▼ (Synchronized via POST /api/threats/sync or background worker)
+         [ Threat Telemetry Ingestion Adapters ]
+                   │
+                   ▼ (Normalized into AttackMetric schema)
+      [ admin.threat_telemetry_cache ] (PostgreSQL)
+                   │
+                   ▼ (Correlated on Demand via RiskCorrelator)
+         [ Contextual Risk Engine ] <─── [ Scanned CVEs & Asset Inventory ]
+                   │
+                   ▼
+  [ RTMS Threat & Exposure Dashboard ] (React / TypeScript UI)
+```
+
+### 2. Supported SOC / SIEM / IDS Providers
+
+RTMS provides native, production-grade telemetry collectors for 5 major security platforms:
+
+| Provider | Ingestion Method | Configuration Parameters | Primary Event Signatures & Fields Extracted |
+| :--- | :--- | :--- | :--- |
+| **Splunk Enterprise / Cloud** | REST Search API (`/services/search/jobs`) & HEC | `soc_url`, `soc_splunk_token`, `soc_splunk_verify_ssl` | `dest_ip`, `dest_port`, `signature`, `count`, `severity` from firewall & IDS indices |
+| **Wazuh / Elasticsearch** | Elasticsearch REST API (`/{index}/_search`) | `soc_wazuh_host`, `soc_wazuh_port`, `soc_wazuh_index`, `soc_wazuh_user`, `soc_wazuh_password`, `soc_wazuh_api_key`, `soc_wazuh_ssl` | `data.destip`, `data.destport`, `rule.description`, `rule.level` from `wazuh-alerts-*` |
+| **Suricata Local IDS** | Fast streaming ingestion from newline-delimited `eve.json` | `soc_suricata_eve_path` (default: `/var/log/suricata/eve.json`) | `dest_ip`, `dest_port`, `alert.signature`, `alert.severity` from `event_type == "alert"` |
+| **Microsoft Sentinel** | Azure Entra ID OAuth2 + Log Analytics REST API (`https://api.loganalytics.io/v1/workspaces/{id}/query`) | `soc_sentinel_workspace_id`, `soc_sentinel_tenant_id`, `soc_sentinel_client_id`, `soc_sentinel_client_secret`, `soc_sentinel_table` | `DestinationIP`, `DestinationPort`, `Activity`, `SeverityLevel` from `CommonSecurityLog` / `SecurityAlert` |
+| **CrowdStrike Falcon** | OAuth2 Bearer Token + Falcon REST API (`/alerts/queries/alerts/v2` & `/alerts/entities/alerts/v2`) | `soc_crowdstrike_client_id`, `soc_crowdstrike_client_secret`, `soc_crowdstrike_base_url` (US-1, US-2, EU-1, GovCloud) | `local_ip`, `local_port`, `description`, `severity_name` from Falcon threat detections |
+
+### 3. Database Schema
+
+#### `admin.threat_telemetry_cache`
+Aggregated telemetry records are stored in PostgreSQL for ultra-fast query performance and offline correlation:
+
+```sql
+CREATE TABLE IF NOT EXISTS admin.threat_telemetry_cache (
+    id SERIAL PRIMARY KEY,
+    dest_ip INET NOT NULL,
+    dest_port INTEGER,
+    total_hits INTEGER NOT NULL DEFAULT 1,
+    max_severity VARCHAR(20) NOT NULL DEFAULT 'MEDIUM',
+    signatures TEXT[] DEFAULT '{}',
+    first_seen TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    last_seen TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    provider VARCHAR(50) NOT NULL DEFAULT 'splunk',
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_telemetry_target UNIQUE (dest_ip, dest_port, provider)
+);
+CREATE INDEX IF NOT EXISTS idx_threat_telemetry_ip ON admin.threat_telemetry_cache(dest_ip);
+CREATE INDEX IF NOT EXISTS idx_threat_telemetry_provider ON admin.threat_telemetry_cache(provider);
+```
+
+#### `admin.system_config` (SOC Configuration Namespacing)
+All provider configuration settings are stored in `admin.system_config` under the `soc_%` prefix:
+- `soc_enabled`: Boolean flag indicating whether SOC correlation is active.
+- `soc_type`: Current active provider (`Splunk`, `Wazuh`, `Suricata`, `Sentinel`, `CrowdStrike Falcon`).
+- Specific connection parameters and credentials for each provider.
+
+### 4. Contextual Risk Scoring Algorithm (`RiskCorrelator`)
+
+Static CVSS v3 scores reflect theoretical vulnerability severity in isolation. The RTMS **Risk Correlator** (`backend/risk_correlator.py`) computes a dynamic **Contextual Risk Score** ($CRS$) bounded between $1.0$ and $10.0$:
+
+$$CRS = \min\left(10.0, CVSS_{base} + \Delta_{hits} + \Delta_{port} + \Delta_{severity} + \Delta_{recency}\right)$$
+
+Where:
+- $CVSS_{base}$: Scanned vulnerability CVSS v3 score.
+- $\Delta_{hits}$: Attack volume multiplier computed via logarithmic scaling:
+  $$\Delta_{hits} = \min(2.0, \log_{10}(\text{hits} + 1) \times 0.65)$$
+- $\Delta_{port}$: Port match bonus:
+  $$\Delta_{port} = \begin{cases} +1.5 & \text{if attack destination port matches the vulnerable service port} \\ 0.0 & \text{otherwise} \end{cases}$$
+- $\Delta_{severity}$: SIEM alert severity weight:
+  $$\Delta_{severity} = \begin{cases} +1.5 & \text{CRITICAL} \\ +1.0 & \text{HIGH} \\ +0.5 & \text{MEDIUM} \\ 0.0 & \text{LOW / INFO} \end{cases}$$
+- $\Delta_{recency}$: Attack recency bonus:
+  $$\Delta_{recency} = \begin{cases} +1.0 & \text{if attack observed within the last 24 hours} \\ +0.5 & \text{if attack observed between 24 and 48 hours ago} \\ 0.0 & \text{older than 48 hours} \end{cases}$$
+
+#### Threat Status Classification Hierarchy
+
+Each correlated finding is assigned an operational threat status:
+1. `ACTIVELY_EXPLOITED`: IP target matched **AND** port matched with active attack hits within the last 24 hours. Represents immediate, active exploitation attempts requiring emergency containment.
+2. `ATTACK_DETECTED`: IP target matched telemetry, but specific port is unmatched or represents generic scanning activity.
+3. `TARGETED`: IP was seen in older telemetry (>24 hours) or reconnaissance patterns.
+4. `POTENTIAL`: Vulnerability exists with high CVSS score, but zero active attack telemetry has been observed targeting this IP.
+5. `DORMANT`: Low-severity vulnerability with no observed attack traffic.
+
+### 5. REST API Endpoints Specification
+
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/threats/overview-kpis` | Returns headline metrics: active attacks, actively exploited CVEs, targeted assets, telemetry hits | Authenticated (`get_current_user_profile`) |
+| `GET` | `/api/threats/top-targeted-services` | Returns top 10 targeted network ports, services, hit volumes, and associated risk levels | Authenticated (`get_current_user_profile`) |
+| `GET` | `/api/threats/activity-timeline` | Returns 48-hour time series buckets of attack volume and severity distribution | Authenticated (`get_current_user_profile`) |
+| `GET` | `/api/threats/correlated` | Returns all tenant vulnerabilities enriched with Contextual Risk Scores and attack telemetry | Authenticated (`get_current_user_profile`) |
+| `POST` | `/api/threats/sync` | Triggers on-demand synchronization from configured SOC provider into telemetry cache | Security Analyst / Admin (`verify_security_analyst_or_admin`) |
+| `GET` | `/api/settings/soc` | Retrieves active SOC provider settings and parameters from `admin.system_config` | Authenticated (`get_current_user_profile`) |
+| `POST` | `/api/settings/soc` | Persists SOC provider configuration and credentials with audit logging | Admin Only (`verify_admin`) |
+| `POST` | `/api/settings/soc/test` | Performs live probe and authentication handshake against selected SOC provider | Admin Only (`verify_admin`) |
 
 
 

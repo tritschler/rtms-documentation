@@ -23,6 +23,8 @@ Detailed technical specifications for each individual subsystem:
   * [Versions & Changelog](components/scanner/versions.md)
 * **RTMS Web (`rtms-web`):**
   * [Web Platform Technical Documentation](components/web/technical_documentation.md) — FastAPI endpoints, React frontend architecture, WebSocket feeds.
+  * [SOC / SIEM Threat Correlation Technical Guide](components/web/soc_threat_correlation_guide.md) — Multi-provider architecture (Splunk, Wazuh, Suricata, Sentinel, CrowdStrike), mathematical risk scoring engine, database schemas, and REST APIs.
+  * [Guide Utilisateur & Mode d'Emploi Dashboard Menaces](components/web/user_guide_threat_dashboard.md) — Guide d'utilisation du dashboard d'exposition, interprétation des scores contextuels, et configuration pas-à-pas des 5 fournisseurs SOC.
   * [Production Nginx & Frontend Setup](components/web/frontend_nginx_setup.md)
   * [Enterprise SSO Keycloak & OIDC Integration](components/web/sso_keycloak_guide.md)
   * [Web Backend Startup Guide](components/web/startup.md)
