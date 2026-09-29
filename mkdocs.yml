@@ -69,6 +69,7 @@ nav:
       - Scanner:
           - Prérequis techniques (FR): components/scanner/technical_requirements_fr.md
           - Prérequis techniques (EN): components/scanner/technical_requirements_en.md
+          - Mobilité, Cycle de vie & Multi-réseaux: components/scanner/mobility_lifecycle.md
           - Mode Standalone: components/scanner/stand_alone.md
           - Versions & Changelog: components/scanner/versions.md
           - Docker & PyInstaller: components/scanner/docker.md

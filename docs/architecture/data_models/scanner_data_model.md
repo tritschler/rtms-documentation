@@ -61,6 +61,13 @@ Le système évalue l'état opérationnel de chaque sous-réseau via deux niveau
    - Si le scan s'exécute mais qu'**aucun hôte ne répond** (ou que tous les hôtes connus sont éteints/injoignables), le compteur d'hôtes en ligne passe à 0.
    - Le sous-réseau est alors marqué **Inactif / Hors ligne** (`isSubnetOnline = false`) et est également **replié d'office sous forme d'une seule ligne** dans l'inventaire web.
 
+3. **Niveau 3 : Mobilité du Scanner et Changement de Sous-Réseau (Roaming)**
+   - Lorsqu'une machine hôte (ex : Mac ou PC portable) exécutant `rtms-scanner` est déplacée d'un sous-réseau A vers un sous-réseau B :
+     - **Registre des services (`admin.service_registry`) :** L'enregistrement existant du scanner (identifié par son empreinte matérielle `machine_id`) est mis à jour sur place (nouveau `subnet`, nouvelle `host_ip`, statut repassé à `RUNNING`). Tout doublon orphelin antérieur portant le même `machine_id` est dédupliqué et purgé.
+     - **Persistance de l'ancien sous-réseau :** L'ancien sous-réseau A **n'est pas supprimé** de `scanner.networks` ; il passe simplement au statut « Non connecté » et reste consultable.
+     - **Persistance des actifs :** Les équipements découverts sur le sous-réseau A restent conservés dans `admin.assets` avec leur horodatage `last_seen`. Les scans du sous-réseau B n'impactent pas l'état des actifs de l'ancien sous-réseau.
+     - Voir la documentation détaillée : [Mobilité du Scanner & Cycle de Vie](../../components/scanner/mobility_lifecycle.md).
+
 ---
 
 ## Liste Blanche d'Adresses MAC par Sous-Réseau (Suppression d'Alertes)
