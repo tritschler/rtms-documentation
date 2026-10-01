@@ -75,6 +75,7 @@ nav:
           - Versions & Changelog: components/scanner/versions.md
           - Docker & PyInstaller: components/scanner/docker.md
           - Commandes Bettercap: components/scanner/bettercap_commands.md
+          - Audit Email & DNS: components/scanner/email_and_dns_audits.md
           - Ressources & Tests HTTP: components/scanner/resources.md
       - Web:
           - Documentation technique: components/web/technical_documentation.md

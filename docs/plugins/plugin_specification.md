@@ -212,6 +212,7 @@ class SslTlsAuditPlugin(BasePlugin):
 | **Durcissement Serveur SSH** | 22 | Échange KEX avec ciphers faibles (3DES, RC4, CBC), KEX SHA-1, bannières vulnérables (regreSSHion CVE-2024-6387, SSHv1) | **Critical / High / Medium** | **✅ INTERNE (`ssh_hardening.py`)** |
 | **Identifiants par défaut (IoT / Réseau)** | 80, 443, 8080, 23 | Switches, caméras, imprimantes, routeurs configurés avec des identifiants d'usine (`admin:admin`, `admin:password`, etc.) | **High** | **✅ INTERNE (`default_credentials.py`)** |
 | **Détection SNMP Community Strings** | 161 UDP | Community strings triviales par défaut (`public`, `private`, `community`, etc.) autorisant la lecture de topologie ou l'écriture MIB | **Critical / High** | **✅ INTERNE (`snmp_community.py`)** |
+| **Audit Sécurité SMTP & Open Relay** | 25, 465, 587 | Relais de messagerie ouvert (Open Relay non authentifié), absence de chiffrement en transit STARTTLS, énumération d'utilisateurs (VRFY/EXPN) | **Critical / High / Medium** | **✅ INTERNE (`smtp_security.py`)** |
 
 ---
 
