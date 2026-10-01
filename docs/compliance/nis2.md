@@ -72,7 +72,7 @@ flowchart TD
 * **Security Controls**:
   1. **Zero Default Passwords**: A dedicated **Setup Wizard** initializes the first Super Administrator upon fresh deployment.
   2. **Forced Password Renewal**: Any seeded or newly created local account is flagged with `must_change_password = TRUE`.
-  3. **Strict MFA Enforcement**: Local accounts with `role == 'admin'` cannot bypass MFA.
+  3. **Strict MFA Enforcement**: Local accounts with `role == 'admin'` cannot bypass MFA in production environments. (For cloud demo instances, an explicit bypass is configurable via `RTMS_ENFORCE_ADMIN_MFA=false`).
   4. **Cryptographic Storage**: Passwords are salted and hashed using **Bcrypt**.
   5. **Adaptive Password Expiration & J-14 Preventive Alerting & Task Automation**: Local accounts without Multi-Factor Authentication (MFA) are subject to a 90-day password expiration policy (`password_expiry_no_mfa_days`). A preventive notification banner and badge are displayed at **J-14** (14 days before expiration) on the dashboard and user profile, and a dedicated **Security Finding remediation task** is automatically created and assigned to the user in *"My Tasks"*. Upon password renewal or MFA activation, the task is automatically resolved (`RESOLVED`). At &ge; 90 days, access is locked at login until the password is changed. Accounts secured with MFA (TOTP) are permanently exempt from periodic expiration pursuant to **NIST SP 800-63B** and **ISO 27001**.
 
@@ -107,6 +107,8 @@ In compliance with **NIS 2 Article 21.2(j)**:
    * Access is only granted once a valid 6-digit confirmation code is validated against the server secret.
 3. **Emergency Reset**:
    * Authorized Super Admins can reset a user's MFA secret from the User Management console in case of device loss.
+4. **Demonstration & Showcase Exemption**:
+   * For evaluation instances, lab sandboxes, or public cloud showcase servers, mandatory admin MFA enforcement can be toggled off via `RTMS_ENFORCE_ADMIN_MFA=false` (or Ansible variable `rtms_enforce_admin_mfa: false`), preventing smartphone pairing lockouts across multiple concurrent testers.
 
 ---
 

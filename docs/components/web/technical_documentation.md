@@ -66,6 +66,13 @@ The RTMS backend utilizes a Strategy Pattern to support multiple authentication 
 - **LDAP (`ldap`)**: Authenticates users against a corporate active directory using a simple bind. It queries the configured LDAP server, binds with the user credentials, and performs Just-In-Time (JIT) provisioning into `admin.users` with `password_hash = 'ldap_managed'`. If the LDAP server is unreachable, it seamlessly cascades to local accounts for emergency access.
 - **SSO / OIDC (`oidc`)**: Enterprise Single Sign-On using OpenID Connect (Keycloak, Microsoft Entra ID, Okta). Handles discovery (`/.well-known/openid-configuration`), secure authorization code exchange, JIT user provisioning with `password_hash = 'sso_managed'`, and full delegation of multi-factor authentication (MFA/TOTP). Provides a dedicated **Break-Glass** local login fallback mode for administrator resilience.
 
+### Administrative MFA Enforcement Policy & Cloud Demonstration Bypass
+* By default, administrative users (`role == 'admin'`) must enforce TOTP Multi-Factor Authentication upon initial login in compliance with **NIS 2 Article 21.2(j)**.
+* **Demonstration / Lab Override**: For cloud-hosted demonstration environments (e.g. public showcase VPS instances), administrative MFA can be disabled to allow seamless shared evaluator access without smartphone TOTP coupling:
+  * **Environment Variable**: `RTMS_ENFORCE_ADMIN_MFA=false` (or `RTMS_DEMO_MODE=true`).
+  * **Database Configuration**: Key `enforce_admin_mfa` in `admin.system_config` set to `false`.
+  * **Ansible Automation**: In `rtms-installer`, set `rtms_enforce_admin_mfa: false` in the target host/group inventory (`group_vars/all.yml`). Production appliances retain `true` by default.
+
 Regardless of the active provider, successful authentications generate the standard JWT session token, record an entry in the `admin.login_audit` table, and update the `last_login` timestamp for the user.
 
 ## Data Lifecycle & Telemetry Purge vs. Factory Reset
