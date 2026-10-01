@@ -64,6 +64,7 @@ nav:
           - Scanner Data Model: architecture/data_models/scanner_data_model.md
           - NVD Data Model: architecture/data_models/nvd_data_model.md
   - Déploiement & Installation:
+      - Guide de Déploiement Ansible: deployment/ansible_deployment_guide.md
       - Guide Installation & Durcissement PostgreSQL: deployment/postgres_hardening_guide.md
   - Composants:
       - Scanner:
