@@ -76,6 +76,7 @@ nav:
           - Docker & PyInstaller: components/scanner/docker.md
           - Commandes Bettercap: components/scanner/bettercap_commands.md
           - Audit Email & DNS: components/scanner/email_and_dns_audits.md
+          - Ciblage Granulaire du Deep Scan: components/scanner/deep_scan_targeting.md
           - Ressources & Tests HTTP: components/scanner/resources.md
       - Web:
           - Documentation technique: components/web/technical_documentation.md
