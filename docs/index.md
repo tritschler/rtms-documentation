@@ -18,7 +18,7 @@ This repository serves as the **Single Source of Truth** for overall system arch
 ### 2. Component Technical Documentation
 Detailed technical specifications for each individual subsystem:
 * **RTMS Scanner (`rtms-scanner`):**
-  * [Technical Requirements (EN)](components/scanner/technical_requirements_en.md) / [Requirements (FR)](components/scanner/technical_requirements_fr.md)
+  * [Prérequis Techniques (Technical Requirements)](components/scanner/technical_requirements.md)
   * [Standalone Mode Guide](components/scanner/stand_alone.md)
   * [Versions & Changelog](components/scanner/versions.md)
 * **RTMS Web (`rtms-web`):**

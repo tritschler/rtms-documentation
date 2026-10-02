@@ -25,7 +25,6 @@ theme:
         icon: material/brightness-7
         name: Passer au mode sombre
   features:
-    - navigation.instant
     - navigation.tracking
     - navigation.tabs
     - navigation.sections
@@ -34,6 +33,18 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
+
+plugins:
+  - search
+  - i18n:
+      languages:
+        - locale: fr
+          default: true
+          name: Français
+          build: true
+        - locale: en
+          name: English
+          build: true
 
 markdown_extensions:
   - admonition
@@ -68,8 +79,7 @@ nav:
       - Guide Installation & Durcissement PostgreSQL: deployment/postgres_hardening_guide.md
   - Composants:
       - Scanner:
-          - Prérequis techniques (FR): components/scanner/technical_requirements_fr.md
-          - Prérequis techniques (EN): components/scanner/technical_requirements_en.md
+          - Prérequis techniques: components/scanner/technical_requirements.md
           - Mobilité, Cycle de vie & Multi-réseaux: components/scanner/mobility_lifecycle.md
           - Mode Standalone: components/scanner/stand_alone.md
           - Versions & Changelog: components/scanner/versions.md
