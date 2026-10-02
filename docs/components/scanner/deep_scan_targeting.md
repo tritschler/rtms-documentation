@@ -1,127 +1,103 @@
 # Ciblage Granulaire du Deep Scan (Sous-réseaux & Exclusions d'Actifs)
 
-La suite **RTMS** permet de moduler précisément la profondeur d'audit lors des scans approfondis (**Deep Scan** / `CMD_DISCOVER_SCAN`).
+La suite **RTMS** implémente une politique de **double consentement strict (Dual Opt-In)** pour l'exécution des scans approfondis (**Deep Scan** / `CMD_DISCOVER_SCAN`).
 
-Cette granularité répond à deux exigences opérationnelles majeures :
-1. **Protection des équipements sensibles (OT / IoT / Médical / Imprimantes)** : éviter d'exécuter des scans de ports TCP intrusifs ou des plugins de sécurité sur des automates programmables (PLC), du matériel SCADA ou des imprimantes tout en conservant leur visibilité et inventaire (ARP / ICMP / MAC).
-2. **Optimisation des performances et priorisation réseau** : concentrer l'analyse en profondeur (ports, bannières, détection de vulnérabilités, audits SMTP/DNS) uniquement sur les sous-réseaux d'infrastructure et de serveurs critiques.
+Cette approche résout un problème critique de sécurité opérationnelle lié à la **mobilité des sondes (Roaming)** : lorsqu'un scanner physique (ordinateur portable, appliance nomade, VM) est déplacé d'un réseau informatique (IT) vers un réseau industriel ou sensible (OT, automates PLC, équipements médicaux, IoT), il ne doit **jamais** exécuter de scan agressif par inadvertance.
 
 ---
 
-## 1. Principes de Fonctionnement
+## 1. Règle du Double Consentement Strict (Dual Opt-In)
 
-Lorsqu'un cycle de scan approfondi (**Deep Scan**) est déclenché par l'orchestrateur :
+Pour qu'un hôte fasse l'objet d'un scan approfondi (Nmap, énumération de ports, plugins de vulnérabilités), **DEUX conditions cumulatives** doivent être obligatoirement satisfaites, complétées par la vérification d'exclusion individuelle :
 
 ```mermaid
 flowchart TD
-    A[Découverte de l'Hôte - ARP / ICMP] --> B[Hôte actif détecté]
-    B --> C{Deep Scan activé pour le sous-réseau ?}
-    C -- Non --> E[Exemption Deep Scan]
-    C -- Oui --> D{Actif / IP exclu du Deep Scan ?}
-    D -- Oui --> E
-    D -- Non --> F[Scan de Ports Nmap get_host_details]
-    F --> G[Exécution des Plugins de Sécurité]
-    G --> H[Rapport Complet : Inventaire + Vulnérabilités]
-    E --> I[Rapport Allégé : Inventaire & Présence Uniquement]
+    A[Hôte découvert via ARP / ICMP] --> B{1. Switch Global / Scanner actif ?}
+    B -- Non --> E[Mode Découverte Douce Uniquement]
+    B -- Oui --> C{2. Subnet explicitement autorisé ?}
+    C -- Non (ou nouveau subnet inconnu) --> E
+    C -- Oui (deep_scan = true) --> D{3. Actif individuel exclu ?}
+    D -- Oui (deep_scan_excluded = true) --> E
+    D -- Non --> F[Deep Scan Autorisé : Nmap + Plugins]
+    
+    E --> G[Inventaire préservé : IP, MAC, Constructeur, Nom<br/>Aucun scan de ports TCP, aucun plugin exécuté]
 ```
 
-### Comportement d'un Actif Exempté
-Lorsqu'un actif est exempté du Deep Scan (soit parce que son sous-réseau est configuré avec `deep_scan: false`, soit parce que l'actif lui-même est marqué avec `deep_scan_excluded: true`) :
-* **Découverte et inventaire préservés** : l'adresse IP, l'adresse MAC, le fabricant (OUI vendor) et le nom d'hôte continuent d'être détectés et remontés au backend.
-* **Aucun scan de ports intrusif** : l'appel Nmap `get_host_details()` est court-circuité (`ports: {}`).
-* **Aucun plugin de sécurité exécuté** : `run_host_plugins_audit()` n'est pas appelé sur cet hôte.
-* **Traçabilité** : un log d'information explicite est enregistré dans le journal du scanner :
-  ```text
-  [INFO] Asset 192.168.1.50 is excluded from Deep Scan (asset exclusion rule). Skipping port scan and security plugins.
-  ```
+### Règle 1 : Le Coupe-Circuit Global (*Global Master Switch*)
+* Si le switch global Deep Scan (`scanner.deep_scan`) est désactivé (`false`), **aucun Deep Scan n'est jamais exécuté**, quel que soit le sous-réseau ou sa configuration.
+* Le scanner opère alors en sonde passive / légère d'inventaire (`CMD_DISCOVER`).
+
+### Règle 2 : L'Autorisation Explicite par Sous-Réseau (*Subnet-Centric Opt-In*)
+* Même si le Deep Scan global est actif, **seuls les sous-réseaux explicitement autorisés** (`deep_scan = true` en base ou présents dans `scanner.deep_scan_subnets`) feront l'objet d'un Deep Scan.
+* **Sécurité par défaut (Zero Trust)** : tout sous-réseau nouvellement découvert ou non explicitement activé a la valeur **`deep_scan = false`**.
+* Lors du déplacement d'un scanner vers un réseau sensible d'automates (ex : `192.168.100.0/24`), le scanner bascule automatiquement en mode découverte douce, éliminant tout risque de perturbation matérielle.
+
+### Règle 3 : L'Exclusion Granulaire par Actif (*Asset-Level Exclude*)
+* Au sein d'un sous-réseau où le Deep Scan est actif, un actif individuel (ex: automate de supervision, automate de perfusion, imprimante réseau) peut être marqué comme **`deep_scan_excluded = true`**.
+* Il reste présent dans l'inventaire CMDB mais ses ports ne sont jamais audités.
 
 ---
 
-## 2. Configuration au Niveau Sous-Réseau (Subnet Deep Scan)
-
-Il est possible d'activer ou désactiver le Deep Scan pour chaque sous-réseau indépendamment.
-
-### Règles d'Évaluation
-* **Si une liste de sous-réseaux autorisés est définie (`scanner.deep_scan_subnets`)** : seuls les hôtes appartenant à ces sous-réseaux (ou à leurs sous-réseaux enfants CIDR) subissent un scan approfondi.
-* **Si une liste d'exclusion est définie (`scanner.deep_scan_exclude_subnets`)** : tout sous-réseau listé est ignoré lors du Deep Scan.
+## 2. Configuration au Niveau Sous-Réseau
 
 ### Clés de Configuration Scanner
 
 | Clé | Type | Exemple | Description |
 | :--- | :--- | :--- | :--- |
-| `scanner.deep_scan_subnets` | Liste CSV | `192.168.10.0/24, 10.0.0.0/16` | Seuls ces sous-réseaux feront l'objet d'un scan approfondi. |
-| `scanner.deep_scan_exclude_subnets` | Liste CSV | `192.168.99.0/24, 172.16.20.0/24` | Sous-réseaux explicitement exclus du scan approfondi. |
+| `scanner.deep_scan` | Booléen | `true` | Coupe-circuit global pour autoriser le scanner à pratiquer le Deep Scan. |
+| `scanner.deep_scan_subnets` | Liste CSV | `10.10.0.0/24, 172.16.0.0/16` | **Obligatoire** : liste des sous-réseaux explicitement autorisés. *(Possibilité d'utiliser `*` pour autoriser tous les sous-réseaux).* |
+| `scanner.deep_scan_exclude_subnets` | Liste CSV | `192.168.100.0/24` | Liste d'exclusion prioritaire (blacklist). |
 
-### Configuration via l'API & Base de Données (`rtms-web`)
+### Base de Données PostgreSQL & API (`rtms-web`)
 
-Dans la base de données PostgreSQL, la table `admin.subnet_names` et `scanner.networks` disposent de la colonne :
-* `deep_scan BOOLEAN DEFAULT TRUE`
+Dans la base de données :
+* `admin.subnet_names.deep_scan` : `BOOLEAN DEFAULT FALSE`
+* `scanner.networks.deep_scan` : `BOOLEAN DEFAULT FALSE`
 
-Endpoint de mise à jour :
+#### Activer le Deep Scan sur un Sous-Réseau via l'API :
 ```http
 POST /api/subnets/name
 Content-Type: application/json
 Authorization: Bearer <token>
 
 {
-  "subnet": "192.168.99.0/24",
-  "name": "Réseau Automates PLC / SCADA",
-  "deep_scan": false
+  "subnet": "10.10.0.0/24",
+  "name": "Réseau Serveurs Production",
+  "deep_scan": true
 }
 ```
 
 ---
 
-## 3. Exclusion au Niveau Actif (Asset-Level Exclude)
+## 3. Configuration de l'Exclusion par Actif
 
-Un actif individuel peut être exclu du Deep Scan même si son sous-réseau est configuré pour être scanné en profondeur.
+### Base de Données PostgreSQL & API (`rtms-web`)
 
-### Clés de Configuration Scanner
+* `admin.assets.deep_scan_excluded` : `BOOLEAN NOT NULL DEFAULT FALSE`
+* `admin.tenant_assets.deep_scan_excluded` : `BOOLEAN NOT NULL DEFAULT FALSE`
 
-| Clé | Type | Exemple | Description |
-| :--- | :--- | :--- | :--- |
-| `scanner.deep_scan_exclude_ips` | Liste CSV | `192.168.1.50, 192.168.1.100` | Adresses IP individuelles ou plages CIDR exclues du Deep Scan. |
-
-### Configuration via l'API & Base de Données (`rtms-web`)
-
-Les tables `admin.assets` et `admin.tenant_assets` disposent de la colonne :
-* `deep_scan_excluded BOOLEAN NOT NULL DEFAULT FALSE`
-
-Endpoint de mise à jour d'un actif :
+#### Exclure un équipement sensible du Deep Scan via l'API :
 ```http
 POST /api/assets/update
 Content-Type: application/json
 Authorization: Bearer <token>
 
 {
-  "ip": "192.168.1.50",
+  "ip": "10.10.0.50",
   "deep_scan_excluded": true
 }
 ```
 
-Lors de la récupération de la configuration par l'agent (`GET /api/scanner/config`), la liste des hôtes connus transmet la directive :
-```json
-{
-  "deep_scan_subnets": ["192.168.1.0/24"],
-  "deep_scan_exclude_subnets": ["192.168.99.0/24"],
-  "deep_scan_exclude_ips": ["192.168.1.50"],
-  "known_hosts": [
-    {
-      "ip": "192.168.1.50",
-      "mac": "00:11:22:33:44:55",
-      "hostname": "printer-label-01",
-      "deep_scan_excluded": true
-    }
-  ]
-}
-```
+Le scanner reçoit cette information dynamiquement via `GET /api/scanner/config` :
+* `deep_scan_exclude_ips`: `["10.10.0.50"]`
+* Dans `known_hosts` : `{"ip": "10.10.0.50", "deep_scan_excluded": true}`
 
 ---
 
-## 4. Tests et Validation
+## 4. Validation des Tests Unitaires
 
-Une suite de tests unitaires dédiée valide le comportement dans [`tests/test_deep_scan_targeting.py`](file:///Users/marctritschler/git_projects/rtms-scanner/tests/test_deep_scan_targeting.py) :
-* Résolution CIDR et correspondance de sous-réseaux (`_subnet_matches`).
-* Respect strict des listes d'inclusion et d'exclusion de sous-réseaux (`is_deep_scan_for_subnet`).
-* Respect des exclusions par adresse IP d'actif (`is_asset_deep_scan_excluded`).
-* Maintien des données d'inventaire de base et court-circuitage complet des scans de ports et des plugins pour les hôtes exemptés.
+La suite de tests unitaires [`tests/test_deep_scan_targeting.py`](file:///Users/marctritschler/git_projects/rtms-scanner/tests/test_deep_scan_targeting.py) valide rigoureusement :
+1. **Coupe-circuit global** : si `scanner.deep_scan = false`, le test vérifie que le Deep Scan est refusé même pour un subnet autorisé.
+2. **Exigence du sous-réseau** : si `scanner.deep_scan = true` mais qu'aucun sous-réseau n'est spécifié, le Deep Scan est refusé (`False`).
+3. **Ciblage strict** : vérifie que le Deep Scan est accordé au sous-réseau autorisé (et à ses sous-réseaux enfants CIDR) mais refusé aux autres.
+4. **Exclusion d'actifs** : vérifie que les hôtes protégés conservent leur inventaire et court-circuitent Nmap et les plugins.
