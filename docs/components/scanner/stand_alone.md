@@ -69,3 +69,21 @@ Format: [SEVERITY] ALERT_TYPE - IP: <ip_address> - <Description>
 The raw, complete JSON output of deep host scans (Nmap module results, OS fingerprinting, NTLM extracts, etc.).
 
 Behavior: These files are preserved historically and are never overwritten. They provide a complete, auditable technical trail of every deep scan executed.
+
+---
+
+## 5. Résilience et Mode Hors-Ligne en Mode API Découplé
+
+En mode API Découplé (`RTMS_SERVER_URL`), si le serveur backend central devient injoignable (coupure réseau, maintenance, panne temporaire) :
+
+1. **Continuité de scan & Cache de configuration local** :
+   Le scanner continue d'auditer le réseau sans interruption en s'appuyant sur la dernière configuration valide mise en cache dans `data/config_cache.json`.
+
+2. **Tampon hors-ligne zéro perte (`data/offline_buffer/`)** :
+   Les rapports de scans générés pendant la panne sont sérialisés au format JSON dans `data/offline_buffer/`. Dès que le serveur RTMS est de nouveau disponible, tous les rapports en attente sont automatiquement rejoués et synchronisés dans l'ordre chronologique, puis purgés.
+
+3. **Protection contre la pollution des logs (Anti-Spam & Backoff Exponentiel)** :
+   * **Alerte initiale unique** : Une notification d'avertissement est émise au moment précis où la liaison est perdue pour signaler le basculement en mode autonome.
+   * **Backoff exponentiel des rappels** : Au lieu d'émettre des avertissements répétitifs à chaque requête, l'intervalle entre deux rappels d'indisponibilité double progressivement (5 min, 10 min, 20 min, 40 min... jusqu'à 4 heures maximum).
+   * **Espacement des heartbeats déconnectés** : La cadence des tentatives de vérification passe automatiquement de 15s à 60s pour éliminer la saturation des sockets.
+   * **Bufferisation silencieuse** : Les rapports de scans s'accumulent sur le disque sans polluer les journaux d'erreurs (niveau `DEBUG`).

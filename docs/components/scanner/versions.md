@@ -35,4 +35,6 @@
 - Strict Ethernet precedence over Wi-Fi on identical subnets
 - Real-time event-driven DHCP hostname discovery (`DHCPSnooper`) with immediate `admin.assets` database synchronization and scan priority resolution
 - Subnet MAC Whitelist management (`admin.subnet_mac_whitelist`) to suppress `NEW_HOST` and unnamed device alerts per CIDR network
+- Granular Deep Scan Targeting: Subnet-Centric dual opt-in and per-asset exclusions (`admin.assets.deep_scan_excluded`, `scanner.deep_scan_subnets`)
+- Resilient Offline API Client: Zero-loss scan buffer replay, exponential log backoff, and socket probe throttling during backend downtime
 
