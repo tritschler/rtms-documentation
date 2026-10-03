@@ -1,0 +1,2872 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation technique interne, d'architecture, de déploiement et de conformité de la plateforme RTMS.">
+      
+      
+        <meta name="author" content="3TS Consulting SRL">
+      
+      
+      
+        <link rel="prev" href="../nis2/">
+      
+      
+        <link rel="next" href="../release_strategy/">
+      
+      
+        
+          <link rel="alternate" href="../../../compliance/cra/" hreflang="fr">
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Cyber Resilience Act (CRA) - RTMS Documentation Technique (3TS Consulting)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rtms-cyber-resilience-act-cra-compliance-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="RTMS Documentation Technique (3TS Consulting)" class="md-header__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RTMS Documentation Technique (3TS Consulting)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cyber Resilience Act (CRA)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../compliance/cra/" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deployment/ansible_deployment_guide/" class="md-tabs__link">
+          
+  
+  
+  Déploiement & Installation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../components/scanner/technical_requirements/" class="md-tabs__link">
+          
+  
+  
+  Composants & Internals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../plugins/plugin_specification/" class="md-tabs__link">
+          
+  
+  
+  Plugins
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../nis2/" class="md-tabs__link">
+          
+  
+  
+  Conformité & Légal
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="RTMS Documentation Technique (3TS Consulting)" class="md-nav__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RTMS Documentation Technique (3TS Consulting)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue d'ensemble
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseau & WireGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modèle RBAC (Permissions)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/database_rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sécurité & RBAC Base de Données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modèles de données
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modèles de données
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data_models/scanner_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data_models/nvd_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déploiement & Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Déploiement & Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/ansible_deployment_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide de Déploiement Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/postgres_hardening_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Installation & Durcissement PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Composants & Internals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Composants & Internals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scanner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/technical_requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prérequis techniques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/mobility_lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobilité, Cycle de vie & Multi-réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/stand_alone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mode Standalone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions & Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker & PyInstaller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/bettercap_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commandes Bettercap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/email_and_dns_audits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Email & DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/deep_scan_targeting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciblage Granulaire du Deep Scan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ressources & Tests HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/technical_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/frontend_nginx_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déploiement Nginx & Frontend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/sso_keycloak_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide SSO Keycloak & OIDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Démarrage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local Agent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Local Agent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/local-agent/technical_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/local-agent/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Microservice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NVD Microservice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/rtms_nvd_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation NVD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/readme_startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Démarrage & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/readme_export_cve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exportation de rapports CVE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Admin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/admin/admin_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/plugin_specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spécification & Développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conformité & Légal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Conformité & Légal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nis2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directive NIS2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-executive-summary-regulatory-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Executive Summary &amp; Regulatory Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-product-classification-conformity-assessment-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Product Classification &amp; Conformity Assessment Procedure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Product Classification &amp; Conformity Assessment Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classification-justification-annex-iii-class-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification Justification (Annex III - Class I)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conformity-assessment-procedure-module-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformity Assessment Procedure (Module A)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-essential-cybersecurity-requirements-annex-i-part-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Essential Cybersecurity Requirements (Annex I, Part I)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-software-bill-of-materials-sbom-supply-chain-transparency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Software Bill of Materials (SBOM) &amp; Supply Chain Transparency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Software Bill of Materials (SBOM) &amp; Supply Chain Transparency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbom-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-purl-identification-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard PURL Identification &amp; Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-vulnerability-handling-mandatory-reporting-annex-i-part-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Vulnerability Handling &amp; Mandatory Reporting (Annex I, Part II)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Vulnerability Handling &amp; Mandatory Reporting (Annex I, Part II)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-coordinated-vulnerability-disclosure-cvd-isoiec-29147" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Coordinated Vulnerability Disclosure (CVD - ISO/IEC 29147)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-cra-24-hour-mandatory-incident-notification-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. CRA 24-Hour Mandatory Incident Notification Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-guaranteed-security-support-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Guaranteed Security Support Period
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-rest-api-endpoints-for-cra-auditing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. REST API Endpoints for CRA Auditing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release_strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stratégie de Release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documents Légaux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documents Légaux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/EULA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EULA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/Applied_standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normes appliquées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/EU_declaration_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déclaration UE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/risk_assessmnent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Évaluation des risques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-executive-summary-regulatory-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Executive Summary &amp; Regulatory Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-product-classification-conformity-assessment-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Product Classification &amp; Conformity Assessment Procedure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Product Classification &amp; Conformity Assessment Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classification-justification-annex-iii-class-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification Justification (Annex III - Class I)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conformity-assessment-procedure-module-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformity Assessment Procedure (Module A)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-essential-cybersecurity-requirements-annex-i-part-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Essential Cybersecurity Requirements (Annex I, Part I)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-software-bill-of-materials-sbom-supply-chain-transparency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Software Bill of Materials (SBOM) &amp; Supply Chain Transparency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Software Bill of Materials (SBOM) &amp; Supply Chain Transparency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbom-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-purl-identification-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard PURL Identification &amp; Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-vulnerability-handling-mandatory-reporting-annex-i-part-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Vulnerability Handling &amp; Mandatory Reporting (Annex I, Part II)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Vulnerability Handling &amp; Mandatory Reporting (Annex I, Part II)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-coordinated-vulnerability-disclosure-cvd-isoiec-29147" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Coordinated Vulnerability Disclosure (CVD - ISO/IEC 29147)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-cra-24-hour-mandatory-incident-notification-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. CRA 24-Hour Mandatory Incident Notification Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-guaranteed-security-support-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Guaranteed Security Support Period
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-rest-api-endpoints-for-cra-auditing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. REST API Endpoints for CRA Auditing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="rtms-cyber-resilience-act-cra-compliance-architecture">RTMS - Cyber Resilience Act (CRA) Compliance &amp; Architecture<a class="headerlink" href="#rtms-cyber-resilience-act-cra-compliance-architecture" title="Permanent link">&para;</a></h1>
+<h2 id="1-executive-summary-regulatory-scope">1. Executive Summary &amp; Regulatory Scope<a class="headerlink" href="#1-executive-summary-regulatory-scope" title="Permanent link">&para;</a></h2>
+<p>The <strong>Cyber Resilience Act (Regulation (EU) 2024/2847 - CRA)</strong> establishes horizontal, mandatory cybersecurity requirements for all products with digital elements placed on the European Union market.</p>
+<p>The <strong>Risk &amp; Threat Management System (RTMS)</strong>, engineered and maintained by <strong>3TS Consulting SRL</strong>, is an on-premises and distributed cybersecurity management platform providing automated network discovery, host and service mapping, vulnerability assessment (NIST NVD/CVE), ARP anomaly detection, and IT compliance governance.</p>
+<p>Because RTMS executes vulnerability scanning, perimeter interrogation, and security monitoring functions, it falls under the <strong>Class I "Important Product with Digital Elements"</strong> regime as defined in <strong>Annex III of Regulation (EU) 2024/2847</strong>.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CRA_Scope["Regulation (EU) 2024/2847 (CRA)"]
+        PDE["Product with Digital Elements (PDE)"] --&gt; CLASS["Annex III: Important Product (Class I)"]
+        CLASS --&gt; CAT1["Vulnerability Scanners &amp; Discovery Probes"]
+        CLASS --&gt; CAT2["Network Monitoring &amp; Anomaly Detection Systems"]
+    end
+
+    subgraph Conformity["Conformity Path (Article 32)"]
+        CLASS --&gt; MOD_A["Module A: Internal Production Control&lt;br/&gt;(Harmonised Standards: ISO 29147, ISO 30111, EN 18031)"]
+        MOD_A --&gt; DOC["EU Declaration of Conformity (DoC)"]
+        DOC --&gt; CE["CE Marking Affixed"]
+    end
+
+    subgraph Pillars["Core Manufacturer Obligations"]
+        CE --&gt; P1["1. Security by Design &amp; by Default"]
+        CE --&gt; P2["2. Automated Machine-Readable SBOM (CycloneDX v1.5)"]
+        CE --&gt; P3["3. Coordinated Vulnerability Disclosure &amp; Handling (CVD)"]
+        CE --&gt; P4["4. 24h CSIRT/ENISA Mandatory Incident Reporting"]
+        CE --&gt; P5["5. Guaranteed 5-Year Security Support Period (2030)"]
+    end</code></pre>
+<hr />
+<h2 id="2-product-classification-conformity-assessment-procedure">2. Product Classification &amp; Conformity Assessment Procedure<a class="headerlink" href="#2-product-classification-conformity-assessment-procedure" title="Permanent link">&para;</a></h2>
+<h3 id="classification-justification-annex-iii-class-i">Classification Justification (Annex III - Class I)<a class="headerlink" href="#classification-justification-annex-iii-class-i" title="Permanent link">&para;</a></h3>
+<p>Under Annex III of the Cyber Resilience Act, products that perform security discovery, network inspection, and vulnerability triage are classified as <strong>Important Products with Digital Elements (Class I)</strong>:
+1. <strong>Network Discovery &amp; Port Probing (<code>rtms-scanner</code>)</strong>: Inspects ARP caches, TCP/UDP open ports, and SNMP gateways across enterprise subnets.
+2. <strong>Vulnerability Assessment Engine (<code>rtms-nvd</code>)</strong>: Ingests the NIST National Vulnerability Database, matches Common Platform Enumerations (CPE), and identifies Common Vulnerabilities and Exposures (CVE).
+3. <strong>Local Endpoint Security Agent (<code>rtms-local-agent</code>)</strong>: Collects local software inventory and OS-level configurations for compliance reporting.</p>
+<h3 id="conformity-assessment-procedure-module-a">Conformity Assessment Procedure (Module A)<a class="headerlink" href="#conformity-assessment-procedure-module-a" title="Permanent link">&para;</a></h3>
+<p>In accordance with <strong>Article 32(1)</strong> of the CRA, 3TS Consulting applies <strong>Module A (Internal Control of Production)</strong>:
+- <strong>Dossier Technique (Technical Documentation - Annex VII)</strong>: Detailed architecture models, threat matrix, cryptographic proofs, and dependency records.
+- <strong>Harmonised Standards Alignment</strong>: Full compliance with ISO/IEC 29147, ISO/IEC 30111, OWASP ASVS/Top 10, and EN 18031 drafts.
+- <strong>EU Declaration of Conformity</strong>: Affirmed and maintained under the sole responsibility of 3TS Consulting SRL.
+- <strong>CE Marking</strong>: Affixed digitally within the RTMS software portal (<code>/security/cra</code>, <code>/help/about</code>) and in production distribution artifacts.</p>
+<hr />
+<h2 id="3-essential-cybersecurity-requirements-annex-i-part-i">3. Essential Cybersecurity Requirements (Annex I, Part I)<a class="headerlink" href="#3-essential-cybersecurity-requirements-annex-i-part-i" title="Permanent link">&para;</a></h2>
+<p>RTMS meets each core technical requirement stipulated in Annex I, Part I of the CRA:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">CRA Requirement</th>
+<th style="text-align: left;">Objective</th>
+<th style="text-align: left;">RTMS Technical Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Security by Default</strong> (Req. 1.1)</td>
+<td style="text-align: left;">No insecure default passwords or open administrative backdoors.</td>
+<td style="text-align: left;">First-login Setup Wizard forces root password change. Non-MFA passwords enforce adaptive 90-day expiration with J-14 warnings.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Attack Surface Minimization</strong> (Req. 1.2)</td>
+<td style="text-align: left;">Disable unnecessary ports, services, and cleartext protocols.</td>
+<td style="text-align: left;">Zero unencrypted HTTP or plaintext telnet. All inter-service communications run over TLS 1.3 or local Unix Domain Sockets.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Identity &amp; Access Management</strong> (Req. 1.3)</td>
+<td style="text-align: left;">Strict authentication, credential protection, and least privilege.</td>
+<td style="text-align: left;">Granular 4-role RBAC (<code>admin</code>, <code>security_analyst</code>, <code>operator</code>, <code>viewer</code>). Mandatory RFC 6238 TOTP MFA for administrators. Session timeouts (15m admin, 30m user).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data Protection &amp; Cryptography</strong> (Req. 1.4)</td>
+<td style="text-align: left;">Confidentiality and integrity of stored and transit telemetry.</td>
+<td style="text-align: left;">Passwords hashed with bcrypt (work factor 12). Appliance identity authenticated via Ed25519 signatures. Offline RSA-2048/SHA-256 license sealing.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Integrity &amp; Tamper Protection</strong> (Req. 1.5)</td>
+<td style="text-align: left;">Prevent unauthorized code alteration and spoofing.</td>
+<td style="text-align: left;">Cryptographic package hash verification (SHA-256) on update ingestion. Triple-tier ARP spoofing and poisoning detection engine.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Security Logging &amp; Auditability</strong> (Req. 1.6)</td>
+<td style="text-align: left;">Maintain non-repudiable audit trails of sensitive actions.</td>
+<td style="text-align: left;">Immutable audit tables (<code>admin.login_audit</code>, <code>admin.system_audit</code>, <code>scanner.alerts</code>). Access restricted to compliance auditors (<code>viewer</code>) and SOC analysts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Secure Update Mechanism</strong> (Req. 1.7)</td>
+<td style="text-align: left;">Signed updates with verification and rollback capability.</td>
+<td style="text-align: left;">Central VPS Support Hub delivers cryptographically hashed <code>.tar.gz</code> releases with automatic staging and verification.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-software-bill-of-materials-sbom-supply-chain-transparency">4. Software Bill of Materials (SBOM) &amp; Supply Chain Transparency<a class="headerlink" href="#4-software-bill-of-materials-sbom-supply-chain-transparency" title="Permanent link">&para;</a></h2>
+<p>In compliance with <strong>Annex I, Part II (Requirement 1)</strong>, RTMS maintains an automated, machine-readable Software Bill of Materials in the <strong>CycloneDX v1.5 (ECMA-424)</strong> standard format.</p>
+<h3 id="sbom-architecture">SBOM Architecture<a class="headerlink" href="#sbom-architecture" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Components["RTMS Software Stack"]
+        WEB["rtms-web&lt;br/&gt;(FastAPI / React)"]
+        SCN["rtms-scanner&lt;br/&gt;(Bettercap / Scapy)"]
+        NVD["rtms-nvd&lt;br/&gt;(httpx / SQLAlchemy)"]
+        AGT["rtms-local-agent&lt;br/&gt;(Go / Python)"]
+    end
+
+    Components --&gt; PARSER["SBOM Generation Engine&lt;br/&gt;(/api/compliance/sbom)"]
+    PARSER --&gt; CYCLONE["CycloneDX v1.5 JSON&lt;br/&gt;(PURL, Licenses, Hashes)"]
+    PARSER --&gt; SPDX["SPDX 2.3 JSON"]
+    CYCLONE --&gt; UI["1-Click Download in Web Portal&lt;br/&gt;(/security/cra)"]
+    CYCLONE --&gt; AUDIT["Client Supply Chain Audits"]</code></pre>
+<h3 id="standard-purl-identification-metadata">Standard PURL Identification &amp; Metadata<a class="headerlink" href="#standard-purl-identification-metadata" title="Permanent link">&para;</a></h3>
+<p>Every direct and transitive library is attributed with:
+- Standard Package URL (e.g. <code>pkg:pypi/fastapi@0.104.1</code>, <code>pkg:npm/react@18.2.0</code>).
+- Exact component version and SHA-256 integrity digest.
+- Declared open-source license identifier (SPDX ID: MIT, Apache-2.0, BSD-3-Clause).
+- Scope indicator (<code>required</code> for production runtime, <code>excluded</code> for development tooling).</p>
+<hr />
+<h2 id="5-vulnerability-handling-mandatory-reporting-annex-i-part-ii">5. Vulnerability Handling &amp; Mandatory Reporting (Annex I, Part II)<a class="headerlink" href="#5-vulnerability-handling-mandatory-reporting-annex-i-part-ii" title="Permanent link">&para;</a></h2>
+<h3 id="a-coordinated-vulnerability-disclosure-cvd-isoiec-29147">A. Coordinated Vulnerability Disclosure (CVD - ISO/IEC 29147)<a class="headerlink" href="#a-coordinated-vulnerability-disclosure-cvd-isoiec-29147" title="Permanent link">&para;</a></h3>
+<p>3TS Consulting maintains a public Coordinated Vulnerability Disclosure policy:
+- <strong>Security Inquiries Contact:</strong> <code>security@3ts-consulting.com</code>
+- <strong>Encryption:</strong> Public PGP Key available for secure submission of vulnerability reports.
+- <strong>Initial Response SLA:</strong> 3TS security engineers acknowledge and initiate triage for all submitted vulnerabilities within <strong>48 hours</strong> (ISO/IEC 30111).
+- <strong>Public Policy:</strong> Available at <a href="file:///Users/marctritschler/git_projects/rtms-web/SECURITY.md">SECURITY.md</a> and exposed via <code>GET /api/compliance/cra</code>.</p>
+<h3 id="b-cra-24-hour-mandatory-incident-notification-workflow">B. CRA 24-Hour Mandatory Incident Notification Workflow<a class="headerlink" href="#b-cra-24-hour-mandatory-incident-notification-workflow" title="Permanent link">&para;</a></h3>
+<p>Under <strong>Article 14 of Regulation (EU) 2024/2847</strong>, software manufacturers must notify authorities of actively exploited vulnerabilities or severe security incidents:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant D as Discoverer / Security Team
+    participant 3TS as 3TS Security Incident Response Team
+    participant ENISA as EU CSIRT / ENISA Single Reporting Platform
+    participant CLI as Affected RTMS Customers
+
+    D-&gt;&gt;3TS: Report actively exploited 0-day or severe incident
+    Note over 3TS: Triage &amp; Confirm Exploitation (&lt; 24 Hours)
+    3TS-&gt;&gt;ENISA: 1. Early Warning Notification (Mandatory &lt; 24 Hours)
+    3TS-&gt;&gt;CLI: Preventive Mitigation Advisory &amp; Hardening Guidance
+    Note over 3TS: Root Cause Analysis &amp; Fix Formulation (&lt; 72 Hours)
+    3TS-&gt;&gt;ENISA: 2. Incident &amp; Vulnerability Assessment Report (&lt; 72 Hours)
+    3TS-&gt;&gt;CLI: Patch Release via Signed Update (VPS Hub)
+    Note over 3TS: Resolution Validation (&lt; 14 Days)
+    3TS-&gt;&gt;ENISA: 3. Final Comprehensive Remediation Report (&lt; 14 Days)</code></pre>
+<ol>
+<li><strong>Step 1: Early Warning (&lt; 24 Hours)</strong>: Notification sent to the designated national CSIRT (CCB in Belgium, ANSSI in France) and ENISA via the European single reporting platform upon confirming active exploitation.</li>
+<li><strong>Step 2: Incident Assessment (&lt; 72 Hours)</strong>: Technical report outlining vulnerability severity, affected versions, and interim risk-mitigation measures.</li>
+<li><strong>Step 3: Final Remediation Report (&lt; 14 Days)</strong>: Comprehensive disclosure describing root-cause analysis, corrective patch details, and customer deployment statistics.</li>
+</ol>
+<hr />
+<h2 id="6-guaranteed-security-support-period">6. Guaranteed Security Support Period<a class="headerlink" href="#6-guaranteed-security-support-period" title="Permanent link">&para;</a></h2>
+<p>In adherence to <strong>Article 13(8)</strong> of the Cyber Resilience Act, the manufacturer must determine and declare the support period during which security updates will be provided free of charge:</p>
+<ul>
+<li><strong>Declared Support Period:</strong> Minimum <strong>5 years</strong> from the official general availability date.</li>
+<li><strong>Current Commitment:</strong> Full vulnerability remediation, CVE updates, and security patches are legally guaranteed until <strong>December 31, 2030</strong> for the RTMS v1.x series.</li>
+<li><strong>Post-Support Transparency:</strong> Any upcoming End-of-Support (EOS) milestone will be announced at least 12 months in advance via the RTMS Web Portal banner and official customer advisories.</li>
+</ul>
+<hr />
+<h2 id="7-rest-api-endpoints-for-cra-auditing">7. REST API Endpoints for CRA Auditing<a class="headerlink" href="#7-rest-api-endpoints-for-cra-auditing" title="Permanent link">&para;</a></h2>
+<p>The RTMS backend provides native machine-readable endpoints for security compliance auditors:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Path</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/compliance/cra</code></td>
+<td style="text-align: left;">Full CRA compliance dossier (classification, CE status, support period, CVD contact, standards)</td>
+<td style="text-align: left;">Authenticated (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/compliance/sbom</code></td>
+<td style="text-align: left;">Exports the machine-readable CycloneDX v1.5 JSON or SPDX Software Bill of Materials</td>
+<td style="text-align: left;">Authenticated (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/compliance/eu-declaration</code></td>
+<td style="text-align: left;">Retrieves or downloads the signed EU Declaration of Conformity</td>
+<td style="text-align: left;">Authenticated (JWT)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

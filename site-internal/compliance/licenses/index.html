@@ -1,0 +1,3146 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation technique interne, d'architecture, de déploiement et de conformité de la plateforme RTMS.">
+      
+      
+        <meta name="author" content="3TS Consulting SRL">
+      
+      
+      
+        <link rel="prev" href="../release_strategy/">
+      
+      
+        <link rel="next" href="../legal/EULA/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="fr">
+        
+          <link rel="alternate" href="../../en/compliance/licenses/" hreflang="en">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Licences - RTMS Documentation Technique (3TS Consulting)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rtms-licensing-system" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="RTMS Documentation Technique (3TS Consulting)" class="md-header__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RTMS Documentation Technique (3TS Consulting)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Licences
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Sélectionner la langue">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../en/compliance/licenses/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deployment/ansible_deployment_guide/" class="md-tabs__link">
+          
+  
+  
+  Déploiement & Installation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../components/scanner/technical_requirements/" class="md-tabs__link">
+          
+  
+  
+  Composants & Internals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../plugins/plugin_specification/" class="md-tabs__link">
+          
+  
+  
+  Plugins
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../nis2/" class="md-tabs__link">
+          
+  
+  
+  Conformité & Légal
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="RTMS Documentation Technique (3TS Consulting)" class="md-nav__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RTMS Documentation Technique (3TS Consulting)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue d'ensemble
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseau & WireGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modèle RBAC (Permissions)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/database_rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sécurité & RBAC Base de Données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modèles de données
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modèles de données
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data_models/scanner_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data_models/nvd_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déploiement & Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Déploiement & Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/ansible_deployment_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide de Déploiement Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/postgres_hardening_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Installation & Durcissement PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Composants & Internals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Composants & Internals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scanner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/technical_requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prérequis techniques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/mobility_lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobilité, Cycle de vie & Multi-réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/stand_alone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mode Standalone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions & Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker & PyInstaller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/bettercap_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commandes Bettercap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/email_and_dns_audits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Email & DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/deep_scan_targeting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciblage Granulaire du Deep Scan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ressources & Tests HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/technical_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/frontend_nginx_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déploiement Nginx & Frontend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/sso_keycloak_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide SSO Keycloak & OIDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Démarrage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local Agent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Local Agent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/local-agent/technical_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/local-agent/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Microservice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NVD Microservice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/rtms_nvd_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation NVD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/readme_startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Démarrage & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/readme_export_cve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exportation de rapports CVE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Admin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/admin/admin_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/plugin_specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spécification & Développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conformité & Légal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Conformité & Légal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nis2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directive NIS2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release_strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stratégie de Release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licences
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-creation-on-your-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Creation (On your Mac)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-import-and-db-injection-on-the-dell-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Import and DB Injection (On the Dell Server)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-verification-by-whom-and-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verification: By Whom and When?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Verification: By Whom and When?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-verification-workflow-decision-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Verification Workflow (Decision Flow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-3-locks-validated-during-each-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 3 Locks Validated During Each Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ui-license-upload-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. UI License Upload and Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. UI License Upload and Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-schema-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Schema Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-cryptographic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Cryptographic Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-happens-if-it-is-not-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What happens if it is not validated?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-happens-upon-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What happens upon success?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-automated-renewal-upgrade-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Automated Renewal &amp; Upgrade Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Automated Renewal &amp; Upgrade Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-client-renewal-request-generation-rtms-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Client Renewal Request Generation (RTMS Web)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-central-vps-ingestion-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Central VPS Ingestion &amp; Notification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-key-generation-3ts-admin-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Key Generation (3TS Admin Machine)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-client-import-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Client Import &amp; Activation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-license-expiration-lifecycle-administrative-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. License Expiration Lifecycle &amp; Administrative Governance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. License Expiration Lifecycle &amp; Administrative Governance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-automated-background-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Automated Background Worker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-security-finding-remediation-task-synchronization-adminsecurity_findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Security Finding &amp; Remediation Task Synchronization (admin.security_findings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-administrative-responsibility-task-claiming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Administrative Responsibility &amp; Task Claiming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-prioritized-multi-channel-notification-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Prioritized Multi-Channel Notification Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-role-based-dashboard-presentation-rbac-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Role-Based Dashboard Presentation (RBAC UX)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-rest-api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. REST API Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documents Légaux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documents Légaux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/EULA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EULA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/Applied_standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normes appliquées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/EU_declaration_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déclaration UE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legal/risk_assessmnent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Évaluation des risques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-creation-on-your-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Creation (On your Mac)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-import-and-db-injection-on-the-dell-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Import and DB Injection (On the Dell Server)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-verification-by-whom-and-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verification: By Whom and When?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Verification: By Whom and When?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-verification-workflow-decision-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Verification Workflow (Decision Flow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-3-locks-validated-during-each-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 3 Locks Validated During Each Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ui-license-upload-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. UI License Upload and Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. UI License Upload and Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-schema-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Schema Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-cryptographic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Cryptographic Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-happens-if-it-is-not-validated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What happens if it is not validated?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-happens-upon-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What happens upon success?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-automated-renewal-upgrade-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Automated Renewal &amp; Upgrade Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Automated Renewal &amp; Upgrade Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-client-renewal-request-generation-rtms-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Client Renewal Request Generation (RTMS Web)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-central-vps-ingestion-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Central VPS Ingestion &amp; Notification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-key-generation-3ts-admin-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Key Generation (3TS Admin Machine)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-client-import-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Client Import &amp; Activation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-license-expiration-lifecycle-administrative-governance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. License Expiration Lifecycle &amp; Administrative Governance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. License Expiration Lifecycle &amp; Administrative Governance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-automated-background-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Automated Background Worker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-security-finding-remediation-task-synchronization-adminsecurity_findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Security Finding &amp; Remediation Task Synchronization (admin.security_findings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-administrative-responsibility-task-claiming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Administrative Responsibility &amp; Task Claiming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-prioritized-multi-channel-notification-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Prioritized Multi-Channel Notification Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-role-based-dashboard-presentation-rbac-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Role-Based Dashboard Presentation (RBAC UX)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-rest-api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. REST API Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="rtms-licensing-system">RTMS Licensing System<a class="headerlink" href="#rtms-licensing-system" title="Permanent link">&para;</a></h1>
+<h2 id="1-creation-on-your-mac">1. Creation (On your Mac)<a class="headerlink" href="#1-creation-on-your-mac" title="Permanent link">&para;</a></h2>
+<p>The license is generated asymmetrically via your generation script.</p>
+<ul>
+<li><strong>Inputs:</strong> The script takes the <code>machine_id</code> (the DMI UUID of the target machine), the plan type (<code>PRO</code>), the maximum number of hosts, and the expiration date.</li>
+<li><strong>Canonical Serialization:</strong> The dictionary containing this information (the <code>raw_payload</code>) is converted into an ultra-strict JSON string. Keys are sorted alphabetically (<code>sort_keys=True</code>) and unnecessary whitespaces are removed (<code>separators=(',', ':')</code>). This is crucial: any extra space or key reordering would alter the final hash.</li>
+<li><strong>Cryptographic Signature:</strong> This character string is hashed using <strong>SHA-256</strong>, then encrypted (signed) with your RSA-2048 private key (<code>private_key.pem</code>).</li>
+<li><strong>Output (<code>license.key</code>):</strong> The script generates the final JSON file containing the <code>raw_payload</code>, the Base64-encoded signature (<code>cryptographic_signature</code>), and surface metadata.</li>
+</ul>
+<hr />
+<h2 id="2-import-and-db-injection-on-the-dell-server">2. Import and DB Injection (On the Dell Server)<a class="headerlink" href="#2-import-and-db-injection-on-the-dell-server" title="Permanent link">&para;</a></h2>
+<p>Database import is not handled by an external script; it is <strong>automatically managed by the binary at startup</strong>.</p>
+<ul>
+<li><strong>Who handles it?</strong> The <code>license_validator.py</code> module via its <code>enforce_license_state()</code> function.</li>
+<li><strong>When?</strong> At each initial application launch (when you run <code>./rtms-nvd</code> or when the systemd service starts <code>main.py</code>).</li>
+<li><strong>Import Mechanics:</strong></li>
+<li>The validator reads the physical <code>license.key</code> file located in the application directory.</li>
+<li>It verifies its signature (see section 3).</li>
+<li>If and only if the local file's signature is <strong>100% valid</strong>, it opens a PostgreSQL connection and calls <code>sync_license_to_db()</code>.</li>
+<li>It executes an <code>UPSERT</code> script (with the clause <code>ON CONFLICT ON CONSTRAINT unique_product_license_key DO UPDATE</code>). The license is then pushed or updated in the <strong><code>admin.product_license</code></strong> table.</li>
+</ul>
+<hr />
+<h2 id="3-verification-by-whom-and-when">3. Verification: By Whom and When?<a class="headerlink" href="#3-verification-by-whom-and-when" title="Permanent link">&para;</a></h2>
+<p>This is where the architecture is most robust. The license is verified at two distinct moments: at <strong>Bootstrap</strong> and during <strong>Awake</strong> cycles.</p>
+<ul>
+<li><strong>By Whom?</strong> Exclusively by the isolated security module <code>rtms_commons.license_validator</code>.</li>
+<li><strong>When?</strong></li>
+<li><strong>At startup (Bootstrap):</strong> In <code>main()</code>, before initializing final logs and verifying the database schema.</li>
+<li><strong>At each cycle (Awake):</strong> Every 120 minutes, as soon as the <code>BackgroundScheduler</code> wakes up the <code>incremental_sync()</code> function in <code>vulnerabilities.py</code>, the very first line of code executed re-invokes the validator.</li>
+</ul>
+<h3 id="internal-verification-workflow-decision-flow">Internal Verification Workflow (Decision Flow)<a class="headerlink" href="#internal-verification-workflow-decision-flow" title="Permanent link">&para;</a></h3>
+<p>During each verification, the validator runs the following DB-First algorithm:</p>
+<ol>
+<li><strong>Primary Attempt (Database - Single Source of Truth):</strong></li>
+<li>It connects to PostgreSQL and queries <code>admin.product_license</code> for an <code>ACTIVE</code> license matching the machine's hardware signature (<code>LOWER(hardware_id) = ANY(host_signatures)</code>).</li>
+<li><em>Success:</em> It validates the RSA cryptographic signature, hardware footprint, and expiration date. If valid, the license is loaded directly from DB without reading disk files.</li>
+<li>
+<p><em>Failure (No active DB license or empty DB):</em> It proceeds to step 2.</p>
+</li>
+<li>
+<p><strong>Fallback / Bootstrap Attempt (Local <code>license.key</code> File):</strong></p>
+</li>
+<li>It looks for the physical <code>license.key</code> file in the application directory.</li>
+<li><em>Success:</em> It validates the signature, hardware signature, and expiration date. If valid, it synchronizes/persists the token into PostgreSQL (<code>sync_license_to_db</code>) and sets it as <code>ACTIVE</code>.</li>
+<li>
+<p><em>Failure (Missing, corrupt or expired file):</em> It proceeds to step 3.</p>
+</li>
+<li>
+<p><strong>Sanction (DEMO Mode / Shutdown):</strong></p>
+</li>
+<li>If both the database and local file checks fail, or if grace period is exceeded, the validator triggers the appropriate degradation (DEMO mode or exit).</li>
+</ol>
+<h3 id="the-3-locks-validated-during-each-verification">The 3 Locks Validated During Each Verification<a class="headerlink" href="#the-3-locks-validated-during-each-verification" title="Permanent link">&para;</a></h3>
+<p>For a license (whether from the file or the database) to grant the <code>PRO</code> plan, it must pass three gates:</p>
+<ul>
+<li><strong>Cryptographic Lock:</strong> The RSA-2048 public key decrypts the Base64 signature and verifies that it matches the <code>raw_payload</code> byte-for-byte. If anyone modifies even a single character of the payload (e.g., trying to alter <code>max_hosts</code>), the signature is broken.</li>
+<li><strong>Hardware Lock (Hardware Footprint):</strong> The validator resolves the host machine's hardware identity:</li>
+<li><strong>Bare-metal Linux:</strong> reads SMBIOS <code>product_uuid</code> from <code>/sys/class/dmi/id/product_uuid</code> (or <code>dmidecode</code>).</li>
+<li><strong>macOS:</strong> reads <code>IOPlatformUUID</code> via <code>system_profiler SPHardwareDataType</code>.</li>
+<li><strong>VMware ESXi / Workstation:</strong> normalizes SMBIOS 2.6+ Little-Endian byte-swapping with vCenter formats. Cloned/copied VMs generate new UUIDs and are rejected; legitimately moved VMs preserve their UUID.</li>
+<li><strong>Docker:</strong> accesses the underlying host hardware through read-only host mounts (<code>/etc/host-machine-id</code> or <code>/sys/class/dmi/id/product_uuid</code>). Environment variable overrides (<code>RTMS_HARDWARE_ID</code>) are disallowed to prevent spoofing.</li>
+<li><strong>Temporal Lock:</strong> It compares the current time (in strict UTC) with the <code>expires_at</code> date. If the expiration date has passed by less than 15 days, it continues running while displaying a grace period warning (<code>Grace period active</code>). Beyond that, the license expires and <code>DEMO</code> mode is activated.</li>
+</ul>
+<hr />
+<h2 id="4-ui-license-upload-and-validation">4. UI License Upload and Validation<a class="headerlink" href="#4-ui-license-upload-and-validation" title="Permanent link">&para;</a></h2>
+<p>When a user uploads a new license via the Subscription interface, the backend performs immediate validation before applying any changes:</p>
+<h3 id="step-1-schema-verification">Step 1: Schema Verification<a class="headerlink" href="#step-1-schema-verification" title="Permanent link">&para;</a></h3>
+<p>The uploaded JSON file is parsed, and the backend verifies that all mandatory fields are present: <code>tenant_id</code>, <code>license_key_id</code> (or <code>license_id</code>), <code>raw_payload</code>, <code>cryptographic_signature</code>, and <code>expires_at</code>.
+* Both individual license files and multi-license bundles (<code>{"licenses": [...]}</code>) are supported.
+* <strong>If missing:</strong> The server immediately rejects the file with a <code>400 Bad Request</code> ("Invalid license file schema").</p>
+<h3 id="step-2-cryptographic-validation">Step 2: Cryptographic Validation<a class="headerlink" href="#step-2-cryptographic-validation" title="Permanent link">&para;</a></h3>
+<p>The <code>raw_payload</code> is reformatted using strict canonical JSON encoding to ensure byte-for-byte exactness. The backend then uses the embedded RSA public key to verify the <code>cryptographic_signature</code> against this payload.
+* <strong>If invalid (altered payload or incorrect signature):</strong> The server blocks the operation with a <code>400 Bad Request</code> ("Invalid cryptographic signature").</p>
+<h3 id="what-happens-if-it-is-not-validated">What happens if it is not validated?<a class="headerlink" href="#what-happens-if-it-is-not-validated" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Backend:</strong> No changes are made. The <code>admin.product_license</code> database table remains untouched, and the existing <code>license.key</code> file is not overwritten. The previous license (or DEMO mode) continues to apply.</li>
+<li><strong>Frontend:</strong> The UI intercepts the error and displays a red error banner at the top of the tab explaining the specific reason for rejection.</li>
+</ul>
+<h3 id="what-happens-upon-success">What happens upon success?<a class="headerlink" href="#what-happens-upon-success" title="Permanent link">&para;</a></h3>
+<p>If the license passes both validation steps, the backend securely writes the new license into the <code>admin.product_license</code> database table and overwrites the <code>license.key</code> file on disk. The UI then automatically refreshes to display the newly activated license details and limits.</p>
+<hr />
+<h2 id="5-automated-renewal-upgrade-workflow">5. Automated Renewal &amp; Upgrade Workflow<a class="headerlink" href="#5-automated-renewal-upgrade-workflow" title="Permanent link">&para;</a></h2>
+<p>RTMS provides an automated, end-to-end renewal cycle that eliminates the need for clients to manually re-run hardware extraction tools.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌────────────────────────────────┐         Direct API / Email          ┌────────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│   Client RTMS Web Portal       │ ──────────────────────────────────&gt; │   3TS Central VPS Support Hub  │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│  "Request Renewal / Upgrade"   │                                     │  (POST /api/v1/license-requests│
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└────────────────────────────────┘                                     └────────────────────────────────┘
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                │                                                                      │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                │ Backup file download                                                 │ Admin review
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                ▼                                                                      ▼
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a> ┌──────────────────────────────┐                                       ┌──────────────────────────────┐
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a> │ rtms_renewal_request.json    │ ────────────────────────────────────&gt; │  3TS Administrator Mac       │
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a> │ (Auto-bound Hardware IDs)    │   python license_generator.py        │  (private_key.pem offline)   │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a> └──────────────────────────────┘   --request renewal_request.json     └──────────────────────────────┘
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                                                                                       │
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                                                                                       │ Signs keys
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                                                                                       ▼
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a> ┌──────────────────────────────┐                                       ┌──────────────────────────────┐
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a> │ RTMS Web: "Upload License"   │ &lt;──────────────────────────────────── │ rtms_license_bundle.json     │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a> │ 1-Click Multi-Scanner Active │        Customer receives bundle       │ (or individual .key files)   │
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a> └──────────────────────────────┘                                       └──────────────────────────────┘
+</span></code></pre></div>
+<h3 id="1-client-renewal-request-generation-rtms-web">1. Client Renewal Request Generation (RTMS Web)<a class="headerlink" href="#1-client-renewal-request-generation-rtms-web" title="Permanent link">&para;</a></h3>
+<ul>
+<li>From the <strong>Subscription &amp; License</strong> page, clicking <strong>"Request Early Upgrade"</strong> or <strong>"Upgrade License"</strong> inspects PostgreSQL database records (<code>admin.service_registry</code>, <code>admin.agent_tokens</code>, <code>admin.tenant_infra</code>).</li>
+<li>The system automatically attaches all known Hardware IDs for active Scanners, NVD Engine, and Local Agents.</li>
+<li>Clicking <strong>"Generate Request File"</strong>:</li>
+<li>Sends the request directly to the <strong>3TS Central Support Hub VPS</strong> (authenticated via the appliance's Ed25519 signed JWT, or fallback Bearer token).</li>
+<li>Simultaneously downloads a local backup copy named <code>rtms_renewal_request_&lt;tenant_id&gt;.json</code>.</li>
+</ul>
+<h3 id="2-central-vps-ingestion-notification">2. Central VPS Ingestion &amp; Notification<a class="headerlink" href="#2-central-vps-ingestion-notification" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The Central Support Hub (<code>vps-support-hub</code>) receives the request via <code>POST /api/v1/license-requests</code>.</li>
+<li>It records the request in PostgreSQL (<code>license_requests</code>) and assigns a reference ID (<code>RTMS-LIC-YYYY-XXXX</code>).</li>
+<li>An automated email alert is immediately sent to <code>support@3ts-consulting.com</code> detailing the requested plan, asset count, and all detected hardware footprints.</li>
+</ul>
+<h3 id="3-key-generation-3ts-admin-machine">3. Key Generation (3TS Admin Machine)<a class="headerlink" href="#3-key-generation-3ts-admin-machine" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The 3TS administrator uses their offline workstation where <code>private_key.pem</code> is stored.</li>
+<li>Generation is executed in 1 command without manual Hardware ID re-entry:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>license_generator.py<span class="w"> </span>--request<span class="w"> </span>rtms_renewal_request_&lt;tenant_id&gt;.json
+</span></code></pre></div></li>
+<li>The generator:</li>
+<li>Automatically matches target machines.</li>
+<li>Validates client payment records in <code>customers</code> DB.</li>
+<li>Produces individual <code>license-&lt;id&gt;.key</code> files and a unified <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code>.</li>
+</ul>
+<h3 id="4-client-import-activation">4. Client Import &amp; Activation<a class="headerlink" href="#4-client-import-activation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The customer receives the bundle file and clicks <strong>"Upload New License"</strong> on their RTMS Web portal.</li>
+<li>The backend activates all renewed licenses in a single transaction, updating quotas and extending subscription validity across all registered scanners.</li>
+</ul>
+<hr />
+<h2 id="6-license-expiration-lifecycle-administrative-governance">6. License Expiration Lifecycle &amp; Administrative Governance<a class="headerlink" href="#6-license-expiration-lifecycle-administrative-governance" title="Permanent link">&para;</a></h2>
+<p>To ensure business continuity and eliminate blind spots when a subscription approaches its end date, RTMS implements an automated, role-aware <strong>License Expiration Lifecycle Management</strong> system with integrated accountability tracking and prioritized multi-channel dispatching.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Periodic["Background Surveillance (Every 4h + Boot)"]
+        W["license_lifecycle_background_worker"] --&gt; CHK{"Active License Expiration"}
+    end
+
+    CHK --&gt;|"&gt; 30 Days"| OK["Normal Operation"]
+    CHK --&gt;|"&lt;= 30 Days OR Expired"| SYNC["sync_license_expiration_finding()"]
+
+    subgraph RemediationTask["Remediation Task Synchronization (admin.security_findings)"]
+        SYNC --&gt; REF["Lookup reference_id = 'LICENSE-EXPIRATION'"]
+        REF --&gt;|"&lt;= 30 Days"| SEV_HIGH["Severity: HIGH"]
+        REF --&gt;|"&lt;= 7 Days or Expired"| SEV_CRIT["Severity: CRITICAL"]
+        REF --&gt; DUE["Due Date = Expiration Date"]
+        REF --&gt; ASSIGN{"Determine Assignee"}
+        ASSIGN --&gt;|"1. Configured"| DES["license_notification_recipient"]
+        ASSIGN --&gt;|"2. Fallback"| ADM["Superadmin 'admin'"]
+        ASSIGN --&gt;|"3. Fallback"| ACT["First Active Admin"]
+        ASSIGN --&gt;|"4. Unassigned"| UNK["Unassigned (Admins Team Pool)"]
+    end
+
+    subgraph NotificationDispatch["Prioritized Multi-Channel Dispatch (license_expiring)"]
+        NOTIF["check_and_send_license_notification()"] --&gt; MILESTONE{"Milestone Hit?&lt;br/&gt;J-30, J-15, J-7, J-1, J-0"}
+        MILESTONE --&gt;|"No / Cooldown &lt; 24h"| SKIP["Skip Notification"]
+        MILESTONE --&gt;|"Yes"| SMTP{"Is SMTP Server Configured?"}
+        SMTP --&gt;|"Yes"| EMAIL["1. Send Email (PRIORITY)&lt;br/&gt;Target: Assigned Admin / Admins Pool"]
+        EMAIL --&gt;|"Success"| DONE["Dispatched"]
+        EMAIL --&gt;|"Failure / Not Configured"| WEBHOOKS{"Teams / Slack Active?"}
+        SMTP --&gt;|"No"| WEBHOOKS
+        WEBHOOKS --&gt;|"Yes"| CHAT["2. Fallback to Microsoft Teams / Slack Webhook"]
+        WEBHOOKS --&gt;|"No"| LOG["Log Warning: No Channel Available"]
+    end
+
+    subgraph RenewalAction["Resolution on Renewal"]
+        UPLOAD["New License Uploaded &gt; 30 Days"] --&gt; AUTO_RES["Auto-Resolve Finding: RESOLVED"]
+    end</code></pre>
+<h3 id="1-automated-background-worker">1. Automated Background Worker<a class="headerlink" href="#1-automated-background-worker" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Execution Frequency:</strong> The asynchronous <code>license_lifecycle_background_worker</code> initiates 10 seconds after FastAPI startup (<code>@app.on_event("startup")</code>) and re-executes every <strong>4 hours</strong>.</li>
+<li><strong>Post-Upload Trigger:</strong> When an administrator successfully uploads a new license via <code>POST /api/license/upload</code>, lifecycle synchronization is executed immediately to refresh all states without waiting for the next periodic cycle.</li>
+</ul>
+<h3 id="2-security-finding-remediation-task-synchronization-adminsecurity_findings">2. Security Finding &amp; Remediation Task Synchronization (<code>admin.security_findings</code>)<a class="headerlink" href="#2-security-finding-remediation-task-synchronization-adminsecurity_findings" title="Permanent link">&para;</a></h3>
+<p>Rather than relying solely on transient banner alerts, expiration warnings are formalized into the system's compliance and audit framework:
+- <strong>Reference Identifier:</strong> Fixed reference ID <code>'LICENSE-EXPIRATION'</code> guarantees idempotency and audit traceability.
+- <strong>Dynamic Severity Escalation:</strong>
+  - <strong><code>HIGH</code></strong>: When expiration is $\le 30$ days.
+  - <strong><code>CRITICAL</code></strong>: When expiration is $\le 7$ days or already expired ($\le 0$ days).
+- <strong>Due Date:</strong> Automatically aligned with the exact timestamp of <code>expires_at</code>.
+- <strong>Automatic Resolution:</strong> As soon as a renewed license with $&gt; 30$ days of validity is activated, the remediation task status is automatically transitioned from <code>OPEN</code> to <code>RESOLVED</code>, archiving the finding in compliance reports.</p>
+<h3 id="3-administrative-responsibility-task-claiming">3. Administrative Responsibility &amp; Task Claiming<a class="headerlink" href="#3-administrative-responsibility-task-claiming" title="Permanent link">&para;</a></h3>
+<p>To eliminate bystander effects across multi-administrator teams:
+- <strong>Designated License Administrator:</strong> Administrators can configure a dedicated license owner via <code>POST /api/license/recipient</code> (saved in <code>admin.system_config.license_notification_recipient</code>).
+- <strong>Assignment Resolution Hierarchy:</strong>
+  1. Configured designated administrator (<code>license_notification_recipient</code>).
+  2. Built-in superadministrator (<code>admin</code>).
+  3. First active administrator user in <code>admin.users</code>.
+  4. If no administrator is resolved, the task is marked as <code>"Unassigned"</code> (accessible to the administrative pool).
+- <strong>1-Click Self-Assignment (Claim):</strong> Any logged-in administrator can claim the renewal responsibility with a single click via <strong>"Prendre en charge"</strong> (<code>POST /api/license/claim-task</code>). This updates <code>assigned_to</code> across the database, banner alerts, and finding records.</p>
+<h3 id="4-prioritized-multi-channel-notification-policy">4. Prioritized Multi-Channel Notification Policy<a class="headerlink" href="#4-prioritized-multi-channel-notification-policy" title="Permanent link">&para;</a></h3>
+<p>When dispatching expiration alerts for the <code>license_expiring</code> event, RTMS enforces a strict channel precedence:
+1. <strong>Email Priority:</strong> The system first evaluates whether an SMTP server is configured (<code>smtp_server</code> in <code>admin.system_config</code>). If configured, the alert is sent <strong>exclusively via Email</strong> to the assigned administrator (or all administrators if unassigned), even if Teams or Slack channels are active.
+2. <strong>Fallback to Microsoft Teams &amp; Slack:</strong> If the SMTP server is unconfigured, or if email delivery encounters an unexpected network exception, the system automatically falls back to dispatching through active Microsoft Teams and/or Slack webhook connectors.
+3. <strong>Anti-Spam Milestone Filtering &amp; Cooldown:</strong>
+   - Alerts are only triggered at decisive countdown milestones: <strong>J-30</strong>, <strong>J-15</strong>, <strong>J-7</strong>, <strong>J-1</strong>, and <strong>J-0</strong> (Expired).
+   - A minimum <strong>24-hour cooldown</strong> prevents alert fatigue if the system is restarted multiple times within the same day.</p>
+<h3 id="5-role-based-dashboard-presentation-rbac-ux">5. Role-Based Dashboard Presentation (RBAC UX)<a class="headerlink" href="#5-role-based-dashboard-presentation-rbac-ux" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NIS2 Overview Dashboard (<code>Nis2Overview.tsx</code>):</strong></li>
+<li><strong>Non-Administrators (<code>security_analyst</code>, <code>operator</code>, <code>viewer</code>):</strong> Pending renewal warnings are completely hidden to avoid unnecessary operational friction. If the license has expired, a non-intrusive informative notice is shown without administrative action buttons.</li>
+<li><strong>Administrators (<code>admin</code>):</strong> Full alert banner displaying days remaining, assignee identification (<code>👤 &lt;admin&gt;</code> or <code>⚠️ Non assignée</code>), direct <strong>"Prendre en charge"</strong> claim button, link to remediation findings (<code>/findings</code>), and direct shortcut to <code>/license</code>.</li>
+<li><strong>Subscription &amp; License Portal (<code>SubscriptionLicense.tsx</code>):</strong></li>
+<li>Dedicated <strong>"Gestion &amp; Responsabilité du Renouvellement"</strong> card with real-time task status, direct claim capability, and designated license recipient selector.</li>
+<li><strong>Alert Routing Matrix (<code>ScannerConfiguration.tsx</code>):</strong></li>
+<li>Includes the <code>license_expiring</code> event row allowing granular toggle of Email, Slack, and Teams destinations.</li>
+</ul>
+<h3 id="6-rest-api-endpoints">6. REST API Endpoints<a class="headerlink" href="#6-rest-api-endpoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Path</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/license/task</code></td>
+<td style="text-align: left;">Retrieves current expiration finding, assignee, and configured recipient</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/license/claim-task</code></td>
+<td style="text-align: left;">Claims the license renewal task for the authenticated admin</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/license/recipient</code></td>
+<td style="text-align: left;">Sets the designated administrator for future license alerts</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/license/status</code></td>
+<td style="text-align: left;">Enriched with task presence, assignee, and expiration metrics</td>
+<td style="text-align: left;">Authenticated (JWT)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

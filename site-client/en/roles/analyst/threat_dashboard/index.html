@@ -1,0 +1,2074 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Guide officiel d'utilisation et d'exploitation de la plateforme RTMS (Real-Time Monitoring & Security).">
+      
+      
+        <meta name="author" content="3TS Consulting SRL">
+      
+      
+      
+        <link rel="prev" href="../../user/alerts/">
+      
+      
+        <link rel="next" href="../threat_correlation/">
+      
+      
+        
+          <link rel="alternate" href="../../../../roles/analyst/threat_dashboard/" hreflang="fr">
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Dashboard de Menaces - RTMS - Guide Utilisateur & Exploitation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-utilisateur-mode-demploi-dashboard-menaces-integration-soc-siem" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../" title="RTMS - Guide Utilisateur &amp; Exploitation" class="md-header__button md-logo" aria-label="RTMS - Guide Utilisateur & Exploitation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RTMS - Guide Utilisateur & Exploitation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dashboard de Menaces
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../../roles/analyst/threat_dashboard/" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user/navigation/" class="md-tabs__link">
+          
+  
+  
+  1. Utilisateur & Opérateur
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  2. Analyste SOC & Sécurité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../auditor/nis2_compliance/" class="md-tabs__link">
+          
+  
+  
+  3. Auditeur & Conformité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../admin/users_and_rbac/" class="md-tabs__link">
+          
+  
+  
+  4. Administrateur Client
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../" title="RTMS - Guide Utilisateur &amp; Exploitation" class="md-nav__button md-logo" aria-label="RTMS - Guide Utilisateur & Exploitation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RTMS - Guide Utilisateur & Exploitation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Utilisateur & Opérateur
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Utilisateur & Opérateur
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prise en main & Navigation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire des actifs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/alerts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alertes réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Analyste SOC & Sécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Analyste SOC & Sécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard de Menaces
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard de Menaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-vue-densemble-philosophie-operationnelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Vue d'Ensemble &amp; Philosophie Opérationnelle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Vue d&#39;Ensemble &amp; Philosophie Opérationnelle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefices-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bénéfices Clés :
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-navigation-dans-le-dashboard-dexposition-vulnerabilitiestabthreats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Navigation dans le Dashboard d'Exposition (/vulnerabilities?tab=threats)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Navigation dans le Dashboard d&#39;Exposition (/vulnerabilities?tab=threats)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-indicateurs-cles-den-tete-kpis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Indicateurs Clés d'En-tête (KPIs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-graphiques-de-repartition-telemetrie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Graphiques de Répartition &amp; Télémétrie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-tableau-des-vulnerabilites-correlees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Tableau des Vulnérabilités Corrélées
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comprendre-les-statuts-de-menace-le-score-de-risque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comprendre les Statuts de Menace &amp; le Score de Risque
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Comprendre les Statuts de Menace &amp; le Score de Risque">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#les-5-niveaux-de-menace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Les 5 Niveaux de Menace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-du-score-de-risque-contextuel-crs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calcul du Score de Risque Contextuel ($CRS$)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mode-demploi-configuration-des-fournisseurs-soc-siem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mode d'Emploi : Configuration des Fournisseurs SOC / SIEM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Mode d&#39;Emploi : Configuration des Fournisseurs SOC / SIEM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-splunk-enterprise-splunk-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1 : Splunk Enterprise / Splunk Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-wazuh-elasticsearch-opensearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2 : Wazuh / Elasticsearch / OpenSearch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-3-suricata-local-journal-dalertes-eve-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3 : Suricata Local (Journal d'Alertes EVE JSON)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-4-microsoft-sentinel-azure-log-analytics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4 : Microsoft Sentinel (Azure Log Analytics)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-5-crowdstrike-falcon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 5 : CrowdStrike Falcon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-synchronisation-de-la-telemetrie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Synchronisation de la Télémétrie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Synchronisation de la Télémétrie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronisation-automatique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synchronisation Automatique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronisation-manuelle-a-la-demande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synchronisation Manuelle à la Demande
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-playbook-operationnel-pour-analystes-securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Playbook Opérationnel pour Analystes Sécurité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-depannage-faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Dépannage &amp; FAQ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Dépannage &amp; FAQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-test-de-connexion-echoue-avec-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le test de connexion échoue avec "Connection refused"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-test-de-connexion-affiche-http-error-401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le test de connexion affiche "HTTP Error 401: Unauthorized"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-fichier-suricata-evejson-indique-file-does-not-exist-or-is-not-readable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le fichier Suricata eve.json indique "File does not exist or is not readable"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aucune-attaque-napparait-dans-le-dashboard-alors-que-le-test-est-reussi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aucune attaque n'apparaît dans le dashboard alors que le test est réussi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../threat_correlation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrélation SOC/SIEM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vulnerability_triage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triage des vulnérabilités
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security_audits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audits de sécurité intégrés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Auditeur & Conformité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Auditeur & Conformité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auditor/nis2_compliance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directive NIS2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auditor/cra_compliance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auditor/audit_trail_exports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journal d'audit & Exports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Administrateur Client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4. Administrateur Client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/users_and_rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilisateurs & Rôles RBAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/scanners_management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestion des sondes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/network_policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Politiques sous-réseaux & Deep Scan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/cmdb_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réconciliation CMDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-vue-densemble-philosophie-operationnelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Vue d'Ensemble &amp; Philosophie Opérationnelle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Vue d&#39;Ensemble &amp; Philosophie Opérationnelle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefices-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bénéfices Clés :
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-navigation-dans-le-dashboard-dexposition-vulnerabilitiestabthreats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Navigation dans le Dashboard d'Exposition (/vulnerabilities?tab=threats)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Navigation dans le Dashboard d&#39;Exposition (/vulnerabilities?tab=threats)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-indicateurs-cles-den-tete-kpis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Indicateurs Clés d'En-tête (KPIs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-graphiques-de-repartition-telemetrie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Graphiques de Répartition &amp; Télémétrie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-tableau-des-vulnerabilites-correlees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Tableau des Vulnérabilités Corrélées
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comprendre-les-statuts-de-menace-le-score-de-risque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comprendre les Statuts de Menace &amp; le Score de Risque
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Comprendre les Statuts de Menace &amp; le Score de Risque">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#les-5-niveaux-de-menace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Les 5 Niveaux de Menace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-du-score-de-risque-contextuel-crs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calcul du Score de Risque Contextuel ($CRS$)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mode-demploi-configuration-des-fournisseurs-soc-siem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mode d'Emploi : Configuration des Fournisseurs SOC / SIEM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Mode d&#39;Emploi : Configuration des Fournisseurs SOC / SIEM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-splunk-enterprise-splunk-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1 : Splunk Enterprise / Splunk Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-wazuh-elasticsearch-opensearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2 : Wazuh / Elasticsearch / OpenSearch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-3-suricata-local-journal-dalertes-eve-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3 : Suricata Local (Journal d'Alertes EVE JSON)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-4-microsoft-sentinel-azure-log-analytics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4 : Microsoft Sentinel (Azure Log Analytics)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-5-crowdstrike-falcon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 5 : CrowdStrike Falcon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-synchronisation-de-la-telemetrie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Synchronisation de la Télémétrie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Synchronisation de la Télémétrie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronisation-automatique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synchronisation Automatique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronisation-manuelle-a-la-demande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synchronisation Manuelle à la Demande
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-playbook-operationnel-pour-analystes-securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Playbook Opérationnel pour Analystes Sécurité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-depannage-faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Dépannage &amp; FAQ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Dépannage &amp; FAQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-test-de-connexion-echoue-avec-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le test de connexion échoue avec "Connection refused"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-test-de-connexion-affiche-http-error-401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le test de connexion affiche "HTTP Error 401: Unauthorized"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-fichier-suricata-evejson-indique-file-does-not-exist-or-is-not-readable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le fichier Suricata eve.json indique "File does not exist or is not readable"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aucune-attaque-napparait-dans-le-dashboard-alors-que-le-test-est-reussi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aucune attaque n'apparaît dans le dashboard alors que le test est réussi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guide-utilisateur-mode-demploi-dashboard-menaces-integration-soc-siem">Guide Utilisateur &amp; Mode d'Emploi : Dashboard Menaces &amp; Intégration SOC / SIEM<a class="headerlink" href="#guide-utilisateur-mode-demploi-dashboard-menaces-integration-soc-siem" title="Permanent link">&para;</a></h1>
+<p>Ce guide s'adresse aux <strong>analystes en cybersécurité</strong>, <strong>administrateurs systèmes</strong> et <strong>responsables SOC</strong> utilisant la plateforme RTMS. Il détaille le fonctionnement, la lecture opérationnelle et la configuration du <strong>Dashboard d'Exposition aux Menaces &amp; Corrélation SOC/SIEM</strong>.</p>
+<hr />
+<h2 id="1-vue-densemble-philosophie-operationnelle">1. Vue d'Ensemble &amp; Philosophie Opérationnelle<a class="headerlink" href="#1-vue-densemble-philosophie-operationnelle" title="Permanent link">&para;</a></h2>
+<p>Dans la plupart des organisations, la gestion des vulnérabilités (scans statiques) et la détection d'intrusions (SOC / SIEM) opèrent en silos isolés. Un serveur présentant 20 vulnérabilités peut n'être soumis à aucune attaque, tandis qu'un serveur critique présentant une seule vulnérabilité modérée peut faire l'objet de tentatives d'exploitation actives en temps réel.</p>
+<p>Le moteur de corrélation de RTMS fusionne ces deux dimensions en temps réel :
+- <strong>Inventaire Scanné &amp; CVEs</strong> : Découvertes par les scanners RTMS et locales agents.
+- <strong>Télémétrie d'Attaque Live</strong> : Provenant de votre infrastructure de détection (<strong>Splunk</strong>, <strong>Wazuh</strong>, <strong>Suricata</strong>, <strong>Microsoft Sentinel</strong>, <strong>CrowdStrike Falcon</strong>).</p>
+<h3 id="benefices-cles">Bénéfices Clés :<a class="headerlink" href="#benefices-cles" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Élimination de la fatigue d'alerte</strong> : Priorisation des correctifs sur les machines et ports réellement attaqués.</li>
+<li><strong>Score de Risque Contextuel Dynamique ($CRS$)</strong> : Le score d'une vulnérabilité s'ajuste dynamiquement en fonction de la pression d'attaque réelle.</li>
+<li><strong>Réaction immédiate</strong> : Détection des incidents <code>ACTIVELY_EXPLOITED</code> nécessitant une remédiation d'urgence.</li>
+</ol>
+<hr />
+<h2 id="2-navigation-dans-le-dashboard-dexposition-vulnerabilitiestabthreats">2. Navigation dans le Dashboard d'Exposition (<code>/vulnerabilities?tab=threats</code>)<a class="headerlink" href="#2-navigation-dans-le-dashboard-dexposition-vulnerabilitiestabthreats" title="Permanent link">&para;</a></h2>
+<p>Pour accéder au dashboard :
+1. Dans le menu latéral gauche, cliquez sur <strong>Vulnérabilités</strong> (ou accédez à <code>/vulnerabilities</code>).
+2. Dans la barre d'onglets supérieure, sélectionnez l'onglet <strong>Menaces &amp; SIEM</strong> (icône radar / flamme).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                        CENTRE DE VULNÉRABILITÉS                        │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├─────────────────┬─────────────────┬──────────────────┬─────────────────┤
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│ Vue d'ensemble  │ Vulnérabilités  │  Menaces &amp; SIEM  │  Historique NVD │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>└─────────────────┴─────────────────┴────────┬─────────┴─────────────────┘
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                                             │
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                                  [ Vous êtes ici ]
+</span></code></pre></div>
+<h3 id="a-indicateurs-cles-den-tete-kpis">A. Indicateurs Clés d'En-tête (KPIs)<a class="headerlink" href="#a-indicateurs-cles-den-tete-kpis" title="Permanent link">&para;</a></h3>
+<p>En haut du dashboard, 4 cartes de synthèse synthétisent la posture globale :</p>
+<ul>
+<li><strong>Activité d'Attaque Active</strong> : Nombre total d'événements de menaces ingérés sur la fenêtre glissante (dernières 24h à 48h).</li>
+<li><strong>CVEs Actuellement Exploitées (<code>ACTIVELY_EXPLOITED</code>)</strong> : Nombre de vulnérabilités pour lesquelles une correspondance stricte d'IP et de port est activement ciblée.</li>
+<li><strong>Actifs Ciblés</strong> : Nombre de serveurs ou hôtes internes ayant reçu du trafic malveillant identifié.</li>
+<li><strong>Fournisseur Télémétrie Actif</strong> : Badge indiquant la source active (ex. <em>Wazuh</em>, <em>Splunk</em>, <em>Suricata</em>, <em>Sentinel</em>, <em>CrowdStrike</em>).</li>
+</ul>
+<h3 id="b-graphiques-de-repartition-telemetrie">B. Graphiques de Répartition &amp; Télémétrie<a class="headerlink" href="#b-graphiques-de-repartition-telemetrie" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Top Services &amp; Ports Ciblés</strong> :</li>
+<li>Présente les 10 ports les plus attaqués sur votre réseau (ex. <code>Port 443 HTTPS</code>, <code>Port 22 SSH</code>, <code>Port 3389 RDP</code>).</li>
+<li>Affiche le volume de frappes (hits), les attaques actives et le niveau de criticité.</li>
+<li><strong>Chronologie d'Activité sur 48h</strong> :</li>
+<li>Histogramme temporel découpé par tranches de 4 heures.</li>
+<li>Permet de repérer les pics d'attaque, les scans automatisés ou le déclenchement d'une campagne malveillante ciblée.</li>
+</ol>
+<h3 id="c-tableau-des-vulnerabilites-correlees">C. Tableau des Vulnérabilités Corrélées<a class="headerlink" href="#c-tableau-des-vulnerabilites-correlees" title="Permanent link">&para;</a></h3>
+<p>Le tableau principal liste l'ensemble des vulnérabilités en les croisant avec la télémétrie :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Colonne</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>CVE ID &amp; Sévérité</strong></td>
+<td style="text-align: left;">Identifiant CVE avec lien NIST et sévérité nominale (CRITICAL, HIGH, etc.).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Actif / Hôte</strong></td>
+<td style="text-align: left;">Nom d'hôte et adresse IP ciblée.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Port / Service</strong></td>
+<td style="text-align: left;">Port applicatif concerné (avec indicateur de correspondance avec l'attaque).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Score Contextuel</strong></td>
+<td style="text-align: left;">Note dynamique sur 10.0 calculée par le moteur RTMS.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Statut de Menace</strong></td>
+<td style="text-align: left;">Badge d'état opérationnel (<code>ACTIVELY_EXPLOITED</code>, <code>ATTACK_DETECTED</code>, etc.).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Signatures &amp; Télémétrie</strong></td>
+<td style="text-align: left;">Règles SIEM / IDS déclenchées et nombre de frappes enregistrées.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Actions</strong></td>
+<td style="text-align: left;">Création d'incident de sécurité, analyse détaillée ou filtrage.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-comprendre-les-statuts-de-menace-le-score-de-risque">3. Comprendre les Statuts de Menace &amp; le Score de Risque<a class="headerlink" href="#3-comprendre-les-statuts-de-menace-le-score-de-risque" title="Permanent link">&para;</a></h2>
+<h3 id="les-5-niveaux-de-menace">Les 5 Niveaux de Menace<a class="headerlink" href="#les-5-niveaux-de-menace" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Statut</th>
+<th style="text-align: left;">Badge Visuel</th>
+<th style="text-align: left;">Signification Opérationnelle</th>
+<th style="text-align: left;">Action Requise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>ACTIVELY_EXPLOITED</code></strong></td>
+<td style="text-align: left;">Rouge écarlate pulsant</td>
+<td style="text-align: left;"><strong>Urgence Absolue</strong>. L'IP et le port précis de ce service vulnérable font l'objet d'attaques actives récentes (&lt; 24h).</td>
+<td style="text-align: left;">Confinement immédiat, isolation réseau ou application du patch d'urgence.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>ATTACK_DETECTED</code></strong></td>
+<td style="text-align: left;">Ambre / Orange</td>
+<td style="text-align: left;">L'adresse IP hôte est ciblée par des attaques, mais le port exact n'est pas ciblé ou il s'agit d'un balayage général.</td>
+<td style="text-align: left;">Surveillance renforcée et vérification des règles de filtrage pare-feu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TARGETED</code></strong></td>
+<td style="text-align: left;">Violet / Indigo</td>
+<td style="text-align: left;">L'IP a fait l'objet de scans ou d'attaques dans les dernières 48h (reconnaissance / probing).</td>
+<td style="text-align: left;">Planification de la remédiation lors du cycle standard.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>POTENTIAL</code></strong></td>
+<td style="text-align: left;">Bleu</td>
+<td style="text-align: left;">Vulnérabilité existante avec un score CVSS élevé, mais aucune attaque détectée sur cette IP.</td>
+<td style="text-align: left;">Traitement préventif normal.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>DORMANT</code></strong></td>
+<td style="text-align: left;">Gris</td>
+<td style="text-align: left;">Vulnérabilité mineure sans activité hostile observée.</td>
+<td style="text-align: left;">Surveillance de routine.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="calcul-du-score-de-risque-contextuel-crs">Calcul du Score de Risque Contextuel ($CRS$)<a class="headerlink" href="#calcul-du-score-de-risque-contextuel-crs" title="Permanent link">&para;</a></h3>
+<p>Le score contextuel démarre du score de base CVSS v3 et y ajoute des pénalités contextuelles :
+- <strong>Volume d'attaques</strong> : Augmentation logarithmique en fonction du nombre de requêtes suspectes (jusqu'à $+2.0$).
+- <strong>Correspondance de Port</strong> : $+1.5$ point si l'attaque vise précisément le port sur lequel tourne le logiciel vulnérable.
+- <strong>Sévérité de l'alerte SIEM</strong> : Jusqu'à $+1.5$ point si le SIEM classe l'alerte en CRITICAL.
+- <strong>Récence de l'attaque</strong> : $+1.0$ point si l'attaque a été vue dans les 24 dernières heures.
+- <strong>Plafond</strong> : Le score total est strictement borné à <strong>10.0</strong>.</p>
+<blockquote>
+<p><strong>Exemple concret</strong> : Une vulnérabilité OpenSSL avec un CVSS de base de <strong>7.5 (HIGH)</strong> sur un serveur web (port 443). Le SIEM détecte 450 requêtes malveillantes sur le port 443 dans les 6 dernières heures. Le score est recalculé à <strong>10.0 (CRITICAL - ACTIVELY EXPLOITED)</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="4-mode-demploi-configuration-des-fournisseurs-soc-siem">4. Mode d'Emploi : Configuration des Fournisseurs SOC / SIEM<a class="headerlink" href="#4-mode-demploi-configuration-des-fournisseurs-soc-siem" title="Permanent link">&para;</a></h2>
+<p>Pour configurer votre connexion SOC/SIEM :
+1. Dans le menu latéral, cliquez sur <strong>Configuration Scanner / Paramètres</strong> (<code>/settings</code>).
+2. Faites défiler jusqu'à la section <strong>Intégration SOC &amp; Télémétrie d'Attaque</strong>.
+3. Cochez la case <strong>Activer la corrélation SOC / SIEM</strong>.
+4. Sélectionnez votre solution dans le menu déroulant.</p>
+<hr />
+<h3 id="option-1-splunk-enterprise-splunk-cloud">Option 1 : Splunk Enterprise / Splunk Cloud<a class="headerlink" href="#option-1-splunk-enterprise-splunk-cloud" title="Permanent link">&para;</a></h3>
+<p>Splunk interroge les journaux de sécurité et d'intrusion via l'API REST de recherche.</p>
+<ol>
+<li><strong>Type de Fournisseur</strong> : Sélectionnez <code>Splunk Enterprise / Cloud</code>.</li>
+<li><strong>URL de l'API Splunk</strong> : Saisissez l'URL d'accès HTTPS avec le port de gestion (par défaut <code>8089</code> pour Splunk Enterprise on-premise, ou le sous-domaine de recherche pour Splunk Cloud) :</li>
+<li>Exemple : <code>https://splunk.corp.local:8089</code></li>
+<li><strong>Jeton d'Authentification (REST / HEC Token)</strong> : Collez votre Bearer Token Splunk généré dans Splunk (<em>Settings &gt; Tokens</em>).</li>
+<li><strong>Vérification SSL</strong> : Cochez cette case en production pour valider le certificat TLS de votre instance Splunk.</li>
+<li>Cliquez sur <strong>Tester la connexion Splunk</strong>.</li>
+<li>Si la connexion est réussie, un badge vert s'affiche avec la confirmation de communication.</li>
+</ol>
+<hr />
+<h3 id="option-2-wazuh-elasticsearch-opensearch">Option 2 : Wazuh / Elasticsearch / OpenSearch<a class="headerlink" href="#option-2-wazuh-elasticsearch-opensearch" title="Permanent link">&para;</a></h3>
+<p>Wazuh stocke ses alertes dans un cluster Elasticsearch ou OpenSearch (index <code>wazuh-alerts-*</code>).</p>
+<ol>
+<li><strong>Type de Fournisseur</strong> : Sélectionnez <code>Wazuh / Elasticsearch</code>.</li>
+<li><strong>Hôte Wazuh / Elasticsearch</strong> : Nom d'hôte ou adresse IP du nœud d'indexation (ex. <code>10.0.0.50</code> ou <code>wazuh-indexer.corp.local</code>).</li>
+<li><strong>Port</strong> : Port de l'API REST Elasticsearch (par défaut <code>9200</code>).</li>
+<li><strong>Modèle d'Index</strong> : Nom ou motif des index d'alertes (par défaut <code>wazuh-alerts-*</code>).</li>
+<li><strong>Authentification</strong> :</li>
+<li><strong>Nom d'utilisateur &amp; Mot de passe</strong> (ex. <code>admin</code> / mot de passe wazuh indexer).</li>
+<li><em>OU</em> <strong>Clé d'API Elasticsearch</strong> si vous utilisez l'authentification par API Key.</li>
+<li><strong>Activer SSL/TLS</strong> : Cochez si votre cluster utilise HTTPS.</li>
+<li>Cliquez sur <strong>Tester la connexion Wazuh</strong>.</li>
+</ol>
+<hr />
+<h3 id="option-3-suricata-local-journal-dalertes-eve-json">Option 3 : Suricata Local (Journal d'Alertes EVE JSON)<a class="headerlink" href="#option-3-suricata-local-journal-dalertes-eve-json" title="Permanent link">&para;</a></h3>
+<p>Idéal pour les déploiements souverains ou les sondes autonomes où Suricata est installé localement sur la même appliance ou partage un volume monté.</p>
+<ol>
+<li><strong>Type de Fournisseur</strong> : Sélectionnez <code>Suricata (Local EVE Log)</code>.</li>
+<li><strong>Chemin du fichier EVE JSON</strong> : Saisissez le chemin absolu vers le journal JSON d'alertes :</li>
+<li>Chemin par défaut sous Linux : <code>/var/log/suricata/eve.json</code></li>
+<li><strong>Permissions requises</strong> : L'utilisateur exécutant le service RTMS Web (<code>rtms</code> ou <code>www-data</code>) doit disposer des droits de lecture sur le fichier (<code>chmod 644 /var/log/suricata/eve.json</code> ou appartenance au groupe <code>suricata</code>).</li>
+<li>Cliquez sur <strong>Tester la connexion Suricata</strong>.</li>
+<li>Le système valide immédiatement l'existence du fichier, ses droits d'accès et sa taille.</li>
+</ol>
+<hr />
+<h3 id="option-4-microsoft-sentinel-azure-log-analytics">Option 4 : Microsoft Sentinel (Azure Log Analytics)<a class="headerlink" href="#option-4-microsoft-sentinel-azure-log-analytics" title="Permanent link">&para;</a></h3>
+<p>Microsoft Sentinel interroge les tables de sécurité cloud Azure via l'API REST Log Analytics et une authentification Entra ID (ex-Azure AD).</p>
+<ol>
+<li><strong>Type de Fournisseur</strong> : Sélectionnez <code>Microsoft Sentinel</code>.</li>
+<li><strong>Workspace ID</strong> : L'identifiant GUID de votre espace de travail Log Analytics (trouvable dans le portail Azure sous <em>Log Analytics workspaces &gt; Overview</em>).</li>
+<li><strong>Tenant ID (Directory ID)</strong> : L'identifiant de votre tenant Azure Entra ID.</li>
+<li><strong>Application (Client) ID</strong> : L'ID de l'application inscrite (App Registration) dans Azure Entra ID.</li>
+<li><strong>Client Secret</strong> : La valeur du secret généré pour cette application.</li>
+<li><strong>Table Cible</strong> : Sélectionnez la table contenant vos alertes (par défaut <code>CommonSecurityLog</code>, ou <code>SecurityAlert</code>).</li>
+<li><strong>Permissions Azure requises</strong> : L'application doit posséder le rôle <strong>Log Analytics Reader</strong> sur le workspace ciblé.</li>
+<li>Cliquez sur <strong>Tester la connexion Sentinel</strong>.</li>
+<li>RTMS effectue une négociation de jeton OAuth2 avec <code>login.microsoftonline.com</code> puis exécute une requête KQL de test.</li>
+</ol>
+<hr />
+<h3 id="option-5-crowdstrike-falcon">Option 5 : CrowdStrike Falcon<a class="headerlink" href="#option-5-crowdstrike-falcon" title="Permanent link">&para;</a></h3>
+<p>CrowdStrike Falcon interroge le cloud Falcon via l'API OAuth2 pour récupérer les détections d'attaques et de comportements hostiles.</p>
+<ol>
+<li><strong>Type de Fournisseur</strong> : Sélectionnez <code>CrowdStrike Falcon</code>.</li>
+<li><strong>Falcon API Client ID</strong> : L'identifiant Client ID créé dans la console Falcon (<em>Support and resources &gt; API clients and keys</em>).</li>
+<li><strong>Falcon API Client Secret</strong> : Le secret associé à la clé d'API.</li>
+<li><strong>Falcon Cloud Base URL</strong> : Sélectionnez la région correspondant à votre souscription CrowdStrike :</li>
+<li><code>api.crowdstrike.com</code> : Cloud US-1</li>
+<li><code>api.us-2.crowdstrike.com</code> : Cloud US-2</li>
+<li><code>api.eu-1.crowdstrike.com</code> : Cloud EU-1 (Francfort - Recommandé en Europe)</li>
+<li><code>api.laggar.gcw.crowdstrike.com</code> : GovCloud</li>
+<li><strong>Permissions Falcon requises</strong> : Portée (Scope) <strong>Alerts</strong> en lecture (<code>Alerts: Read</code>).</li>
+<li>Cliquez sur <strong>Tester la connexion CrowdStrike Falcon</strong>.</li>
+</ol>
+<hr />
+<h2 id="5-synchronisation-de-la-telemetrie">5. Synchronisation de la Télémétrie<a class="headerlink" href="#5-synchronisation-de-la-telemetrie" title="Permanent link">&para;</a></h2>
+<h3 id="synchronisation-automatique">Synchronisation Automatique<a class="headerlink" href="#synchronisation-automatique" title="Permanent link">&para;</a></h3>
+<p>Lorsque l'intégration SOC est activée, RTMS synchronise la télémétrie en arrière-plan à intervalles réguliers (toutes les 15 minutes) et rafraîchit la table <code>admin.threat_telemetry_cache</code>.</p>
+<h3 id="synchronisation-manuelle-a-la-demande">Synchronisation Manuelle à la Demande<a class="headerlink" href="#synchronisation-manuelle-a-la-demande" title="Permanent link">&para;</a></h3>
+<p>Vous pouvez forcer une synchronisation immédiate à tout moment depuis le dashboard :
+1. Rendez-vous sur <code>/vulnerabilities?tab=threats</code>.
+2. En haut à droite du tableau, cliquez sur le bouton <strong>Synchroniser la télémétrie</strong> (icône de synchronisation).
+3. Une notification vous confirme le nombre d'événements et de cibles d'attaques synchronisés dans le cache.</p>
+<hr />
+<h2 id="6-playbook-operationnel-pour-analystes-securite">6. Playbook Opérationnel pour Analystes Sécurité<a class="headerlink" href="#6-playbook-operationnel-pour-analystes-securite" title="Permanent link">&para;</a></h2>
+<p>Lorsqu'une alerte ou un incident de type <code>ACTIVELY_EXPLOITED</code> apparaît dans le dashboard :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[ Détection ACTIVELY_EXPLOITED ]
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>               │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>               ▼
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   1. Vérifier l'Actif &amp; le Port concerné
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>               │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>               ▼
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>   2. Isoler le flux réseau suspect au pare-feu
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>               │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>               ▼
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>   3. Créer un Incident dans RTMS ("Créer Incident")
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>               │
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>               ▼
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>   4. Appliquer le correctif de sécurité (Patch / Update)
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>               │
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>               ▼
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>   5. Déclencher un rescan RTMS &amp; valider la résolution
+</span></code></pre></div>
+<ol>
+<li><strong>Vérification immédiate</strong> :</li>
+<li>Cliquez sur la ligne de la vulnérabilité pour consulter les signatures d'attaque et les adresses IP sources d'où proviennent les tentatives.</li>
+<li><strong>Mesure d'endiguement rapide</strong> :</li>
+<li>Si le service n'a pas besoin d'être exposé publiquement, restreignez le port au pare-feu ou sur le groupe de sécurité.</li>
+<li><strong>Création d'un Incident de Sécurité</strong> :</li>
+<li>Cliquez sur le bouton d'action <strong>Créer Incident</strong> sur la ligne correspondante. Un ticket est automatiquement ouvert dans le module de remédiation RTMS avec les détails de la CVE et de l'attaque.</li>
+<li><strong>Vérification post-correctif</strong> :</li>
+<li>Après application du patch, lancez un scan ciblé depuis le menu <strong>Scanneur</strong>. Le statut basculera automatiquement à résolu.</li>
+</ol>
+<hr />
+<h2 id="7-depannage-faq">7. Dépannage &amp; FAQ<a class="headerlink" href="#7-depannage-faq" title="Permanent link">&para;</a></h2>
+<h3 id="le-test-de-connexion-echoue-avec-connection-refused">Le test de connexion échoue avec "Connection refused"<a class="headerlink" href="#le-test-de-connexion-echoue-avec-connection-refused" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong> : L'hôte ou le port spécifié n'est pas joignable depuis le serveur RTMS Web.</li>
+<li><strong>Résolution</strong> :</li>
+<li>Vérifiez les règles de pare-feu entre RTMS Web et votre serveur SOC.</li>
+<li>Pour Wazuh, vérifiez que Elasticsearch écoute bien sur <code>0.0.0.0</code> ou l'IP du réseau interne et non uniquement sur <code>127.0.0.1</code>.</li>
+</ul>
+<h3 id="le-test-de-connexion-affiche-http-error-401-unauthorized">Le test de connexion affiche "HTTP Error 401: Unauthorized"<a class="headerlink" href="#le-test-de-connexion-affiche-http-error-401-unauthorized" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Splunk</strong> : Le jeton HEC / REST a expiré ou ne dispose pas du rôle <code>search</code>.</li>
+<li><strong>Wazuh</strong> : Le mot de passe ou la clé d'API est incorrecte.</li>
+<li><strong>CrowdStrike</strong> : Le Client ID ou Secret est erroné, ou la région cloud sélectionnée ne correspond pas à votre tenant.</li>
+</ul>
+<h3 id="le-fichier-suricata-evejson-indique-file-does-not-exist-or-is-not-readable">Le fichier Suricata <code>eve.json</code> indique "File does not exist or is not readable"<a class="headerlink" href="#le-fichier-suricata-evejson-indique-file-does-not-exist-or-is-not-readable" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong> : Le chemin saisi est incorrect ou le serveur RTMS n'a pas les droits de lecture sur le journal.</li>
+<li><strong>Résolution</strong> :</li>
+<li>Exécutez sur le serveur : <code>ls -l /var/log/suricata/eve.json</code>.</li>
+<li>Accordez les droits nécessaires : <code>chmod 644 /var/log/suricata/eve.json</code> ou ajoutez l'utilisateur au groupe <code>suricata</code>.</li>
+</ul>
+<h3 id="aucune-attaque-napparait-dans-le-dashboard-alors-que-le-test-est-reussi">Aucune attaque n'apparaît dans le dashboard alors que le test est réussi<a class="headerlink" href="#aucune-attaque-napparait-dans-le-dashboard-alors-que-le-test-est-reussi" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cause</strong> : La fenêtre temporelle d'interrogation (48h par défaut) ne contient aucun événement ciblant les adresses IP présentes dans l'inventaire de vos actifs scannés.</li>
+<li><strong>Vérification</strong> : Assurez-vous que vos sous-réseaux et machines sont bien scannés et enregistrés dans la section <strong>Gestion des Actifs</strong>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

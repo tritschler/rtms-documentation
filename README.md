@@ -2,20 +2,39 @@
 
 Welcome to the central documentation repository for the **RTMS (Real-Time Monitoring & Security)** platform.
 
-This repository serves as the **Single Source of Truth** for overall system architecture, technical specifications, cross-cutting features, security compliance, and deployment guides.
+This repository serves as the **Single Source of Truth** for the entire RTMS platform, split into **two distinct documentation spheres**:
+
+1. 🔒 **Internal Technical Portal (`docs-internal/`)**:
+   * Destined exclusively for **3TS Consulting SRL**, core engineers, nomadic installers, and AI development agents.
+   * Covers internal system architecture, data models, Ansible deployment playbooks, PostgreSQL hardening, scanner internals, and licensing.
+   * Built via `mkdocs.internal.yml` $\rightarrow$ `site-internal/` (local server: `http://127.0.0.1:8008`).
+
+2. 👥 **Client & User Guide (`docs-client/`)**:
+   * Destined for **end-clients and operators**, served in HTML via Nginx and embedded directly inside the RTMS Web Console (`/help/documentation`).
+   * Structured by the **4 RTMS RBAC Roles**:
+     * 🔰 **1. Opérateur & Utilisateur Réseau** (Prise en main, Inventaire des actifs, Alertes)
+     * 🛡️ **2. Analyste de Sécurité / SOC** (Dashboard Menaces, Triage CVE, Corrélation SIEM)
+     * 📋 **3. Auditeur & Conformité** (Directive NIS2, Cyber Resilience Act CRA, Journal d'audit)
+     * ⚙️ **4. Administrateur Client** (Utilisateurs RBAC, Gestion des sondes, Deep Scan, CMDB)
+   * Built via `mkdocs.client.yml` $\rightarrow$ `site-client/` (local server: `http://127.0.0.1:8009`).
 
 ---
 
-## Running the Documentation Site (MkDocs Material)
+## 🛠️ Build & Serve Commands (Makefile)
 
-To browse this documentation with the interactive, dark/light themed Material portal:
+A `Makefile` is provided for convenient building and local preview:
 
 ```bash
-# Start local live-reloading web server (http://127.0.0.1:8008)
-uv run mkdocs serve
+# Compile both documentations strictly
+make build-all
 
-# Build production static website (output: site/)
-uv run mkdocs build
+# Compile individually
+make build-internal   # Outputs to site-internal/
+make build-client     # Outputs to site-client/
+
+# Run local preview servers
+make serve-internal   # Live on http://127.0.0.1:8008
+make serve-client     # Live on http://127.0.0.1:8009
 ```
 
 ---

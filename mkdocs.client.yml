@@ -1,0 +1,87 @@
+site_name: RTMS - Guide Utilisateur & Exploitation
+site_description: Guide officiel d'utilisation et d'exploitation de la plateforme RTMS (Real-Time Monitoring & Security).
+site_author: 3TS Consulting SRL
+copyright: Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+
+dev_addr: '127.0.0.1:8009'
+docs_dir: docs-client
+site_dir: site-client
+
+theme:
+  name: material
+  language: fr
+  palette:
+    # Mode sombre par défaut
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Passer au mode clair
+    # Mode clair
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Passer au mode sombre
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - i18n:
+      languages:
+        - locale: fr
+          default: true
+          name: Français
+          build: true
+        - locale: en
+          name: English
+          build: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Accueil: index.md
+  - 1. Utilisateur & Opérateur:
+      - Prise en main & Navigation: roles/user/navigation.md
+      - Inventaire des actifs: roles/user/inventory.md
+      - Alertes réseau: roles/user/alerts.md
+  - 2. Analyste SOC & Sécurité:
+      - Dashboard de Menaces: roles/analyst/threat_dashboard.md
+      - Corrélation SOC/SIEM: roles/analyst/threat_correlation.md
+      - Triage des vulnérabilités: roles/analyst/vulnerability_triage.md
+      - Audits de sécurité intégrés: roles/analyst/security_audits.md
+  - 3. Auditeur & Conformité:
+      - Directive NIS2: roles/auditor/nis2_compliance.md
+      - Cyber Resilience Act (CRA): roles/auditor/cra_compliance.md
+      - Journal d'audit & Exports: roles/auditor/audit_trail_exports.md
+  - 4. Administrateur Client:
+      - Utilisateurs & Rôles RBAC: roles/admin/users_and_rbac.md
+      - Gestion des sondes: roles/admin/scanners_management.md
+      - Politiques sous-réseaux & Deep Scan: roles/admin/network_policies.md
+      - Réconciliation CMDB: roles/admin/cmdb_sync.md

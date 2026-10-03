@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>None./</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="None"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
+    </url>
+    <url>
+        <loc>Noneroles/admin/cmdb_sync/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/cmdb_sync/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/cmdb_sync/"/>
+    </url>
+    <url>
+        <loc>Noneroles/admin/network_policies/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/network_policies/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/network_policies/"/>
+    </url>
+    <url>
+        <loc>Noneroles/admin/scanners_management/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/scanners_management/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/scanners_management/"/>
+    </url>
+    <url>
+        <loc>Noneroles/admin/users_and_rbac/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/users_and_rbac/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/users_and_rbac/"/>
+    </url>
+    <url>
+        <loc>Noneroles/analyst/security_audits/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/security_audits/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/security_audits/"/>
+    </url>
+    <url>
+        <loc>Noneroles/analyst/threat_correlation/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/threat_correlation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/threat_correlation/"/>
+    </url>
+    <url>
+        <loc>Noneroles/analyst/threat_dashboard/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/threat_dashboard/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/threat_dashboard/"/>
+    </url>
+    <url>
+        <loc>Noneroles/analyst/vulnerability_triage/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/vulnerability_triage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/vulnerability_triage/"/>
+    </url>
+    <url>
+        <loc>Noneroles/auditor/audit_trail_exports/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/auditor/audit_trail_exports/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/auditor/audit_trail_exports/"/>
+    </url>
+    <url>
+        <loc>Noneroles/auditor/cra_compliance/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/auditor/cra_compliance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/auditor/cra_compliance/"/>
+    </url>
+    <url>
+        <loc>Noneroles/auditor/nis2_compliance/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/auditor/nis2_compliance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/auditor/nis2_compliance/"/>
+    </url>
+    <url>
+        <loc>Noneroles/user/alerts/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/user/alerts/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/user/alerts/"/>
+    </url>
+    <url>
+        <loc>Noneroles/user/inventory/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/user/inventory/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/user/inventory/"/>
+    </url>
+    <url>
+        <loc>Noneroles/user/navigation/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/user/navigation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/user/navigation/"/>
+    </url>
+    <url>
+        <loc>Noneen/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="None"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/admin/cmdb_sync/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/cmdb_sync/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/cmdb_sync/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/admin/network_policies/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/network_policies/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/network_policies/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/admin/scanners_management/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/scanners_management/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/scanners_management/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/admin/users_and_rbac/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/admin/users_and_rbac/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/admin/users_and_rbac/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/analyst/security_audits/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/security_audits/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/security_audits/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/analyst/threat_correlation/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/threat_correlation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/threat_correlation/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/analyst/threat_dashboard/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/threat_dashboard/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/threat_dashboard/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/analyst/vulnerability_triage/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/analyst/vulnerability_triage/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/analyst/vulnerability_triage/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/auditor/audit_trail_exports/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/auditor/audit_trail_exports/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/auditor/audit_trail_exports/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/auditor/cra_compliance/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/auditor/cra_compliance/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/auditor/cra_compliance/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/auditor/nis2_compliance/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/auditor/nis2_compliance/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/auditor/nis2_compliance/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/user/alerts/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/user/alerts/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/user/alerts/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/user/inventory/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/user/inventory/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/user/inventory/"/>
+    </url>
+    <url>
+        <loc>Noneen/roles/user/navigation/</loc>
+        <lastmod>2026-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/roles/user/navigation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Noneroles/user/navigation/"/>
+    </url>
+</urlset>

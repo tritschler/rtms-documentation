@@ -1,0 +1,523 @@
+# Technical Documentation: Automatic Session Timeout (JWT)
+
+## Overview
+This document describes the implementation of the automatic session timeout feature in the RTMS application. The feature ensures that user sessions are automatically invalidated after a period of inactivity, enhancing the security of the application.
+
+## Backend Implementation (FastAPI)
+The backend is responsible for generating JSON Web Tokens (JWT) upon successful authentication. 
+The token includes an `exp` (expiration time) claim, which dictates how long the token is valid.
+
+**File:** `backend/main.py`
+- **Library used:** `PyJWT`
+- **Expiration Logic:**
+  - Administrators (`role == 'admin'`): 15 minutes.
+  - Normal Users: 30 minutes.
+- **Response:** The `/api/login` endpoint returns the generated `access_token`, the user object, and an explicitly calculated `expires_at` timestamp (UNIX epoch). 
+
+*Code Snippet:*
+```python
+import jwt
+from datetime import datetime, timedelta, timezone
+
+# Inside login function:
+exp_minutes = 15 if user_dict.get('role') == 'admin' else 30
+expire = datetime.now(timezone.utc) + timedelta(minutes=exp_minutes)
+to_encode = {"sub": request.username, "exp": expire}
+encoded_jwt = jwt.encode(to_encode, "super-secret-key-for-rtms", algorithm="HS256")
+
+return {
+    "access_token": encoded_jwt,
+    "token_type": "bearer",
+    "user": user_dict,
+    "expires_at": int(expire.timestamp())
+}
+```
+
+## Frontend Implementation (React)
+The frontend receives the `expires_at` timestamp and proactively manages the user session in the browser. 
+
+**File:** `frontend/src/App.tsx`
+- **State Management:** The application maintains the `expiresAt` state alongside the authenticated `user` state.
+- **Timeout Logic:** A `useEffect` hook monitors the `user` and `expiresAt` states. It calculates the remaining time (in milliseconds) until the session expires.
+  - If the time has already elapsed, the `handleLogout()` function is called immediately.
+  - If time remains, a `setTimeout` is initialized to automatically trigger the `handleLogout()` function exactly when the token expires.
+
+*Code Snippet:*
+```tsx
+  useEffect(() => {
+    if (user && expiresAt) {
+      const timeUntilExpiry = expiresAt * 1000 - Date.now();
+      if (timeUntilExpiry <= 0) {
+        handleLogout();
+      } else {
+        const timer = setTimeout(() => {
+          handleLogout();
+        }, timeUntilExpiry);
+        return () => clearTimeout(timer); // Cleanup on unmount or state change
+      }
+    }
+  }, [user, expiresAt]);
+```
+
+## Authentication Providers
+The RTMS backend utilizes a Strategy Pattern to support multiple authentication providers, configured dynamically via the web interface (`admin.system_config`) or the `RTMS_AUTH_PROVIDER` environment variable. An authentication factory instantiates the corresponding strategy at runtime:
+
+- **Local (`local`)**: The default authentication strategy. It authenticates users against the `admin.users` database table by verifying the provided password against a stored bcrypt hash. Supports mandatory NIS 2 MFA enrollment and **adaptive risk-based password aging**: non-MFA local accounts expire every 90 days (configurable via `password_expiry_no_mfa_days`) with a preventive warning banner starting at J-14 (14 days before expiration) and access lockout at &ge; 90 days. Accounts with MFA (TOTP) enabled are permanently exempt from periodic rotation (NIST SP 800-63B / ISO 27001).
+- **LDAP (`ldap`)**: Authenticates users against a corporate active directory using a simple bind. It queries the configured LDAP server, binds with the user credentials, and performs Just-In-Time (JIT) provisioning into `admin.users` with `password_hash = 'ldap_managed'`. If the LDAP server is unreachable, it seamlessly cascades to local accounts for emergency access.
+- **SSO / OIDC (`oidc`)**: Enterprise Single Sign-On using OpenID Connect (Keycloak, Microsoft Entra ID, Okta). Handles discovery (`/.well-known/openid-configuration`), secure authorization code exchange, JIT user provisioning with `password_hash = 'sso_managed'`, and full delegation of multi-factor authentication (MFA/TOTP). Provides a dedicated **Break-Glass** local login fallback mode for administrator resilience.
+
+### Administrative MFA Enforcement Policy & Cloud Demonstration Bypass
+* By default, administrative users (`role == 'admin'`) must enforce TOTP Multi-Factor Authentication upon initial login in compliance with **NIS 2 Article 21.2(j)**.
+* **Demonstration / Lab Override**: For cloud-hosted demonstration environments (e.g. public showcase VPS instances), administrative MFA can be disabled to allow seamless shared evaluator access without smartphone TOTP coupling:
+  * **Environment Variable**: `RTMS_ENFORCE_ADMIN_MFA=false` (or `RTMS_DEMO_MODE=true`).
+  * **Database Configuration**: Key `enforce_admin_mfa` in `admin.system_config` set to `false`.
+  * **Ansible Automation**: In `rtms-installer`, set `rtms_enforce_admin_mfa: false` in the target host/group inventory (`group_vars/all.yml`). Production appliances retain `true` by default.
+
+Regardless of the active provider, successful authentications generate the standard JWT session token, record an entry in the `admin.login_audit` table, and update the `last_login` timestamp for the user.
+
+## Data Lifecycle & Telemetry Purge vs. Factory Reset
+
+RTMS strictly separates operational scan telemetry from persistent system configurations:
+
+* **Tenant Telemetry & Vulnerability Purge (`admin.purge_tenant_data`, `admin.purge_tenant_vulnerabilities`)**:
+  * Removes discovered host assets, open ports, software inventory, and CVE findings for a given tenant.
+  * **100% Preserved:** iTop CMDB configurations (`cmdb_*`), SSO / Keycloak settings (`oidc_*`), LDAP directory bind settings, SMTP alert policies, user profiles (`admin.users`), and product licenses.
+* **Factory Reset (`clean_schemas.sql` / `clean_app_data.sql`)**:
+  * Empties all tables in `admin` and `scanner` schemas for a clean Setup Wizard re-initialization.
+
+## Security Considerations & Role-Based Access Control (RBAC)
+- The session timeout relies on the backend issuing valid JWTs with an expiration claim (`exp`).
+- The frontend timer acts as a proactive UX measure, forcing a logout when the token is known to have expired.
+- **Granular 4-Role RBAC Model**: Authorization is enforced on every API route via FastAPI dependency injection:
+  - `verify_admin`: Reserved for system administrators (user provisioning, system config, licenses, service lifecycle, orphan purge).
+  - `verify_security_analyst_or_admin`: Dedicated to SOC analysts and administrators (CVE risk triage & justification, security findings declaration & assignment, alert management, verification scans).
+  - `verify_operator_or_admin`: Dedicated to network/scanner operators and administrators (scanner restart `RESTART`, agent token revocation/reenrollment, subnet management, asset deletion).
+  - `verify_can_operate`: Allows operational read-write (`admin`, `security_analyst`, `operator`) for asset metadata editing and software inventory tracking.
+  - `verify_can_scan`: Allows triggering network discovery scans (`admin`, `security_analyst`, `operator`).
+  - `verify_can_view_audit`: Restricts audit log inspection (`/api/audit/*`) to compliance auditors (`viewer`), SOC analysts (`security_analyst`), and `admin`. Operators are explicitly denied (403) to prevent tampering.
+- **Root Admin Immobility**: The seeded `admin` account is hard-protected against deactivation or role downgrades.
+- Complete architectural specifications are available in the [Modèle RBAC (Permissions)](../../architecture/rbac.md) document.
+
+## Database Schema Reset (Factory Reset)
+This section explains the application's behavior when selectively deleting database schemas. 
+
+If the `admin` and `scanner` schemas are deleted from the database but the `nvd` schema is kept intact, the application handles it seamlessly without crashing. This effectively acts as a safe "factory reset" for operational data while avoiding the need to re-download the massive NVD vulnerability dataset.
+
+### Startup Behavior
+Upon restarting the `rtms-nvd` or `rtms-scanner` components, the following occurs:
+
+1. **Automatic Schema Recreation**: `rtms_commons.db_client.init_db()` executes `CREATE SCHEMA IF NOT EXISTS` for both `admin` and `scanner` schemas. It automatically detects they are missing and creates empty schemas.
+2. **Table Generation**: The application executes the core DDL scripts (`ADMIN_DDL`, `TABLES_DDL`, etc.). Since these use `CREATE TABLE IF NOT EXISTS`, all required tables within `admin` and `scanner` are cleanly recreated from scratch.
+3. **Data Bootstrapping**: The default system data is automatically re-inserted (e.g., the default `3TS` tenant, the default `admin` user, and default scanner configurations).
+4. **License Restoration**: The `LicenseValidator` module reads the physical `license.key` file from the disk and synchronizes it, safely re-inserting the license payload into the newly recreated `admin.product_license` table.
+5. **NVD Sync Continuity**: Because the `nvd` schema remains intact, the vulnerability tables (`nvd.cve`, `nvd.cpe_match`, etc.) are preserved. When the NVD incremental sync scheduler runs, it queries `SELECT MAX(last_modified_date) FROM nvd.cve;` to find the newest known CVE. It then successfully fetches only the newest updates from the NIST API seamlessly.
+
+### Consequences
+- **Data Loss**: All operational data stored in the `admin` and `scanner` schemas is completely lost. This includes scanned networks, discovered assets, matched asset vulnerabilities, custom users, and configured alert webhook destinations.
+- **Continuity**: The application boots normally with a fresh state, retaining full vulnerability data continuity without requiring hours of data ingestion.
+
+---
+
+## Network Scan Archive System (NIS2 Compliance Snapshots)
+
+To fulfill NIS2 Article 21 requirements regarding configuration management and historical verification of network perimeters, RTMS includes a dedicated **Scan Archive System**.
+
+### Database Storage (`scanner.scan_archives`)
+- Stores complete immutable snapshots of network discovery scans for a specific scanner and subnet.
+- **Data structure**:
+  - `id`: UUID primary key.
+  - `scanner_id`: Scanner service identifier (`admin.service_registry.service_name`).
+  - `subnet`: Network CIDR (e.g. `192.168.0.0/24`).
+  - `scan_id`: Optional link to the specific `scanner.scans` execution.
+  - `snapshot_data`: Comprehensive JSONB payload containing:
+    - Complete host inventory (`ip_address`, `mac_address`, `hostname`, `vendor`, `status`, `last_seen`).
+    - Open TCP/UDP ports and service banners for each host.
+    - Software inventory installed on discovered hosts.
+  - `host_count`, `online_count`, `service_count`: Pre-aggregated counters for fast reporting.
+  - `label` & `notes`: User-defined audit labels (e.g. *"Baseline Pre-Audit NIS2"*).
+  - `created_at`: Exact UTC creation timestamp.
+
+### REST API Endpoints (`backend/main.py`)
+- `GET /api/archives/summary`: High-level metrics (total archive count, covered subnets, active scanners, latest timestamp).
+- `GET /api/archives`: List filtered archives by scanner or subnet with search support.
+- `POST /api/scanners/{service_name}/archive-latest`: One-click snapshot of the latest scan and live assets for a scanner.
+- `POST /api/archives`: Manual snapshot creation with custom label and notes.
+- `GET /api/archives/{id}`: Detailed inspection of archived host assets and services.
+- `GET /api/archives/{id}/export`: Download snapshot as a standalone `.json` file attachment.
+- `GET /api/archives/{id}/diff`: Real-time delta comparison between the archive snapshot and current live network state (computes `added`, `removed`, `changed`, and `unchanged` hosts).
+- `DELETE /api/archives/{id}`: Hard deletion of an archive snapshot.
+
+---
+
+## SNMP Discovery & Gateway Probing
+
+RTMS incorporates an asynchronous, non-blocking SNMP engine (`rtms-scanner/snmp_discovery.py`) based on PySNMP to interrogate network infrastructure:
+
+1. **System Identity Probe**:
+   - Queries standard MIB-II OIDs: `sysDescr` (`.1.3.6.1.2.1.1.1.0`), `sysName` (`.1.3.6.1.2.1.1.5.0`), and `sysObjectID` (`.1.3.6.1.2.1.1.2.0`).
+   - Identifies router vendors (Cisco, Fortinet, pfSense, Linux/Net-SNMP) without intrusive scanning.
+2. **Remote ARP Cache Discovery**:
+   - Walks RFC 1213 `ipNetToMediaTable` (`.1.3.6.1.2.1.4.22.1.2` and `.4`) to discover silent hosts and workstations that ignore ICMP pings behind local firewalls.
+3. **Custom SNMP Target Support**:
+   - Scanners can be configured with a custom SNMP Target IP (`snmp_target_ip`) and community string (`snmp_community`) in `admin.service_registry`.
+   - Allows network administrators to query dedicated SNMP bastions, L3 switches, or Linux mock servers (running `net-snmp`) when the perimeter modem does not expose SNMP.
+
+---
+
+## ARP Spoofing & Network Anomaly Detection
+
+RTMS actively detects layer-2 and layer-3 network attacks through a 3-tier anomaly detection engine implemented in `rtms-scanner/main_scanner.py`:
+
+1. **Gateway Impersonation Detection (`ARP_SPOOFING_GATEWAY`) - Severity: CRITICAL**:
+   - **Trigger**: The MAC address of any configured or discovered gateway suddenly changes compared to historical state in `global_known_ips`.
+   - **Threat**: Indicates a rogue host forging ARP replies to redirect LAN traffic through itself (Man-In-The-Middle / credential theft).
+2. **SNMP vs. Wire Cross-Validation (`ARP_POISONING_DETECTED`) - Severity: CRITICAL**:
+   - **Trigger**: A MAC address captured on the local wire for an IP directly contradicts the authoritative hardware ARP table returned by the switch/router via SNMP.
+   - **Threat**: Confirms active ARP cache poisoning on the network segment.
+3. **Host IP/MAC Conflict Detection (`IP_MAC_CONFLICT`) - Severity: WARNING**:
+   - **Trigger**: A known non-gateway IP begins responding with a different MAC address without DHCP release.
+   - **Threat**: Detects conflicting static IP configurations or host-level spoofing.
+
+Alerts are routed through `rtms_commons.alerts.dispatch_alert()` to the database (`scanner.alerts`), local logs, and configured external channels (email, Teams, Slack, Splunk). In the frontend, security alerts display dedicated badges and icons (`ShieldAlert`).
+
+---
+
+## Subnet Management & Lifecycle Detection
+
+The RTMS web interface and backend provide granular subnet status determination, custom naming, and intelligent collapsible views to enhance operator readability on multi-VLAN networks.
+
+### 1. Subnet Lifecycle Determination (Connected vs. Inactive vs. Disconnected)
+A subnet's operational status is determined via two cascading tiers:
+
+* **Tier 1: Physical Interface Presence ("Non connecté" / Disconnected)**
+  - When the scanner starts or checks in (`check_env()`), it enumerates local active network interfaces (`_get_network_details()`).
+  - Active CIDRs are published to `admin.service_registry.subnet`.
+  - If a subnet known in the inventory has no corresponding active interface on the scanner host, the scanner cannot perform Layer 2 ARP discovery.
+  - The backend assigns `subnet_active = false` and `is_up = false` to all hosts on that subnet.
+  - The frontend classifies the subnet as **Non connecté** (`isSubnetConnected = false`).
+* **Tier 2: Host Availability ("Inactif / Hors ligne" / Inactive)**
+  - If the scanner has a valid physical interface on the subnet (`isSubnetConnected = true`), periodic ARP sweeps and host probes are executed.
+  - If at least one host responds, the subnet is marked **En ligne** (`isSubnetOnline = true`, green badge).
+  - If the sweep completes but zero hosts respond (or all previously discovered hosts are unreachable), `onlineCount == 0`.
+  - The frontend classifies the subnet as **Inactif** (`isSubnetOnline = false`).
+
+### 2. Default Collapsed State for Offline / Inactive Subnets
+- In `frontend/src/pages/AssetManagement.tsx`, subnets that are disconnected or inactive (`!isSubnetConnected || !isSubnetOnline`) are **collapsed by default** into a single compact header line showing their status badge, host count, and alerts.
+- Active subnets with online hosts remain expanded by default.
+- Operators can expand or collapse any subnet with a single click on its header line or corresponding Quick Subnet Pill.
+
+### 3. Custom Subnet Naming (`admin.subnet_names`)
+- Operators with Administrator privileges can assign friendly custom names (e.g., *DMZ*, *Production*, *Guest Wi-Fi*) to any CIDR block.
+- **Data Persistence**: Stored in `admin.subnet_names (subnet_cidr CIDR PRIMARY KEY, name VARCHAR(150), description TEXT, updated_at TIMESTAMPTZ)` and synchronized into `scanner.networks.name`.
+- **API Endpoints**:
+  - `GET /api/subnets/names`: Fetches custom names mapping.
+  - `POST /api/subnets/name`: Upserts custom name with authenticated admin verification (`Authorization: Bearer <token>`).
+- Custom names are rendered alongside the CIDR in subnet headers and Quick Subnet navigation pills.
+
+### 4. Subnet MAC Whitelist (`admin.subnet_mac_whitelist`)
+To eliminate alert fatigue and prevent false-positive notifications caused by legitimate recurring devices (e.g. IoT appliances, printers, embedded test benches, maintenance laptops), RTMS supports configuring an authorized MAC address whitelist on a per-subnet basis.
+
+#### Data Persistence & Schema
+Stored in PostgreSQL table `admin.subnet_mac_whitelist`:
+- `id`: Auto-incrementing primary key.
+- `subnet_cidr`: Target network CIDR (`CIDR NOT NULL`).
+- `mac_address`: Normalized uppercase MAC address (`VARCHAR(17) NOT NULL`).
+- `label`: Optional description or rationale (`VARCHAR(150)`).
+- `created_by`: Username of the administrator who registered the entry.
+- `created_at` / `updated_at`: Audit timestamps.
+- `CONSTRAINT uq_subnet_mac UNIQUE (subnet_cidr, mac_address)`: Ensures idempotency and prevents duplicate entries for the same subnet and MAC.
+
+#### REST API Endpoints (`backend/main.py`)
+- `GET /api/settings/subnets/mac-whitelist/counts`: Returns a key-value dictionary mapping subnet CIDRs to the count of whitelisted MAC addresses.
+- `GET /api/settings/subnets/{subnet_cidr}/mac-whitelist`: Retrieves all whitelisted MAC addresses, labels, and audit metadata for a given subnet.
+- `POST /api/settings/subnets/mac-whitelist`: Validates the CIDR and MAC format, upserts the whitelist entry, and writes an audit log entry (`SUBNET_MAC_WHITELIST_ADDED`). Requires administrator privileges.
+- `DELETE /api/settings/subnets/mac-whitelist/{item_id}`: Removes an entry by ID and records an audit log (`SUBNET_MAC_WHITELIST_REMOVED`). Requires administrator privileges.
+
+#### User Interface Workflows
+1. **Scanner Configuration (`ScannerConfiguration.tsx`)**:
+   - The Network Media & Scanner Interfaces table displays a shield badge showing the number of whitelisted MACs for each active subnet.
+   - Clicking the whitelist badge/icon opens a modal dialog allowing operators to:
+     - Review all whitelisted MACs for that CIDR, including labels, author, and registration dates.
+     - Add new MAC addresses with optional labels.
+     - Remove obsolete or revoked whitelist entries with one click.
+2. **Security Alerts Quick Action (`SecurityAlerts.tsx`)**:
+   - On active (unresolved) security incidents (such as `NEW_HOST` or unknown device alerts), a **"Whitelist MAC"** button (`ShieldCheck`) appears next to the resolve button.
+   - Clicking it automatically extracts the MAC address, suggests the corresponding `/24` subnet CIDR based on the host's IP address, registers the entry in `admin.subnet_mac_whitelist`, and immediately marks the alert as `RESOLVED`.
+
+#### Scanner Engine Enforcement (`rtms-scanner/main_scanner.py`)
+- Loaded dynamically via `rtms_commons.db_client.load_subnet_mac_whitelist(config_db)` and refreshed every scan loop.
+- When an IP is discovered on a subnet context (`ctx_target`), its physical MAC address is matched against `subnet_mac_whitelist[ctx_target]`.
+- If matched:
+  - Suppresses the `NEW_HOST` alert trigger.
+  - Suppresses unknown device and missing hostname warnings in scanner logs.
+  - Sets hostname fallback to `"Whitelisted-Device"` in `global_known_macs` if DNS resolution returns empty.
+  - Logs a debug trace: `[MAC WHITELIST] Host <IP> (MAC: <MAC>) is whitelisted on subnet <SUBNET>. Suppressing unknown device and missing hostname alerts.`
+
+### 5. Excluded Host Status & Presumed Online Detection
+Hosts excluded from network scans (`scanner.excluded_ips`, e.g., the primary modem/gateway `192.168.0.1` or sensitive equipment) are never directly probed with ARP sweeps or Nmap packets. 
+
+To prevent misleading red "Stale / Offline" indicators on active infrastructure:
+- **Heuristic**: When an excluded host resides on an active subnet with responding hosts (`isSubnetConnected && isSubnetOnline`), the host is classified as **"Presumed Online"** (`excluded_presumed_online`).
+- **Visual Design**: Rendered as an emerald green ring (stroke: `#10b981`, translucent emerald fill `rgba(16, 185, 129, 0.18)`, drop shadow) instead of a solid circle, visually denoting a deduced operational status.
+- **Filter Integration**: Presumed online excluded devices appear under the "Online" view filter and are excluded from the "Stale" filter.
+
+---
+
+## Scanner Bearer Token Lifecycle Management (`admin.scanner_tokens`)
+
+To adhere to Zero Trust principles and prevent distributed network probes from accessing the central PostgreSQL server directly (port 5432), RTMS implements a dedicated, decoupled **Scanner Token Lifecycle Management** subsystem.
+
+### Architecture & Security Model
+- **Decoupled REST API**: Network probes (`rtms-scanner`) connect to `rtms-web` exclusively over HTTPS (`TCP/443` or `TCP/8000`).
+- **Cryptographic Hashing**: Cleartext tokens are never stored in the database. When an administrator creates a token, the raw token string (prefixed `rtms_st_...`) is presented to the user **exactly once**. The backend calculates and stores only the `SHA-256` hash in `admin.scanner_tokens.token_hash`.
+- **Strict 365-Day Ceiling**: In alignment with enterprise key management standards and NIS2 access control requirements, token lifespans are strictly capped at a maximum of **365 days (1 year)**. Attempting to create or renew a token with an expiration exceeding 365 days results in an HTTP 422 validation error.
+- **Instant Revocation & Rotation**: Administrators can revoke compromised or decommissioned probes instantly from the web console, immediately terminating their access.
+
+### Database Schema (`admin.scanner_tokens`)
+```sql
+CREATE TABLE IF NOT EXISTS admin.scanner_tokens (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    token_hash VARCHAR(64) NOT NULL UNIQUE,
+    expires_at TIMESTAMPTZ NOT NULL,
+    last_used_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(100)
+);
+CREATE INDEX IF NOT EXISTS idx_scanner_tokens_hash ON admin.scanner_tokens(token_hash);
+```
+
+### REST API Endpoints (`backend/main.py`)
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/scanner/tokens` | List all registered scanner tokens with validity and expiration | Admin Only (JWT) |
+| `POST` | `/api/scanner/tokens` | Generate a new Bearer token (returns raw token once) | Admin Only (JWT, max 365 days) |
+| `DELETE` | `/api/scanner/tokens/{id}` | Revoke an existing token immediately | Admin Only (JWT) |
+| `POST` | `/api/scanner/renew-token` | Renew/rotate a scanner token before expiration | Scanner Bearer Auth (max 365 days) |
+| `POST` | `/api/scanner/heartbeat` | Report probe status, interface IPs, and active media policy | Scanner Bearer Auth |
+| `GET` | `/api/scanner/config` | Pull dynamic scanner configuration and polling interval | Scanner Bearer Auth |
+| `POST` | `/api/scanner/sync-results` | Ingest discovery scans, open ports, and security anomalies | Scanner Bearer Auth |
+
+---
+
+## Central VPS Support, Licensing & Distribution Hub
+
+RTMS includes an integrated, enterprise-grade connection to the **3TS Central Support Hub** hosted on an OVH Cloud VPS (`vps-054fcfa2.vps.ovh.net` / `support-api.3ts-consulting.com`).
+
+### Architecture & Capabilities
+- **Central Gateway**: Provides a high-availability cloud interface (`rtms-admin/vps-support-hub`) for support ticketing, license renewals, and software releases.
+- **Zero-Trust Asymmetric Authentication (Ed25519)**:
+  - The local appliance holds a private key (`/opt/rtms/config/instance.key`, `chmod 0600`) generated at installation.
+  - Outgoing requests generate an ephemeral JWT (15-minute lifespan) signed via `EdDSA`.
+  - The VPS validates the JWT signature against the customer's enrolled public key (`"3TS".client_keys`).
+  - No permanent shared secrets circulate on the network, preventing credential replay or exfiltration risks.
+  - Automatic fallback to legacy static Bearer tokens (`RTMS_SUPPORT_VPS_API_KEY`) if asymmetric keys are not yet configured.
+- **Triple Purpose Integration**:
+  1. **Support Ticketing**: Direct incident filing, diagnostic attachment ingestion, and real-time status tracking.
+  2. **License Renewal Ingestion**: Automatic transmission of customer renewal requests containing hardware footprints for scanners, NVD engine, and local agents.
+  3. **Software Releases & Updates**: Dynamic version manifest discovery (`/version`) and secure download of signed component packages (`.tar.gz`) with SHA-256 integrity verification.
+
+### Key REST API Endpoints (`backend/main.py`)
+- `GET /api/settings/support-hub`: Retrieves current Support VPS URL, masked legacy token status, and the appliance's **Ed25519 Cryptographic Instance Identity** (public key PEM and SHA-256 fingerprint).
+- `POST /api/settings/support-hub`: Saves Support VPS URL and optional legacy Bearer API Token to `admin.system_config` with audit logging.
+- `POST /api/settings/instance-identity/regenerate`: Performs cryptographic keypair rotation, generating a new Ed25519 keypair and updating system audit trails.
+- `POST /api/settings/support-hub/test`: Tests live connectivity and cryptographic handshake against the VPS Support Hub (`GET /api/v1/version`).
+- `POST /api/support/tickets`: Accepts ticket category, subject, description, priority, and optional diagnostics, returning a unique support ticket ID (`RTMS-YYYY-XXXX`).
+- `GET /api/support/tickets/history`: Retrieves the customer's historical ticket log, resolution status, and technician notes.
+- `POST /api/subscription/license/request-renewal`: Automatically transmits hardware footprint request to `{support_vps_url}/api/v1/license-requests` authenticated via signed JWT.
+- `GET /api/system/updates/status`: Resolves the active release manifest from the VPS hub using signed JWT authentication and displays target versions and package availability.
+- `POST /api/system/updates/apply`: Downloads signed `.tar.gz` packages from the VPS, validates their SHA-256 hash, and stages them for maintenance cycle application.
+
+---
+
+## License Expiration Lifecycle & Alert Routing Architecture
+
+To guarantee timely renewals and avoid abrupt service degradation, RTMS incorporates an automated background lifecycle watcher coupled with administrative accountability and flexible multi-channel alert dispatching.
+
+### Background Lifecycle Watcher
+- **Implementation:** `license_lifecycle_background_worker` in `backend/main.py`.
+- **Schedule:** Runs 10 seconds post-startup, then repeats periodically every **4 hours**.
+- **On-Demand Trigger:** Automatically invoked upon successful license upload (`POST /api/license/upload`) to ensure immediate state consistency.
+
+### Remediation Finding Synchronization (`admin.security_findings`)
+- Expiration tracking is synchronized with the platform's native security findings table using the unique reference `LICENSE-EXPIRATION`.
+- **Severity Escalation:**
+  - `HIGH`: $\le 30$ days before expiration.
+  - `CRITICAL`: $\le 7$ days before expiration or expired ($\le 0$ days).
+- **Auto-Resolution:** Automatically transitions finding status to `RESOLVED` when an active license with $> 30$ days remaining is activated.
+
+### Administrative Responsibility & Task Claiming
+- Tracks the responsible administrator (`assigned_to`) on the finding.
+- **Assignment Resolution Hierarchy:**
+  1. Designated administrator set in `admin.system_config.license_notification_recipient`.
+  2. Fallback to default `admin`.
+  3. Fallback to first active administrator from `admin.users`.
+  4. Fallback to `"Unassigned"` (team pool).
+- **Claim Endpoint:** `POST /api/license/claim-task` enables any administrator to claim ownership with 1 click.
+- **Recipient Configuration:** `POST /api/license/recipient` designates the default owner.
+
+### Prioritized Multi-Channel Notification Engine
+- **Event:** `license_expiring` registered in `admin.alert_matrix` (`ScannerConfiguration.tsx`).
+- **Priority Dispatching Rule:**
+  1. **Email Priority:** If SMTP is configured in `admin.system_config`, email notifications are sent first to the assigned administrator (or all administrators if unassigned).
+  2. **Webhook Fallback:** If SMTP is missing or fails, alerts fall back to active **Microsoft Teams** and/or **Slack** webhooks.
+- **Milestone Filtering & Cooldown:** Dispatched at countdown milestones (**J-30**, **J-15**, **J-7**, **J-1**, **J-0**) with a 24-hour anti-spam cooldown window.
+
+### REST API Endpoints
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/license/task` | Returns current expiration finding, assignee, and configured recipient | Admin Only (JWT) |
+| `POST` | `/api/license/claim-task` | Claims the renewal task for the current authenticated admin | Admin Only (JWT) |
+| `POST` | `/api/license/recipient` | Sets the designated administrator for license notifications | Admin Only (JWT) |
+| `GET` | `/api/license/status` | Enriched with task status, assignee, and countdown metrics | Authenticated (JWT) |
+
+---
+
+## NVD Synchronization Telemetry, Impact Alerts & Live Threat Feed
+
+RTMS integrates a multi-layered telemetry and correlation suite connecting the `rtms-nvd` background engine with the web dashboard:
+
+### 1. Synchronization Telemetry & Audit Modal (Services Status)
+- **File:** `frontend/src/pages/ServicesStatus.tsx`
+- **Backend Endpoint:** `GET /api/nvd/sync-history`
+- **Features:**
+  - Real-time status badge on `rtms-nvd` service card: displays ingested CVE count, CPE records count, and execution duration in milliseconds.
+  - Dedicated **Sync Activity** button on both the service card and NVD category banner.
+  - **Inspection Modal:** Interactive split-view dialog featuring:
+    - Chronological list of sync runs with status badges (`SUCCESS` / `FAILED`), timestamps, and duration metrics.
+    - Selected cycle KPI cards: Ingested CVEs, Processed CPEs, Duration, and Inventory Impact.
+    - Searchable list of all ingested CVEs with direct links to NIST NVD, CVSS v3 score/severity badges, affected software component tags, and inventory impact status (`Affects your inventory` vs. `No impact on your inventory`).
+
+### 2. Recent NVD Scan Impact Notification (Software Inventory)
+- **File:** `frontend/src/pages/SoftwareInventory.tsx`
+- **Backend Endpoint:** `GET /api/cve/recent-impacts`
+- **Features:**
+  - Informative banner located at the top of the Software Inventory page.
+  - **Zero Impact Reassurance:** When no tracked components or hosts are affected by the latest sync, displays a reassurance banner with a direct link to service telemetry.
+  - **Immediate Incident Alert:** If newly ingested CVEs match installed packages or Global Watchlist components, renders a high-visibility warning banner with an immediate 1-click shortcut to filter and inspect the impacted CVEs.
+
+### 3. Live Global NVD Feed (CVE Database Lookup)
+- **File:** `frontend/src/pages/SoftwareInventory.tsx`
+- **Backend Endpoint:** `GET /api/cve/recent-feed`
+- **Features:**
+  - Replaces the blank initial state of the CVE Database Lookup tab with a real-time stream of the latest CVEs published or modified by NIST worldwide.
+  - Interactive severity filtering (`ALL`, `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`) and manual refresh capability.
+  - Correlates each CVE in real time against the tenant's assets and Global Watchlist.
+  - One-click operational shortcuts:
+    - **+ Surveiller dans la Global Watchlist**: Instantly adds the vulnerable component to the tenant's monitored watchlist.
+    - **Créer un Incident de Sécurité**: Directly creates an actionable ticket in the Security Findings module.
+
+---
+
+## Threat Exposure & Multi-Provider SOC/SIEM Telemetry Correlation Engine
+
+RTMS incorporates a unified **Threat & Exposure Correlation Subsystem** that connects vulnerability scans with live attack telemetry sourced from Security Operations Center (SOC), Security Information and Event Management (SIEM), and Network Intrusion Detection (IDS) platforms.
+
+### 1. Architectural Overview & Data Ingestion Flow
+
+Rather than treating vulnerability management and threat monitoring as isolated silos, RTMS bridges them using a dynamic correlation pipeline:
+
+```
+[ Security Infrastructure ]
+  ├── Splunk Enterprise / Cloud (REST / HEC)
+  ├── Wazuh / Elasticsearch / OpenSearch (REST API)
+  ├── Suricata Local IDS (EVE JSON log streaming)
+  ├── Microsoft Sentinel / Log Analytics (KQL & Entra ID OAuth2)
+  └── CrowdStrike Falcon (Cloud REST API OAuth2)
+                   │
+                   ▼ (Synchronized via POST /api/threats/sync or background worker)
+         [ Threat Telemetry Ingestion Adapters ]
+                   │
+                   ▼ (Normalized into AttackMetric schema)
+      [ admin.threat_telemetry_cache ] (PostgreSQL)
+                   │
+                   ▼ (Correlated on Demand via RiskCorrelator)
+         [ Contextual Risk Engine ] <─── [ Scanned CVEs & Asset Inventory ]
+                   │
+                   ▼
+  [ RTMS Threat & Exposure Dashboard ] (React / TypeScript UI)
+```
+
+### 2. Supported SOC / SIEM / IDS Providers
+
+RTMS provides native, production-grade telemetry collectors for 5 major security platforms:
+
+| Provider | Ingestion Method | Configuration Parameters | Primary Event Signatures & Fields Extracted |
+| :--- | :--- | :--- | :--- |
+| **Splunk Enterprise / Cloud** | REST Search API (`/services/search/jobs`) & HEC | `soc_url`, `soc_splunk_token`, `soc_splunk_verify_ssl` | `dest_ip`, `dest_port`, `signature`, `count`, `severity` from firewall & IDS indices |
+| **Wazuh / Elasticsearch** | Elasticsearch REST API (`/{index}/_search`) | `soc_wazuh_host`, `soc_wazuh_port`, `soc_wazuh_index`, `soc_wazuh_user`, `soc_wazuh_password`, `soc_wazuh_api_key`, `soc_wazuh_ssl` | `data.destip`, `data.destport`, `rule.description`, `rule.level` from `wazuh-alerts-*` |
+| **Suricata Local IDS** | Fast streaming ingestion from newline-delimited `eve.json` | `soc_suricata_eve_path` (default: `/var/log/suricata/eve.json`) | `dest_ip`, `dest_port`, `alert.signature`, `alert.severity` from `event_type == "alert"` |
+| **Microsoft Sentinel** | Azure Entra ID OAuth2 + Log Analytics REST API (`https://api.loganalytics.io/v1/workspaces/{id}/query`) | `soc_sentinel_workspace_id`, `soc_sentinel_tenant_id`, `soc_sentinel_client_id`, `soc_sentinel_client_secret`, `soc_sentinel_table` | `DestinationIP`, `DestinationPort`, `Activity`, `SeverityLevel` from `CommonSecurityLog` / `SecurityAlert` |
+| **CrowdStrike Falcon** | OAuth2 Bearer Token + Falcon REST API (`/alerts/queries/alerts/v2` & `/alerts/entities/alerts/v2`) | `soc_crowdstrike_client_id`, `soc_crowdstrike_client_secret`, `soc_crowdstrike_base_url` (US-1, US-2, EU-1, GovCloud) | `local_ip`, `local_port`, `description`, `severity_name` from Falcon threat detections |
+
+### 3. Database Schema
+
+#### `admin.threat_telemetry_cache`
+Aggregated telemetry records are stored in PostgreSQL for ultra-fast query performance and offline correlation:
+
+```sql
+CREATE TABLE IF NOT EXISTS admin.threat_telemetry_cache (
+    id SERIAL PRIMARY KEY,
+    dest_ip INET NOT NULL,
+    dest_port INTEGER,
+    total_hits INTEGER NOT NULL DEFAULT 1,
+    max_severity VARCHAR(20) NOT NULL DEFAULT 'MEDIUM',
+    signatures TEXT[] DEFAULT '{}',
+    first_seen TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    last_seen TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    provider VARCHAR(50) NOT NULL DEFAULT 'splunk',
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_telemetry_target UNIQUE (dest_ip, dest_port, provider)
+);
+CREATE INDEX IF NOT EXISTS idx_threat_telemetry_ip ON admin.threat_telemetry_cache(dest_ip);
+CREATE INDEX IF NOT EXISTS idx_threat_telemetry_provider ON admin.threat_telemetry_cache(provider);
+```
+
+#### `admin.system_config` (SOC Configuration Namespacing)
+All provider configuration settings are stored in `admin.system_config` under the `soc_%` prefix:
+- `soc_enabled`: Boolean flag indicating whether SOC correlation is active.
+- `soc_type`: Current active provider (`Splunk`, `Wazuh`, `Suricata`, `Sentinel`, `CrowdStrike Falcon`).
+- Specific connection parameters and credentials for each provider.
+
+### 4. Contextual Risk Scoring Algorithm (`RiskCorrelator`)
+
+Static CVSS v3 scores reflect theoretical vulnerability severity in isolation. The RTMS **Risk Correlator** (`backend/risk_correlator.py`) computes a dynamic **Contextual Risk Score** ($CRS$) bounded between $1.0$ and $10.0$:
+
+$$CRS = \min\left(10.0, CVSS_{base} + \Delta_{hits} + \Delta_{port} + \Delta_{severity} + \Delta_{recency}\right)$$
+
+Where:
+- $CVSS_{base}$: Scanned vulnerability CVSS v3 score.
+- $\Delta_{hits}$: Attack volume multiplier computed via logarithmic scaling:
+  $$\Delta_{hits} = \min(2.0, \log_{10}(\text{hits} + 1) \times 0.65)$$
+- $\Delta_{port}$: Port match bonus:
+  $$\Delta_{port} = \begin{cases} +1.5 & \text{if attack destination port matches the vulnerable service port} \\ 0.0 & \text{otherwise} \end{cases}$$
+- $\Delta_{severity}$: SIEM alert severity weight:
+  $$\Delta_{severity} = \begin{cases} +1.5 & \text{CRITICAL} \\ +1.0 & \text{HIGH} \\ +0.5 & \text{MEDIUM} \\ 0.0 & \text{LOW / INFO} \end{cases}$$
+- $\Delta_{recency}$: Attack recency bonus:
+  $$\Delta_{recency} = \begin{cases} +1.0 & \text{if attack observed within the last 24 hours} \\ +0.5 & \text{if attack observed between 24 and 48 hours ago} \\ 0.0 & \text{older than 48 hours} \end{cases}$$
+
+#### Threat Status Classification Hierarchy
+
+Each correlated finding is assigned an operational threat status:
+1. `ACTIVELY_EXPLOITED`: IP target matched **AND** port matched with active attack hits within the last 24 hours. Represents immediate, active exploitation attempts requiring emergency containment.
+2. `ATTACK_DETECTED`: IP target matched telemetry, but specific port is unmatched or represents generic scanning activity.
+3. `TARGETED`: IP was seen in older telemetry (>24 hours) or reconnaissance patterns.
+4. `POTENTIAL`: Vulnerability exists with high CVSS score, but zero active attack telemetry has been observed targeting this IP.
+5. `DORMANT`: Low-severity vulnerability with no observed attack traffic.
+
+### 5. REST API Endpoints Specification
+
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/threats/overview-kpis` | Returns headline metrics: active attacks, actively exploited CVEs, targeted assets, telemetry hits | Authenticated (`get_current_user_profile`) |
+| `GET` | `/api/threats/top-targeted-services` | Returns top 10 targeted network ports, services, hit volumes, and associated risk levels | Authenticated (`get_current_user_profile`) |
+| `GET` | `/api/threats/activity-timeline` | Returns 48-hour time series buckets of attack volume and severity distribution | Authenticated (`get_current_user_profile`) |
+| `GET` | `/api/threats/correlated` | Returns all tenant vulnerabilities enriched with Contextual Risk Scores and attack telemetry | Authenticated (`get_current_user_profile`) |
+| `POST` | `/api/threats/sync` | Triggers on-demand synchronization from configured SOC provider into telemetry cache | Security Analyst / Admin (`verify_security_analyst_or_admin`) |
+| `GET` | `/api/settings/soc` | Retrieves active SOC provider settings and parameters from `admin.system_config` | Authenticated (`get_current_user_profile`) |
+| `POST` | `/api/settings/soc` | Persists SOC provider configuration and credentials with audit logging | Admin Only (`verify_admin`) |
+| `POST` | `/api/settings/soc/test` | Performs live probe and authentication handshake against selected SOC provider | Admin Only (`verify_admin`) |
+
+
+

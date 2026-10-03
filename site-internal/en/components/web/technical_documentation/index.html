@@ -1,0 +1,4289 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation technique interne, d'architecture, de déploiement et de conformité de la plateforme RTMS.">
+      
+      
+        <meta name="author" content="3TS Consulting SRL">
+      
+      
+      
+        <link rel="prev" href="../../scanner/resources/">
+      
+      
+        <link rel="next" href="../frontend_nginx_setup/">
+      
+      
+        
+          <link rel="alternate" href="../../../../components/web/technical_documentation/" hreflang="fr">
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Documentation technique - RTMS Documentation Technique (3TS Consulting)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#technical-documentation-automatic-session-timeout-jwt" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../" title="RTMS Documentation Technique (3TS Consulting)" class="md-header__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RTMS Documentation Technique (3TS Consulting)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentation technique
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../../components/web/technical_documentation/" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../deployment/ansible_deployment_guide/" class="md-tabs__link">
+          
+  
+  
+  Déploiement & Installation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../scanner/technical_requirements/" class="md-tabs__link">
+          
+  
+  
+  Composants & Internals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../plugins/plugin_specification/" class="md-tabs__link">
+          
+  
+  
+  Plugins
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../compliance/nis2/" class="md-tabs__link">
+          
+  
+  
+  Conformité & Légal
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../" title="RTMS Documentation Technique (3TS Consulting)" class="md-nav__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RTMS Documentation Technique (3TS Consulting)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue d'ensemble
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseau & WireGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modèle RBAC (Permissions)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/database_rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sécurité & RBAC Base de Données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modèles de données
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modèles de données
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/data_models/scanner_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/data_models/nvd_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déploiement & Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Déploiement & Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deployment/ansible_deployment_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide de Déploiement Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deployment/postgres_hardening_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Installation & Durcissement PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Composants & Internals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Composants & Internals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scanner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/technical_requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prérequis techniques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/mobility_lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobilité, Cycle de vie & Multi-réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/stand_alone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mode Standalone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions & Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker & PyInstaller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/bettercap_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commandes Bettercap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/email_and_dns_audits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit Email & DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/deep_scan_targeting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciblage Granulaire du Deep Scan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scanner/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ressources & Tests HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation technique
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-implementation-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Implementation (FastAPI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-implementation-react" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Implementation (React)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Providers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#administrative-mfa-enforcement-policy-cloud-demonstration-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Administrative MFA Enforcement Policy &amp; Cloud Demonstration Bypass
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-lifecycle-telemetry-purge-vs-factory-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Lifecycle &amp; Telemetry Purge vs. Factory Reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations-role-based-access-control-rbac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations &amp; Role-Based Access Control (RBAC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-schema-reset-factory-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema Reset (Factory Reset)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database Schema Reset (Factory Reset)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#startup-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Startup Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-scan-archive-system-nis2-compliance-snapshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Scan Archive System (NIS2 Compliance Snapshots)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Scan Archive System (NIS2 Compliance Snapshots)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-storage-scannerscan_archives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Storage (scanner.scan_archives)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints-backendmainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp-discovery-gateway-probing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMP Discovery &amp; Gateway Probing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arp-spoofing-network-anomaly-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ARP Spoofing &amp; Network Anomaly Detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subnet-management-lifecycle-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subnet Management &amp; Lifecycle Detection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Subnet Management &amp; Lifecycle Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-subnet-lifecycle-determination-connected-vs-inactive-vs-disconnected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Subnet Lifecycle Determination (Connected vs. Inactive vs. Disconnected)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-default-collapsed-state-for-offline-inactive-subnets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Default Collapsed State for Offline / Inactive Subnets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-custom-subnet-naming-adminsubnet_names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Custom Subnet Naming (admin.subnet_names)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-subnet-mac-whitelist-adminsubnet_mac_whitelist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Subnet MAC Whitelist (admin.subnet_mac_whitelist)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Subnet MAC Whitelist (admin.subnet_mac_whitelist)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-persistence-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Persistence &amp; Schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints-backendmainpy_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-interface-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Interface Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanner-engine-enforcement-rtms-scannermain_scannerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanner Engine Enforcement (rtms-scanner/main_scanner.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-excluded-host-status-presumed-online-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Excluded Host Status &amp; Presumed Online Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanner-bearer-token-lifecycle-management-adminscanner_tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanner Bearer Token Lifecycle Management (admin.scanner_tokens)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scanner Bearer Token Lifecycle Management (admin.scanner_tokens)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-security-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture &amp; Security Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-schema-adminscanner_tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema (admin.scanner_tokens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints-backendmainpy_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#central-vps-support-licensing-distribution-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Central VPS Support, Licensing &amp; Distribution Hub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Central VPS Support, Licensing &amp; Distribution Hub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture &amp; Capabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-rest-api-endpoints-backendmainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license-expiration-lifecycle-alert-routing-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License Expiration Lifecycle &amp; Alert Routing Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="License Expiration Lifecycle &amp; Alert Routing Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-lifecycle-watcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background Lifecycle Watcher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-finding-synchronization-adminsecurity_findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Finding Synchronization (admin.security_findings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#administrative-responsibility-task-claiming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Administrative Responsibility &amp; Task Claiming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prioritized-multi-channel-notification-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioritized Multi-Channel Notification Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvd-synchronization-telemetry-impact-alerts-live-threat-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NVD Synchronization Telemetry, Impact Alerts &amp; Live Threat Feed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NVD Synchronization Telemetry, Impact Alerts &amp; Live Threat Feed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-synchronization-telemetry-audit-modal-services-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Synchronization Telemetry &amp; Audit Modal (Services Status)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-recent-nvd-scan-impact-notification-software-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Recent NVD Scan Impact Notification (Software Inventory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-live-global-nvd-feed-cve-database-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Live Global NVD Feed (CVE Database Lookup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threat-exposure-multi-provider-socsiem-telemetry-correlation-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Exposure &amp; Multi-Provider SOC/SIEM Telemetry Correlation Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threat Exposure &amp; Multi-Provider SOC/SIEM Telemetry Correlation Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-architectural-overview-data-ingestion-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architectural Overview &amp; Data Ingestion Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-supported-soc-siem-ids-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Supported SOC / SIEM / IDS Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Database Schema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Database Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adminthreat_telemetry_cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.threat_telemetry_cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adminsystem_config-soc-configuration-namespacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.system_config (SOC Configuration Namespacing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-contextual-risk-scoring-algorithm-riskcorrelator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contextual Risk Scoring Algorithm (RiskCorrelator)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Contextual Risk Scoring Algorithm (RiskCorrelator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threat-status-classification-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Status Classification Hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-rest-api-endpoints-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. REST API Endpoints Specification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend_nginx_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déploiement Nginx & Frontend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sso_keycloak_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide SSO Keycloak & OIDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Démarrage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local Agent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Local Agent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../local-agent/technical_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../local-agent/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Microservice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NVD Microservice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nvd/rtms_nvd_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation NVD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nvd/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nvd/readme_startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Démarrage & Ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nvd/readme_export_cve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exportation de rapports CVE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Admin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/admin_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plugins/plugin_specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spécification & Développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conformité & Légal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Conformité & Légal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/nis2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directive NIS2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/cra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/release_strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stratégie de Release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documents Légaux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documents Légaux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/legal/EULA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EULA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/legal/Applied_standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normes appliquées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/legal/EU_declaration_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Déclaration UE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../compliance/legal/risk_assessmnent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Évaluation des risques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-implementation-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Implementation (FastAPI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-implementation-react" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Implementation (React)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Providers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#administrative-mfa-enforcement-policy-cloud-demonstration-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Administrative MFA Enforcement Policy &amp; Cloud Demonstration Bypass
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-lifecycle-telemetry-purge-vs-factory-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Lifecycle &amp; Telemetry Purge vs. Factory Reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations-role-based-access-control-rbac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations &amp; Role-Based Access Control (RBAC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-schema-reset-factory-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema Reset (Factory Reset)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database Schema Reset (Factory Reset)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#startup-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Startup Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-scan-archive-system-nis2-compliance-snapshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Scan Archive System (NIS2 Compliance Snapshots)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Scan Archive System (NIS2 Compliance Snapshots)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-storage-scannerscan_archives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Storage (scanner.scan_archives)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints-backendmainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp-discovery-gateway-probing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMP Discovery &amp; Gateway Probing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arp-spoofing-network-anomaly-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ARP Spoofing &amp; Network Anomaly Detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subnet-management-lifecycle-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subnet Management &amp; Lifecycle Detection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Subnet Management &amp; Lifecycle Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-subnet-lifecycle-determination-connected-vs-inactive-vs-disconnected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Subnet Lifecycle Determination (Connected vs. Inactive vs. Disconnected)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-default-collapsed-state-for-offline-inactive-subnets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Default Collapsed State for Offline / Inactive Subnets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-custom-subnet-naming-adminsubnet_names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Custom Subnet Naming (admin.subnet_names)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-subnet-mac-whitelist-adminsubnet_mac_whitelist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Subnet MAC Whitelist (admin.subnet_mac_whitelist)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Subnet MAC Whitelist (admin.subnet_mac_whitelist)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-persistence-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Persistence &amp; Schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints-backendmainpy_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-interface-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Interface Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanner-engine-enforcement-rtms-scannermain_scannerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanner Engine Enforcement (rtms-scanner/main_scanner.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-excluded-host-status-presumed-online-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Excluded Host Status &amp; Presumed Online Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanner-bearer-token-lifecycle-management-adminscanner_tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanner Bearer Token Lifecycle Management (admin.scanner_tokens)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scanner Bearer Token Lifecycle Management (admin.scanner_tokens)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-security-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture &amp; Security Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-schema-adminscanner_tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema (admin.scanner_tokens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints-backendmainpy_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#central-vps-support-licensing-distribution-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Central VPS Support, Licensing &amp; Distribution Hub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Central VPS Support, Licensing &amp; Distribution Hub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture &amp; Capabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-rest-api-endpoints-backendmainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key REST API Endpoints (backend/main.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license-expiration-lifecycle-alert-routing-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License Expiration Lifecycle &amp; Alert Routing Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="License Expiration Lifecycle &amp; Alert Routing Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-lifecycle-watcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background Lifecycle Watcher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-finding-synchronization-adminsecurity_findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Finding Synchronization (admin.security_findings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#administrative-responsibility-task-claiming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Administrative Responsibility &amp; Task Claiming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prioritized-multi-channel-notification-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioritized Multi-Channel Notification Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvd-synchronization-telemetry-impact-alerts-live-threat-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NVD Synchronization Telemetry, Impact Alerts &amp; Live Threat Feed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NVD Synchronization Telemetry, Impact Alerts &amp; Live Threat Feed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-synchronization-telemetry-audit-modal-services-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Synchronization Telemetry &amp; Audit Modal (Services Status)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-recent-nvd-scan-impact-notification-software-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Recent NVD Scan Impact Notification (Software Inventory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-live-global-nvd-feed-cve-database-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Live Global NVD Feed (CVE Database Lookup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threat-exposure-multi-provider-socsiem-telemetry-correlation-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Exposure &amp; Multi-Provider SOC/SIEM Telemetry Correlation Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threat Exposure &amp; Multi-Provider SOC/SIEM Telemetry Correlation Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-architectural-overview-data-ingestion-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architectural Overview &amp; Data Ingestion Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-supported-soc-siem-ids-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Supported SOC / SIEM / IDS Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Database Schema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Database Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adminthreat_telemetry_cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.threat_telemetry_cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adminsystem_config-soc-configuration-namespacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.system_config (SOC Configuration Namespacing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-contextual-risk-scoring-algorithm-riskcorrelator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contextual Risk Scoring Algorithm (RiskCorrelator)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Contextual Risk Scoring Algorithm (RiskCorrelator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threat-status-classification-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Status Classification Hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-rest-api-endpoints-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. REST API Endpoints Specification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="technical-documentation-automatic-session-timeout-jwt">Technical Documentation: Automatic Session Timeout (JWT)<a class="headerlink" href="#technical-documentation-automatic-session-timeout-jwt" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This document describes the implementation of the automatic session timeout feature in the RTMS application. The feature ensures that user sessions are automatically invalidated after a period of inactivity, enhancing the security of the application.</p>
+<h2 id="backend-implementation-fastapi">Backend Implementation (FastAPI)<a class="headerlink" href="#backend-implementation-fastapi" title="Permanent link">&para;</a></h2>
+<p>The backend is responsible for generating JSON Web Tokens (JWT) upon successful authentication. 
+The token includes an <code>exp</code> (expiration time) claim, which dictates how long the token is valid.</p>
+<p><strong>File:</strong> <code>backend/main.py</code>
+- <strong>Library used:</strong> <code>PyJWT</code>
+- <strong>Expiration Logic:</strong>
+  - Administrators (<code>role == 'admin'</code>): 15 minutes.
+  - Normal Users: 30 minutes.
+- <strong>Response:</strong> The <code>/api/login</code> endpoint returns the generated <code>access_token</code>, the user object, and an explicitly calculated <code>expires_at</code> timestamp (UNIX epoch). </p>
+<p><em>Code Snippet:</em>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jwt</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">timezone</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Inside login function:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">exp_minutes</span> <span class="o">=</span> <span class="mi">15</span> <span class="k">if</span> <span class="n">user_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'role'</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'admin'</span> <span class="k">else</span> <span class="mi">30</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">expire</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">exp_minutes</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">to_encode</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"sub"</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="s2">"exp"</span><span class="p">:</span> <span class="n">expire</span><span class="p">}</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">encoded_jwt</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">to_encode</span><span class="p">,</span> <span class="s2">"super-secret-key-for-rtms"</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s2">"HS256"</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="s2">"access_token"</span><span class="p">:</span> <span class="n">encoded_jwt</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="s2">"token_type"</span><span class="p">:</span> <span class="s2">"bearer"</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="s2">"user"</span><span class="p">:</span> <span class="n">user_dict</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="s2">"expires_at"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">expire</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<h2 id="frontend-implementation-react">Frontend Implementation (React)<a class="headerlink" href="#frontend-implementation-react" title="Permanent link">&para;</a></h2>
+<p>The frontend receives the <code>expires_at</code> timestamp and proactively manages the user session in the browser. </p>
+<p><strong>File:</strong> <code>frontend/src/App.tsx</code>
+- <strong>State Management:</strong> The application maintains the <code>expiresAt</code> state alongside the authenticated <code>user</code> state.
+- <strong>Timeout Logic:</strong> A <code>useEffect</code> hook monitors the <code>user</code> and <code>expiresAt</code> states. It calculates the remaining time (in milliseconds) until the session expires.
+  - If the time has already elapsed, the <code>handleLogout()</code> function is called immediately.
+  - If time remains, a <code>setTimeout</code> is initialized to automatically trigger the <code>handleLogout()</code> function exactly when the token expires.</p>
+<p><em>Code Snippet:</em>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">user</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">expiresAt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">timeUntilExpiry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expiresAt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">timeUntilExpiry</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="nx">handleLogout</span><span class="p">();</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">          </span><span class="nx">handleLogout</span><span class="p">();</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="p">},</span><span class="w"> </span><span class="nx">timeUntilExpiry</span><span class="p">);</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span><span class="w"> </span><span class="c1">// Cleanup on unmount or state change</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">expiresAt</span><span class="p">]);</span>
+</span></code></pre></div></p>
+<h2 id="authentication-providers">Authentication Providers<a class="headerlink" href="#authentication-providers" title="Permanent link">&para;</a></h2>
+<p>The RTMS backend utilizes a Strategy Pattern to support multiple authentication providers, configured dynamically via the web interface (<code>admin.system_config</code>) or the <code>RTMS_AUTH_PROVIDER</code> environment variable. An authentication factory instantiates the corresponding strategy at runtime:</p>
+<ul>
+<li><strong>Local (<code>local</code>)</strong>: The default authentication strategy. It authenticates users against the <code>admin.users</code> database table by verifying the provided password against a stored bcrypt hash. Supports mandatory NIS 2 MFA enrollment and <strong>adaptive risk-based password aging</strong>: non-MFA local accounts expire every 90 days (configurable via <code>password_expiry_no_mfa_days</code>) with a preventive warning banner starting at J-14 (14 days before expiration) and access lockout at &ge; 90 days. Accounts with MFA (TOTP) enabled are permanently exempt from periodic rotation (NIST SP 800-63B / ISO 27001).</li>
+<li><strong>LDAP (<code>ldap</code>)</strong>: Authenticates users against a corporate active directory using a simple bind. It queries the configured LDAP server, binds with the user credentials, and performs Just-In-Time (JIT) provisioning into <code>admin.users</code> with <code>password_hash = 'ldap_managed'</code>. If the LDAP server is unreachable, it seamlessly cascades to local accounts for emergency access.</li>
+<li><strong>SSO / OIDC (<code>oidc</code>)</strong>: Enterprise Single Sign-On using OpenID Connect (Keycloak, Microsoft Entra ID, Okta). Handles discovery (<code>/.well-known/openid-configuration</code>), secure authorization code exchange, JIT user provisioning with <code>password_hash = 'sso_managed'</code>, and full delegation of multi-factor authentication (MFA/TOTP). Provides a dedicated <strong>Break-Glass</strong> local login fallback mode for administrator resilience.</li>
+</ul>
+<h3 id="administrative-mfa-enforcement-policy-cloud-demonstration-bypass">Administrative MFA Enforcement Policy &amp; Cloud Demonstration Bypass<a class="headerlink" href="#administrative-mfa-enforcement-policy-cloud-demonstration-bypass" title="Permanent link">&para;</a></h3>
+<ul>
+<li>By default, administrative users (<code>role == 'admin'</code>) must enforce TOTP Multi-Factor Authentication upon initial login in compliance with <strong>NIS 2 Article 21.2(j)</strong>.</li>
+<li><strong>Demonstration / Lab Override</strong>: For cloud-hosted demonstration environments (e.g. public showcase VPS instances), administrative MFA can be disabled to allow seamless shared evaluator access without smartphone TOTP coupling:</li>
+<li><strong>Environment Variable</strong>: <code>RTMS_ENFORCE_ADMIN_MFA=false</code> (or <code>RTMS_DEMO_MODE=true</code>).</li>
+<li><strong>Database Configuration</strong>: Key <code>enforce_admin_mfa</code> in <code>admin.system_config</code> set to <code>false</code>.</li>
+<li><strong>Ansible Automation</strong>: In <code>rtms-installer</code>, set <code>rtms_enforce_admin_mfa: false</code> in the target host/group inventory (<code>group_vars/all.yml</code>). Production appliances retain <code>true</code> by default.</li>
+</ul>
+<p>Regardless of the active provider, successful authentications generate the standard JWT session token, record an entry in the <code>admin.login_audit</code> table, and update the <code>last_login</code> timestamp for the user.</p>
+<h2 id="data-lifecycle-telemetry-purge-vs-factory-reset">Data Lifecycle &amp; Telemetry Purge vs. Factory Reset<a class="headerlink" href="#data-lifecycle-telemetry-purge-vs-factory-reset" title="Permanent link">&para;</a></h2>
+<p>RTMS strictly separates operational scan telemetry from persistent system configurations:</p>
+<ul>
+<li><strong>Tenant Telemetry &amp; Vulnerability Purge (<code>admin.purge_tenant_data</code>, <code>admin.purge_tenant_vulnerabilities</code>)</strong>:</li>
+<li>Removes discovered host assets, open ports, software inventory, and CVE findings for a given tenant.</li>
+<li><strong>100% Preserved:</strong> iTop CMDB configurations (<code>cmdb_*</code>), SSO / Keycloak settings (<code>oidc_*</code>), LDAP directory bind settings, SMTP alert policies, user profiles (<code>admin.users</code>), and product licenses.</li>
+<li><strong>Factory Reset (<code>clean_schemas.sql</code> / <code>clean_app_data.sql</code>)</strong>:</li>
+<li>Empties all tables in <code>admin</code> and <code>scanner</code> schemas for a clean Setup Wizard re-initialization.</li>
+</ul>
+<h2 id="security-considerations-role-based-access-control-rbac">Security Considerations &amp; Role-Based Access Control (RBAC)<a class="headerlink" href="#security-considerations-role-based-access-control-rbac" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The session timeout relies on the backend issuing valid JWTs with an expiration claim (<code>exp</code>).</li>
+<li>The frontend timer acts as a proactive UX measure, forcing a logout when the token is known to have expired.</li>
+<li><strong>Granular 4-Role RBAC Model</strong>: Authorization is enforced on every API route via FastAPI dependency injection:</li>
+<li><code>verify_admin</code>: Reserved for system administrators (user provisioning, system config, licenses, service lifecycle, orphan purge).</li>
+<li><code>verify_security_analyst_or_admin</code>: Dedicated to SOC analysts and administrators (CVE risk triage &amp; justification, security findings declaration &amp; assignment, alert management, verification scans).</li>
+<li><code>verify_operator_or_admin</code>: Dedicated to network/scanner operators and administrators (scanner restart <code>RESTART</code>, agent token revocation/reenrollment, subnet management, asset deletion).</li>
+<li><code>verify_can_operate</code>: Allows operational read-write (<code>admin</code>, <code>security_analyst</code>, <code>operator</code>) for asset metadata editing and software inventory tracking.</li>
+<li><code>verify_can_scan</code>: Allows triggering network discovery scans (<code>admin</code>, <code>security_analyst</code>, <code>operator</code>).</li>
+<li><code>verify_can_view_audit</code>: Restricts audit log inspection (<code>/api/audit/*</code>) to compliance auditors (<code>viewer</code>), SOC analysts (<code>security_analyst</code>), and <code>admin</code>. Operators are explicitly denied (403) to prevent tampering.</li>
+<li><strong>Root Admin Immobility</strong>: The seeded <code>admin</code> account is hard-protected against deactivation or role downgrades.</li>
+<li>Complete architectural specifications are available in the <a href="../../../architecture/rbac/">Modèle RBAC (Permissions)</a> document.</li>
+</ul>
+<h2 id="database-schema-reset-factory-reset">Database Schema Reset (Factory Reset)<a class="headerlink" href="#database-schema-reset-factory-reset" title="Permanent link">&para;</a></h2>
+<p>This section explains the application's behavior when selectively deleting database schemas. </p>
+<p>If the <code>admin</code> and <code>scanner</code> schemas are deleted from the database but the <code>nvd</code> schema is kept intact, the application handles it seamlessly without crashing. This effectively acts as a safe "factory reset" for operational data while avoiding the need to re-download the massive NVD vulnerability dataset.</p>
+<h3 id="startup-behavior">Startup Behavior<a class="headerlink" href="#startup-behavior" title="Permanent link">&para;</a></h3>
+<p>Upon restarting the <code>rtms-nvd</code> or <code>rtms-scanner</code> components, the following occurs:</p>
+<ol>
+<li><strong>Automatic Schema Recreation</strong>: <code>rtms_commons.db_client.init_db()</code> executes <code>CREATE SCHEMA IF NOT EXISTS</code> for both <code>admin</code> and <code>scanner</code> schemas. It automatically detects they are missing and creates empty schemas.</li>
+<li><strong>Table Generation</strong>: The application executes the core DDL scripts (<code>ADMIN_DDL</code>, <code>TABLES_DDL</code>, etc.). Since these use <code>CREATE TABLE IF NOT EXISTS</code>, all required tables within <code>admin</code> and <code>scanner</code> are cleanly recreated from scratch.</li>
+<li><strong>Data Bootstrapping</strong>: The default system data is automatically re-inserted (e.g., the default <code>3TS</code> tenant, the default <code>admin</code> user, and default scanner configurations).</li>
+<li><strong>License Restoration</strong>: The <code>LicenseValidator</code> module reads the physical <code>license.key</code> file from the disk and synchronizes it, safely re-inserting the license payload into the newly recreated <code>admin.product_license</code> table.</li>
+<li><strong>NVD Sync Continuity</strong>: Because the <code>nvd</code> schema remains intact, the vulnerability tables (<code>nvd.cve</code>, <code>nvd.cpe_match</code>, etc.) are preserved. When the NVD incremental sync scheduler runs, it queries <code>SELECT MAX(last_modified_date) FROM nvd.cve;</code> to find the newest known CVE. It then successfully fetches only the newest updates from the NIST API seamlessly.</li>
+</ol>
+<h3 id="consequences">Consequences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Data Loss</strong>: All operational data stored in the <code>admin</code> and <code>scanner</code> schemas is completely lost. This includes scanned networks, discovered assets, matched asset vulnerabilities, custom users, and configured alert webhook destinations.</li>
+<li><strong>Continuity</strong>: The application boots normally with a fresh state, retaining full vulnerability data continuity without requiring hours of data ingestion.</li>
+</ul>
+<hr />
+<h2 id="network-scan-archive-system-nis2-compliance-snapshots">Network Scan Archive System (NIS2 Compliance Snapshots)<a class="headerlink" href="#network-scan-archive-system-nis2-compliance-snapshots" title="Permanent link">&para;</a></h2>
+<p>To fulfill NIS2 Article 21 requirements regarding configuration management and historical verification of network perimeters, RTMS includes a dedicated <strong>Scan Archive System</strong>.</p>
+<h3 id="database-storage-scannerscan_archives">Database Storage (<code>scanner.scan_archives</code>)<a class="headerlink" href="#database-storage-scannerscan_archives" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stores complete immutable snapshots of network discovery scans for a specific scanner and subnet.</li>
+<li><strong>Data structure</strong>:</li>
+<li><code>id</code>: UUID primary key.</li>
+<li><code>scanner_id</code>: Scanner service identifier (<code>admin.service_registry.service_name</code>).</li>
+<li><code>subnet</code>: Network CIDR (e.g. <code>192.168.0.0/24</code>).</li>
+<li><code>scan_id</code>: Optional link to the specific <code>scanner.scans</code> execution.</li>
+<li><code>snapshot_data</code>: Comprehensive JSONB payload containing:<ul>
+<li>Complete host inventory (<code>ip_address</code>, <code>mac_address</code>, <code>hostname</code>, <code>vendor</code>, <code>status</code>, <code>last_seen</code>).</li>
+<li>Open TCP/UDP ports and service banners for each host.</li>
+<li>Software inventory installed on discovered hosts.</li>
+</ul>
+</li>
+<li><code>host_count</code>, <code>online_count</code>, <code>service_count</code>: Pre-aggregated counters for fast reporting.</li>
+<li><code>label</code> &amp; <code>notes</code>: User-defined audit labels (e.g. <em>"Baseline Pre-Audit NIS2"</em>).</li>
+<li><code>created_at</code>: Exact UTC creation timestamp.</li>
+</ul>
+<h3 id="rest-api-endpoints-backendmainpy">REST API Endpoints (<code>backend/main.py</code>)<a class="headerlink" href="#rest-api-endpoints-backendmainpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>GET /api/archives/summary</code>: High-level metrics (total archive count, covered subnets, active scanners, latest timestamp).</li>
+<li><code>GET /api/archives</code>: List filtered archives by scanner or subnet with search support.</li>
+<li><code>POST /api/scanners/{service_name}/archive-latest</code>: One-click snapshot of the latest scan and live assets for a scanner.</li>
+<li><code>POST /api/archives</code>: Manual snapshot creation with custom label and notes.</li>
+<li><code>GET /api/archives/{id}</code>: Detailed inspection of archived host assets and services.</li>
+<li><code>GET /api/archives/{id}/export</code>: Download snapshot as a standalone <code>.json</code> file attachment.</li>
+<li><code>GET /api/archives/{id}/diff</code>: Real-time delta comparison between the archive snapshot and current live network state (computes <code>added</code>, <code>removed</code>, <code>changed</code>, and <code>unchanged</code> hosts).</li>
+<li><code>DELETE /api/archives/{id}</code>: Hard deletion of an archive snapshot.</li>
+</ul>
+<hr />
+<h2 id="snmp-discovery-gateway-probing">SNMP Discovery &amp; Gateway Probing<a class="headerlink" href="#snmp-discovery-gateway-probing" title="Permanent link">&para;</a></h2>
+<p>RTMS incorporates an asynchronous, non-blocking SNMP engine (<code>rtms-scanner/snmp_discovery.py</code>) based on PySNMP to interrogate network infrastructure:</p>
+<ol>
+<li><strong>System Identity Probe</strong>:</li>
+<li>Queries standard MIB-II OIDs: <code>sysDescr</code> (<code>.1.3.6.1.2.1.1.1.0</code>), <code>sysName</code> (<code>.1.3.6.1.2.1.1.5.0</code>), and <code>sysObjectID</code> (<code>.1.3.6.1.2.1.1.2.0</code>).</li>
+<li>Identifies router vendors (Cisco, Fortinet, pfSense, Linux/Net-SNMP) without intrusive scanning.</li>
+<li><strong>Remote ARP Cache Discovery</strong>:</li>
+<li>Walks RFC 1213 <code>ipNetToMediaTable</code> (<code>.1.3.6.1.2.1.4.22.1.2</code> and <code>.4</code>) to discover silent hosts and workstations that ignore ICMP pings behind local firewalls.</li>
+<li><strong>Custom SNMP Target Support</strong>:</li>
+<li>Scanners can be configured with a custom SNMP Target IP (<code>snmp_target_ip</code>) and community string (<code>snmp_community</code>) in <code>admin.service_registry</code>.</li>
+<li>Allows network administrators to query dedicated SNMP bastions, L3 switches, or Linux mock servers (running <code>net-snmp</code>) when the perimeter modem does not expose SNMP.</li>
+</ol>
+<hr />
+<h2 id="arp-spoofing-network-anomaly-detection">ARP Spoofing &amp; Network Anomaly Detection<a class="headerlink" href="#arp-spoofing-network-anomaly-detection" title="Permanent link">&para;</a></h2>
+<p>RTMS actively detects layer-2 and layer-3 network attacks through a 3-tier anomaly detection engine implemented in <code>rtms-scanner/main_scanner.py</code>:</p>
+<ol>
+<li><strong>Gateway Impersonation Detection (<code>ARP_SPOOFING_GATEWAY</code>) - Severity: CRITICAL</strong>:</li>
+<li><strong>Trigger</strong>: The MAC address of any configured or discovered gateway suddenly changes compared to historical state in <code>global_known_ips</code>.</li>
+<li><strong>Threat</strong>: Indicates a rogue host forging ARP replies to redirect LAN traffic through itself (Man-In-The-Middle / credential theft).</li>
+<li><strong>SNMP vs. Wire Cross-Validation (<code>ARP_POISONING_DETECTED</code>) - Severity: CRITICAL</strong>:</li>
+<li><strong>Trigger</strong>: A MAC address captured on the local wire for an IP directly contradicts the authoritative hardware ARP table returned by the switch/router via SNMP.</li>
+<li><strong>Threat</strong>: Confirms active ARP cache poisoning on the network segment.</li>
+<li><strong>Host IP/MAC Conflict Detection (<code>IP_MAC_CONFLICT</code>) - Severity: WARNING</strong>:</li>
+<li><strong>Trigger</strong>: A known non-gateway IP begins responding with a different MAC address without DHCP release.</li>
+<li><strong>Threat</strong>: Detects conflicting static IP configurations or host-level spoofing.</li>
+</ol>
+<p>Alerts are routed through <code>rtms_commons.alerts.dispatch_alert()</code> to the database (<code>scanner.alerts</code>), local logs, and configured external channels (email, Teams, Slack, Splunk). In the frontend, security alerts display dedicated badges and icons (<code>ShieldAlert</code>).</p>
+<hr />
+<h2 id="subnet-management-lifecycle-detection">Subnet Management &amp; Lifecycle Detection<a class="headerlink" href="#subnet-management-lifecycle-detection" title="Permanent link">&para;</a></h2>
+<p>The RTMS web interface and backend provide granular subnet status determination, custom naming, and intelligent collapsible views to enhance operator readability on multi-VLAN networks.</p>
+<h3 id="1-subnet-lifecycle-determination-connected-vs-inactive-vs-disconnected">1. Subnet Lifecycle Determination (Connected vs. Inactive vs. Disconnected)<a class="headerlink" href="#1-subnet-lifecycle-determination-connected-vs-inactive-vs-disconnected" title="Permanent link">&para;</a></h3>
+<p>A subnet's operational status is determined via two cascading tiers:</p>
+<ul>
+<li><strong>Tier 1: Physical Interface Presence ("Non connecté" / Disconnected)</strong></li>
+<li>When the scanner starts or checks in (<code>check_env()</code>), it enumerates local active network interfaces (<code>_get_network_details()</code>).</li>
+<li>Active CIDRs are published to <code>admin.service_registry.subnet</code>.</li>
+<li>If a subnet known in the inventory has no corresponding active interface on the scanner host, the scanner cannot perform Layer 2 ARP discovery.</li>
+<li>The backend assigns <code>subnet_active = false</code> and <code>is_up = false</code> to all hosts on that subnet.</li>
+<li>The frontend classifies the subnet as <strong>Non connecté</strong> (<code>isSubnetConnected = false</code>).</li>
+<li><strong>Tier 2: Host Availability ("Inactif / Hors ligne" / Inactive)</strong></li>
+<li>If the scanner has a valid physical interface on the subnet (<code>isSubnetConnected = true</code>), periodic ARP sweeps and host probes are executed.</li>
+<li>If at least one host responds, the subnet is marked <strong>En ligne</strong> (<code>isSubnetOnline = true</code>, green badge).</li>
+<li>If the sweep completes but zero hosts respond (or all previously discovered hosts are unreachable), <code>onlineCount == 0</code>.</li>
+<li>The frontend classifies the subnet as <strong>Inactif</strong> (<code>isSubnetOnline = false</code>).</li>
+</ul>
+<h3 id="2-default-collapsed-state-for-offline-inactive-subnets">2. Default Collapsed State for Offline / Inactive Subnets<a class="headerlink" href="#2-default-collapsed-state-for-offline-inactive-subnets" title="Permanent link">&para;</a></h3>
+<ul>
+<li>In <code>frontend/src/pages/AssetManagement.tsx</code>, subnets that are disconnected or inactive (<code>!isSubnetConnected || !isSubnetOnline</code>) are <strong>collapsed by default</strong> into a single compact header line showing their status badge, host count, and alerts.</li>
+<li>Active subnets with online hosts remain expanded by default.</li>
+<li>Operators can expand or collapse any subnet with a single click on its header line or corresponding Quick Subnet Pill.</li>
+</ul>
+<h3 id="3-custom-subnet-naming-adminsubnet_names">3. Custom Subnet Naming (<code>admin.subnet_names</code>)<a class="headerlink" href="#3-custom-subnet-naming-adminsubnet_names" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Operators with Administrator privileges can assign friendly custom names (e.g., <em>DMZ</em>, <em>Production</em>, <em>Guest Wi-Fi</em>) to any CIDR block.</li>
+<li><strong>Data Persistence</strong>: Stored in <code>admin.subnet_names (subnet_cidr CIDR PRIMARY KEY, name VARCHAR(150), description TEXT, updated_at TIMESTAMPTZ)</code> and synchronized into <code>scanner.networks.name</code>.</li>
+<li><strong>API Endpoints</strong>:</li>
+<li><code>GET /api/subnets/names</code>: Fetches custom names mapping.</li>
+<li><code>POST /api/subnets/name</code>: Upserts custom name with authenticated admin verification (<code>Authorization: Bearer &lt;token&gt;</code>).</li>
+<li>Custom names are rendered alongside the CIDR in subnet headers and Quick Subnet navigation pills.</li>
+</ul>
+<h3 id="4-subnet-mac-whitelist-adminsubnet_mac_whitelist">4. Subnet MAC Whitelist (<code>admin.subnet_mac_whitelist</code>)<a class="headerlink" href="#4-subnet-mac-whitelist-adminsubnet_mac_whitelist" title="Permanent link">&para;</a></h3>
+<p>To eliminate alert fatigue and prevent false-positive notifications caused by legitimate recurring devices (e.g. IoT appliances, printers, embedded test benches, maintenance laptops), RTMS supports configuring an authorized MAC address whitelist on a per-subnet basis.</p>
+<h4 id="data-persistence-schema">Data Persistence &amp; Schema<a class="headerlink" href="#data-persistence-schema" title="Permanent link">&para;</a></h4>
+<p>Stored in PostgreSQL table <code>admin.subnet_mac_whitelist</code>:
+- <code>id</code>: Auto-incrementing primary key.
+- <code>subnet_cidr</code>: Target network CIDR (<code>CIDR NOT NULL</code>).
+- <code>mac_address</code>: Normalized uppercase MAC address (<code>VARCHAR(17) NOT NULL</code>).
+- <code>label</code>: Optional description or rationale (<code>VARCHAR(150)</code>).
+- <code>created_by</code>: Username of the administrator who registered the entry.
+- <code>created_at</code> / <code>updated_at</code>: Audit timestamps.
+- <code>CONSTRAINT uq_subnet_mac UNIQUE (subnet_cidr, mac_address)</code>: Ensures idempotency and prevents duplicate entries for the same subnet and MAC.</p>
+<h4 id="rest-api-endpoints-backendmainpy_1">REST API Endpoints (<code>backend/main.py</code>)<a class="headerlink" href="#rest-api-endpoints-backendmainpy_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>GET /api/settings/subnets/mac-whitelist/counts</code>: Returns a key-value dictionary mapping subnet CIDRs to the count of whitelisted MAC addresses.</li>
+<li><code>GET /api/settings/subnets/{subnet_cidr}/mac-whitelist</code>: Retrieves all whitelisted MAC addresses, labels, and audit metadata for a given subnet.</li>
+<li><code>POST /api/settings/subnets/mac-whitelist</code>: Validates the CIDR and MAC format, upserts the whitelist entry, and writes an audit log entry (<code>SUBNET_MAC_WHITELIST_ADDED</code>). Requires administrator privileges.</li>
+<li><code>DELETE /api/settings/subnets/mac-whitelist/{item_id}</code>: Removes an entry by ID and records an audit log (<code>SUBNET_MAC_WHITELIST_REMOVED</code>). Requires administrator privileges.</li>
+</ul>
+<h4 id="user-interface-workflows">User Interface Workflows<a class="headerlink" href="#user-interface-workflows" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Scanner Configuration (<code>ScannerConfiguration.tsx</code>)</strong>:</li>
+<li>The Network Media &amp; Scanner Interfaces table displays a shield badge showing the number of whitelisted MACs for each active subnet.</li>
+<li>Clicking the whitelist badge/icon opens a modal dialog allowing operators to:<ul>
+<li>Review all whitelisted MACs for that CIDR, including labels, author, and registration dates.</li>
+<li>Add new MAC addresses with optional labels.</li>
+<li>Remove obsolete or revoked whitelist entries with one click.</li>
+</ul>
+</li>
+<li><strong>Security Alerts Quick Action (<code>SecurityAlerts.tsx</code>)</strong>:</li>
+<li>On active (unresolved) security incidents (such as <code>NEW_HOST</code> or unknown device alerts), a <strong>"Whitelist MAC"</strong> button (<code>ShieldCheck</code>) appears next to the resolve button.</li>
+<li>Clicking it automatically extracts the MAC address, suggests the corresponding <code>/24</code> subnet CIDR based on the host's IP address, registers the entry in <code>admin.subnet_mac_whitelist</code>, and immediately marks the alert as <code>RESOLVED</code>.</li>
+</ol>
+<h4 id="scanner-engine-enforcement-rtms-scannermain_scannerpy">Scanner Engine Enforcement (<code>rtms-scanner/main_scanner.py</code>)<a class="headerlink" href="#scanner-engine-enforcement-rtms-scannermain_scannerpy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Loaded dynamically via <code>rtms_commons.db_client.load_subnet_mac_whitelist(config_db)</code> and refreshed every scan loop.</li>
+<li>When an IP is discovered on a subnet context (<code>ctx_target</code>), its physical MAC address is matched against <code>subnet_mac_whitelist[ctx_target]</code>.</li>
+<li>If matched:</li>
+<li>Suppresses the <code>NEW_HOST</code> alert trigger.</li>
+<li>Suppresses unknown device and missing hostname warnings in scanner logs.</li>
+<li>Sets hostname fallback to <code>"Whitelisted-Device"</code> in <code>global_known_macs</code> if DNS resolution returns empty.</li>
+<li>Logs a debug trace: <code>[MAC WHITELIST] Host &lt;IP&gt; (MAC: &lt;MAC&gt;) is whitelisted on subnet &lt;SUBNET&gt;. Suppressing unknown device and missing hostname alerts.</code></li>
+</ul>
+<h3 id="5-excluded-host-status-presumed-online-detection">5. Excluded Host Status &amp; Presumed Online Detection<a class="headerlink" href="#5-excluded-host-status-presumed-online-detection" title="Permanent link">&para;</a></h3>
+<p>Hosts excluded from network scans (<code>scanner.excluded_ips</code>, e.g., the primary modem/gateway <code>192.168.0.1</code> or sensitive equipment) are never directly probed with ARP sweeps or Nmap packets. </p>
+<p>To prevent misleading red "Stale / Offline" indicators on active infrastructure:
+- <strong>Heuristic</strong>: When an excluded host resides on an active subnet with responding hosts (<code>isSubnetConnected &amp;&amp; isSubnetOnline</code>), the host is classified as <strong>"Presumed Online"</strong> (<code>excluded_presumed_online</code>).
+- <strong>Visual Design</strong>: Rendered as an emerald green ring (stroke: <code>#10b981</code>, translucent emerald fill <code>rgba(16, 185, 129, 0.18)</code>, drop shadow) instead of a solid circle, visually denoting a deduced operational status.
+- <strong>Filter Integration</strong>: Presumed online excluded devices appear under the "Online" view filter and are excluded from the "Stale" filter.</p>
+<hr />
+<h2 id="scanner-bearer-token-lifecycle-management-adminscanner_tokens">Scanner Bearer Token Lifecycle Management (<code>admin.scanner_tokens</code>)<a class="headerlink" href="#scanner-bearer-token-lifecycle-management-adminscanner_tokens" title="Permanent link">&para;</a></h2>
+<p>To adhere to Zero Trust principles and prevent distributed network probes from accessing the central PostgreSQL server directly (port 5432), RTMS implements a dedicated, decoupled <strong>Scanner Token Lifecycle Management</strong> subsystem.</p>
+<h3 id="architecture-security-model">Architecture &amp; Security Model<a class="headerlink" href="#architecture-security-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Decoupled REST API</strong>: Network probes (<code>rtms-scanner</code>) connect to <code>rtms-web</code> exclusively over HTTPS (<code>TCP/443</code> or <code>TCP/8000</code>).</li>
+<li><strong>Cryptographic Hashing</strong>: Cleartext tokens are never stored in the database. When an administrator creates a token, the raw token string (prefixed <code>rtms_st_...</code>) is presented to the user <strong>exactly once</strong>. The backend calculates and stores only the <code>SHA-256</code> hash in <code>admin.scanner_tokens.token_hash</code>.</li>
+<li><strong>Strict 365-Day Ceiling</strong>: In alignment with enterprise key management standards and NIS2 access control requirements, token lifespans are strictly capped at a maximum of <strong>365 days (1 year)</strong>. Attempting to create or renew a token with an expiration exceeding 365 days results in an HTTP 422 validation error.</li>
+<li><strong>Instant Revocation &amp; Rotation</strong>: Administrators can revoke compromised or decommissioned probes instantly from the web console, immediately terminating their access.</li>
+</ul>
+<h3 id="database-schema-adminscanner_tokens">Database Schema (<code>admin.scanner_tokens</code>)<a class="headerlink" href="#database-schema-adminscanner_tokens" title="Permanent link">&para;</a></h3>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">scanner_tokens</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">token_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">expires_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">last_used_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">is_active</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">created_by</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">);</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_scanner_tokens_hash</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">scanner_tokens</span><span class="p">(</span><span class="n">token_hash</span><span class="p">);</span>
+</span></code></pre></div>
+<h3 id="rest-api-endpoints-backendmainpy_2">REST API Endpoints (<code>backend/main.py</code>)<a class="headerlink" href="#rest-api-endpoints-backendmainpy_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Path</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/scanner/tokens</code></td>
+<td style="text-align: left;">List all registered scanner tokens with validity and expiration</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/scanner/tokens</code></td>
+<td style="text-align: left;">Generate a new Bearer token (returns raw token once)</td>
+<td style="text-align: left;">Admin Only (JWT, max 365 days)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DELETE</code></td>
+<td style="text-align: left;"><code>/api/scanner/tokens/{id}</code></td>
+<td style="text-align: left;">Revoke an existing token immediately</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/scanner/renew-token</code></td>
+<td style="text-align: left;">Renew/rotate a scanner token before expiration</td>
+<td style="text-align: left;">Scanner Bearer Auth (max 365 days)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/scanner/heartbeat</code></td>
+<td style="text-align: left;">Report probe status, interface IPs, and active media policy</td>
+<td style="text-align: left;">Scanner Bearer Auth</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/scanner/config</code></td>
+<td style="text-align: left;">Pull dynamic scanner configuration and polling interval</td>
+<td style="text-align: left;">Scanner Bearer Auth</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/scanner/sync-results</code></td>
+<td style="text-align: left;">Ingest discovery scans, open ports, and security anomalies</td>
+<td style="text-align: left;">Scanner Bearer Auth</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="central-vps-support-licensing-distribution-hub">Central VPS Support, Licensing &amp; Distribution Hub<a class="headerlink" href="#central-vps-support-licensing-distribution-hub" title="Permanent link">&para;</a></h2>
+<p>RTMS includes an integrated, enterprise-grade connection to the <strong>3TS Central Support Hub</strong> hosted on an OVH Cloud VPS (<code>vps-054fcfa2.vps.ovh.net</code> / <code>support-api.3ts-consulting.com</code>).</p>
+<h3 id="architecture-capabilities">Architecture &amp; Capabilities<a class="headerlink" href="#architecture-capabilities" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Central Gateway</strong>: Provides a high-availability cloud interface (<code>rtms-admin/vps-support-hub</code>) for support ticketing, license renewals, and software releases.</li>
+<li><strong>Zero-Trust Asymmetric Authentication (Ed25519)</strong>:</li>
+<li>The local appliance holds a private key (<code>/opt/rtms/config/instance.key</code>, <code>chmod 0600</code>) generated at installation.</li>
+<li>Outgoing requests generate an ephemeral JWT (15-minute lifespan) signed via <code>EdDSA</code>.</li>
+<li>The VPS validates the JWT signature against the customer's enrolled public key (<code>"3TS".client_keys</code>).</li>
+<li>No permanent shared secrets circulate on the network, preventing credential replay or exfiltration risks.</li>
+<li>Automatic fallback to legacy static Bearer tokens (<code>RTMS_SUPPORT_VPS_API_KEY</code>) if asymmetric keys are not yet configured.</li>
+<li><strong>Triple Purpose Integration</strong>:</li>
+<li><strong>Support Ticketing</strong>: Direct incident filing, diagnostic attachment ingestion, and real-time status tracking.</li>
+<li><strong>License Renewal Ingestion</strong>: Automatic transmission of customer renewal requests containing hardware footprints for scanners, NVD engine, and local agents.</li>
+<li><strong>Software Releases &amp; Updates</strong>: Dynamic version manifest discovery (<code>/version</code>) and secure download of signed component packages (<code>.tar.gz</code>) with SHA-256 integrity verification.</li>
+</ul>
+<h3 id="key-rest-api-endpoints-backendmainpy">Key REST API Endpoints (<code>backend/main.py</code>)<a class="headerlink" href="#key-rest-api-endpoints-backendmainpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>GET /api/settings/support-hub</code>: Retrieves current Support VPS URL, masked legacy token status, and the appliance's <strong>Ed25519 Cryptographic Instance Identity</strong> (public key PEM and SHA-256 fingerprint).</li>
+<li><code>POST /api/settings/support-hub</code>: Saves Support VPS URL and optional legacy Bearer API Token to <code>admin.system_config</code> with audit logging.</li>
+<li><code>POST /api/settings/instance-identity/regenerate</code>: Performs cryptographic keypair rotation, generating a new Ed25519 keypair and updating system audit trails.</li>
+<li><code>POST /api/settings/support-hub/test</code>: Tests live connectivity and cryptographic handshake against the VPS Support Hub (<code>GET /api/v1/version</code>).</li>
+<li><code>POST /api/support/tickets</code>: Accepts ticket category, subject, description, priority, and optional diagnostics, returning a unique support ticket ID (<code>RTMS-YYYY-XXXX</code>).</li>
+<li><code>GET /api/support/tickets/history</code>: Retrieves the customer's historical ticket log, resolution status, and technician notes.</li>
+<li><code>POST /api/subscription/license/request-renewal</code>: Automatically transmits hardware footprint request to <code>{support_vps_url}/api/v1/license-requests</code> authenticated via signed JWT.</li>
+<li><code>GET /api/system/updates/status</code>: Resolves the active release manifest from the VPS hub using signed JWT authentication and displays target versions and package availability.</li>
+<li><code>POST /api/system/updates/apply</code>: Downloads signed <code>.tar.gz</code> packages from the VPS, validates their SHA-256 hash, and stages them for maintenance cycle application.</li>
+</ul>
+<hr />
+<h2 id="license-expiration-lifecycle-alert-routing-architecture">License Expiration Lifecycle &amp; Alert Routing Architecture<a class="headerlink" href="#license-expiration-lifecycle-alert-routing-architecture" title="Permanent link">&para;</a></h2>
+<p>To guarantee timely renewals and avoid abrupt service degradation, RTMS incorporates an automated background lifecycle watcher coupled with administrative accountability and flexible multi-channel alert dispatching.</p>
+<h3 id="background-lifecycle-watcher">Background Lifecycle Watcher<a class="headerlink" href="#background-lifecycle-watcher" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Implementation:</strong> <code>license_lifecycle_background_worker</code> in <code>backend/main.py</code>.</li>
+<li><strong>Schedule:</strong> Runs 10 seconds post-startup, then repeats periodically every <strong>4 hours</strong>.</li>
+<li><strong>On-Demand Trigger:</strong> Automatically invoked upon successful license upload (<code>POST /api/license/upload</code>) to ensure immediate state consistency.</li>
+</ul>
+<h3 id="remediation-finding-synchronization-adminsecurity_findings">Remediation Finding Synchronization (<code>admin.security_findings</code>)<a class="headerlink" href="#remediation-finding-synchronization-adminsecurity_findings" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Expiration tracking is synchronized with the platform's native security findings table using the unique reference <code>LICENSE-EXPIRATION</code>.</li>
+<li><strong>Severity Escalation:</strong></li>
+<li><code>HIGH</code>: $\le 30$ days before expiration.</li>
+<li><code>CRITICAL</code>: $\le 7$ days before expiration or expired ($\le 0$ days).</li>
+<li><strong>Auto-Resolution:</strong> Automatically transitions finding status to <code>RESOLVED</code> when an active license with $&gt; 30$ days remaining is activated.</li>
+</ul>
+<h3 id="administrative-responsibility-task-claiming">Administrative Responsibility &amp; Task Claiming<a class="headerlink" href="#administrative-responsibility-task-claiming" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Tracks the responsible administrator (<code>assigned_to</code>) on the finding.</li>
+<li><strong>Assignment Resolution Hierarchy:</strong></li>
+<li>Designated administrator set in <code>admin.system_config.license_notification_recipient</code>.</li>
+<li>Fallback to default <code>admin</code>.</li>
+<li>Fallback to first active administrator from <code>admin.users</code>.</li>
+<li>Fallback to <code>"Unassigned"</code> (team pool).</li>
+<li><strong>Claim Endpoint:</strong> <code>POST /api/license/claim-task</code> enables any administrator to claim ownership with 1 click.</li>
+<li><strong>Recipient Configuration:</strong> <code>POST /api/license/recipient</code> designates the default owner.</li>
+</ul>
+<h3 id="prioritized-multi-channel-notification-engine">Prioritized Multi-Channel Notification Engine<a class="headerlink" href="#prioritized-multi-channel-notification-engine" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Event:</strong> <code>license_expiring</code> registered in <code>admin.alert_matrix</code> (<code>ScannerConfiguration.tsx</code>).</li>
+<li><strong>Priority Dispatching Rule:</strong></li>
+<li><strong>Email Priority:</strong> If SMTP is configured in <code>admin.system_config</code>, email notifications are sent first to the assigned administrator (or all administrators if unassigned).</li>
+<li><strong>Webhook Fallback:</strong> If SMTP is missing or fails, alerts fall back to active <strong>Microsoft Teams</strong> and/or <strong>Slack</strong> webhooks.</li>
+<li><strong>Milestone Filtering &amp; Cooldown:</strong> Dispatched at countdown milestones (<strong>J-30</strong>, <strong>J-15</strong>, <strong>J-7</strong>, <strong>J-1</strong>, <strong>J-0</strong>) with a 24-hour anti-spam cooldown window.</li>
+</ul>
+<h3 id="rest-api-endpoints">REST API Endpoints<a class="headerlink" href="#rest-api-endpoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Path</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/license/task</code></td>
+<td style="text-align: left;">Returns current expiration finding, assignee, and configured recipient</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/license/claim-task</code></td>
+<td style="text-align: left;">Claims the renewal task for the current authenticated admin</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/license/recipient</code></td>
+<td style="text-align: left;">Sets the designated administrator for license notifications</td>
+<td style="text-align: left;">Admin Only (JWT)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/license/status</code></td>
+<td style="text-align: left;">Enriched with task status, assignee, and countdown metrics</td>
+<td style="text-align: left;">Authenticated (JWT)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="nvd-synchronization-telemetry-impact-alerts-live-threat-feed">NVD Synchronization Telemetry, Impact Alerts &amp; Live Threat Feed<a class="headerlink" href="#nvd-synchronization-telemetry-impact-alerts-live-threat-feed" title="Permanent link">&para;</a></h2>
+<p>RTMS integrates a multi-layered telemetry and correlation suite connecting the <code>rtms-nvd</code> background engine with the web dashboard:</p>
+<h3 id="1-synchronization-telemetry-audit-modal-services-status">1. Synchronization Telemetry &amp; Audit Modal (Services Status)<a class="headerlink" href="#1-synchronization-telemetry-audit-modal-services-status" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>File:</strong> <code>frontend/src/pages/ServicesStatus.tsx</code></li>
+<li><strong>Backend Endpoint:</strong> <code>GET /api/nvd/sync-history</code></li>
+<li><strong>Features:</strong></li>
+<li>Real-time status badge on <code>rtms-nvd</code> service card: displays ingested CVE count, CPE records count, and execution duration in milliseconds.</li>
+<li>Dedicated <strong>Sync Activity</strong> button on both the service card and NVD category banner.</li>
+<li><strong>Inspection Modal:</strong> Interactive split-view dialog featuring:<ul>
+<li>Chronological list of sync runs with status badges (<code>SUCCESS</code> / <code>FAILED</code>), timestamps, and duration metrics.</li>
+<li>Selected cycle KPI cards: Ingested CVEs, Processed CPEs, Duration, and Inventory Impact.</li>
+<li>Searchable list of all ingested CVEs with direct links to NIST NVD, CVSS v3 score/severity badges, affected software component tags, and inventory impact status (<code>Affects your inventory</code> vs. <code>No impact on your inventory</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-recent-nvd-scan-impact-notification-software-inventory">2. Recent NVD Scan Impact Notification (Software Inventory)<a class="headerlink" href="#2-recent-nvd-scan-impact-notification-software-inventory" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>File:</strong> <code>frontend/src/pages/SoftwareInventory.tsx</code></li>
+<li><strong>Backend Endpoint:</strong> <code>GET /api/cve/recent-impacts</code></li>
+<li><strong>Features:</strong></li>
+<li>Informative banner located at the top of the Software Inventory page.</li>
+<li><strong>Zero Impact Reassurance:</strong> When no tracked components or hosts are affected by the latest sync, displays a reassurance banner with a direct link to service telemetry.</li>
+<li><strong>Immediate Incident Alert:</strong> If newly ingested CVEs match installed packages or Global Watchlist components, renders a high-visibility warning banner with an immediate 1-click shortcut to filter and inspect the impacted CVEs.</li>
+</ul>
+<h3 id="3-live-global-nvd-feed-cve-database-lookup">3. Live Global NVD Feed (CVE Database Lookup)<a class="headerlink" href="#3-live-global-nvd-feed-cve-database-lookup" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>File:</strong> <code>frontend/src/pages/SoftwareInventory.tsx</code></li>
+<li><strong>Backend Endpoint:</strong> <code>GET /api/cve/recent-feed</code></li>
+<li><strong>Features:</strong></li>
+<li>Replaces the blank initial state of the CVE Database Lookup tab with a real-time stream of the latest CVEs published or modified by NIST worldwide.</li>
+<li>Interactive severity filtering (<code>ALL</code>, <code>CRITICAL</code>, <code>HIGH</code>, <code>MEDIUM</code>, <code>LOW</code>) and manual refresh capability.</li>
+<li>Correlates each CVE in real time against the tenant's assets and Global Watchlist.</li>
+<li>One-click operational shortcuts:<ul>
+<li><strong>+ Surveiller dans la Global Watchlist</strong>: Instantly adds the vulnerable component to the tenant's monitored watchlist.</li>
+<li><strong>Créer un Incident de Sécurité</strong>: Directly creates an actionable ticket in the Security Findings module.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="threat-exposure-multi-provider-socsiem-telemetry-correlation-engine">Threat Exposure &amp; Multi-Provider SOC/SIEM Telemetry Correlation Engine<a class="headerlink" href="#threat-exposure-multi-provider-socsiem-telemetry-correlation-engine" title="Permanent link">&para;</a></h2>
+<p>RTMS incorporates a unified <strong>Threat &amp; Exposure Correlation Subsystem</strong> that connects vulnerability scans with live attack telemetry sourced from Security Operations Center (SOC), Security Information and Event Management (SIEM), and Network Intrusion Detection (IDS) platforms.</p>
+<h3 id="1-architectural-overview-data-ingestion-flow">1. Architectural Overview &amp; Data Ingestion Flow<a class="headerlink" href="#1-architectural-overview-data-ingestion-flow" title="Permanent link">&para;</a></h3>
+<p>Rather than treating vulnerability management and threat monitoring as isolated silos, RTMS bridges them using a dynamic correlation pipeline:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[ Security Infrastructure ]
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  ├── Splunk Enterprise / Cloud (REST / HEC)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  ├── Wazuh / Elasticsearch / OpenSearch (REST API)
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  ├── Suricata Local IDS (EVE JSON log streaming)
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  ├── Microsoft Sentinel / Log Analytics (KQL &amp; Entra ID OAuth2)
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  └── CrowdStrike Falcon (Cloud REST API OAuth2)
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                   │
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                   ▼ (Synchronized via POST /api/threats/sync or background worker)
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>         [ Threat Telemetry Ingestion Adapters ]
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                   │
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                   ▼ (Normalized into AttackMetric schema)
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>      [ admin.threat_telemetry_cache ] (PostgreSQL)
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                   │
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>                   ▼ (Correlated on Demand via RiskCorrelator)
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>         [ Contextual Risk Engine ] &lt;─── [ Scanned CVEs &amp; Asset Inventory ]
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                   │
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>                   ▼
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>  [ RTMS Threat &amp; Exposure Dashboard ] (React / TypeScript UI)
+</span></code></pre></div>
+<h3 id="2-supported-soc-siem-ids-providers">2. Supported SOC / SIEM / IDS Providers<a class="headerlink" href="#2-supported-soc-siem-ids-providers" title="Permanent link">&para;</a></h3>
+<p>RTMS provides native, production-grade telemetry collectors for 5 major security platforms:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Provider</th>
+<th style="text-align: left;">Ingestion Method</th>
+<th style="text-align: left;">Configuration Parameters</th>
+<th style="text-align: left;">Primary Event Signatures &amp; Fields Extracted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Splunk Enterprise / Cloud</strong></td>
+<td style="text-align: left;">REST Search API (<code>/services/search/jobs</code>) &amp; HEC</td>
+<td style="text-align: left;"><code>soc_url</code>, <code>soc_splunk_token</code>, <code>soc_splunk_verify_ssl</code></td>
+<td style="text-align: left;"><code>dest_ip</code>, <code>dest_port</code>, <code>signature</code>, <code>count</code>, <code>severity</code> from firewall &amp; IDS indices</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wazuh / Elasticsearch</strong></td>
+<td style="text-align: left;">Elasticsearch REST API (<code>/{index}/_search</code>)</td>
+<td style="text-align: left;"><code>soc_wazuh_host</code>, <code>soc_wazuh_port</code>, <code>soc_wazuh_index</code>, <code>soc_wazuh_user</code>, <code>soc_wazuh_password</code>, <code>soc_wazuh_api_key</code>, <code>soc_wazuh_ssl</code></td>
+<td style="text-align: left;"><code>data.destip</code>, <code>data.destport</code>, <code>rule.description</code>, <code>rule.level</code> from <code>wazuh-alerts-*</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Suricata Local IDS</strong></td>
+<td style="text-align: left;">Fast streaming ingestion from newline-delimited <code>eve.json</code></td>
+<td style="text-align: left;"><code>soc_suricata_eve_path</code> (default: <code>/var/log/suricata/eve.json</code>)</td>
+<td style="text-align: left;"><code>dest_ip</code>, <code>dest_port</code>, <code>alert.signature</code>, <code>alert.severity</code> from <code>event_type == "alert"</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Microsoft Sentinel</strong></td>
+<td style="text-align: left;">Azure Entra ID OAuth2 + Log Analytics REST API (<code>https://api.loganalytics.io/v1/workspaces/{id}/query</code>)</td>
+<td style="text-align: left;"><code>soc_sentinel_workspace_id</code>, <code>soc_sentinel_tenant_id</code>, <code>soc_sentinel_client_id</code>, <code>soc_sentinel_client_secret</code>, <code>soc_sentinel_table</code></td>
+<td style="text-align: left;"><code>DestinationIP</code>, <code>DestinationPort</code>, <code>Activity</code>, <code>SeverityLevel</code> from <code>CommonSecurityLog</code> / <code>SecurityAlert</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CrowdStrike Falcon</strong></td>
+<td style="text-align: left;">OAuth2 Bearer Token + Falcon REST API (<code>/alerts/queries/alerts/v2</code> &amp; <code>/alerts/entities/alerts/v2</code>)</td>
+<td style="text-align: left;"><code>soc_crowdstrike_client_id</code>, <code>soc_crowdstrike_client_secret</code>, <code>soc_crowdstrike_base_url</code> (US-1, US-2, EU-1, GovCloud)</td>
+<td style="text-align: left;"><code>local_ip</code>, <code>local_port</code>, <code>description</code>, <code>severity_name</code> from Falcon threat detections</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-database-schema">3. Database Schema<a class="headerlink" href="#3-database-schema" title="Permanent link">&para;</a></h3>
+<h4 id="adminthreat_telemetry_cache"><code>admin.threat_telemetry_cache</code><a class="headerlink" href="#adminthreat_telemetry_cache" title="Permanent link">&para;</a></h4>
+<p>Aggregated telemetry records are stored in PostgreSQL for ultra-fast query performance and offline correlation:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">dest_ip</span><span class="w"> </span><span class="n">INET</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">dest_port</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">total_hits</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">max_severity</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'MEDIUM'</span><span class="p">,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">signatures</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">[]</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'{}'</span><span class="p">,</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="n">first_seen</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="n">last_seen</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'splunk'</span><span class="p">,</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">uq_telemetry_target</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">dest_ip</span><span class="p">,</span><span class="w"> </span><span class="n">dest_port</span><span class="p">,</span><span class="w"> </span><span class="n">provider</span><span class="p">)</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p">);</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_threat_telemetry_ip</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="p">(</span><span class="n">dest_ip</span><span class="p">);</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_threat_telemetry_provider</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="p">(</span><span class="n">provider</span><span class="p">);</span>
+</span></code></pre></div>
+<h4 id="adminsystem_config-soc-configuration-namespacing"><code>admin.system_config</code> (SOC Configuration Namespacing)<a class="headerlink" href="#adminsystem_config-soc-configuration-namespacing" title="Permanent link">&para;</a></h4>
+<p>All provider configuration settings are stored in <code>admin.system_config</code> under the <code>soc_%</code> prefix:
+- <code>soc_enabled</code>: Boolean flag indicating whether SOC correlation is active.
+- <code>soc_type</code>: Current active provider (<code>Splunk</code>, <code>Wazuh</code>, <code>Suricata</code>, <code>Sentinel</code>, <code>CrowdStrike Falcon</code>).
+- Specific connection parameters and credentials for each provider.</p>
+<h3 id="4-contextual-risk-scoring-algorithm-riskcorrelator">4. Contextual Risk Scoring Algorithm (<code>RiskCorrelator</code>)<a class="headerlink" href="#4-contextual-risk-scoring-algorithm-riskcorrelator" title="Permanent link">&para;</a></h3>
+<p>Static CVSS v3 scores reflect theoretical vulnerability severity in isolation. The RTMS <strong>Risk Correlator</strong> (<code>backend/risk_correlator.py</code>) computes a dynamic <strong>Contextual Risk Score</strong> ($CRS$) bounded between $1.0$ and $10.0$:</p>
+<p>$$CRS = \min\left(10.0, CVSS_{base} + \Delta_{hits} + \Delta_{port} + \Delta_{severity} + \Delta_{recency}\right)$$</p>
+<p>Where:
+- $CVSS_{base}$: Scanned vulnerability CVSS v3 score.
+- $\Delta_{hits}$: Attack volume multiplier computed via logarithmic scaling:
+  $$\Delta_{hits} = \min(2.0, \log_{10}(\text{hits} + 1) \times 0.65)$$
+- $\Delta_{port}$: Port match bonus:
+  $$\Delta_{port} = \begin{cases} +1.5 &amp; \text{if attack destination port matches the vulnerable service port} \ 0.0 &amp; \text{otherwise} \end{cases}$$
+- $\Delta_{severity}$: SIEM alert severity weight:
+  $$\Delta_{severity} = \begin{cases} +1.5 &amp; \text{CRITICAL} \ +1.0 &amp; \text{HIGH} \ +0.5 &amp; \text{MEDIUM} \ 0.0 &amp; \text{LOW / INFO} \end{cases}$$
+- $\Delta_{recency}$: Attack recency bonus:
+  $$\Delta_{recency} = \begin{cases} +1.0 &amp; \text{if attack observed within the last 24 hours} \ +0.5 &amp; \text{if attack observed between 24 and 48 hours ago} \ 0.0 &amp; \text{older than 48 hours} \end{cases}$$</p>
+<h4 id="threat-status-classification-hierarchy">Threat Status Classification Hierarchy<a class="headerlink" href="#threat-status-classification-hierarchy" title="Permanent link">&para;</a></h4>
+<p>Each correlated finding is assigned an operational threat status:
+1. <code>ACTIVELY_EXPLOITED</code>: IP target matched <strong>AND</strong> port matched with active attack hits within the last 24 hours. Represents immediate, active exploitation attempts requiring emergency containment.
+2. <code>ATTACK_DETECTED</code>: IP target matched telemetry, but specific port is unmatched or represents generic scanning activity.
+3. <code>TARGETED</code>: IP was seen in older telemetry (&gt;24 hours) or reconnaissance patterns.
+4. <code>POTENTIAL</code>: Vulnerability exists with high CVSS score, but zero active attack telemetry has been observed targeting this IP.
+5. <code>DORMANT</code>: Low-severity vulnerability with no observed attack traffic.</p>
+<h3 id="5-rest-api-endpoints-specification">5. REST API Endpoints Specification<a class="headerlink" href="#5-rest-api-endpoints-specification" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Path</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/threats/overview-kpis</code></td>
+<td style="text-align: left;">Returns headline metrics: active attacks, actively exploited CVEs, targeted assets, telemetry hits</td>
+<td style="text-align: left;">Authenticated (<code>get_current_user_profile</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/threats/top-targeted-services</code></td>
+<td style="text-align: left;">Returns top 10 targeted network ports, services, hit volumes, and associated risk levels</td>
+<td style="text-align: left;">Authenticated (<code>get_current_user_profile</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/threats/activity-timeline</code></td>
+<td style="text-align: left;">Returns 48-hour time series buckets of attack volume and severity distribution</td>
+<td style="text-align: left;">Authenticated (<code>get_current_user_profile</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/threats/correlated</code></td>
+<td style="text-align: left;">Returns all tenant vulnerabilities enriched with Contextual Risk Scores and attack telemetry</td>
+<td style="text-align: left;">Authenticated (<code>get_current_user_profile</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/threats/sync</code></td>
+<td style="text-align: left;">Triggers on-demand synchronization from configured SOC provider into telemetry cache</td>
+<td style="text-align: left;">Security Analyst / Admin (<code>verify_security_analyst_or_admin</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/settings/soc</code></td>
+<td style="text-align: left;">Retrieves active SOC provider settings and parameters from <code>admin.system_config</code></td>
+<td style="text-align: left;">Authenticated (<code>get_current_user_profile</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/settings/soc</code></td>
+<td style="text-align: left;">Persists SOC provider configuration and credentials with audit logging</td>
+<td style="text-align: left;">Admin Only (<code>verify_admin</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/settings/soc/test</code></td>
+<td style="text-align: left;">Performs live probe and authentication handshake against selected SOC provider</td>
+<td style="text-align: left;">Admin Only (<code>verify_admin</code>)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

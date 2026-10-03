@@ -1,0 +1,2127 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Guide officiel d'utilisation et d'exploitation de la plateforme RTMS (Real-Time Monitoring & Security).">
+      
+      
+        <meta name="author" content="3TS Consulting SRL">
+      
+      
+      
+        <link rel="prev" href="../threat_dashboard/">
+      
+      
+        <link rel="next" href="../vulnerability_triage/">
+      
+      
+        
+          <link rel="alternate" href="../../../../roles/analyst/threat_correlation/" hreflang="fr">
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Corrélation SOC/SIEM - RTMS - Guide Utilisateur & Exploitation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rtms-soc-siem-threat-exposure-correlation-engine" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../" title="RTMS - Guide Utilisateur &amp; Exploitation" class="md-header__button md-logo" aria-label="RTMS - Guide Utilisateur & Exploitation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RTMS - Guide Utilisateur & Exploitation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Corrélation SOC/SIEM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../../roles/analyst/threat_correlation/" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user/navigation/" class="md-tabs__link">
+          
+  
+  
+  1. Utilisateur & Opérateur
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../threat_dashboard/" class="md-tabs__link">
+          
+  
+  
+  2. Analyste SOC & Sécurité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../auditor/nis2_compliance/" class="md-tabs__link">
+          
+  
+  
+  3. Auditeur & Conformité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../admin/users_and_rbac/" class="md-tabs__link">
+          
+  
+  
+  4. Administrateur Client
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../" title="RTMS - Guide Utilisateur &amp; Exploitation" class="md-nav__button md-logo" aria-label="RTMS - Guide Utilisateur & Exploitation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RTMS - Guide Utilisateur & Exploitation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Utilisateur & Opérateur
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. Utilisateur & Opérateur
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prise en main & Navigation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire des actifs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/alerts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alertes réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Analyste SOC & Sécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2. Analyste SOC & Sécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard de Menaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrélation SOC/SIEM
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrélation SOC/SIEM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture-integration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Architecture &amp; Integration Guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-architectural-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architectural Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ingestion-adapters-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ingestion Adapters &amp; Protocols
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Ingestion Adapters &amp; Protocols">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-splunk-enterprise-splunk-cloud-splunkthreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Splunk Enterprise &amp; Splunk Cloud (SplunkThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-wazuh-elasticsearch-opensearch-wazuhthreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Wazuh / Elasticsearch / OpenSearch (WazuhThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-suricata-local-ids-suricatathreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Suricata Local IDS (SuricataThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-microsoft-sentinel-sentinelthreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Microsoft Sentinel (SentinelThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-crowdstrike-falcon-crowdstrikethreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E. CrowdStrike Falcon (CrowdStrikeThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-database-schema-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Database Schema Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Database Schema Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adminthreat_telemetry_cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.threat_telemetry_cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adminsystem_config-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.system_config Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-contextual-risk-correlator-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contextual Risk Correlator Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Contextual Risk Correlator Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correlation Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Formula
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rest-api-endpoints-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. REST API Endpoints Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. REST API Endpoints Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-get-apithreatsoverview-kpis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. GET /api/threats/overview-kpis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-get-apithreatstop-targeted-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. GET /api/threats/top-targeted-services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-get-apithreatsactivity-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. GET /api/threats/activity-timeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-post-apisettingssoctest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. POST /api/settings/soc/test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-verification-automated-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Verification &amp; Automated Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vulnerability_triage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triage des vulnérabilités
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security_audits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audits de sécurité intégrés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Auditeur & Conformité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Auditeur & Conformité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auditor/nis2_compliance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directive NIS2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auditor/cra_compliance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auditor/audit_trail_exports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journal d'audit & Exports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Administrateur Client
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4. Administrateur Client
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/users_and_rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilisateurs & Rôles RBAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/scanners_management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestion des sondes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/network_policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Politiques sous-réseaux & Deep Scan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/cmdb_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réconciliation CMDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture-integration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Architecture &amp; Integration Guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-architectural-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architectural Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ingestion-adapters-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ingestion Adapters &amp; Protocols
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Ingestion Adapters &amp; Protocols">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-splunk-enterprise-splunk-cloud-splunkthreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Splunk Enterprise &amp; Splunk Cloud (SplunkThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-wazuh-elasticsearch-opensearch-wazuhthreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Wazuh / Elasticsearch / OpenSearch (WazuhThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-suricata-local-ids-suricatathreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Suricata Local IDS (SuricataThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-microsoft-sentinel-sentinelthreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Microsoft Sentinel (SentinelThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-crowdstrike-falcon-crowdstrikethreatprovider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E. CrowdStrike Falcon (CrowdStrikeThreatProvider)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-database-schema-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Database Schema Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Database Schema Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adminthreat_telemetry_cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.threat_telemetry_cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adminsystem_config-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        admin.system_config Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-contextual-risk-correlator-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Contextual Risk Correlator Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Contextual Risk Correlator Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correlation-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correlation Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Formula
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rest-api-endpoints-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. REST API Endpoints Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. REST API Endpoints Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-get-apithreatsoverview-kpis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. GET /api/threats/overview-kpis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-get-apithreatstop-targeted-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. GET /api/threats/top-targeted-services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-get-apithreatsactivity-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. GET /api/threats/activity-timeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-post-apisettingssoctest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. POST /api/settings/soc/test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-verification-automated-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Verification &amp; Automated Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="rtms-soc-siem-threat-exposure-correlation-engine">RTMS SOC / SIEM &amp; Threat Exposure Correlation Engine<a class="headerlink" href="#rtms-soc-siem-threat-exposure-correlation-engine" title="Permanent link">&para;</a></h1>
+<h2 id="technical-architecture-integration-guide">Technical Architecture &amp; Integration Guide<a class="headerlink" href="#technical-architecture-integration-guide" title="Permanent link">&para;</a></h2>
+<p>This document provides a comprehensive technical reference for the <strong>Threat Exposure &amp; Telemetry Correlation Subsystem</strong> of the RTMS platform. It covers data models, ingestion mechanisms, normalization adapters, mathematical risk scoring algorithms, and REST APIs.</p>
+<hr />
+<h2 id="1-architectural-overview">1. Architectural Overview<a class="headerlink" href="#1-architectural-overview" title="Permanent link">&para;</a></h2>
+<p>The RTMS Threat Correlation Engine bridges static vulnerability scanning with real-time operational threat telemetry gathered from enterprise SOC and SIEM systems.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                           External Telemetry Sources                            │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├──────────────┬──────────────────┬─────────────────┬──────────────┬──────────────┤
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│ Splunk Cloud │ Wazuh / Elastic  │  Suricata IDS   │ MS Sentinel  │ CrowdStrike  │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  REST / HEC  │    /_search      │  eve.json log   │  Azure KQL   │  Cloud API   │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>└──────┬───────┴────────┬─────────┴────────┬────────┴──────┬───────┴──────┬───────┘
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>       │                │                  │               │              │
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>       ▼                ▼                  ▼               ▼              ▼
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>┌─────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│                        Threat Telemetry Provider Adapters                       │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│                     (rtms-web/backend/risk_correlator.py)                       │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>├─────────────────────────────────────────────────────────────────────────────────┤
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│ - BaseThreatProvider (Abstract Base Class)                                      │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   ├── SplunkThreatProvider                                                      │
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   ├── WazuhThreatProvider                                                       │
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   ├── SuricataThreatProvider                                                    │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│   ├── SentinelThreatProvider                                                    │
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   └── CrowdStrikeThreatProvider                                                 │
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>└────────────────────────────────────────┬────────────────────────────────────────┘
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                                         │
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                                         ▼ (Normalized AttackMetric objects)
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>┌─────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│                           PostgreSQL Telemetry Cache                            │
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│                       `admin.threat_telemetry_cache`                            │
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│            Unique Constraint: (dest_ip, dest_port, provider)                    │
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>└────────────────────────────────────────┬────────────────────────────────────────┘
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>                                         │
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>                                         ▼
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>┌─────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>│                             RiskCorrelator Engine                               │
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>│  - Correlates ScannedVulnerability with active AttackMetric telemetry           │
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>│  - Calculates dynamic Contextual Risk Score (1.0 - 10.0)                         │
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>│  - Assigns Threat Status (ACTIVELY_EXPLOITED, ATTACK_DETECTED, TARGETED, etc.)  │
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>└────────────────────────────────────────┬────────────────────────────────────────┘
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>                                         │
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>                                         ▼
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>┌─────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>│                      FastAPI Threat Telemetry Endpoints                         │
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>│  - GET /api/threats/overview-kpis                                               │
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>│  - GET /api/threats/top-targeted-services                                       │
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>│  - GET /api/threats/activity-timeline                                           │
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>│  - GET /api/threats/correlated                                                  │
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>│  - POST /api/threats/sync                                                       │
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>│  - POST /api/settings/soc/test                                                  │
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>└────────────────────────────────────────┬────────────────────────────────────────┘
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>                                         │
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>                                         ▼
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>┌─────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>│                       React ThreatExposureDashboard                             │
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>│                  (frontend/src/components/ThreatExposureDashboard.tsx)           │
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>└─────────────────────────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<hr />
+<h2 id="2-ingestion-adapters-protocols">2. Ingestion Adapters &amp; Protocols<a class="headerlink" href="#2-ingestion-adapters-protocols" title="Permanent link">&para;</a></h2>
+<p>Each provider subclasses <code>BaseThreatProvider</code> and implements <code>fetch_telemetry(window_hours: int = 48) -&gt; List[AttackMetric]</code>.</p>
+<h3 id="a-splunk-enterprise-splunk-cloud-splunkthreatprovider">A. Splunk Enterprise &amp; Splunk Cloud (<code>SplunkThreatProvider</code>)<a class="headerlink" href="#a-splunk-enterprise-splunk-cloud-splunkthreatprovider" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Transport</strong>: HTTPS REST API (<code>POST /services/search/jobs/export</code>).</li>
+<li><strong>Authentication</strong>: HTTP Header <code>Authorization: Splunk &lt;token&gt;</code> or <code>Bearer &lt;token&gt;</code>.</li>
+<li><strong>Search Query</strong>:
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>search index=* (sourcetype=suricata* OR sourcetype=pan:threat OR sourcetype=cisco:asa OR action=blocked OR action=alert)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>| stats count, values(signature) as signatures, max(severity) as max_severity, min(_time) as first_seen, max(_time) as last_seen by dest_ip, dest_port
+</span></code></pre></div></li>
+<li><strong>Response Format</strong>: Output mode <code>json</code>.</li>
+</ul>
+<h3 id="b-wazuh-elasticsearch-opensearch-wazuhthreatprovider">B. Wazuh / Elasticsearch / OpenSearch (<code>WazuhThreatProvider</code>)<a class="headerlink" href="#b-wazuh-elasticsearch-opensearch-wazuhthreatprovider" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Transport</strong>: HTTPS REST API (<code>POST /{index_pattern}/_search</code>).</li>
+<li><strong>Index Pattern</strong>: <code>wazuh-alerts-*</code>, <code>filebeat-*</code>, <code>suricata-*</code>.</li>
+<li><strong>Authentication</strong>: HTTP Basic Auth (<code>username:password</code>) or <code>Authorization: ApiKey &lt;api_key&gt;</code>.</li>
+<li><strong>Query DSL</strong>:
+  <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"@timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"gte"</span><span class="p">:</span><span class="w"> </span><span class="s2">"now-48h"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"rule.level"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"gte"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="p">]</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nt">"aggs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nt">"by_dest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="nt">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.destip.keyword"</span><span class="p">,</span><span class="w"> </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="nt">"aggs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="nt">"by_port"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">          </span><span class="nt">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.destport"</span><span class="p">,</span><span class="w"> </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">          </span><span class="nt">"aggs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">            </span><span class="nt">"max_level"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rule.level"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">            </span><span class="nt">"signatures"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"terms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rule.description.keyword"</span><span class="p">,</span><span class="w"> </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">          </span><span class="p">}</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="p">}</span>
+</span></code></pre></div></li>
+</ul>
+<h3 id="c-suricata-local-ids-suricatathreatprovider">C. Suricata Local IDS (<code>SuricataThreatProvider</code>)<a class="headerlink" href="#c-suricata-local-ids-suricatathreatprovider" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Transport</strong>: Streaming file reader on newline-delimited <code>eve.json</code> (e.g. <code>/var/log/suricata/eve.json</code>).</li>
+<li><strong>Filter</strong>: Only lines where <code>"event_type": "alert"</code>.</li>
+<li><strong>Extracted Fields</strong>:</li>
+<li><code>dest_ip</code>: Target host address.</li>
+<li><code>dest_port</code>: Destination service port.</li>
+<li><code>alert.signature</code>: Detection rule message.</li>
+<li><code>alert.severity</code>: Mapped to severity levels (<code>1</code> -&gt; CRITICAL, <code>2</code> -&gt; HIGH, <code>3</code> -&gt; MEDIUM).</li>
+<li><code>timestamp</code>: Event ISO-8601 timestamp.</li>
+</ul>
+<h3 id="d-microsoft-sentinel-sentinelthreatprovider">D. Microsoft Sentinel (<code>SentinelThreatProvider</code>)<a class="headerlink" href="#d-microsoft-sentinel-sentinelthreatprovider" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Transport</strong>: Two-step Azure REST communication:</li>
+<li><strong>Token Acquisition</strong>:<ul>
+<li><code>POST https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token</code></li>
+<li>Form parameters: <code>grant_type=client_credentials</code>, <code>client_id=...</code>, <code>client_secret=...</code>, <code>scope=https://api.loganalytics.io/.default</code>.</li>
+</ul>
+</li>
+<li><strong>Log Analytics Query Execution</strong>:<ul>
+<li><code>POST https://api.loganalytics.io/v1/workspaces/{workspace_id}/query</code></li>
+<li>Header: <code>Authorization: Bearer &lt;access_token&gt;</code></li>
+<li>KQL Query:
+   <div class="language-kql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">CommonSecurityLog</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">TimeGenerated</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="n">ago</span><span class="p">(</span><span class="mi">48</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Activity</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="s">""</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">TotalHits</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">count</span><span class="p">(),</span><span class="w"> </span><span class="n">MaxSeverity</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">LogSeverity</span><span class="p">),</span><span class="w"> </span><span class="n">Signatures</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make_set</span><span class="p">(</span><span class="n">Activity</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">DestinationIP</span><span class="p">,</span><span class="w"> </span><span class="n">DestinationPort</span>
+</span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="e-crowdstrike-falcon-crowdstrikethreatprovider">E. CrowdStrike Falcon (<code>CrowdStrikeThreatProvider</code>)<a class="headerlink" href="#e-crowdstrike-falcon-crowdstrikethreatprovider" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Transport</strong>: Two-step Falcon Cloud REST API:</li>
+<li><strong>Token Acquisition</strong>:<ul>
+<li><code>POST https://{base_url}/oauth2/token</code></li>
+<li>Form parameters: <code>client_id=...</code>, <code>client_secret=...</code>.</li>
+</ul>
+</li>
+<li><strong>Alert Query &amp; Entity Details</strong>:<ul>
+<li><code>GET https://{base_url}/alerts/queries/alerts/v2?limit=500</code></li>
+<li><code>GET https://{base_url}/alerts/entities/alerts/v2?ids=...</code></li>
+<li>Extracted attributes: <code>local_ip</code>, <code>local_port</code>, <code>description</code>, <code>severity_name</code>.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="3-database-schema-specifications">3. Database Schema Specifications<a class="headerlink" href="#3-database-schema-specifications" title="Permanent link">&para;</a></h2>
+<h3 id="adminthreat_telemetry_cache"><code>admin.threat_telemetry_cache</code><a class="headerlink" href="#adminthreat_telemetry_cache" title="Permanent link">&para;</a></h3>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">dest_ip</span><span class="w"> </span><span class="n">INET</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">dest_port</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">total_hits</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">max_severity</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'MEDIUM'</span><span class="p">,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">signatures</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">[]</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'{}'</span><span class="p">,</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="n">first_seen</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="n">last_seen</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'splunk'</span><span class="p">,</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">uq_telemetry_target</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">dest_ip</span><span class="p">,</span><span class="w"> </span><span class="n">dest_port</span><span class="p">,</span><span class="w"> </span><span class="n">provider</span><span class="p">)</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p">);</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_threat_telemetry_ip</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="p">(</span><span class="n">dest_ip</span><span class="p">);</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_threat_telemetry_port</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="p">(</span><span class="n">dest_port</span><span class="p">);</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_threat_telemetry_provider</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="p">(</span><span class="n">provider</span><span class="p">);</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_threat_telemetry_last_seen</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">threat_telemetry_cache</span><span class="p">(</span><span class="n">last_seen</span><span class="p">);</span>
+</span></code></pre></div>
+<h3 id="adminsystem_config-keys"><code>admin.system_config</code> Keys<a class="headerlink" href="#adminsystem_config-keys" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Configuration Key</th>
+<th style="text-align: left;">Data Type</th>
+<th style="text-align: left;">Default Value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>soc_enabled</code></td>
+<td style="text-align: left;"><code>BOOLEAN</code></td>
+<td style="text-align: left;"><code>false</code></td>
+<td style="text-align: left;">Master toggle for SOC telemetry integration</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_type</code></td>
+<td style="text-align: left;"><code>VARCHAR(50)</code></td>
+<td style="text-align: left;"><code>Splunk</code></td>
+<td style="text-align: left;">Active provider (<code>Splunk</code>, <code>Wazuh</code>, <code>Suricata</code>, <code>Sentinel</code>, <code>CrowdStrike Falcon</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_url</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Splunk REST API URL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_splunk_token</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Splunk Bearer authentication token</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_splunk_verify_ssl</code></td>
+<td style="text-align: left;"><code>BOOLEAN</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Enable/disable SSL validation for Splunk</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_host</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>"localhost"</code></td>
+<td style="text-align: left;">Wazuh / Elasticsearch node IP or hostname</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_port</code></td>
+<td style="text-align: left;"><code>INTEGER</code></td>
+<td style="text-align: left;"><code>9200</code></td>
+<td style="text-align: left;">Wazuh / Elasticsearch port</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_index</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>"wazuh-alerts-*"</code></td>
+<td style="text-align: left;">Wazuh index pattern</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_user</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>"admin"</code></td>
+<td style="text-align: left;">Wazuh basic auth username</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_password</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Wazuh basic auth password</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_api_key</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Elasticsearch API key (alternative to password)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_wazuh_ssl</code></td>
+<td style="text-align: left;"><code>BOOLEAN</code></td>
+<td style="text-align: left;"><code>false</code></td>
+<td style="text-align: left;">Enable/disable TLS for Wazuh</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_suricata_eve_path</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>"/var/log/suricata/eve.json"</code></td>
+<td style="text-align: left;">Absolute file path to Suricata EVE JSON log</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_sentinel_workspace_id</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Azure Log Analytics Workspace GUID</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_sentinel_tenant_id</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Azure Entra Tenant ID</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_sentinel_client_id</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Azure Registered Application Client ID</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_sentinel_client_secret</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">Azure Registered Application Client Secret</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_sentinel_table</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>"CommonSecurityLog"</code></td>
+<td style="text-align: left;">Target KQL table</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_crowdstrike_client_id</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">CrowdStrike Falcon API Client ID</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_crowdstrike_client_secret</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>""</code></td>
+<td style="text-align: left;">CrowdStrike Falcon API Client Secret</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>soc_crowdstrike_base_url</code></td>
+<td style="text-align: left;"><code>TEXT</code></td>
+<td style="text-align: left;"><code>"api.crowdstrike.com"</code></td>
+<td style="text-align: left;">CrowdStrike Falcon Cloud Region Base URL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-contextual-risk-correlator-algorithm">4. Contextual Risk Correlator Algorithm<a class="headerlink" href="#4-contextual-risk-correlator-algorithm" title="Permanent link">&para;</a></h2>
+<p>The <code>RiskCorrelator</code> class executes the contextual calculation dynamically.</p>
+<h3 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><code>scanned: List[ScannedVulnerability]</code></strong>: Scanned vulnerabilities from <code>admin.asset_vulnerabilities</code> and <code>nvd.cve</code>.</li>
+<li><strong><code>metrics: List[AttackMetric]</code></strong>: Telemetry hits from <code>admin.threat_telemetry_cache</code>.</li>
+</ul>
+<h3 id="correlation-keys">Correlation Keys<a class="headerlink" href="#correlation-keys" title="Permanent link">&para;</a></h3>
+<p>Correlation occurs on:
+$$\text{Key} = (\text{dest_ip}, \text{dest_port})$$</p>
+<h3 id="mathematical-formula">Mathematical Formula<a class="headerlink" href="#mathematical-formula" title="Permanent link">&para;</a></h3>
+<p>$$\text{ContextualRiskScore} = \min\left(10.0, CVSS_{base} + \Delta_{hits} + \Delta_{port} + \Delta_{severity} + \Delta_{recency}\right)$$</p>
+<ol>
+<li><strong>Volume Multiplier ($\Delta_{hits}$)</strong>:
+   $$\Delta_{hits} = \min\left(2.0, \log_{10}(\text{hits} + 1) \times 0.65\right)$$</li>
+<li>$1 \text{ hit} \approx +0.20$</li>
+<li>$10 \text{ hits} \approx +0.68$</li>
+<li>$100 \text{ hits} \approx +1.30$</li>
+<li>
+<p>$\ge 1200 \text{ hits} \approx +2.00$</p>
+</li>
+<li>
+<p><strong>Port Matching Bonus ($\Delta_{port}$)</strong>:
+   $$\Delta_{port} = \begin{cases} +1.5 &amp; \text{if } \text{dest_port}<em>{\text{vuln}} == \text{dest_port}</em>{\text{attack}} \ 0.0 &amp; \text{otherwise} \end{cases}$$</p>
+</li>
+<li>
+<p><strong>SIEM Severity Bonus ($\Delta_{severity}$)</strong>:
+   $$\Delta_{severity} = \begin{cases} +1.5 &amp; \text{CRITICAL} \ +1.0 &amp; \text{HIGH} \ +0.5 &amp; \text{MEDIUM} \ 0.0 &amp; \text{LOW / INFO} \end{cases}$$</p>
+</li>
+<li>
+<p><strong>Recency Bonus ($\Delta_{recency}$)</strong>:
+   $$\Delta_{recency} = \begin{cases} +1.0 &amp; \text{if } t_{now} - t_{last} \le 24\text{ hours} \ +0.5 &amp; \text{if } 24\text{ hours} &lt; t_{now} - t_{last} \le 48\text{ hours} \ 0.0 &amp; \text{otherwise} \end{cases}$$</p>
+</li>
+</ol>
+<hr />
+<h2 id="5-rest-api-endpoints-specification">5. REST API Endpoints Specification<a class="headerlink" href="#5-rest-api-endpoints-specification" title="Permanent link">&para;</a></h2>
+<h3 id="1-get-apithreatsoverview-kpis">1. <code>GET /api/threats/overview-kpis</code><a class="headerlink" href="#1-get-apithreatsoverview-kpis" title="Permanent link">&para;</a></h3>
+<p>Returns platform headline metrics.</p>
+<p><strong>Response Structure (<code>ThreatOverviewKPIs</code>)</strong>:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"active_attacks_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"actively_exploited_cves_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">"targeted_assets_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">"total_hits_24h"</span><span class="p">:</span><span class="w"> </span><span class="mi">1845</span><span class="p">,</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wazuh"</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">"delta_attacks_pct"</span><span class="p">:</span><span class="w"> </span><span class="mf">14.5</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="2-get-apithreatstop-targeted-services">2. <code>GET /api/threats/top-targeted-services</code><a class="headerlink" href="#2-get-apithreatstop-targeted-services" title="Permanent link">&para;</a></h3>
+<p>Returns top 10 targeted network ports.</p>
+<p><strong>Response Structure (<code>List[TopTargetedService]</code>)</strong>:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">[</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">"service_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTPS"</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">"total_hits"</span><span class="p">:</span><span class="w"> </span><span class="mi">850</span><span class="p">,</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">"active_attacks"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">"risk_level"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRITICAL"</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="nt">"service_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSH"</span><span class="p">,</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nt">"total_hits"</span><span class="p">:</span><span class="w"> </span><span class="mi">520</span><span class="p">,</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nt">"active_attacks"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nt">"risk_level"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HIGH"</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="p">]</span>
+</span></code></pre></div></p>
+<h3 id="3-get-apithreatsactivity-timeline">3. <code>GET /api/threats/activity-timeline</code><a class="headerlink" href="#3-get-apithreatsactivity-timeline" title="Permanent link">&para;</a></h3>
+<p>Returns 48h histogram data points for time-series trend charting.</p>
+<p><strong>Response Structure (<code>List[TimelineDataPoint]</code>)</strong>:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">[</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-26T04:00:00Z"</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">"total_hits"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">"critical_hits"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">"high_hits"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">"medium_hits"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">]</span>
+</span></code></pre></div></p>
+<h3 id="4-post-apisettingssoctest">4. <code>POST /api/settings/soc/test</code><a class="headerlink" href="#4-post-apisettingssoctest" title="Permanent link">&para;</a></h3>
+<p>Validates real-time connectivity to the selected SOC/SIEM without saving configuration.</p>
+<p><strong>Request Structure (<code>TestSocRequest</code>)</strong>:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"soc_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wazuh"</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">"wazuh_host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.0.50"</span><span class="p">,</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">"wazuh_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">9200</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">"wazuh_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wazuh-alerts-*"</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">"wazuh_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">"wazuh_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SecretPassword123!"</span><span class="p">,</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nt">"wazuh_ssl"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p><strong>Response Structure</strong>:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">"reachable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">"events_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successfully connected to Wazuh (10.0.0.50:9200). Fetched 350 telemetry attack events."</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<hr />
+<h2 id="6-verification-automated-testing">6. Verification &amp; Automated Testing<a class="headerlink" href="#6-verification-automated-testing" title="Permanent link">&para;</a></h2>
+<p>The backend includes a comprehensive unit test suite in <code>rtms-web/backend/test_risk_correlator.py</code>:
+- 16 unit tests covering <code>RiskCorrelator</code>, <code>SplunkThreatProvider</code>, <code>WazuhThreatProvider</code>, <code>SuricataThreatProvider</code>, <code>SentinelThreatProvider</code>, and <code>CrowdStrikeThreatProvider</code>.
+- Execution command:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span>/Users/marctritschler/git_projects/rtms-web/backend
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>test_risk_correlator.py
+</span></code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
