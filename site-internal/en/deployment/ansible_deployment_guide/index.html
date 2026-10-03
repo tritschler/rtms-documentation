@@ -31,7 +31,7 @@
     
     
       
-        <title>Guide de Déploiement Ansible - RTMS Documentation Technique (3TS Consulting)</title>
+        <title>Ansible Deployment Guide - RTMS Documentation Technique (3TS Consulting)</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#guide-de-deploiement-orchestration-ansible" class="md-skip">
+        <a href="#ansible-deployment-orchestration-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Guide de Déploiement Ansible
+              Ansible Deployment Guide
             
           </span>
         </div>
@@ -249,7 +249,7 @@
   
     
   
-  Accueil
+  Home
 
       </a>
     </li>
@@ -290,7 +290,7 @@
           
   
   
-  Déploiement & Installation
+  Deployment & Installation
 
         </a>
       </li>
@@ -317,7 +317,7 @@
           
   
   
-  Composants & Internals
+  Components & Internals
 
         </a>
       </li>
@@ -360,7 +360,7 @@
           
   
   
-  Conformité & Légal
+  Governance & Legal Compliance
 
         </a>
       </li>
@@ -415,7 +415,7 @@
   <span class="md-ellipsis">
     
   
-    Accueil
+    Home
   
 
     
@@ -496,7 +496,7 @@
   <span class="md-ellipsis">
     
   
-    Vue d'ensemble
+    System Overview
   
 
     
@@ -524,7 +524,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -552,7 +552,7 @@
   <span class="md-ellipsis">
     
   
-    Modèle RBAC (Permissions)
+    RBAC Security Model
   
 
     
@@ -580,7 +580,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -626,7 +626,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de données
+    Data Models
   
 
     
@@ -642,7 +642,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Modèles de données
+    Data Models
   
 
           </label>
@@ -754,7 +754,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
     
@@ -770,7 +770,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
           </label>
@@ -799,7 +799,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -817,7 +817,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -843,22 +843,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-prerequis-installation-mac-vs-vps" class="md-nav__link">
+  <a href="#1-prerequisites-installation-mac-vs-vps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Prérequis &amp; Installation : Mac vs VPS
+        1. Prerequisites &amp; Installation: Mac vs VPS
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Prérequis &amp; Installation : Mac vs VPS">
+    <nav class="md-nav" aria-label="1. Prerequisites &amp; Installation: Mac vs VPS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-sur-votre-mac-machine-de-controle" class="md-nav__link">
+  <a href="#a-on-your-mac-control-machine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. Sur votre Mac (Machine de contrôle)
+        A. On your Mac (Control Machine)
       
     </span>
   </a>
@@ -866,10 +866,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-sur-le-vps-ubuntu-machine-cible" class="md-nav__link">
+  <a href="#b-on-the-ubuntu-vps-target-machine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. Sur le VPS Ubuntu (Machine cible)
+        B. On the Ubuntu VPS (Target Machine)
       
     </span>
   </a>
@@ -882,10 +882,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-structure-des-roles-composants" class="md-nav__link">
+  <a href="#2-roles-component-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Structure des Rôles &amp; Composants
+        2. Roles &amp; Component Structure
       
     </span>
   </a>
@@ -893,34 +893,34 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-scenarios-de-deploiement" class="md-nav__link">
+  <a href="#3-deployment-scenarios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Scénarios de Déploiement
+        3. Deployment Scenarios
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Scénarios de Déploiement">
+    <nav class="md-nav" aria-label="3. Deployment Scenarios">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scenario-1-appliance-on-premise-standalone-1-seule-machine" class="md-nav__link">
+  <a href="#scenario-1-standalone-on-premise-appliance-single-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scénario 1 : Appliance On-Premise Standalone (1 seule machine)
+        Scenario 1: Standalone On-Premise Appliance (Single Server)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Scénario 1 : Appliance On-Premise Standalone (1 seule machine)">
+    <nav class="md-nav" aria-label="Scenario 1: Standalone On-Premise Appliance (Single Server)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#methode-1-via-le-script-wrapper-recommande-pour-le-client" class="md-nav__link">
+  <a href="#method-1-via-the-installation-wrapper-recommended-for-clients" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Méthode 1 : Via le script wrapper (recommandé pour le client)
+        Method 1: Via the installation wrapper (Recommended for clients)
       
     </span>
   </a>
@@ -928,10 +928,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methode-2-directement-via-ansible" class="md-nav__link">
+  <a href="#method-2-directly-via-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Méthode 2 : Directement via Ansible
+        Method 2: Directly via Ansible
       
     </span>
   </a>
@@ -944,10 +944,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scenario-2-architecture-distribuee-flotte-dagents" class="md-nav__link">
+  <a href="#scenario-2-distributed-architecture-fleet-deployment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scénario 2 : Architecture Distribuée &amp; Flotte d'Agents
+        Scenario 2: Distributed Architecture &amp; Fleet Deployment
       
     </span>
   </a>
@@ -955,10 +955,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scenario-3-deploiement-vps-central-ovh-rtms-admin" class="md-nav__link">
+  <a href="#scenario-3-central-ovh-vps-deployment-rtms-admin-hub" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scénario 3 : Déploiement VPS Central OVH (RTMS Admin)
+        Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)
       
     </span>
   </a>
@@ -971,10 +971,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-mode-simulation-dry-run-validation" class="md-nav__link">
+  <a href="#4-simulation-mode-dry-run-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Mode Simulation (Dry-Run) &amp; Validation
+        4. Simulation Mode (Dry-Run) &amp; Validation
       
     </span>
   </a>
@@ -1004,7 +1004,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -1057,7 +1057,7 @@
   <span class="md-ellipsis">
     
   
-    Composants & Internals
+    Components & Internals
   
 
     
@@ -1073,7 +1073,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Composants & Internals
+    Components & Internals
   
 
           </label>
@@ -1147,7 +1147,7 @@
   <span class="md-ellipsis">
     
   
-    Prérequis techniques
+    Technical Requirements
   
 
     
@@ -1175,7 +1175,7 @@
   <span class="md-ellipsis">
     
   
-    Mobilité, Cycle de vie & Multi-réseaux
+    Mobility & Multi-Network Lifecycle
   
 
     
@@ -1203,7 +1203,7 @@
   <span class="md-ellipsis">
     
   
-    Mode Standalone
+    Standalone Mode
   
 
     
@@ -1259,7 +1259,7 @@
   <span class="md-ellipsis">
     
   
-    Docker & PyInstaller
+    Docker & Packaging
   
 
     
@@ -1287,7 +1287,7 @@
   <span class="md-ellipsis">
     
   
-    Commandes Bettercap
+    Bettercap Commands
   
 
     
@@ -1315,7 +1315,7 @@
   <span class="md-ellipsis">
     
   
-    Audit Email & DNS
+    Email & DNS Audits
   
 
     
@@ -1343,7 +1343,7 @@
   <span class="md-ellipsis">
     
   
-    Ciblage Granulaire du Deep Scan
+    Granular Deep Scan Targeting
   
 
     
@@ -1371,7 +1371,7 @@
   <span class="md-ellipsis">
     
   
-    Ressources & Tests HTTP
+    Resources & HTTP Diagnostics
   
 
     
@@ -1461,7 +1461,63 @@
   <span class="md-ellipsis">
     
   
-    Documentation technique
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
   
 
     
@@ -1489,7 +1545,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement Nginx & Frontend
+    Production Nginx & Frontend Setup
   
 
     
@@ -1517,7 +1573,7 @@
   <span class="md-ellipsis">
     
   
-    Guide SSO Keycloak & OIDC
+    Enterprise SSO Keycloak & OIDC
   
 
     
@@ -1545,7 +1601,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage
+    Backend Startup Guide
   
 
     
@@ -1635,7 +1691,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture technique
+    Agent Architecture
   
 
     
@@ -1663,7 +1719,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1753,7 +1809,7 @@
   <span class="md-ellipsis">
     
   
-    Documentation NVD
+    NVD Technical Documentation
   
 
     
@@ -1781,7 +1837,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1809,7 +1865,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage & Ingestion
+    Startup & Ingestion Sequence
   
 
     
@@ -1837,7 +1893,7 @@
   <span class="md-ellipsis">
     
   
-    Exportation de rapports CVE
+    Exporting CVE Data
   
 
     
@@ -1927,7 +1983,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'administration
+    Admin & Licensing Workflow
   
 
     
@@ -2024,7 +2080,7 @@
   <span class="md-ellipsis">
     
   
-    Spécification & Développement
+    Plugin Specifications & Dev Guide
   
 
     
@@ -2077,7 +2133,7 @@
   <span class="md-ellipsis">
     
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
     
@@ -2093,7 +2149,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
           </label>
@@ -2113,7 +2169,7 @@
   <span class="md-ellipsis">
     
   
-    Directive NIS2
+    NIS 2 Compliance
   
 
     
@@ -2169,7 +2225,7 @@
   <span class="md-ellipsis">
     
   
-    Stratégie de Release
+    Release Strategy
   
 
     
@@ -2197,7 +2253,7 @@
   <span class="md-ellipsis">
     
   
-    Licences
+    Software Licenses & Copyrights
   
 
     
@@ -2243,7 +2299,7 @@
   <span class="md-ellipsis">
     
   
-    Documents Légaux
+    Legal Documents
   
 
     
@@ -2259,7 +2315,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Documents Légaux
+    Legal Documents
   
 
           </label>
@@ -2279,7 +2335,7 @@
   <span class="md-ellipsis">
     
   
-    EULA
+    End User License Agreement
   
 
     
@@ -2307,7 +2363,7 @@
   <span class="md-ellipsis">
     
   
-    Normes appliquées
+    Applied Standards
   
 
     
@@ -2335,7 +2391,7 @@
   <span class="md-ellipsis">
     
   
-    Déclaration UE
+    EU Declaration of Conformity
   
 
     
@@ -2363,7 +2419,7 @@
   <span class="md-ellipsis">
     
   
-    Évaluation des risques
+    Risk Assessment
   
 
     
@@ -2419,22 +2475,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-prerequis-installation-mac-vs-vps" class="md-nav__link">
+  <a href="#1-prerequisites-installation-mac-vs-vps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Prérequis &amp; Installation : Mac vs VPS
+        1. Prerequisites &amp; Installation: Mac vs VPS
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Prérequis &amp; Installation : Mac vs VPS">
+    <nav class="md-nav" aria-label="1. Prerequisites &amp; Installation: Mac vs VPS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-sur-votre-mac-machine-de-controle" class="md-nav__link">
+  <a href="#a-on-your-mac-control-machine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. Sur votre Mac (Machine de contrôle)
+        A. On your Mac (Control Machine)
       
     </span>
   </a>
@@ -2442,10 +2498,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-sur-le-vps-ubuntu-machine-cible" class="md-nav__link">
+  <a href="#b-on-the-ubuntu-vps-target-machine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. Sur le VPS Ubuntu (Machine cible)
+        B. On the Ubuntu VPS (Target Machine)
       
     </span>
   </a>
@@ -2458,10 +2514,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-structure-des-roles-composants" class="md-nav__link">
+  <a href="#2-roles-component-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Structure des Rôles &amp; Composants
+        2. Roles &amp; Component Structure
       
     </span>
   </a>
@@ -2469,34 +2525,34 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-scenarios-de-deploiement" class="md-nav__link">
+  <a href="#3-deployment-scenarios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Scénarios de Déploiement
+        3. Deployment Scenarios
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Scénarios de Déploiement">
+    <nav class="md-nav" aria-label="3. Deployment Scenarios">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scenario-1-appliance-on-premise-standalone-1-seule-machine" class="md-nav__link">
+  <a href="#scenario-1-standalone-on-premise-appliance-single-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scénario 1 : Appliance On-Premise Standalone (1 seule machine)
+        Scenario 1: Standalone On-Premise Appliance (Single Server)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Scénario 1 : Appliance On-Premise Standalone (1 seule machine)">
+    <nav class="md-nav" aria-label="Scenario 1: Standalone On-Premise Appliance (Single Server)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#methode-1-via-le-script-wrapper-recommande-pour-le-client" class="md-nav__link">
+  <a href="#method-1-via-the-installation-wrapper-recommended-for-clients" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Méthode 1 : Via le script wrapper (recommandé pour le client)
+        Method 1: Via the installation wrapper (Recommended for clients)
       
     </span>
   </a>
@@ -2504,10 +2560,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methode-2-directement-via-ansible" class="md-nav__link">
+  <a href="#method-2-directly-via-ansible" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Méthode 2 : Directement via Ansible
+        Method 2: Directly via Ansible
       
     </span>
   </a>
@@ -2520,10 +2576,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scenario-2-architecture-distribuee-flotte-dagents" class="md-nav__link">
+  <a href="#scenario-2-distributed-architecture-fleet-deployment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scénario 2 : Architecture Distribuée &amp; Flotte d'Agents
+        Scenario 2: Distributed Architecture &amp; Fleet Deployment
       
     </span>
   </a>
@@ -2531,10 +2587,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scenario-3-deploiement-vps-central-ovh-rtms-admin" class="md-nav__link">
+  <a href="#scenario-3-central-ovh-vps-deployment-rtms-admin-hub" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scénario 3 : Déploiement VPS Central OVH (RTMS Admin)
+        Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)
       
     </span>
   </a>
@@ -2547,10 +2603,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-mode-simulation-dry-run-validation" class="md-nav__link">
+  <a href="#4-simulation-mode-dry-run-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Mode Simulation (Dry-Run) &amp; Validation
+        4. Simulation Mode (Dry-Run) &amp; Validation
       
     </span>
   </a>
@@ -2574,116 +2630,116 @@
 
 
 
-<h1 id="guide-de-deploiement-orchestration-ansible">Guide de Déploiement &amp; Orchestration Ansible<a class="headerlink" href="#guide-de-deploiement-orchestration-ansible" title="Permanent link">&para;</a></h1>
-<p>Ce guide documente le déploiement automatisé et idempotent de la suite <strong>RTMS</strong> à l'aide d'<strong>Ansible</strong>.<br />
-Le moteur d'orchestration est intégré directement dans le dépôt <a href="https://github.com/tritschler/rtms-installer"><code>rtms-installer</code></a>.</p>
+<h1 id="ansible-deployment-orchestration-guide">Ansible Deployment &amp; Orchestration Guide<a class="headerlink" href="#ansible-deployment-orchestration-guide" title="Permanent link">&para;</a></h1>
+<p>This guide documents the automated, idempotent deployment of the <strong>RTMS</strong> suite using <strong>Ansible</strong>.<br />
+The orchestration engine is housed directly within the <a href="https://github.com/tritschler/rtms-installer"><code>rtms-installer</code></a> repository.</p>
 <hr />
-<h2 id="1-prerequis-installation-mac-vs-vps">1. Prérequis &amp; Installation : Mac vs VPS<a class="headerlink" href="#1-prerequis-installation-mac-vs-vps" title="Permanent link">&para;</a></h2>
-<p>Une des forces d'Ansible est son architecture <strong>Agentless</strong> (sans agent à installer sur les serveurs cibles).</p>
-<h3 id="a-sur-votre-mac-machine-de-controle">A. Sur votre Mac (Machine de contrôle)<a class="headerlink" href="#a-sur-votre-mac-machine-de-controle" title="Permanent link">&para;</a></h3>
-<p>Pour lancer des déploiements vers votre VPS ou vos environnements clients depuis votre Mac :</p>
+<h2 id="1-prerequisites-installation-mac-vs-vps">1. Prerequisites &amp; Installation: Mac vs VPS<a class="headerlink" href="#1-prerequisites-installation-mac-vs-vps" title="Permanent link">&para;</a></h2>
+<p>One of Ansible's key strengths is its <strong>Agentless</strong> architecture (no background daemon required on managed nodes).</p>
+<h3 id="a-on-your-mac-control-machine">A. On your Mac (Control Machine)<a class="headerlink" href="#a-on-your-mac-control-machine" title="Permanent link">&para;</a></h3>
+<p>To run deployments toward your VPS or client appliances from macOS:</p>
 <ul>
-<li><strong>Option 1 (Recommandée &amp; Sans pollution globale via <code>uv</code>) :</strong><br />
-  Puisque vous utilisez déjà <code>uv</code> sur votre Mac, vous n'avez même pas besoin d'installer Ansible globalement :
+<li><strong>Option 1 (Recommended &amp; Isolated via <code>uv</code>):</strong><br />
+  Since you already use <code>uv</code>, you do not need a global Ansible installation:
   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>rtms-installer/ansible
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>uv<span class="w"> </span>run<span class="w"> </span>--with<span class="w"> </span>ansible<span class="w"> </span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml
 </span></code></pre></div></li>
-<li><strong>Option 2 (Installation standard macOS via Homebrew) :</strong>
+<li><strong>Option 2 (Homebrew):</strong>
   <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>brew<span class="w"> </span>install<span class="w"> </span>ansible
 </span></code></pre></div></li>
-<li><strong>Option 3 (Via pipx) :</strong>
+<li><strong>Option 3 (Via pipx):</strong>
   <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pipx<span class="w"> </span>install<span class="w"> </span>ansible
 </span></code></pre></div></li>
 </ul>
 <hr />
-<h3 id="b-sur-le-vps-ubuntu-machine-cible">B. Sur le VPS Ubuntu (Machine cible)<a class="headerlink" href="#b-sur-le-vps-ubuntu-machine-cible" title="Permanent link">&para;</a></h3>
-<p><strong>Vous n'avez RIEN à installer au préalable sur votre VPS Ubuntu !</strong></p>
-<p>Ansible fonctionne sans agent (<em>Agentless</em>) :
-1. Il se connecte en <strong>SSH</strong> (<code>ssh ubuntu@vps</code>).
-2. Il utilise l'interpréteur <strong>Python 3</strong> natif d'Ubuntu (<code>/usr/bin/python3</code>).
-3. Il exécute les tâches et s'assure des permissions <code>sudo</code>.</p>
+<h3 id="b-on-the-ubuntu-vps-target-machine">B. On the Ubuntu VPS (Target Machine)<a class="headerlink" href="#b-on-the-ubuntu-vps-target-machine" title="Permanent link">&para;</a></h3>
+<p><strong>You do NOT need to pre-install anything on your target Ubuntu VPS!</strong></p>
+<p>Ansible operates agentlessly:
+1. Connects via <strong>SSH</strong> (<code>ssh ubuntu@vps</code>).
+2. Leverages the native Ubuntu <strong>Python 3</strong> interpreter (<code>/usr/bin/python3</code>).
+3. Executes modular tasks with elevated <code>sudo</code> privileges.</p>
 <blockquote>
-<p><strong>Note :</strong> Si vous préférez exécuter l'installation <em>directement depuis la console du VPS</em> (sans passer par votre Mac via SSH), lancez simplement le script wrapper :
+<p><strong>Note:</strong> If you choose to execute installation <em>locally on the VPS console</em> (without SSH from your workstation), simply execute the wrapper script:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>./install.sh
 </span></code></pre></div>
-Le script installera lui-même Ansible et les dépendances nécessaires (<code>apt-get install -y ansible</code>) de manière transparente.</p>
+The script installs Ansible and necessary packages (<code>apt-get install -y ansible</code>) transparently.</p>
 </blockquote>
 <hr />
-<h2 id="2-structure-des-roles-composants">2. Structure des Rôles &amp; Composants<a class="headerlink" href="#2-structure-des-roles-composants" title="Permanent link">&para;</a></h2>
-<p>L'orchestration s'appuie sur 8 rôles modulaires situés dans <code>rtms-installer/ansible/roles/</code> :</p>
+<h2 id="2-roles-component-structure">2. Roles &amp; Component Structure<a class="headerlink" href="#2-roles-component-structure" title="Permanent link">&para;</a></h2>
+<p>Orchestration is organized across 8 modular roles located in <code>rtms-installer/ansible/roles/</code>:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Rôle</th>
+<th style="text-align: left;">Role</th>
 <th style="text-align: left;">Description</th>
-<th style="text-align: left;">Composants gérés</th>
+<th style="text-align: left;">Managed Components</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>common</code></td>
-<td style="text-align: left;">Socle système et sécurité</td>
-<td style="text-align: left;">Utilisateur système <code>rtms</code>, répertoires <code>/opt/rtms</code>, génération clé Ed25519</td>
+<td style="text-align: left;">System base &amp; security</td>
+<td style="text-align: left;"><code>rtms</code> system user, <code>/opt/rtms</code> paths, Ed25519 asymmetric keypair</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>postgresql</code></td>
-<td style="text-align: left;">Base de données locale ou distante</td>
-<td style="text-align: left;">Installation, création user/db, seeding initial et durcissement RBAC</td>
+<td style="text-align: left;">Local or remote database</td>
+<td style="text-align: left;">Installation, user/db creation, schema migration, and RBAC hardening</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>backend</code></td>
-<td style="text-align: left;">API FastAPI</td>
-<td style="text-align: left;">Binaire <code>rtms-backend</code>, fichier <code>.env</code> (JWT), service systemd</td>
+<td style="text-align: left;">FastAPI backend</td>
+<td style="text-align: left;"><code>rtms-backend</code> binary, <code>.env</code> file (JWT), systemd service</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>frontend</code></td>
-<td style="text-align: left;">Interface utilisateur</td>
-<td style="text-align: left;">Compilation Vite/npm ou copie SPA <code>dist</code>, serveur NGINX (SSL optionnel)</td>
+<td style="text-align: left;">User interface</td>
+<td style="text-align: left;">Vite/npm compilation or SPA <code>dist</code> deployment, NGINX configuration (optional TLS)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>scanner</code></td>
-<td style="text-align: left;">Moteur de scan réseau</td>
-<td style="text-align: left;">Binaire <code>rtms-scanner</code>, fichier <code>scanner.properties</code>, service systemd</td>
+<td style="text-align: left;">Network scanning probe</td>
+<td style="text-align: left;"><code>rtms-scanner</code> binary, <code>scanner.properties</code>, systemd service</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>nvd</code></td>
-<td style="text-align: left;">Ingestion CVE NIST</td>
-<td style="text-align: left;">Binaire <code>rtms-nvd</code>, service d'arrière-plan systemd</td>
+<td style="text-align: left;">NIST CVE ingestion</td>
+<td style="text-align: left;"><code>rtms-nvd</code> binary, background ingestion systemd service</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>local_agent</code></td>
-<td style="text-align: left;">Agent endpoint distribué</td>
-<td style="text-align: left;">Binaire <code>rtms-local-agent</code>, jeton d'enrôlement, service systemd</td>
+<td style="text-align: left;">Distributed endpoint agent</td>
+<td style="text-align: left;"><code>rtms-local-agent</code> binary, enrollment token, systemd service</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>admin_hub</code></td>
-<td style="text-align: left;">Console centrale &amp; Support Hub</td>
-<td style="text-align: left;">FastAPI, venv Python, NGINX, initialisation tables Postgres OVH</td>
+<td style="text-align: left;">Central hub &amp; Support console</td>
+<td style="text-align: left;">FastAPI, Python virtualenv, NGINX, OVH Postgres table seeding</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="3-scenarios-de-deploiement">3. Scénarios de Déploiement<a class="headerlink" href="#3-scenarios-de-deploiement" title="Permanent link">&para;</a></h2>
-<h3 id="scenario-1-appliance-on-premise-standalone-1-seule-machine">Scénario 1 : Appliance On-Premise Standalone (1 seule machine)<a class="headerlink" href="#scenario-1-appliance-on-premise-standalone-1-seule-machine" title="Permanent link">&para;</a></h3>
-<p>Idéal pour une VM ou un serveur physique client hébergeant l'ensemble de la suite.</p>
-<h4 id="methode-1-via-le-script-wrapper-recommande-pour-le-client">Méthode 1 : Via le script wrapper (recommandé pour le client)<a class="headerlink" href="#methode-1-via-le-script-wrapper-recommande-pour-le-client" title="Permanent link">&para;</a></h4>
+<h2 id="3-deployment-scenarios">3. Deployment Scenarios<a class="headerlink" href="#3-deployment-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-1-standalone-on-premise-appliance-single-server">Scenario 1: Standalone On-Premise Appliance (Single Server)<a class="headerlink" href="#scenario-1-standalone-on-premise-appliance-single-server" title="Permanent link">&para;</a></h3>
+<p>Ideal for client virtual machines or bare-metal servers hosting all RTMS services.</p>
+<h4 id="method-1-via-the-installation-wrapper-recommended-for-clients">Method 1: Via the installation wrapper (Recommended for clients)<a class="headerlink" href="#method-1-via-the-installation-wrapper-recommended-for-clients" title="Permanent link">&para;</a></h4>
 <p><div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>./install.sh
 </span></code></pre></div>
-* Options de compilation et binaires :
-  * <code>--build-from-source</code> : Force la compilation locale avec <code>uv</code>/<code>build.sh</code>/<code>npm</code>.
-  * <code>--use-precompiled</code> : Utilise strictement les binaires précompilés du dossier <code>bin/</code>.
-  * <code>--non-interactive</code> : Automatisation batch (idéal pour scripts CI/CD).
-  * <code>--legacy</code> : Exécute l'ancien script pure-bash en cas de besoin.</p>
-<h4 id="methode-2-directement-via-ansible">Méthode 2 : Directement via Ansible<a class="headerlink" href="#methode-2-directement-via-ansible" title="Permanent link">&para;</a></h4>
+* Compilation &amp; binary options:
+  * <code>--build-from-source</code>: Force local compilation with <code>uv</code>/<code>build.sh</code>/<code>npm</code>.
+  * <code>--use-precompiled</code>: Enforce using precompiled binaries in <code>bin/</code>.
+  * <code>--non-interactive</code>: Unattended automated provisioning (ideal for CI/CD).
+  * <code>--legacy</code>: Fall back to legacy bash installer if necessary.</p>
+<h4 id="method-2-directly-via-ansible">Method 2: Directly via Ansible<a class="headerlink" href="#method-2-directly-via-ansible" title="Permanent link">&para;</a></h4>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>ansible
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/standalone/hosts.yml<span class="w"> </span>playbooks/site_standalone.yml
 </span></code></pre></div>
 <hr />
-<h3 id="scenario-2-architecture-distribuee-flotte-dagents">Scénario 2 : Architecture Distribuée &amp; Flotte d'Agents<a class="headerlink" href="#scenario-2-architecture-distribuee-flotte-dagents" title="Permanent link">&para;</a></h3>
-<p>Pour les environnements d'entreprise avec un serveur central, des scanners déportés (DMZ) et des dizaines de postes équipés de l'agent local.</p>
+<h3 id="scenario-2-distributed-architecture-fleet-deployment">Scenario 2: Distributed Architecture &amp; Fleet Deployment<a class="headerlink" href="#scenario-2-distributed-architecture-fleet-deployment" title="Permanent link">&para;</a></h3>
+<p>For enterprise environments featuring a central cluster, remote DMZ network probes, and fleets of endpoints running the local agent.</p>
 <ol>
 <li>
-<p>Définir les adresses IP dans <code>inventories/distributed/hosts.yml</code> :
+<p>Define target hosts in <code>inventories/distributed/hosts.yml</code>:
    <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">all</span><span class="p">:</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">children</span><span class="p">:</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">rtms_core</span><span class="p">:</span>
@@ -2702,32 +2758,32 @@ Le script installera lui-même Ansible et les dépendances nécessaires (<code>a
 </span></code></pre></div></p>
 </li>
 <li>
-<p>Déployer le Core et les Scanners :
+<p>Deploy Core Services and Remote Probes:
    <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/distributed/hosts.yml<span class="w"> </span>playbooks/deploy_distributed.yml
 </span></code></pre></div></p>
 </li>
 <li>
-<p>Déployer la flotte de <strong>Local Agents</strong> en rolling update :
+<p>Deploy <strong>Local Agent</strong> fleet via rolling updates:
    <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/distributed/hosts.yml<span class="w"> </span>playbooks/deploy_agents.yml
 </span></code></pre></div></p>
 <blockquote>
-<p><strong>Déploiement par vagues :</strong> Les agents sont déployés par vagues successives de 25% des machines (<code>serial: "25%"</code>), avec interruption automatique si plus de 10% des postes rencontrent une erreur.</p>
+<p><strong>Rolling Deployments:</strong> Agents are updated in batches of 25% of hosts (<code>serial: "25%"</code>), with automated failure cutoffs if more than 10% fail.</p>
 </blockquote>
 </li>
 </ol>
 <hr />
-<h3 id="scenario-3-deploiement-vps-central-ovh-rtms-admin">Scénario 3 : Déploiement VPS Central OVH (RTMS Admin)<a class="headerlink" href="#scenario-3-deploiement-vps-central-ovh-rtms-admin" title="Permanent link">&para;</a></h3>
-<p>Pour administrer et mettre à jour votre serveur central de télé-assistance et de licences :</p>
+<h3 id="scenario-3-central-ovh-vps-deployment-rtms-admin-hub">Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)<a class="headerlink" href="#scenario-3-central-ovh-vps-deployment-rtms-admin-hub" title="Permanent link">&para;</a></h3>
+<p>To deploy or upgrade your central support, license, and release gateway:</p>
 <ol>
-<li>Configurer <code>inventories/vps_ovh/hosts.yml</code> avec l'IP publique et l'utilisateur SSH (<code>ubuntu</code>).</li>
-<li>Lancer le déploiement depuis votre Mac :
+<li>Configure <code>inventories/vps_ovh/hosts.yml</code> with the public IP and SSH username (<code>ubuntu</code>).</li>
+<li>Run deployment from your Mac workstation:
    <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>ansible
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>uv<span class="w"> </span>run<span class="w"> </span>--with<span class="w"> </span>ansible<span class="w"> </span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml
 </span></code></pre></div></li>
 </ol>
 <hr />
-<h2 id="4-mode-simulation-dry-run-validation">4. Mode Simulation (Dry-Run) &amp; Validation<a class="headerlink" href="#4-mode-simulation-dry-run-validation" title="Permanent link">&para;</a></h2>
-<p>Avant d'appliquer des changements en production, vous pouvez tester l'exécution sans rien modifier sur les machines distantes :</p>
+<h2 id="4-simulation-mode-dry-run-validation">4. Simulation Mode (Dry-Run) &amp; Validation<a class="headerlink" href="#4-simulation-mode-dry-run-validation" title="Permanent link">&para;</a></h2>
+<p>Before applying modifications to production systems, simulate the execution without altering target hosts:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml<span class="w"> </span>--check<span class="w"> </span>--diff
 </span></code></pre></div>
 

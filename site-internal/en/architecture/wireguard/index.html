@@ -31,7 +31,7 @@
     
     
       
-        <title>Réseau & WireGuard - RTMS Documentation Technique (3TS Consulting)</title>
+        <title>Network & WireGuard - RTMS Documentation Technique (3TS Consulting)</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#22-activation-du-routage-ip-ip-forwarding" class="md-skip">
+        <a href="#secure-wireguard-vpn-infrastructure-hub-and-spoke-architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Réseau & WireGuard
+              Network & WireGuard
             
           </span>
         </div>
@@ -249,7 +249,7 @@
   
     
   
-  Accueil
+  Home
 
       </a>
     </li>
@@ -290,7 +290,7 @@
           
   
   
-  Déploiement & Installation
+  Deployment & Installation
 
         </a>
       </li>
@@ -317,7 +317,7 @@
           
   
   
-  Composants & Internals
+  Components & Internals
 
         </a>
       </li>
@@ -360,7 +360,7 @@
           
   
   
-  Conformité & Légal
+  Governance & Legal Compliance
 
         </a>
       </li>
@@ -415,7 +415,7 @@
   <span class="md-ellipsis">
     
   
-    Accueil
+    Home
   
 
     
@@ -499,7 +499,7 @@
   <span class="md-ellipsis">
     
   
-    Vue d'ensemble
+    System Overview
   
 
     
@@ -526,6 +526,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -534,7 +536,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -552,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -568,6 +570,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -576,88 +580,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#22-activation-du-routage-ip-ip-forwarding" class="md-nav__link">
+  <a href="#1-network-architecture-addressing-plan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Activation du routage IP (IP Forwarding)
+        1. Network Architecture &amp; Addressing Plan
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#23-fichier-de-configuration-etcwireguardwg0conf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Fichier de configuration /etc/wireguard/wg0.conf
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#24-gestion-du-service" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4. Gestion du service
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-configuration-du-client-1-mac-macos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Configuration du Client 1 (Mac - macOS)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Configuration du Client 1 (Mac - macOS)">
+    <nav class="md-nav" aria-label="1. Network Architecture &amp; Addressing Plan">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-installation-via-la-ligne-de-commande" class="md-nav__link">
+  <a href="#ip-address-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Installation via la ligne de commande
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-generation-des-cles-locales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2. Génération des clés locales
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-fichier-de-configuration-opthomebrewetcwireguardwg0conf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3. Fichier de configuration /opt/homebrew/etc/wireguard/wg0.conf
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-stabilisation-des-sessions-ssh-keepalive" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4. Stabilisation des sessions SSH (KeepAlive)
+        IP Address Mapping
       
     </span>
   </a>
@@ -670,22 +608,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-configuration-du-client-2-linux-maison-endeavouros" class="md-nav__link">
+  <a href="#2-server-configuration-vps-ubuntu-2404-2604" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Configuration du Client 2 (Linux Maison - EndeavourOS)
+        2. Server Configuration (VPS - Ubuntu 24.04 / 26.04)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Configuration du Client 2 (Linux Maison - EndeavourOS)">
+    <nav class="md-nav" aria-label="2. Server Configuration (VPS - Ubuntu 24.04 / 26.04)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-installation-et-gestion-du-kernel" class="md-nav__link">
+  <a href="#21-installation-and-initialization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Installation et gestion du Kernel
+        2.1. Installation and Initialization
       
     </span>
   </a>
@@ -693,10 +631,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-fichier-de-configuration-etcwireguardwg0conf" class="md-nav__link">
+  <a href="#22-enable-ip-forwarding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Fichier de configuration /etc/wireguard/wg0.conf
+        2.2. Enable IP Forwarding
       
     </span>
   </a>
@@ -704,10 +642,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-lancement-et-persistance" class="md-nav__link">
+  <a href="#23-configuration-file-etcwireguardwg0conf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Lancement et persistance
+        2.3. Configuration File /etc/wireguard/wg0.conf
       
     </span>
   </a>
@@ -715,10 +653,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#44-configuration-always-on-empecher-la-mise-en-veille" class="md-nav__link">
+  <a href="#24-service-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.4. Configuration "Always-On" (Empêcher la mise en veille)
+        2.4. Service Management
       
     </span>
   </a>
@@ -731,22 +669,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-securisation-et-durcissement-hardening-du-vps" class="md-nav__link">
+  <a href="#3-client-1-configuration-mac-macos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Sécurisation et Durcissement (Hardening du VPS)
+        3. Client 1 Configuration (Mac - macOS)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Sécurisation et Durcissement (Hardening du VPS)">
+    <nav class="md-nav" aria-label="3. Client 1 Configuration (Mac - macOS)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-configuration-des-regles-ufw-sur-le-vps" class="md-nav__link">
+  <a href="#31-installation-via-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. Configuration des règles UFW sur le VPS
+        3.1. Installation via CLI
       
     </span>
   </a>
@@ -754,10 +692,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-verrouillage-du-service-ssh-etcsshsshd_configd00-securityconf" class="md-nav__link">
+  <a href="#32-local-key-generation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Verrouillage du service SSH (/etc/ssh/sshd_config.d/00-security.conf)
+        3.2. Local Key Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-configuration-file-opthomebrewetcwireguardwg0conf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Configuration File /opt/homebrew/etc/wireguard/wg0.conf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-ssh-session-stabilization-keepalive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. SSH Session Stabilization (KeepAlive)
       
     </span>
   </a>
@@ -770,10 +730,110 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-commandes-de-diagnostic-et-dexploitation" class="md-nav__link">
+  <a href="#4-client-2-configuration-linux-home-endeavouros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Commandes de Diagnostic et d'Exploitation
+        4. Client 2 Configuration (Linux Home - EndeavourOS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Client 2 Configuration (Linux Home - EndeavourOS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-installation-and-kernel-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Installation and Kernel Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configuration-file-etcwireguardwg0conf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Configuration File /etc/wireguard/wg0.conf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-startup-and-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Startup and Persistence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-always-on-configuration-disable-sleep-suspend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Always-On Configuration (Disable Sleep &amp; Suspend)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-security-hardening-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Security &amp; Hardening (VPS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Security &amp; Hardening (VPS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-ufw-rules-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. UFW Rules on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ssh-service-hardening-etcsshsshd_configd00-securityconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. SSH Service Hardening (/etc/ssh/sshd_config.d/00-security.conf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-diagnostic-operational-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Diagnostic &amp; Operational Commands
       
     </span>
   </a>
@@ -803,7 +863,7 @@
   <span class="md-ellipsis">
     
   
-    Modèle RBAC (Permissions)
+    RBAC Security Model
   
 
     
@@ -831,7 +891,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -880,7 +940,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de données
+    Data Models
   
 
     
@@ -896,7 +956,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Modèles de données
+    Data Models
   
 
           </label>
@@ -1005,7 +1065,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
     
@@ -1021,7 +1081,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
           </label>
@@ -1041,7 +1101,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -1069,7 +1129,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -1122,7 +1182,7 @@
   <span class="md-ellipsis">
     
   
-    Composants & Internals
+    Components & Internals
   
 
     
@@ -1138,7 +1198,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Composants & Internals
+    Components & Internals
   
 
           </label>
@@ -1212,7 +1272,7 @@
   <span class="md-ellipsis">
     
   
-    Prérequis techniques
+    Technical Requirements
   
 
     
@@ -1240,7 +1300,7 @@
   <span class="md-ellipsis">
     
   
-    Mobilité, Cycle de vie & Multi-réseaux
+    Mobility & Multi-Network Lifecycle
   
 
     
@@ -1268,7 +1328,7 @@
   <span class="md-ellipsis">
     
   
-    Mode Standalone
+    Standalone Mode
   
 
     
@@ -1324,7 +1384,7 @@
   <span class="md-ellipsis">
     
   
-    Docker & PyInstaller
+    Docker & Packaging
   
 
     
@@ -1352,7 +1412,7 @@
   <span class="md-ellipsis">
     
   
-    Commandes Bettercap
+    Bettercap Commands
   
 
     
@@ -1380,7 +1440,7 @@
   <span class="md-ellipsis">
     
   
-    Audit Email & DNS
+    Email & DNS Audits
   
 
     
@@ -1408,7 +1468,7 @@
   <span class="md-ellipsis">
     
   
-    Ciblage Granulaire du Deep Scan
+    Granular Deep Scan Targeting
   
 
     
@@ -1436,7 +1496,7 @@
   <span class="md-ellipsis">
     
   
-    Ressources & Tests HTTP
+    Resources & HTTP Diagnostics
   
 
     
@@ -1526,7 +1586,63 @@
   <span class="md-ellipsis">
     
   
-    Documentation technique
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
   
 
     
@@ -1554,7 +1670,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement Nginx & Frontend
+    Production Nginx & Frontend Setup
   
 
     
@@ -1582,7 +1698,7 @@
   <span class="md-ellipsis">
     
   
-    Guide SSO Keycloak & OIDC
+    Enterprise SSO Keycloak & OIDC
   
 
     
@@ -1610,7 +1726,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage
+    Backend Startup Guide
   
 
     
@@ -1700,7 +1816,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture technique
+    Agent Architecture
   
 
     
@@ -1728,7 +1844,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1818,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Documentation NVD
+    NVD Technical Documentation
   
 
     
@@ -1846,7 +1962,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1874,7 +1990,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage & Ingestion
+    Startup & Ingestion Sequence
   
 
     
@@ -1902,7 +2018,7 @@
   <span class="md-ellipsis">
     
   
-    Exportation de rapports CVE
+    Exporting CVE Data
   
 
     
@@ -1992,7 +2108,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'administration
+    Admin & Licensing Workflow
   
 
     
@@ -2089,7 +2205,7 @@
   <span class="md-ellipsis">
     
   
-    Spécification & Développement
+    Plugin Specifications & Dev Guide
   
 
     
@@ -2142,7 +2258,7 @@
   <span class="md-ellipsis">
     
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
     
@@ -2158,7 +2274,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
           </label>
@@ -2178,7 +2294,7 @@
   <span class="md-ellipsis">
     
   
-    Directive NIS2
+    NIS 2 Compliance
   
 
     
@@ -2234,7 +2350,7 @@
   <span class="md-ellipsis">
     
   
-    Stratégie de Release
+    Release Strategy
   
 
     
@@ -2262,7 +2378,7 @@
   <span class="md-ellipsis">
     
   
-    Licences
+    Software Licenses & Copyrights
   
 
     
@@ -2308,7 +2424,7 @@
   <span class="md-ellipsis">
     
   
-    Documents Légaux
+    Legal Documents
   
 
     
@@ -2324,7 +2440,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Documents Légaux
+    Legal Documents
   
 
           </label>
@@ -2344,7 +2460,7 @@
   <span class="md-ellipsis">
     
   
-    EULA
+    End User License Agreement
   
 
     
@@ -2372,7 +2488,7 @@
   <span class="md-ellipsis">
     
   
-    Normes appliquées
+    Applied Standards
   
 
     
@@ -2400,7 +2516,7 @@
   <span class="md-ellipsis">
     
   
-    Déclaration UE
+    EU Declaration of Conformity
   
 
     
@@ -2428,7 +2544,7 @@
   <span class="md-ellipsis">
     
   
-    Évaluation des risques
+    Risk Assessment
   
 
     
@@ -2474,6 +2590,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2482,88 +2600,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#22-activation-du-routage-ip-ip-forwarding" class="md-nav__link">
+  <a href="#1-network-architecture-addressing-plan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Activation du routage IP (IP Forwarding)
+        1. Network Architecture &amp; Addressing Plan
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#23-fichier-de-configuration-etcwireguardwg0conf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Fichier de configuration /etc/wireguard/wg0.conf
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#24-gestion-du-service" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4. Gestion du service
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-configuration-du-client-1-mac-macos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Configuration du Client 1 (Mac - macOS)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Configuration du Client 1 (Mac - macOS)">
+    <nav class="md-nav" aria-label="1. Network Architecture &amp; Addressing Plan">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-installation-via-la-ligne-de-commande" class="md-nav__link">
+  <a href="#ip-address-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Installation via la ligne de commande
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-generation-des-cles-locales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2. Génération des clés locales
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-fichier-de-configuration-opthomebrewetcwireguardwg0conf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3. Fichier de configuration /opt/homebrew/etc/wireguard/wg0.conf
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-stabilisation-des-sessions-ssh-keepalive" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4. Stabilisation des sessions SSH (KeepAlive)
+        IP Address Mapping
       
     </span>
   </a>
@@ -2576,22 +2628,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-configuration-du-client-2-linux-maison-endeavouros" class="md-nav__link">
+  <a href="#2-server-configuration-vps-ubuntu-2404-2604" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Configuration du Client 2 (Linux Maison - EndeavourOS)
+        2. Server Configuration (VPS - Ubuntu 24.04 / 26.04)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Configuration du Client 2 (Linux Maison - EndeavourOS)">
+    <nav class="md-nav" aria-label="2. Server Configuration (VPS - Ubuntu 24.04 / 26.04)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-installation-et-gestion-du-kernel" class="md-nav__link">
+  <a href="#21-installation-and-initialization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Installation et gestion du Kernel
+        2.1. Installation and Initialization
       
     </span>
   </a>
@@ -2599,10 +2651,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-fichier-de-configuration-etcwireguardwg0conf" class="md-nav__link">
+  <a href="#22-enable-ip-forwarding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Fichier de configuration /etc/wireguard/wg0.conf
+        2.2. Enable IP Forwarding
       
     </span>
   </a>
@@ -2610,10 +2662,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-lancement-et-persistance" class="md-nav__link">
+  <a href="#23-configuration-file-etcwireguardwg0conf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Lancement et persistance
+        2.3. Configuration File /etc/wireguard/wg0.conf
       
     </span>
   </a>
@@ -2621,10 +2673,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#44-configuration-always-on-empecher-la-mise-en-veille" class="md-nav__link">
+  <a href="#24-service-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.4. Configuration "Always-On" (Empêcher la mise en veille)
+        2.4. Service Management
       
     </span>
   </a>
@@ -2637,22 +2689,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-securisation-et-durcissement-hardening-du-vps" class="md-nav__link">
+  <a href="#3-client-1-configuration-mac-macos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Sécurisation et Durcissement (Hardening du VPS)
+        3. Client 1 Configuration (Mac - macOS)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Sécurisation et Durcissement (Hardening du VPS)">
+    <nav class="md-nav" aria-label="3. Client 1 Configuration (Mac - macOS)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-configuration-des-regles-ufw-sur-le-vps" class="md-nav__link">
+  <a href="#31-installation-via-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. Configuration des règles UFW sur le VPS
+        3.1. Installation via CLI
       
     </span>
   </a>
@@ -2660,10 +2712,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-verrouillage-du-service-ssh-etcsshsshd_configd00-securityconf" class="md-nav__link">
+  <a href="#32-local-key-generation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Verrouillage du service SSH (/etc/ssh/sshd_config.d/00-security.conf)
+        3.2. Local Key Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-configuration-file-opthomebrewetcwireguardwg0conf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Configuration File /opt/homebrew/etc/wireguard/wg0.conf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-ssh-session-stabilization-keepalive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. SSH Session Stabilization (KeepAlive)
       
     </span>
   </a>
@@ -2676,10 +2750,110 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-commandes-de-diagnostic-et-dexploitation" class="md-nav__link">
+  <a href="#4-client-2-configuration-linux-home-endeavouros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Commandes de Diagnostic et d'Exploitation
+        4. Client 2 Configuration (Linux Home - EndeavourOS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Client 2 Configuration (Linux Home - EndeavourOS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-installation-and-kernel-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Installation and Kernel Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configuration-file-etcwireguardwg0conf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Configuration File /etc/wireguard/wg0.conf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-startup-and-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Startup and Persistence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-always-on-configuration-disable-sleep-suspend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Always-On Configuration (Disable Sleep &amp; Suspend)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-security-hardening-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Security &amp; Hardening (VPS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Security &amp; Hardening (VPS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-ufw-rules-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. UFW Rules on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ssh-service-hardening-etcsshsshd_configd00-securityconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. SSH Service Hardening (/etc/ssh/sshd_config.d/00-security.conf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-diagnostic-operational-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Diagnostic &amp; Operational Commands
       
     </span>
   </a>
@@ -2703,57 +2877,49 @@
 
 
 
-  <h1>Réseau & WireGuard</h1>
-
-<p>Voici le contenu complet et détaillé de ton fichier <code>WireGuard.md</code>. Tu peux le copier-coller directement dans ton système de documentation.</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gh"># Infrastructure VPN Sécurisée WireGuard (Architecture Hub-and-Spoke)</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Ce document détaille la configuration complète d'un réseau privé virtuel (VPN) WireGuard permettant d'interconnecter un Mac (Poste de travail) et un serveur Linux local (Maison/Client) via un VPS faisant office de point de rebond central (Bastion/Hub).
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>---
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gu">## 1. Architecture Réseau &amp; Plan d'Adressage</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>L'architecture retenue est une topologie en étoile (<span class="gs">**Hub-and-Spoke**</span>). Le VPS possède une IP publique fixe et redirige les flux entre les différents clients cachés derrière des routeurs ou pare-feux NAT.
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gu">### Cartographie des adresses IP</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">*</span><span class="w"> </span><span class="gs">**VPS (Hub) :**</span> * IP Publique : <span class="sb">`135.125.102.194`</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="k">*</span><span class="w"> </span>IP VPN Privée : <span class="sb">`10.0.0.1`</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">*</span><span class="w"> </span><span class="gs">**Mac (Spoke 1) :**</span> * IP VPN Privée : <span class="sb">`10.0.0.2`</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">*</span><span class="w"> </span><span class="gs">**Linux Maison - EndeavourOS (Spoke 2) :**</span> * IP VPN Privée : <span class="sb">`10.0.0.3`</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>---
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gu">## 2. Configuration du Serveur (VPS - Ubuntu 26.04)</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="gu">### 2.1. Installation et initialisation</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>Connecte-toi en SSH sur le VPS et bascule en mode superutilisateur (<span class="sb">`sudo -i`</span>).
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>```bash
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="gh"># Update package list and install WireGuard tools</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>apt update &amp;&amp; apt install -y wireguard
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="gh"># Navigate to configuration directory and set strict permissions</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>cd /etc/wireguard
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>umask 077
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="gh"># Generate server keys</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>wg genkey | tee server_private.key | wg pubkey &gt; server_public.key
+<h1 id="secure-wireguard-vpn-infrastructure-hub-and-spoke-architecture">Secure WireGuard VPN Infrastructure (Hub-and-Spoke Architecture)<a class="headerlink" href="#secure-wireguard-vpn-infrastructure-hub-and-spoke-architecture" title="Permanent link">&para;</a></h1>
+<p>This document details the complete configuration of a WireGuard Virtual Private Network (VPN) interconnecting a Mac workstation and a local Linux server (Home/Client) via a VPS acting as a central relay point (Bastion/Hub).</p>
+<hr />
+<h2 id="1-network-architecture-addressing-plan">1. Network Architecture &amp; Addressing Plan<a class="headerlink" href="#1-network-architecture-addressing-plan" title="Permanent link">&para;</a></h2>
+<p>The selected architecture follows a star topology (<strong>Hub-and-Spoke</strong>). The VPS has a static public IP address and forwards traffic between clients behind NAT routers or firewalls.</p>
+<h3 id="ip-address-mapping">IP Address Mapping<a class="headerlink" href="#ip-address-mapping" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>VPS (Hub):</strong></li>
+<li>Public IP: <code>135.125.102.194</code></li>
+<li>VPN Private IP: <code>10.0.0.1</code></li>
+<li><strong>Mac (Spoke 1):</strong></li>
+<li>VPN Private IP: <code>10.0.0.2</code></li>
+<li><strong>Linux Home - EndeavourOS (Spoke 2):</strong></li>
+<li>VPN Private IP: <code>10.0.0.3</code></li>
+</ul>
+<hr />
+<h2 id="2-server-configuration-vps-ubuntu-2404-2604">2. Server Configuration (VPS - Ubuntu 24.04 / 26.04)<a class="headerlink" href="#2-server-configuration-vps-ubuntu-2404-2604" title="Permanent link">&para;</a></h2>
+<h3 id="21-installation-and-initialization">2.1. Installation and Initialization<a class="headerlink" href="#21-installation-and-initialization" title="Permanent link">&para;</a></h3>
+<p>Connect via SSH to the VPS and elevate to root (<code>sudo -i</code>).</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Update package list and install WireGuard tools</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wireguard
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Navigate to configuration directory and set strict permissions</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">cd</span><span class="w"> </span>/etc/wireguard
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">umask</span><span class="w"> </span><span class="m">077</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Generate server keys</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>wg<span class="w"> </span>genkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>server_private.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>wg<span class="w"> </span>pubkey<span class="w"> </span>&gt;<span class="w"> </span>server_public.key
 </span></code></pre></div>
-<h3 id="22-activation-du-routage-ip-ip-forwarding">2.2. Activation du routage IP (IP Forwarding)<a class="headerlink" href="#22-activation-du-routage-ip-ip-forwarding" title="Permanent link">&para;</a></h3>
-<p>Le VPS doit être autorisé à transférer les paquets réseau d'une interface à l'autre.</p>
+<h3 id="22-enable-ip-forwarding">2.2. Enable IP Forwarding<a class="headerlink" href="#22-enable-ip-forwarding" title="Permanent link">&para;</a></h3>
+<p>The VPS must be permitted to route packets between network interfaces:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Enable IPv4 forwarding permanently</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"net.ipv4.ip_forward=1"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Apply changes immediately</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sysctl<span class="w"> </span>-p
 </span></code></pre></div>
-<h3 id="23-fichier-de-configuration-etcwireguardwg0conf">2.3. Fichier de configuration <code>/etc/wireguard/wg0.conf</code><a class="headerlink" href="#23-fichier-de-configuration-etcwireguardwg0conf" title="Permanent link">&para;</a></h3>
-<p>Crée le fichier contenant la définition de l'interface réseau du serveur et les déclarations des clients autorisés (<em>Peers</em>) :</p>
+<h3 id="23-configuration-file-etcwireguardwg0conf">2.3. Configuration File <code>/etc/wireguard/wg0.conf</code><a class="headerlink" href="#23-configuration-file-etcwireguardwg0conf" title="Permanent link">&para;</a></h3>
+<p>Create the server interface definition and authorized peer declarations:</p>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">[Interface]</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.1/24</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">ListenPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">51820</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;CONTENU_DE_SERVER_PRIVATE_KEY&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;SERVER_PRIVATE_KEY_CONTENT&gt;</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># NAT and traffic forwarding routing rules</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="na">PostUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">iptables -A FORWARD -i wg0 -j ACCEPT</span><span class="c1">; iptables -t nat -A POSTROUTING -o ens3 -j ACCEPT</span>
@@ -2763,7 +2929,7 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># Peer 1: Mac</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">[Peer]</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;CONTENU_DE_MAC_PUBLIC_KEY&gt;</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;MAC_PUBLIC_KEY_CONTENT&gt;</span>
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="na">AllowedIPs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.2/32</span>
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># Peer 2: Linux Home (EndeavourOS)</span>
@@ -2771,14 +2937,14 @@
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">h80EvWfEpnEre4gfPL2tzDEMbc2oowCDxdX5SjkLeDE=</span>
 </span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="na">AllowedIPs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.3/32</span>
 </span></code></pre></div>
-<h3 id="24-gestion-du-service">2.4. Gestion du service<a class="headerlink" href="#24-gestion-du-service" title="Permanent link">&para;</a></h3>
+<h3 id="24-service-management">2.4. Service Management<a class="headerlink" href="#24-service-management" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Enable and start WireGuard on boot</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>wg-quick@wg0
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>systemctl<span class="w"> </span>start<span class="w"> </span>wg-quick@wg0
 </span></code></pre></div>
 <hr />
-<h2 id="3-configuration-du-client-1-mac-macos">3. Configuration du Client 1 (Mac - macOS)<a class="headerlink" href="#3-configuration-du-client-1-mac-macos" title="Permanent link">&para;</a></h2>
-<h3 id="31-installation-via-la-ligne-de-commande">3.1. Installation via la ligne de commande<a class="headerlink" href="#31-installation-via-la-ligne-de-commande" title="Permanent link">&para;</a></h3>
+<h2 id="3-client-1-configuration-mac-macos">3. Client 1 Configuration (Mac - macOS)<a class="headerlink" href="#3-client-1-configuration-mac-macos" title="Permanent link">&para;</a></h2>
+<h3 id="31-installation-via-cli">3.1. Installation via CLI<a class="headerlink" href="#31-installation-via-cli" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Install WireGuard CLI tools via Homebrew</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>brew<span class="w"> </span>install<span class="w"> </span>wireguard-tools
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
@@ -2786,14 +2952,14 @@
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/homebrew/etc/wireguard
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">cd</span><span class="w"> </span>/opt/homebrew/etc/wireguard
 </span></code></pre></div>
-<h3 id="32-generation-des-cles-locales">3.2. Génération des clés locales<a class="headerlink" href="#32-generation-des-cles-locales" title="Permanent link">&para;</a></h3>
+<h3 id="32-local-key-generation">3.2. Local Key Generation<a class="headerlink" href="#32-local-key-generation" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Generate Mac keys</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>wg<span class="w"> </span>genkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>mac_private.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>wg<span class="w"> </span>pubkey<span class="w"> </span>&gt;<span class="w"> </span>mac_public.key
 </span></code></pre></div>
-<h3 id="33-fichier-de-configuration-opthomebrewetcwireguardwg0conf">3.3. Fichier de configuration <code>/opt/homebrew/etc/wireguard/wg0.conf</code><a class="headerlink" href="#33-fichier-de-configuration-opthomebrewetcwireguardwg0conf" title="Permanent link">&para;</a></h3>
+<h3 id="33-configuration-file-opthomebrewetcwireguardwg0conf">3.3. Configuration File <code>/opt/homebrew/etc/wireguard/wg0.conf</code><a class="headerlink" href="#33-configuration-file-opthomebrewetcwireguardwg0conf" title="Permanent link">&para;</a></h3>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[Interface]</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="na">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.2/24</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;CONTENU_DE_MAC_PRIVATE_KEY&gt;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;MAC_PRIVATE_KEY_CONTENT&gt;</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">[Peer]</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kuFPoygzjrLTWhTlWZSi+VlGiQdH6fMIHU/+ph4I/UA=</span>
@@ -2801,22 +2967,22 @@
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="na">AllowedIPs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.0/24</span>
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="na">PersistentKeepalive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">25</span>
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Secure the configuration file permissions</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Secure configuration file permissions</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/opt/homebrew/etc/wireguard/wg0.conf
 </span></code></pre></div>
-<h3 id="34-stabilisation-des-sessions-ssh-keepalive">3.4. Stabilisation des sessions SSH (KeepAlive)<a class="headerlink" href="#34-stabilisation-des-sessions-ssh-keepalive" title="Permanent link">&para;</a></h3>
-<p>Pour éviter que les connexions SSH vers le tunnel ne se coupent par inactivité, configure le client SSH local du Mac :</p>
+<h3 id="34-ssh-session-stabilization-keepalive">3.4. SSH Session Stabilization (KeepAlive)<a class="headerlink" href="#34-ssh-session-stabilization-keepalive" title="Permanent link">&para;</a></h3>
+<p>To prevent idle SSH sessions over the tunnel from disconnecting, configure the local SSH client:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nano<span class="w"> </span>~/.ssh/config
 </span></code></pre></div>
-<p>Ajoute ces règles :</p>
+<p>Add the following rules:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Host *
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    ServerAliveInterval 60
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    ServerAliveCountMax 3
 </span></code></pre></div>
 <hr />
-<h2 id="4-configuration-du-client-2-linux-maison-endeavouros">4. Configuration du Client 2 (Linux Maison - EndeavourOS)<a class="headerlink" href="#4-configuration-du-client-2-linux-maison-endeavouros" title="Permanent link">&para;</a></h2>
-<h3 id="41-installation-et-gestion-du-kernel">4.1. Installation et gestion du Kernel<a class="headerlink" href="#41-installation-et-gestion-du-kernel" title="Permanent link">&para;</a></h3>
-<p>Sur une distribution de type Arch (EndeavourOS), une mise à jour système simultanée peut nécessiter un redémarrage pour charger correctement les modules du noyau.</p>
+<h2 id="4-client-2-configuration-linux-home-endeavouros">4. Client 2 Configuration (Linux Home - EndeavourOS)<a class="headerlink" href="#4-client-2-configuration-linux-home-endeavouros" title="Permanent link">&para;</a></h2>
+<h3 id="41-installation-and-kernel-management">4.1. Installation and Kernel Management<a class="headerlink" href="#41-installation-and-kernel-management" title="Permanent link">&para;</a></h3>
+<p>On an Arch-based distribution (EndeavourOS), system updates may require a reboot to load updated kernel modules:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Switch to root session to prevent permission denied errors</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>-i
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">cd</span><span class="w"> </span>/etc/wireguard
@@ -2828,11 +2994,11 @@
 </span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># Generate keys</span>
 </span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>wg<span class="w"> </span>genkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>home_private.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>wg<span class="w"> </span>pubkey<span class="w"> </span>&gt;<span class="w"> </span>home_public.key
 </span></code></pre></div>
-<p><em>Note: Si l'erreur <code>Unknown device type</code> ou <code>Protocol not supported</code> apparaît, effectue un <code>reboot</code> pour initialiser le nouveau noyau.</em></p>
-<h3 id="42-fichier-de-configuration-etcwireguardwg0conf">4.2. Fichier de configuration <code>/etc/wireguard/wg0.conf</code><a class="headerlink" href="#42-fichier-de-configuration-etcwireguardwg0conf" title="Permanent link">&para;</a></h3>
+<p><em>Note: If <code>Unknown device type</code> or <code>Protocol not supported</code> appears, reboot to initialize the new kernel.</em></p>
+<h3 id="42-configuration-file-etcwireguardwg0conf">4.2. Configuration File <code>/etc/wireguard/wg0.conf</code><a class="headerlink" href="#42-configuration-file-etcwireguardwg0conf" title="Permanent link">&para;</a></h3>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">[Interface]</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="na">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.3/24</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;CONTENU_DE_HOME_PRIVATE_KEY&gt;</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;HOME_PRIVATE_KEY_CONTENT&gt;</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">[Peer]</span>
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kuFPoygzjrLTWhTlWZSi+VlGiQdH6fMIHU/+ph4I/UA=</span>
@@ -2840,29 +3006,31 @@
 </span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="na">AllowedIPs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0.0.0/24</span>
 </span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="na">PersistentKeepalive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">25</span>
 </span></code></pre></div>
-<h3 id="43-lancement-et-persistance">4.3. Lancement et persistance<a class="headerlink" href="#43-lancement-et-persistance" title="Permanent link">&para;</a></h3>
+<h3 id="43-startup-and-persistence">4.3. Startup and Persistence<a class="headerlink" href="#43-startup-and-persistence" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Enable and start the service permanently</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>wg-quick@wg0
 </span></code></pre></div>
-<h3 id="44-configuration-always-on-empecher-la-mise-en-veille">4.4. Configuration "Always-On" (Empêcher la mise en veille)<a class="headerlink" href="#44-configuration-always-on-empecher-la-mise-en-veille" title="Permanent link">&para;</a></h3>
-<p>Pour garantir la disponibilité du serveur SSH sur cet ordinateur portable, les mécanismes de mise en sommeil par inactivité ou fermeture de l'écran doivent être désactivés.</p>
+<h3 id="44-always-on-configuration-disable-sleep-suspend">4.4. Always-On Configuration (Disable Sleep &amp; Suspend)<a class="headerlink" href="#44-always-on-configuration-disable-sleep-suspend" title="Permanent link">&para;</a></h3>
+<p>To maintain SSH server availability on a laptop, disable sleep triggers:</p>
 <ol>
-<li><strong>Ignorer la fermeture de l'écran :</strong>
+<li><strong>Ignore laptop lid closure:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nano<span class="w"> </span>/etc/systemd/logind.conf
 </span></code></pre></div></li>
 </ol>
-<p>Décommenter et modifier les directives suivantes :
+<p>Uncomment and set:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>HandleLidSwitch=ignore
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>HandleLidSwitchExternalPower=ignore
 </span></code></pre></div></p>
-<p>Appliquer le changement : <code>systemctl restart systemd-logind</code>
-2. <strong>Désactiver la mise en veille système :</strong>
+<p>Apply changes: <code>systemctl restart systemd-logind</code></p>
+<ol>
+<li><strong>Disable system sleep modes:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>systemctl<span class="w"> </span>mask<span class="w"> </span>systemd-suspend.service<span class="w"> </span>systemd-hibernate.service<span class="w"> </span>systemd-hybrid-sleep.service<span class="w"> </span>systemd-suspend-then-hibernate.service
-</span></code></pre></div></p>
+</span></code></pre></div></li>
+</ol>
 <hr />
-<h2 id="5-securisation-et-durcissement-hardening-du-vps">5. Sécurisation et Durcissement (Hardening du VPS)<a class="headerlink" href="#5-securisation-et-durcissement-hardening-du-vps" title="Permanent link">&para;</a></h2>
-<p>Pour masquer complètement le serveur de l'Internet public, le pare-feu <strong>UFW</strong> bloque tout accès direct au port SSH (22) traditionnel et restreint l'écoute aux seules machines authentifiées au sein du VPN.</p>
-<h3 id="51-configuration-des-regles-ufw-sur-le-vps">5.1. Configuration des règles UFW sur le VPS<a class="headerlink" href="#51-configuration-des-regles-ufw-sur-le-vps" title="Permanent link">&para;</a></h3>
+<h2 id="5-security-hardening-vps">5. Security &amp; Hardening (VPS)<a class="headerlink" href="#5-security-hardening-vps" title="Permanent link">&para;</a></h2>
+<p>To hide the server from the public Internet, the <strong>UFW</strong> firewall denies public SSH (port 22) and restricts access strictly to authenticated machines inside the VPN tunnel.</p>
+<h3 id="51-ufw-rules-on-vps">5.1. UFW Rules on VPS<a class="headerlink" href="#51-ufw-rules-on-vps" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Reset UFW to default settings</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>ufw<span class="w"> </span>--force<span class="w"> </span>reset
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
@@ -2879,43 +3047,41 @@
 </span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="c1"># Enable the firewall</span>
 </span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>ufw<span class="w"> </span><span class="nb">enable</span>
 </span></code></pre></div>
-<h3 id="52-verrouillage-du-service-ssh-etcsshsshd_configd00-securityconf">5.2. Verrouillage du service SSH (<code>/etc/ssh/sshd_config.d/00-security.conf</code>)<a class="headerlink" href="#52-verrouillage-du-service-ssh-etcsshsshd_configd00-securityconf" title="Permanent link">&para;</a></h3>
-<p>Pour interdire l'usage des mots de passe au profit exclusif des clés SSH :</p>
+<h3 id="52-ssh-service-hardening-etcsshsshd_configd00-securityconf">5.2. SSH Service Hardening (<code>/etc/ssh/sshd_config.d/00-security.conf</code>)<a class="headerlink" href="#52-ssh-service-hardening-etcsshsshd_configd00-securityconf" title="Permanent link">&para;</a></h3>
+<p>Enforce public key authentication and disable password logins:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>PasswordAuthentication no
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>ChallengeResponseAuthentication no
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>PubkeyAuthentication yes
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>PermitRootLogin no
 </span></code></pre></div>
-<p>Appliquer les modifications : <code>sshd -t &amp;&amp; systemctl restart ssh</code></p>
+<p>Apply configuration: <code>sshd -t &amp;&amp; systemctl restart ssh</code></p>
 <hr />
-<h2 id="6-commandes-de-diagnostic-et-dexploitation">6. Commandes de Diagnostic et d'Exploitation<a class="headerlink" href="#6-commandes-de-diagnostic-et-dexploitation" title="Permanent link">&para;</a></h2>
+<h2 id="6-diagnostic-operational-commands">6. Diagnostic &amp; Operational Commands<a class="headerlink" href="#6-diagnostic-operational-commands" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>Vérifier l'état du tunnel (Clés, handshakes, transferts) :</strong>
+<p><strong>Check tunnel status (keys, handshakes, bytes transferred):</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show
 </span></code></pre></div></p>
 </li>
 <li>
-<p><strong>Recharger la configuration du VPS à chaud (sans coupure) :</strong>
+<p><strong>Hot-reload VPS configuration (without dropping sessions):</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>wg<span class="w"> </span>syncconf<span class="w"> </span>wg0<span class="w"> </span>&lt;<span class="o">(</span>sudo<span class="w"> </span>wg-quick<span class="w"> </span>strip<span class="w"> </span>wg0<span class="o">)</span>
 </span></code></pre></div></p>
 </li>
 <li>
-<p><strong>Commandes d'arrêt/relance manuelles :</strong>
+<p><strong>Manual start/stop commands:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>wg-quick<span class="w"> </span>up<span class="w"> </span>wg0
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>wg-quick<span class="w"> </span>down<span class="w"> </span>wg0
 </span></code></pre></div></p>
 </li>
 <li>
-<p><strong>Test de connectivité direct de bout en bout (depuis le Mac) :</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ping<span class="w"> </span><span class="m">10</span>.0.0.1<span class="w">  </span><span class="c1"># Ping vers le VPS</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>ping<span class="w"> </span><span class="m">10</span>.0.0.3<span class="w">  </span><span class="c1"># Ping vers le Linux Maison via le VPS</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>ssh<span class="w"> </span>utilisateur@10.0.0.3<span class="w">  </span><span class="c1"># Connexion SSH sécurisée</span>
+<p><strong>End-to-end connectivity test (from Mac):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ping<span class="w"> </span><span class="m">10</span>.0.0.1<span class="w">          </span><span class="c1"># Ping VPS</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>ping<span class="w"> </span><span class="m">10</span>.0.0.3<span class="w">          </span><span class="c1"># Ping Linux Home via VPS</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>ssh<span class="w"> </span>user@10.0.0.3<span class="w">      </span><span class="c1"># Secure SSH connection</span>
 </span></code></pre></div></p>
 </li>
 </ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>
-</span></code></pre></div>
 
 
 

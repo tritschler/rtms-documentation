@@ -31,7 +31,7 @@
     
     
       
-        <title>Sécurité & RBAC Base de Données - RTMS Documentation Technique (3TS Consulting)</title>
+        <title>Database Security & RBAC - RTMS Documentation Technique (3TS Consulting)</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#securite-modele-rbac-de-la-base-de-donnees" class="md-skip">
+        <a href="#database-security-postgresql-rbac-model" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sécurité & RBAC Base de Données
+              Database Security & RBAC
             
           </span>
         </div>
@@ -249,7 +249,7 @@
   
     
   
-  Accueil
+  Home
 
       </a>
     </li>
@@ -290,7 +290,7 @@
           
   
   
-  Déploiement & Installation
+  Deployment & Installation
 
         </a>
       </li>
@@ -317,7 +317,7 @@
           
   
   
-  Composants & Internals
+  Components & Internals
 
         </a>
       </li>
@@ -360,7 +360,7 @@
           
   
   
-  Conformité & Légal
+  Governance & Legal Compliance
 
         </a>
       </li>
@@ -415,7 +415,7 @@
   <span class="md-ellipsis">
     
   
-    Accueil
+    Home
   
 
     
@@ -499,7 +499,7 @@
   <span class="md-ellipsis">
     
   
-    Vue d'ensemble
+    System Overview
   
 
     
@@ -527,7 +527,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -555,7 +555,7 @@
   <span class="md-ellipsis">
     
   
-    Modèle RBAC (Permissions)
+    RBAC Security Model
   
 
     
@@ -592,7 +592,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -610,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -636,10 +636,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-principes-disolation-moindre-privilege" class="md-nav__link">
+  <a href="#1-isolation-principles-least-privilege" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Principes d'Isolation &amp; Moindre Privilège
+        1. Isolation Principles &amp; Least Privilege
       
     </span>
   </a>
@@ -647,22 +647,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-definition-des-roles-postgresql" class="md-nav__link">
+  <a href="#2-postgresql-role-definitions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Définition des Rôles PostgreSQL
+        2. PostgreSQL Role Definitions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Définition des Rôles PostgreSQL">
+    <nav class="md-nav" aria-label="2. PostgreSQL Role Definitions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-rtms_user-proprietaire-de-la-base-migrations" class="md-nav__link">
+  <a href="#a-rtms_user-database-owner-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. rtms_user (Propriétaire de la Base &amp; Migrations)
+        A. rtms_user (Database Owner &amp; Migrations)
       
     </span>
   </a>
@@ -670,10 +670,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-rtms_nvd_user-microservice-nvd" class="md-nav__link">
+  <a href="#b-rtms_nvd_user-nvd-microservice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. rtms_nvd_user (Microservice NVD)
+        B. rtms_nvd_user (NVD Microservice)
       
     </span>
   </a>
@@ -681,10 +681,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-rtms_scanner_user-moteur-de-scan" class="md-nav__link">
+  <a href="#c-rtms_scanner_user-scanning-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        C. rtms_scanner_user (Moteur de Scan)
+        C. rtms_scanner_user (Scanning Engine)
       
     </span>
   </a>
@@ -692,10 +692,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#d-rtms_web_user-backend-fastapi-dashboard" class="md-nav__link">
+  <a href="#d-rtms_web_user-fastapi-backend-dashboard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        D. rtms_web_user (Backend FastAPI &amp; Dashboard)
+        D. rtms_web_user (FastAPI Backend &amp; Dashboard)
       
     </span>
   </a>
@@ -708,10 +708,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-matrice-recapitulative-des-privileges" class="md-nav__link">
+  <a href="#3-privileges-matrix-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Matrice Récapitulative des Privilèges
+        3. Privileges Matrix Summary
       
     </span>
   </a>
@@ -719,10 +719,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-conformite-reglementaire-nis-2-iso-27001" class="md-nav__link">
+  <a href="#4-regulatory-compliance-nis-2-iso-27001" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Conformité Réglementaire (NIS 2 / ISO 27001)
+        4. Regulatory Compliance (NIS 2 / ISO 27001)
       
     </span>
   </a>
@@ -773,7 +773,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de données
+    Data Models
   
 
     
@@ -789,7 +789,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Modèles de données
+    Data Models
   
 
           </label>
@@ -898,7 +898,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
     
@@ -914,7 +914,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
           </label>
@@ -934,7 +934,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -962,7 +962,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -1015,7 +1015,7 @@
   <span class="md-ellipsis">
     
   
-    Composants & Internals
+    Components & Internals
   
 
     
@@ -1031,7 +1031,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Composants & Internals
+    Components & Internals
   
 
           </label>
@@ -1105,7 +1105,7 @@
   <span class="md-ellipsis">
     
   
-    Prérequis techniques
+    Technical Requirements
   
 
     
@@ -1133,7 +1133,7 @@
   <span class="md-ellipsis">
     
   
-    Mobilité, Cycle de vie & Multi-réseaux
+    Mobility & Multi-Network Lifecycle
   
 
     
@@ -1161,7 +1161,7 @@
   <span class="md-ellipsis">
     
   
-    Mode Standalone
+    Standalone Mode
   
 
     
@@ -1217,7 +1217,7 @@
   <span class="md-ellipsis">
     
   
-    Docker & PyInstaller
+    Docker & Packaging
   
 
     
@@ -1245,7 +1245,7 @@
   <span class="md-ellipsis">
     
   
-    Commandes Bettercap
+    Bettercap Commands
   
 
     
@@ -1273,7 +1273,7 @@
   <span class="md-ellipsis">
     
   
-    Audit Email & DNS
+    Email & DNS Audits
   
 
     
@@ -1301,7 +1301,7 @@
   <span class="md-ellipsis">
     
   
-    Ciblage Granulaire du Deep Scan
+    Granular Deep Scan Targeting
   
 
     
@@ -1329,7 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Ressources & Tests HTTP
+    Resources & HTTP Diagnostics
   
 
     
@@ -1419,7 +1419,63 @@
   <span class="md-ellipsis">
     
   
-    Documentation technique
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
   
 
     
@@ -1447,7 +1503,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement Nginx & Frontend
+    Production Nginx & Frontend Setup
   
 
     
@@ -1475,7 +1531,7 @@
   <span class="md-ellipsis">
     
   
-    Guide SSO Keycloak & OIDC
+    Enterprise SSO Keycloak & OIDC
   
 
     
@@ -1503,7 +1559,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage
+    Backend Startup Guide
   
 
     
@@ -1593,7 +1649,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture technique
+    Agent Architecture
   
 
     
@@ -1621,7 +1677,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1711,7 +1767,7 @@
   <span class="md-ellipsis">
     
   
-    Documentation NVD
+    NVD Technical Documentation
   
 
     
@@ -1739,7 +1795,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1767,7 +1823,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage & Ingestion
+    Startup & Ingestion Sequence
   
 
     
@@ -1795,7 +1851,7 @@
   <span class="md-ellipsis">
     
   
-    Exportation de rapports CVE
+    Exporting CVE Data
   
 
     
@@ -1885,7 +1941,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'administration
+    Admin & Licensing Workflow
   
 
     
@@ -1982,7 +2038,7 @@
   <span class="md-ellipsis">
     
   
-    Spécification & Développement
+    Plugin Specifications & Dev Guide
   
 
     
@@ -2035,7 +2091,7 @@
   <span class="md-ellipsis">
     
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
     
@@ -2051,7 +2107,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
           </label>
@@ -2071,7 +2127,7 @@
   <span class="md-ellipsis">
     
   
-    Directive NIS2
+    NIS 2 Compliance
   
 
     
@@ -2127,7 +2183,7 @@
   <span class="md-ellipsis">
     
   
-    Stratégie de Release
+    Release Strategy
   
 
     
@@ -2155,7 +2211,7 @@
   <span class="md-ellipsis">
     
   
-    Licences
+    Software Licenses & Copyrights
   
 
     
@@ -2201,7 +2257,7 @@
   <span class="md-ellipsis">
     
   
-    Documents Légaux
+    Legal Documents
   
 
     
@@ -2217,7 +2273,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Documents Légaux
+    Legal Documents
   
 
           </label>
@@ -2237,7 +2293,7 @@
   <span class="md-ellipsis">
     
   
-    EULA
+    End User License Agreement
   
 
     
@@ -2265,7 +2321,7 @@
   <span class="md-ellipsis">
     
   
-    Normes appliquées
+    Applied Standards
   
 
     
@@ -2293,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Déclaration UE
+    EU Declaration of Conformity
   
 
     
@@ -2321,7 +2377,7 @@
   <span class="md-ellipsis">
     
   
-    Évaluation des risques
+    Risk Assessment
   
 
     
@@ -2377,10 +2433,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-principes-disolation-moindre-privilege" class="md-nav__link">
+  <a href="#1-isolation-principles-least-privilege" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Principes d'Isolation &amp; Moindre Privilège
+        1. Isolation Principles &amp; Least Privilege
       
     </span>
   </a>
@@ -2388,22 +2444,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-definition-des-roles-postgresql" class="md-nav__link">
+  <a href="#2-postgresql-role-definitions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Définition des Rôles PostgreSQL
+        2. PostgreSQL Role Definitions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Définition des Rôles PostgreSQL">
+    <nav class="md-nav" aria-label="2. PostgreSQL Role Definitions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-rtms_user-proprietaire-de-la-base-migrations" class="md-nav__link">
+  <a href="#a-rtms_user-database-owner-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. rtms_user (Propriétaire de la Base &amp; Migrations)
+        A. rtms_user (Database Owner &amp; Migrations)
       
     </span>
   </a>
@@ -2411,10 +2467,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-rtms_nvd_user-microservice-nvd" class="md-nav__link">
+  <a href="#b-rtms_nvd_user-nvd-microservice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. rtms_nvd_user (Microservice NVD)
+        B. rtms_nvd_user (NVD Microservice)
       
     </span>
   </a>
@@ -2422,10 +2478,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-rtms_scanner_user-moteur-de-scan" class="md-nav__link">
+  <a href="#c-rtms_scanner_user-scanning-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        C. rtms_scanner_user (Moteur de Scan)
+        C. rtms_scanner_user (Scanning Engine)
       
     </span>
   </a>
@@ -2433,10 +2489,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#d-rtms_web_user-backend-fastapi-dashboard" class="md-nav__link">
+  <a href="#d-rtms_web_user-fastapi-backend-dashboard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        D. rtms_web_user (Backend FastAPI &amp; Dashboard)
+        D. rtms_web_user (FastAPI Backend &amp; Dashboard)
       
     </span>
   </a>
@@ -2449,10 +2505,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-matrice-recapitulative-des-privileges" class="md-nav__link">
+  <a href="#3-privileges-matrix-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Matrice Récapitulative des Privilèges
+        3. Privileges Matrix Summary
       
     </span>
   </a>
@@ -2460,10 +2516,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-conformite-reglementaire-nis-2-iso-27001" class="md-nav__link">
+  <a href="#4-regulatory-compliance-nis-2-iso-27001" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Conformité Réglementaire (NIS 2 / ISO 27001)
+        4. Regulatory Compliance (NIS 2 / ISO 27001)
       
     </span>
   </a>
@@ -2487,28 +2543,28 @@
 
 
 
-<h1 id="securite-modele-rbac-de-la-base-de-donnees">Sécurité &amp; Modèle RBAC de la Base de Données<a class="headerlink" href="#securite-modele-rbac-de-la-base-de-donnees" title="Permanent link">&para;</a></h1>
-<p>Ce document décrit l'architecture de sécurité, la séparation des schémas et le modèle <strong>RBAC PostgreSQL</strong> de la plateforme RTMS.</p>
+<h1 id="database-security-postgresql-rbac-model">Database Security &amp; PostgreSQL RBAC Model<a class="headerlink" href="#database-security-postgresql-rbac-model" title="Permanent link">&para;</a></h1>
+<p>This document outlines the security architecture, schema segregation, and <strong>PostgreSQL RBAC</strong> model of the RTMS platform.</p>
 <hr />
-<h2 id="1-principes-disolation-moindre-privilege">1. Principes d'Isolation &amp; Moindre Privilège<a class="headerlink" href="#1-principes-disolation-moindre-privilege" title="Permanent link">&para;</a></h2>
-<p>L'architecture de la base de données PostgreSQL repose sur deux niveaux de protection :
-1. <strong>Cloisonnement logique par schémas</strong> (<code>admin</code>, <code>scanner</code>, <code>nvd</code>).
-2. <strong>Cloisonnement des privilèges par rôles applicatifs</strong> (<em>Principle of Least Privilege</em>).</p>
-<p>Aucun microservice applicatif n'utilise le compte propriétaire maître (<code>rtms_user</code>) en production.</p>
+<h2 id="1-isolation-principles-least-privilege">1. Isolation Principles &amp; Least Privilege<a class="headerlink" href="#1-isolation-principles-least-privilege" title="Permanent link">&para;</a></h2>
+<p>The PostgreSQL database architecture is founded on two levels of containment:
+1. <strong>Logical Schema Segregation</strong> (<code>admin</code>, <code>scanner</code>, <code>nvd</code>).
+2. <strong>Privilege Segregation by Application Roles</strong> (<em>Principle of Least Privilege</em>).</p>
+<p>No application microservice runs under the master database owner account (<code>rtms_user</code>) in production.</p>
 <pre class="mermaid"><code>graph TD
     subgraph PostgreSQL Database: rtms_db
-        subgraph Schéma admin
+        subgraph Schema admin
             T_Users[users / auth]
             T_Lic[product_license]
             T_Assets[assets / asset_software]
             T_Svc[service_registry / nvd_config]
         end
-        subgraph Schéma scanner
+        subgraph Schema scanner
             T_Scans[scans / networks / services]
             T_Vulns[vulnerabilities / alerts]
             T_Tags[host_tags / excluded_ips]
         end
-        subgraph Schéma nvd
+        subgraph Schema nvd
             T_CVE[cve / cpe_match / cve_cache]
         end
     end
@@ -2524,55 +2580,55 @@
     Scanner --&gt;|CRUD| T_Vulns
     Scanner --&gt;|INSERT / UPDATE| T_Assets
     Scanner --&gt;|SELECT / UPDATE| T_Svc
-    Scanner -.-&gt;|INTERDIT| T_CVE
-    Scanner -.-&gt;|INTERDIT| T_Users
+    Scanner -.-&gt;|DENIED| T_CVE
+    Scanner -.-&gt;|DENIED| T_Users
 
     NVD[rtms_nvd_user] --&gt;|CRUD| T_CVE
     NVD --&gt;|SELECT / UPDATE| T_Svc
-    NVD -.-&gt;|INTERDIT| T_Scans
-    NVD -.-&gt;|INTERDIT| T_Users</code></pre>
+    NVD -.-&gt;|DENIED| T_Scans
+    NVD -.-&gt;|DENIED| T_Users</code></pre>
 <hr />
-<h2 id="2-definition-des-roles-postgresql">2. Définition des Rôles PostgreSQL<a class="headerlink" href="#2-definition-des-roles-postgresql" title="Permanent link">&para;</a></h2>
-<h3 id="a-rtms_user-proprietaire-de-la-base-migrations">A. <code>rtms_user</code> (Propriétaire de la Base &amp; Migrations)<a class="headerlink" href="#a-rtms_user-proprietaire-de-la-base-migrations" title="Permanent link">&para;</a></h3>
+<h2 id="2-postgresql-role-definitions">2. PostgreSQL Role Definitions<a class="headerlink" href="#2-postgresql-role-definitions" title="Permanent link">&para;</a></h2>
+<h3 id="a-rtms_user-database-owner-migrations">A. <code>rtms_user</code> (Database Owner &amp; Migrations)<a class="headerlink" href="#a-rtms_user-database-owner-migrations" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Périmètre</strong> : Propriétaire (<code>OWNER</code>) de la base <code>rtms_db</code> et des 3 schémas.</li>
-<li><strong>Privilèges</strong> : DDL complet (<code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>DROP</code>, <code>CREATE EXTENSION</code>).</li>
-<li><strong>Usage</strong> : Utilisé exclusivement lors de l'installation (<a href="file:///Users/marctritschler/git_projects/rtms-installer/install.sh">install.sh</a>) et pour les opérations de maintenance/sauvegarde (<code>manage_schemas.py</code>, <code>pg_dump</code>).</li>
+<li><strong>Scope</strong>: Owner (<code>OWNER</code>) of the database <code>rtms_db</code> and the 3 schemas.</li>
+<li><strong>Privileges</strong>: Full DDL (<code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>DROP</code>, <code>CREATE EXTENSION</code>).</li>
+<li><strong>Usage</strong>: Used exclusively during deployment (<a href="file:///Users/marctritschler/git_projects/rtms-installer/install.sh">install.sh</a>) and maintenance/backup workflows (<code>manage_schemas.py</code>, <code>pg_dump</code>).</li>
 </ul>
-<h3 id="b-rtms_nvd_user-microservice-nvd">B. <code>rtms_nvd_user</code> (Microservice NVD)<a class="headerlink" href="#b-rtms_nvd_user-microservice-nvd" title="Permanent link">&para;</a></h3>
+<h3 id="b-rtms_nvd_user-nvd-microservice">B. <code>rtms_nvd_user</code> (NVD Microservice)<a class="headerlink" href="#b-rtms_nvd_user-nvd-microservice" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Schéma <code>nvd</code></strong> : Accès complet Lecture/Écriture (<code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) sur toutes les tables (<code>cve</code>, <code>cpe_match</code>, <code>cve_cache</code>).</li>
-<li><strong>Schéma <code>admin</code></strong> : Accès restreint par table :</li>
-<li><code>admin.nvd_config</code> : <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (lecture des clés API et paramètres de synchronisation).</li>
-<li><code>admin.service_registry</code> : <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (enregistrement de la présence et heartbeat).</li>
-<li><code>admin.cve_alerts</code> / <code>admin.cve_alerts_config</code> : <code>SELECT</code>, <code>INSERT</code> (déclenchement d'alertes directes si configuré).</li>
-<li><strong>Schéma <code>scanner</code></strong> : <strong>Révocation totale (<code>REVOKE ALL</code>)</strong>. Aucun accès aux données de scan réseau.</li>
-<li><strong>Sécurité <code>admin.users</code></strong> : <strong>Révocation totale</strong>. Impossible d'accéder aux comptes administrateurs.</li>
+<li><strong>Schema <code>nvd</code></strong>: Full Read/Write access (<code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) across all tables (<code>cve</code>, <code>cpe_match</code>, <code>cve_cache</code>).</li>
+<li><strong>Schema <code>admin</code></strong>: Scoped table access:</li>
+<li><code>admin.nvd_config</code>: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (reading API keys and sync settings).</li>
+<li><code>admin.service_registry</code>: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (heartbeat and service presence).</li>
+<li><code>admin.cve_alerts</code> / <code>admin.cve_alerts_config</code>: <code>SELECT</code>, <code>INSERT</code> (triggering alerts if configured).</li>
+<li><strong>Schema <code>scanner</code></strong>: <strong>Full Revocation (<code>REVOKE ALL</code>)</strong>. No access to network scan data.</li>
+<li><strong>Security on <code>admin.users</code></strong>: <strong>Full Revocation</strong>. No access to administrator accounts or password hashes.</li>
 </ul>
-<h3 id="c-rtms_scanner_user-moteur-de-scan">C. <code>rtms_scanner_user</code> (Moteur de Scan)<a class="headerlink" href="#c-rtms_scanner_user-moteur-de-scan" title="Permanent link">&para;</a></h3>
+<h3 id="c-rtms_scanner_user-scanning-engine">C. <code>rtms_scanner_user</code> (Scanning Engine)<a class="headerlink" href="#c-rtms_scanner_user-scanning-engine" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Schéma <code>scanner</code></strong> : Accès complet Lecture/Écriture sur toutes les tables de découverte et de scan.</li>
-<li><strong>Schéma <code>admin</code></strong> : Accès ciblé :</li>
-<li><code>admin.assets</code> et <code>admin.asset_software</code> : <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (persistance des actifs et inventaires découverts).</li>
-<li><code>admin.service_registry</code> : <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (heartbeat et état du scanner).</li>
-<li><code>admin.system_config</code>, <code>admin.subnet_names</code>, <code>admin.subnet_mac_whitelist</code> : <code>SELECT</code> (règles et politiques d'exclusion).</li>
-<li><strong>Schéma <code>nvd</code></strong> : <strong>Révocation totale (<code>REVOKE ALL</code>)</strong>. Le scanner n'a pas accès à la base de vulnérabilités NVD brute (le matching s'effectue via l'API Web).</li>
-<li><strong>Sécurité <code>admin.users</code></strong> : <strong>Révocation totale</strong>.</li>
+<li><strong>Schema <code>scanner</code></strong>: Full Read/Write access across all discovery and scan tables.</li>
+<li><strong>Schema <code>admin</code></strong>: Scoped table access:</li>
+<li><code>admin.assets</code> and <code>admin.asset_software</code>: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (persisting discovered hosts and software).</li>
+<li><code>admin.service_registry</code>: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> (scanner heartbeat and operational state).</li>
+<li><code>admin.system_config</code>, <code>admin.subnet_names</code>, <code>admin.subnet_mac_whitelist</code>: <code>SELECT</code> (scanning policies and exclusion rules).</li>
+<li><strong>Schema <code>nvd</code></strong>: <strong>Full Revocation (<code>REVOKE ALL</code>)</strong>. The scanner does not touch the raw CVE database directly (vulnerability correlation is performed by the Web API).</li>
+<li><strong>Security on <code>admin.users</code></strong>: <strong>Full Revocation</strong>.</li>
 </ul>
-<h3 id="d-rtms_web_user-backend-fastapi-dashboard">D. <code>rtms_web_user</code> (Backend FastAPI &amp; Dashboard)<a class="headerlink" href="#d-rtms_web_user-backend-fastapi-dashboard" title="Permanent link">&para;</a></h3>
+<h3 id="d-rtms_web_user-fastapi-backend-dashboard">D. <code>rtms_web_user</code> (FastAPI Backend &amp; Dashboard)<a class="headerlink" href="#d-rtms_web_user-fastapi-backend-dashboard" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Schéma <code>admin</code></strong> : Accès complet Lecture/Écriture (gestion des utilisateurs, sessions, licences, configuration).</li>
-<li><strong>Schéma <code>scanner</code></strong> : Accès complet Lecture/Écriture (gestion et lancement des scans, acquittement des vulnérabilités).</li>
-<li><strong>Schéma <code>nvd</code></strong> : <strong>Lecture Seule Stricte (<code>SELECT</code>)</strong>.</li>
-<li>Permet de joindre <code>scanner.vulnerabilities</code> avec <code>nvd.cve</code> pour afficher les scores CVSS, descriptions et métadonnées.</li>
-<li>Interdit formellement toute modification (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>TRUNCATE</code>) pour garantir l'intégrité de la base CVE.</li>
+<li><strong>Schema <code>admin</code></strong>: Full Read/Write access (user accounts, sessions, licenses, system configuration).</li>
+<li><strong>Schema <code>scanner</code></strong>: Full Read/Write access (scan orchestration, vulnerability acknowledgement).</li>
+<li><strong>Schema <code>nvd</code></strong>: <strong>Strict Read-Only (<code>SELECT</code>)</strong>.</li>
+<li>Joins <code>scanner.vulnerabilities</code> with <code>nvd.cve</code> to display CVSS scores, descriptions, and metadata.</li>
+<li>Formally prohibits mutations (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>TRUNCATE</code>) to guarantee CVE data integrity.</li>
 </ul>
 <hr />
-<h2 id="3-matrice-recapitulative-des-privileges">3. Matrice Récapitulative des Privilèges<a class="headerlink" href="#3-matrice-recapitulative-des-privileges" title="Permanent link">&para;</a></h2>
+<h2 id="3-privileges-matrix-summary">3. Privileges Matrix Summary<a class="headerlink" href="#3-privileges-matrix-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Ressource / Table</th>
+<th style="text-align: left;">Resource / Table</th>
 <th style="text-align: center;"><code>rtms_nvd_user</code></th>
 <th style="text-align: center;"><code>rtms_scanner_user</code></th>
 <th style="text-align: center;"><code>rtms_web_user</code></th>
@@ -2583,41 +2639,41 @@
 <tr>
 <td style="text-align: left;"><strong><code>nvd.cve</code></strong></td>
 <td style="text-align: center;">✅ CRUD</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
-<td style="text-align: center;">👁️ <strong>SELECT (Lecture Seule)</strong></td>
+<td style="text-align: center;">❌ Denied</td>
+<td style="text-align: center;">👁️ <strong>SELECT (Read-Only)</strong></td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>nvd.cpe_match</code></strong></td>
 <td style="text-align: center;">✅ CRUD</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
-<td style="text-align: center;">👁️ <strong>SELECT (Lecture Seule)</strong></td>
+<td style="text-align: center;">❌ Denied</td>
+<td style="text-align: center;">👁️ <strong>SELECT (Read-Only)</strong></td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>nvd.cve_cache</code></strong></td>
 <td style="text-align: center;">✅ CRUD</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
-<td style="text-align: center;">👁️ <strong>SELECT (Lecture Seule)</strong></td>
+<td style="text-align: center;">❌ Denied</td>
+<td style="text-align: center;">👁️ <strong>SELECT (Read-Only)</strong></td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong><code>scanner.*</code> (Toutes tables)</strong></td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: left;"><strong><code>scanner.*</code> (All tables)</strong></td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>admin.assets</code></strong></td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ SELECT / INSERT / UPDATE</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>admin.asset_software</code></strong></td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ SELECT / INSERT / UPDATE</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
@@ -2632,39 +2688,39 @@
 <tr>
 <td style="text-align: left;"><strong><code>admin.nvd_config</code></strong></td>
 <td style="text-align: center;">✅ SELECT / INSERT / UPDATE</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>admin.users</code></strong></td>
-<td style="text-align: center;">❌ Accès Refusé</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: center;">❌ Denied</td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>admin.product_license</code></strong></td>
-<td style="text-align: center;">❌ Accès Refusé</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: center;">❌ Denied</td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>admin.login_audit</code></strong></td>
-<td style="text-align: center;">❌ Accès Refusé</td>
-<td style="text-align: center;">❌ Accès Refusé</td>
+<td style="text-align: center;">❌ Denied</td>
+<td style="text-align: center;">❌ Denied</td>
 <td style="text-align: center;">✅ CRUD</td>
 <td style="text-align: center;">👑 Owner</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="4-conformite-reglementaire-nis-2-iso-27001">4. Conformité Réglementaire (NIS 2 / ISO 27001)<a class="headerlink" href="#4-conformite-reglementaire-nis-2-iso-27001" title="Permanent link">&para;</a></h2>
-<p>Ce modèle répond directement aux exigences suivantes :
-* <strong>NIS 2 - Article 21 (Mesures de gestion des risques de cybersécurité)</strong> : Sécurisation de la chaîne d'approvisionnement logicielle et contrôle strict des accès.
-* <strong>ISO/IEC 27001 (Mesure A.9.2 - Gestion des accès utilisateurs)</strong> : Attribution des accès basée sur le besoin d'en connaître (<em>Need to Know</em>) et le moindre privilège (<em>Least Privilege</em>).
-* <strong>Protection contre le déplacement latéral</strong> : En cas de compromission d'une sonde locale ou du microservice NVD, un attaquant ne peut ni accéder aux identifiants des utilisateurs, ni altérer les signatures de vulnérabilités.</p>
+<h2 id="4-regulatory-compliance-nis-2-iso-27001">4. Regulatory Compliance (NIS 2 / ISO 27001)<a class="headerlink" href="#4-regulatory-compliance-nis-2-iso-27001" title="Permanent link">&para;</a></h2>
+<p>This database security model directly addresses:
+* <strong>NIS 2 - Article 21 (Cybersecurity risk-management measures)</strong>: Software supply chain security and strict access controls.
+* <strong>ISO/IEC 27001 (Control A.9.2 - User access management)</strong>: Access allocation founded on Need-to-Know and Least Privilege.
+* <strong>Lateral Movement Prevention</strong>: In the event that a probe or the NVD ingestion worker is compromised, attackers cannot retrieve user credentials or tamper with vulnerability definitions.</p>
 
 
 

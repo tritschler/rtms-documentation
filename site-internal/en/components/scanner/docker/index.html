@@ -31,7 +31,7 @@
     
     
       
-        <title>Docker & PyInstaller - RTMS Documentation Technique (3TS Consulting)</title>
+        <title>Docker & Packaging - RTMS Documentation Technique (3TS Consulting)</title>
       
     
     
@@ -81,6 +81,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#docker-binary-packaging" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -111,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Docker & PyInstaller
+              Docker & Packaging
             
           </span>
         </div>
@@ -244,7 +249,7 @@
   
     
   
-  Accueil
+  Home
 
       </a>
     </li>
@@ -283,7 +288,7 @@
           
   
   
-  Déploiement & Installation
+  Deployment & Installation
 
         </a>
       </li>
@@ -314,7 +319,7 @@
           
   
   
-  Composants & Internals
+  Components & Internals
 
         </a>
       </li>
@@ -357,7 +362,7 @@
           
   
   
-  Conformité & Légal
+  Governance & Legal Compliance
 
         </a>
       </li>
@@ -412,7 +417,7 @@
   <span class="md-ellipsis">
     
   
-    Accueil
+    Home
   
 
     
@@ -493,7 +498,7 @@
   <span class="md-ellipsis">
     
   
-    Vue d'ensemble
+    System Overview
   
 
     
@@ -521,7 +526,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -549,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Modèle RBAC (Permissions)
+    RBAC Security Model
   
 
     
@@ -577,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -623,7 +628,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de données
+    Data Models
   
 
     
@@ -639,7 +644,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Modèles de données
+    Data Models
   
 
           </label>
@@ -748,7 +753,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
     
@@ -764,7 +769,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
           </label>
@@ -784,7 +789,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -812,7 +817,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -868,7 +873,7 @@
   <span class="md-ellipsis">
     
   
-    Composants & Internals
+    Components & Internals
   
 
     
@@ -884,7 +889,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Composants & Internals
+    Components & Internals
   
 
           </label>
@@ -961,7 +966,7 @@
   <span class="md-ellipsis">
     
   
-    Prérequis techniques
+    Technical Requirements
   
 
     
@@ -989,7 +994,7 @@
   <span class="md-ellipsis">
     
   
-    Mobilité, Cycle de vie & Multi-réseaux
+    Mobility & Multi-Network Lifecycle
   
 
     
@@ -1017,7 +1022,7 @@
   <span class="md-ellipsis">
     
   
-    Mode Standalone
+    Standalone Mode
   
 
     
@@ -1072,6 +1077,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker & Packaging
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1080,7 +1105,7 @@
   <span class="md-ellipsis">
     
   
-    Docker & PyInstaller
+    Docker & Packaging
   
 
     
@@ -1089,6 +1114,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#multi-stage-distroless-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Stage Distroless Build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obfuscation-binary-stripping-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obfuscation &amp; Binary Stripping (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1109,7 +1175,7 @@
   <span class="md-ellipsis">
     
   
-    Commandes Bettercap
+    Bettercap Commands
   
 
     
@@ -1137,7 +1203,7 @@
   <span class="md-ellipsis">
     
   
-    Audit Email & DNS
+    Email & DNS Audits
   
 
     
@@ -1165,7 +1231,7 @@
   <span class="md-ellipsis">
     
   
-    Ciblage Granulaire du Deep Scan
+    Granular Deep Scan Targeting
   
 
     
@@ -1193,7 +1259,7 @@
   <span class="md-ellipsis">
     
   
-    Ressources & Tests HTTP
+    Resources & HTTP Diagnostics
   
 
     
@@ -1286,7 +1352,63 @@
   <span class="md-ellipsis">
     
   
-    Documentation technique
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
   
 
     
@@ -1314,7 +1436,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement Nginx & Frontend
+    Production Nginx & Frontend Setup
   
 
     
@@ -1342,7 +1464,7 @@
   <span class="md-ellipsis">
     
   
-    Guide SSO Keycloak & OIDC
+    Enterprise SSO Keycloak & OIDC
   
 
     
@@ -1370,7 +1492,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage
+    Backend Startup Guide
   
 
     
@@ -1463,7 +1585,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture technique
+    Agent Architecture
   
 
     
@@ -1491,7 +1613,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1584,7 +1706,7 @@
   <span class="md-ellipsis">
     
   
-    Documentation NVD
+    NVD Technical Documentation
   
 
     
@@ -1612,7 +1734,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1640,7 +1762,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage & Ingestion
+    Startup & Ingestion Sequence
   
 
     
@@ -1668,7 +1790,7 @@
   <span class="md-ellipsis">
     
   
-    Exportation de rapports CVE
+    Exporting CVE Data
   
 
     
@@ -1761,7 +1883,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'administration
+    Admin & Licensing Workflow
   
 
     
@@ -1858,7 +1980,7 @@
   <span class="md-ellipsis">
     
   
-    Spécification & Développement
+    Plugin Specifications & Dev Guide
   
 
     
@@ -1911,7 +2033,7 @@
   <span class="md-ellipsis">
     
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
     
@@ -1927,7 +2049,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
           </label>
@@ -1947,7 +2069,7 @@
   <span class="md-ellipsis">
     
   
-    Directive NIS2
+    NIS 2 Compliance
   
 
     
@@ -2003,7 +2125,7 @@
   <span class="md-ellipsis">
     
   
-    Stratégie de Release
+    Release Strategy
   
 
     
@@ -2031,7 +2153,7 @@
   <span class="md-ellipsis">
     
   
-    Licences
+    Software Licenses & Copyrights
   
 
     
@@ -2077,7 +2199,7 @@
   <span class="md-ellipsis">
     
   
-    Documents Légaux
+    Legal Documents
   
 
     
@@ -2093,7 +2215,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Documents Légaux
+    Legal Documents
   
 
           </label>
@@ -2113,7 +2235,7 @@
   <span class="md-ellipsis">
     
   
-    EULA
+    End User License Agreement
   
 
     
@@ -2141,7 +2263,7 @@
   <span class="md-ellipsis">
     
   
-    Normes appliquées
+    Applied Standards
   
 
     
@@ -2169,7 +2291,7 @@
   <span class="md-ellipsis">
     
   
-    Déclaration UE
+    EU Declaration of Conformity
   
 
     
@@ -2197,7 +2319,7 @@
   <span class="md-ellipsis">
     
   
-    Évaluation des risques
+    Risk Assessment
   
 
     
@@ -2243,6 +2365,38 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#multi-stage-distroless-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Stage Distroless Build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obfuscation-binary-stripping-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obfuscation &amp; Binary Stripping (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2259,21 +2413,24 @@
 
 
 
-  <h1>Docker & PyInstaller</h1>
-
-<p>Stage 1: uses pyinstaller to convert your Python app into a single binary
-done in the dockerfile</p>
-<p>Stage 2: uses a distroless image (has no shell, no package manager, and no Python), so:
-Your .py files are never included.
-Even if the client enters the container, there’s no sh or cat to read files.
-They only see a binary, which is very hard to reverse-engineer.</p>
-<p>docker build -t myapp-protected .
-docker run --rm myapp-protected</p>
-<p>Bonus: Add basic obfuscation (optional)
-If you want even more protection:
-Use pyarmor or nuitka instead of PyInstaller (they obfuscate Python bytecode).
-Strip debug symbols from the binary:</p>
-<p>RUN strip /app/dist/myapp</p>
+<h1 id="docker-binary-packaging">Docker &amp; Binary Packaging<a class="headerlink" href="#docker-binary-packaging" title="Permanent link">&para;</a></h1>
+<h2 id="multi-stage-distroless-build">Multi-Stage Distroless Build<a class="headerlink" href="#multi-stage-distroless-build" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Stage 1</strong>: Uses PyInstaller to compile the Python application into a single standalone binary inside the Docker build container.</li>
+<li><strong>Stage 2</strong>: Uses a distroless base image (no shell, no package manager, no Python runtime):</li>
+<li>Source <code>.py</code> files are never included in the final image.</li>
+<li>Even if an operator inspects the container, there is no <code>/bin/sh</code> or <code>cat</code> available.</li>
+<li>Only the compiled, stripped binary is present.</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>rtms-scanner-protected<span class="w"> </span>.
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>rtms-scanner-protected
+</span></code></pre></div>
+<h2 id="obfuscation-binary-stripping-optional">Obfuscation &amp; Binary Stripping (Optional)<a class="headerlink" href="#obfuscation-binary-stripping-optional" title="Permanent link">&para;</a></h2>
+<p>For hardened distribution environments:
+* Utilize PyArmor or Nuitka alongside PyInstaller for bytecode obfuscation.
+* Strip debug symbols from the final ELF binary:
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">RUN</span><span class="w"> </span>strip<span class="w"> </span>/app/dist/myapp
+</span></code></pre></div></p>
 
 
 

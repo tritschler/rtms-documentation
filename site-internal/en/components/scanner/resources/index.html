@@ -31,7 +31,7 @@
     
     
       
-        <title>Ressources & Tests HTTP - RTMS Documentation Technique (3TS Consulting)</title>
+        <title>Resources & HTTP Diagnostics - RTMS Documentation Technique (3TS Consulting)</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#curl-commands" class="md-skip">
+        <a href="#http-testing-administrative-resources" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ressources & Tests HTTP
+              Resources & HTTP Diagnostics
             
           </span>
         </div>
@@ -249,7 +249,7 @@
   
     
   
-  Accueil
+  Home
 
       </a>
     </li>
@@ -288,7 +288,7 @@
           
   
   
-  Déploiement & Installation
+  Deployment & Installation
 
         </a>
       </li>
@@ -319,7 +319,7 @@
           
   
   
-  Composants & Internals
+  Components & Internals
 
         </a>
       </li>
@@ -362,7 +362,7 @@
           
   
   
-  Conformité & Légal
+  Governance & Legal Compliance
 
         </a>
       </li>
@@ -417,7 +417,7 @@
   <span class="md-ellipsis">
     
   
-    Accueil
+    Home
   
 
     
@@ -498,7 +498,7 @@
   <span class="md-ellipsis">
     
   
-    Vue d'ensemble
+    System Overview
   
 
     
@@ -526,7 +526,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -554,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Modèle RBAC (Permissions)
+    RBAC Security Model
   
 
     
@@ -582,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -628,7 +628,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de données
+    Data Models
   
 
     
@@ -644,7 +644,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Modèles de données
+    Data Models
   
 
           </label>
@@ -753,7 +753,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
     
@@ -769,7 +769,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
           </label>
@@ -789,7 +789,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -817,7 +817,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -873,7 +873,7 @@
   <span class="md-ellipsis">
     
   
-    Composants & Internals
+    Components & Internals
   
 
     
@@ -889,7 +889,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Composants & Internals
+    Components & Internals
   
 
           </label>
@@ -966,7 +966,7 @@
   <span class="md-ellipsis">
     
   
-    Prérequis techniques
+    Technical Requirements
   
 
     
@@ -994,7 +994,7 @@
   <span class="md-ellipsis">
     
   
-    Mobilité, Cycle de vie & Multi-réseaux
+    Mobility & Multi-Network Lifecycle
   
 
     
@@ -1022,7 +1022,7 @@
   <span class="md-ellipsis">
     
   
-    Mode Standalone
+    Standalone Mode
   
 
     
@@ -1078,7 +1078,7 @@
   <span class="md-ellipsis">
     
   
-    Docker & PyInstaller
+    Docker & Packaging
   
 
     
@@ -1106,7 +1106,7 @@
   <span class="md-ellipsis">
     
   
-    Commandes Bettercap
+    Bettercap Commands
   
 
     
@@ -1134,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Audit Email & DNS
+    Email & DNS Audits
   
 
     
@@ -1162,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Ciblage Granulaire du Deep Scan
+    Granular Deep Scan Targeting
   
 
     
@@ -1192,6 +1192,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources & HTTP Diagnostics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1199,7 +1217,7 @@
   <span class="md-ellipsis">
     
   
-    Ressources & Tests HTTP
+    Resources & HTTP Diagnostics
   
 
     
@@ -1208,6 +1226,97 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-useful-curl-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Useful cURL Diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-direct-urls-for-wordpress-administration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Direct URLs for WordPress Administration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Direct URLs for WordPress Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority &amp; Recovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme-page-builders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theme &amp; Page Builders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-backup-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security &amp; Backup Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1293,7 +1402,63 @@
   <span class="md-ellipsis">
     
   
-    Documentation technique
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
   
 
     
@@ -1321,7 +1486,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement Nginx & Frontend
+    Production Nginx & Frontend Setup
   
 
     
@@ -1349,7 +1514,7 @@
   <span class="md-ellipsis">
     
   
-    Guide SSO Keycloak & OIDC
+    Enterprise SSO Keycloak & OIDC
   
 
     
@@ -1377,7 +1542,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage
+    Backend Startup Guide
   
 
     
@@ -1470,7 +1635,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture technique
+    Agent Architecture
   
 
     
@@ -1498,7 +1663,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1591,7 +1756,7 @@
   <span class="md-ellipsis">
     
   
-    Documentation NVD
+    NVD Technical Documentation
   
 
     
@@ -1619,7 +1784,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1647,7 +1812,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage & Ingestion
+    Startup & Ingestion Sequence
   
 
     
@@ -1675,7 +1840,7 @@
   <span class="md-ellipsis">
     
   
-    Exportation de rapports CVE
+    Exporting CVE Data
   
 
     
@@ -1768,7 +1933,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'administration
+    Admin & Licensing Workflow
   
 
     
@@ -1865,7 +2030,7 @@
   <span class="md-ellipsis">
     
   
-    Spécification & Développement
+    Plugin Specifications & Dev Guide
   
 
     
@@ -1918,7 +2083,7 @@
   <span class="md-ellipsis">
     
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
     
@@ -1934,7 +2099,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
           </label>
@@ -1954,7 +2119,7 @@
   <span class="md-ellipsis">
     
   
-    Directive NIS2
+    NIS 2 Compliance
   
 
     
@@ -2010,7 +2175,7 @@
   <span class="md-ellipsis">
     
   
-    Stratégie de Release
+    Release Strategy
   
 
     
@@ -2038,7 +2203,7 @@
   <span class="md-ellipsis">
     
   
-    Licences
+    Software Licenses & Copyrights
   
 
     
@@ -2084,7 +2249,7 @@
   <span class="md-ellipsis">
     
   
-    Documents Légaux
+    Legal Documents
   
 
     
@@ -2100,7 +2265,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Documents Légaux
+    Legal Documents
   
 
           </label>
@@ -2120,7 +2285,7 @@
   <span class="md-ellipsis">
     
   
-    EULA
+    End User License Agreement
   
 
     
@@ -2148,7 +2313,7 @@
   <span class="md-ellipsis">
     
   
-    Normes appliquées
+    Applied Standards
   
 
     
@@ -2176,7 +2341,7 @@
   <span class="md-ellipsis">
     
   
-    Déclaration UE
+    EU Declaration of Conformity
   
 
     
@@ -2204,7 +2369,7 @@
   <span class="md-ellipsis">
     
   
-    Évaluation des risques
+    Risk Assessment
   
 
     
@@ -2253,6 +2418,86 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-useful-curl-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Useful cURL Diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-direct-urls-for-wordpress-administration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Direct URLs for WordPress Administration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Direct URLs for WordPress Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority &amp; Recovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme-page-builders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theme &amp; Page Builders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-backup-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security &amp; Backup Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2268,67 +2513,50 @@
 
 
 
-<h1 id="curl-commands">CURL commands<a class="headerlink" href="#curl-commands" title="Permanent link">&para;</a></h1>
-<h1 id="send-standard-http-get">send standard HTTP GET<a class="headerlink" href="#send-standard-http-get" title="Permanent link">&para;</a></h1>
-<p>curl -L https://3tsconsulting.be          # renvoie le contenu complet de la page
-curl -I -L https://3tsconsulting.be</p>
-<h3 id="2-inspection-des-en-tetes-headers">2. Inspection des en-têtes (Headers)<a class="headerlink" href="#2-inspection-des-en-tetes-headers" title="Permanent link">&para;</a></h3>
-<p>Pour vérifier les codes d'état (comme le 200 OK) sans télécharger tout le contenu :
-curl -I -L https://3tsconsulting.be</p>
-<h3 id="3-mode-verbeux-debug">3. Mode verbeux (Debug)<a class="headerlink" href="#3-mode-verbeux-debug" title="Permanent link">&para;</a></h3>
-<p>curl -v -L https://3tsconsulting.be</p>
-<h3 id="4-test-de-lapi-rest-wordpress">4. Test de l'API REST WordPress<a class="headerlink" href="#4-test-de-lapi-rest-wordpress" title="Permanent link">&para;</a></h3>
-<p>Pour vérifier si l'API JSON de votre site est active et accessible :
-curl -I -L https://3tsconsulting.be/wp-json/</p>
-<h3 id="5-affichage-du-contenu-json-de-lapi">5. Affichage du contenu JSON de l'API<a class="headerlink" href="#5-affichage-du-contenu-json-de-lapi" title="Permanent link">&para;</a></h3>
-<p>Pour récupérer et afficher les données JSON brutes de WordPress :
-curl -L https://3tsconsulting.be/wp-json/</p>
-<p><em>Note : L'option <code>-L</code> a été systématiquement recommandée pour s'assurer que curl suive les redirections (par exemple de HTTP vers HTTPS ou de non-www vers www).</em></p>
-<h6 id="-direct-urls-for-php-wp-admin">-------- Direct URLs for PHP WP admin<a class="headerlink" href="#-direct-urls-for-php-wp-admin" title="Permanent link">&para;</a></h6>
-<p>https://3ts-cybersecurity.be/wp-admin/profile.php</p>
-<p>Voici une compilation des liens directs (URLs) pour administrer votre site <strong>3ts-cybersecurity.be</strong>.</p>
-<p>Ces liens sont des "raccourcis" qui contournent les menus masqués par le plugin <em>WP Clean Admin Menu</em>.
-<strong>Note :</strong> Vous devez être déjà connecté à votre site pour que ces liens fonctionnent.</p>
-<h3 id="urgence-deblocage-prioritaire">Urgence &amp; Déblocage (Prioritaire)<a class="headerlink" href="#urgence-deblocage-prioritaire" title="Permanent link">&para;</a></h3>
-<p>C'est ici que vous pouvez désactiver les plugins qui vous cachent la vue.</p>
+<h1 id="http-testing-administrative-resources">HTTP Testing &amp; Administrative Resources<a class="headerlink" href="#http-testing-administrative-resources" title="Permanent link">&para;</a></h1>
+<h2 id="1-useful-curl-diagnostics">1. Useful cURL Diagnostics<a class="headerlink" href="#1-useful-curl-diagnostics" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Standard HTTP GET (fetches complete page content)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://3tsconsulting.be
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Inspect response headers (checks HTTP 200 OK without downloading body)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>curl<span class="w"> </span>-I<span class="w"> </span>-L<span class="w"> </span>https://3tsconsulting.be
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Verbose debug mode (TLS handshake, request/response headers)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>curl<span class="w"> </span>-v<span class="w"> </span>-L<span class="w"> </span>https://3tsconsulting.be
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Test WordPress REST API reachability</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>curl<span class="w"> </span>-I<span class="w"> </span>-L<span class="w"> </span>https://3tsconsulting.be/wp-json/
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Retrieve raw REST API JSON payload</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://3tsconsulting.be/wp-json/
+</span></code></pre></div>
+<p><em>Note: The <code>-L</code> flag ensures cURL follows redirects (HTTP to HTTPS, non-www to www).</em></p>
+<hr />
+<h2 id="2-direct-urls-for-wordpress-administration">2. Direct URLs for WordPress Administration<a class="headerlink" href="#2-direct-urls-for-wordpress-administration" title="Permanent link">&para;</a></h2>
+<p>Useful shortcuts bypassing third-party admin menu plugins:</p>
+<h3 id="priority-recovery">Priority &amp; Recovery<a class="headerlink" href="#priority-recovery" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Gestion des Plugins (Pour désactiver "WP Clean Admin Menu") :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/plugins.php</code></li>
-<li><strong>Mises à jour (Vérifier l'état de santé réel) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/update-core.php</code></li>
+<li><strong>Plugin Management:</strong> <code>https://3ts-cybersecurity.be/wp-admin/plugins.php</code></li>
+<li><strong>Core Updates:</strong> <code>https://3ts-cybersecurity.be/wp-admin/update-core.php</code></li>
 </ul>
-<h3 id="oshine-tatsu-licences-options">Oshine &amp; Tatsu (Licences &amp; Options)<a class="headerlink" href="#oshine-tatsu-licences-options" title="Permanent link">&para;</a></h3>
-<p>Si le menu est caché, ces liens devraient vous amener directement dans les entrailles du thème.</p>
+<h3 id="theme-page-builders">Theme &amp; Page Builders<a class="headerlink" href="#theme-page-builders" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Accueil Oshine (Souvent là où est la licence) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=oshine</code></li>
-<li><strong>Options du Thème (Couleurs, logos, header) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=oshine_options</code></li>
-<li><strong>Tableau de bord Tatsu :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=tatsu</code></li>
+<li><strong>Oshine Settings:</strong> <code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=oshine</code></li>
+<li><strong>Theme Options:</strong> <code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=oshine_options</code></li>
+<li><strong>Tatsu Dashboard:</strong> <code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=tatsu</code></li>
 </ul>
-<h3 id="votre-compte">Votre Compte<a class="headerlink" href="#votre-compte" title="Permanent link">&para;</a></h3>
+<h3 id="general-settings">General Settings<a class="headerlink" href="#general-settings" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Changer votre mot de passe / Email :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/profile.php</code></li>
+<li><strong>User Profile:</strong> <code>https://3ts-cybersecurity.be/wp-admin/profile.php</code></li>
+<li><strong>General Settings:</strong> <code>https://3ts-cybersecurity.be/wp-admin/options-general.php</code></li>
+<li><strong>Navigation Menus:</strong> <code>https://3ts-cybersecurity.be/wp-admin/nav-menus.php</code></li>
+<li><strong>Page Management:</strong> <code>https://3ts-cybersecurity.be/wp-admin/edit.php?post_type=page</code></li>
 </ul>
-<h3 id="reglages-generaux-wordpress">Réglages Généraux WordPress<a class="headerlink" href="#reglages-generaux-wordpress" title="Permanent link">&para;</a></h3>
+<h3 id="security-backup-extensions">Security &amp; Backup Extensions<a class="headerlink" href="#security-backup-extensions" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Réglages Généraux (Titre du site, URL) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/options-general.php</code></li>
-<li><strong>Gestion des Menus (Barre de navigation) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/nav-menus.php</code></li>
-<li><strong>Gestion des Pages (Toutes vos pages) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/edit.php?post_type=page</code></li>
+<li><strong>Wordfence Security:</strong> <code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=Wordfence</code></li>
+<li><strong>UpdraftPlus Backups:</strong> <code>https://3ts-cybersecurity.be/wp-admin/options-general.php?page=updraftplus</code></li>
 </ul>
-<h3 id="plugins-specifiques-vus-dans-votre-liste">Plugins Spécifiques (vus dans votre liste)<a class="headerlink" href="#plugins-specifiques-vus-dans-votre-liste" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Réglages Wordfence (Sécurité) :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/admin.php?page=Wordfence</code></li>
-<li><strong>Sauvegardes UpdraftPlus :</strong>
-<code>https://3ts-cybersecurity.be/wp-admin/options-general.php?page=updraftplus</code></li>
-</ul>
-<p><strong>Astuce :</strong> Je vous conseille de garder cette liste ou de mettre en favori le lien <strong>Plugins</strong> (<code>.../plugins.php</code>) car c'est la clé pour reprendre le contrôle si un prestataire vous masque à nouveau les menus.</p>
 
 
 

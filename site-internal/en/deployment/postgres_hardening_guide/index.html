@@ -31,7 +31,7 @@
     
     
       
-        <title>Guide Installation & Durcissement PostgreSQL - RTMS Documentation Technique (3TS Consulting)</title>
+        <title>PostgreSQL Hardening Guide - RTMS Documentation Technique (3TS Consulting)</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#guide-dinstallation-et-de-durcissement-postgresql-vps-production" class="md-skip">
+        <a href="#postgresql-installation-hardening-guide-vps-production" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Guide Installation & Durcissement PostgreSQL
+              PostgreSQL Hardening Guide
             
           </span>
         </div>
@@ -249,7 +249,7 @@
   
     
   
-  Accueil
+  Home
 
       </a>
     </li>
@@ -290,7 +290,7 @@
           
   
   
-  Déploiement & Installation
+  Deployment & Installation
 
         </a>
       </li>
@@ -317,7 +317,7 @@
           
   
   
-  Composants & Internals
+  Components & Internals
 
         </a>
       </li>
@@ -360,7 +360,7 @@
           
   
   
-  Conformité & Légal
+  Governance & Legal Compliance
 
         </a>
       </li>
@@ -415,7 +415,7 @@
   <span class="md-ellipsis">
     
   
-    Accueil
+    Home
   
 
     
@@ -496,7 +496,7 @@
   <span class="md-ellipsis">
     
   
-    Vue d'ensemble
+    System Overview
   
 
     
@@ -524,7 +524,7 @@
   <span class="md-ellipsis">
     
   
-    Réseau & WireGuard
+    Network & WireGuard
   
 
     
@@ -552,7 +552,7 @@
   <span class="md-ellipsis">
     
   
-    Modèle RBAC (Permissions)
+    RBAC Security Model
   
 
     
@@ -580,7 +580,7 @@
   <span class="md-ellipsis">
     
   
-    Sécurité & RBAC Base de Données
+    Database Security & RBAC
   
 
     
@@ -626,7 +626,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de données
+    Data Models
   
 
     
@@ -642,7 +642,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Modèles de données
+    Data Models
   
 
           </label>
@@ -754,7 +754,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
     
@@ -770,7 +770,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Déploiement & Installation
+    Deployment & Installation
   
 
           </label>
@@ -790,7 +790,7 @@
   <span class="md-ellipsis">
     
   
-    Guide de Déploiement Ansible
+    Ansible Deployment Guide
   
 
     
@@ -827,7 +827,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -845,7 +845,7 @@
   <span class="md-ellipsis">
     
   
-    Guide Installation & Durcissement PostgreSQL
+    PostgreSQL Hardening Guide
   
 
     
@@ -871,10 +871,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-prerequis-systeme" class="md-nav__link">
+  <a href="#1-system-prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Prérequis Système
+        1. System Prerequisites
       
     </span>
   </a>
@@ -882,10 +882,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-etape-1-installation-de-postgresql" class="md-nav__link">
+  <a href="#2-step-1-install-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Étape 1 : Installation de PostgreSQL
+        2. Step 1: Install PostgreSQL
       
     </span>
   </a>
@@ -893,10 +893,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-etape-2-initialisation-de-la-base-et-des-schemas" class="md-nav__link">
+  <a href="#3-step-2-database-schemas-initialization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Étape 2 : Initialisation de la Base et des Schémas
+        3. Step 2: Database &amp; Schemas Initialization
       
     </span>
   </a>
@@ -904,22 +904,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-etape-3-application-du-durcissement-rbac-moindre-privilege" class="md-nav__link">
+  <a href="#4-step-3-enforce-rbac-hardening-least-privilege" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Étape 3 : Application du Durcissement RBAC (Moindre Privilège)
+        4. Step 3: Enforce RBAC Hardening (Least Privilege)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Étape 3 : Application du Durcissement RBAC (Moindre Privilège)">
+    <nav class="md-nav" aria-label="4. Step 3: Enforce RBAC Hardening (Least Privilege)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#execution-du-script-de-securisation" class="md-nav__link">
+  <a href="#running-the-hardening-script" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exécution du script de sécurisation :
+        Running the Hardening Script:
       
     </span>
   </a>
@@ -932,22 +932,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-etape-4-durcissement-du-serveur-postgresql-au-niveau-systeme" class="md-nav__link">
+  <a href="#5-step-4-system-level-postgresql-hardening" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Étape 4 : Durcissement du Serveur PostgreSQL au niveau Système
+        5. Step 4: System-Level PostgreSQL Hardening
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Étape 4 : Durcissement du Serveur PostgreSQL au niveau Système">
+    <nav class="md-nav" aria-label="5. Step 4: System-Level PostgreSQL Hardening">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-restriction-de-lecoute-reseau-postgresqlconf" class="md-nav__link">
+  <a href="#a-network-binding-restrictions-postgresqlconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. Restriction de l'écoute réseau (postgresql.conf)
+        A. Network Binding Restrictions (postgresql.conf)
       
     </span>
   </a>
@@ -955,10 +955,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-controle-dauthentification-pg_hbaconf" class="md-nav__link">
+  <a href="#b-client-authentication-restrictions-pg_hbaconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. Contrôle d'authentification (pg_hba.conf)
+        B. Client Authentication Restrictions (pg_hba.conf)
       
     </span>
   </a>
@@ -971,22 +971,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-etape-5-configuration-des-services-rtms" class="md-nav__link">
+  <a href="#6-step-5-rtms-service-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Étape 5 : Configuration des Services RTMS
+        6. Step 5: RTMS Service Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. Étape 5 : Configuration des Services RTMS">
+    <nav class="md-nav" aria-label="6. Step 5: RTMS Service Configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-backend-web-env" class="md-nav__link">
+  <a href="#1-web-backend-env" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Backend Web (.env)
+        1. Web Backend (.env)
       
     </span>
   </a>
@@ -994,10 +994,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-service-nvd-scannerproperties-ou-environnement-systeme" class="md-nav__link">
+  <a href="#2-nvd-service-scannerproperties-or-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Service NVD (scanner.properties ou environnement système)
+        2. NVD Service (scanner.properties or environment variables)
       
     </span>
   </a>
@@ -1005,10 +1005,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-service-scanner" class="md-nav__link">
+  <a href="#3-scanner-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Service Scanner
+        3. Scanner Service
       
     </span>
   </a>
@@ -1021,22 +1021,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-etape-6-tests-de-validation-de-la-securite" class="md-nav__link">
+  <a href="#7-step-6-security-verification-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Étape 6 : Tests de Validation de la Sécurité
+        7. Step 6: Security Verification Tests
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="7. Étape 6 : Tests de Validation de la Sécurité">
+    <nav class="md-nav" aria-label="7. Step 6: Security Verification Tests">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#test-1-verifier-que-rtms-scanner-ne-peut-pas-acceder-a-nvd" class="md-nav__link">
+  <a href="#test-1-confirm-rtms-scanner-cannot-query-nvd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 1 : Vérifier que rtms-scanner ne peut pas accéder à nvd
+        Test 1: Confirm rtms-scanner cannot query nvd
       
     </span>
   </a>
@@ -1044,10 +1044,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#test-2-verifier-que-rtms-web-ne-peut-pas-modifier-la-base-nvd-lecture-seule" class="md-nav__link">
+  <a href="#test-2-confirm-rtms-web-cannot-mutate-nvd-data-read-only" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 2 : Vérifier que rtms-web ne peut pas modifier la base NVD (Lecture Seule)
+        Test 2: Confirm rtms-web cannot mutate NVD data (Read-Only)
       
     </span>
   </a>
@@ -1055,10 +1055,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#test-3-verifier-que-rtms-nvd-ne-peut-pas-acceder-aux-utilisateurs-administrateurs" class="md-nav__link">
+  <a href="#test-3-confirm-rtms-nvd-cannot-read-admin-user-accounts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 3 : Vérifier que rtms-nvd ne peut pas accéder aux utilisateurs administrateurs
+        Test 3: Confirm rtms-nvd cannot read admin user accounts
       
     </span>
   </a>
@@ -1066,10 +1066,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#test-4-verifier-que-rtms-web-peut-lire-les-cves" class="md-nav__link">
+  <a href="#test-4-confirm-rtms-web-can-query-cves" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 4 : Vérifier que rtms-web peut lire les CVEs
+        Test 4: Confirm rtms-web can query CVEs
       
     </span>
   </a>
@@ -1082,10 +1082,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-sauvegarde-et-restauration" class="md-nav__link">
+  <a href="#8-backup-disaster-recovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Sauvegarde et Restauration
+        8. Backup &amp; Disaster Recovery
       
     </span>
   </a>
@@ -1140,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Composants & Internals
+    Components & Internals
   
 
     
@@ -1156,7 +1156,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Composants & Internals
+    Components & Internals
   
 
           </label>
@@ -1230,7 +1230,7 @@
   <span class="md-ellipsis">
     
   
-    Prérequis techniques
+    Technical Requirements
   
 
     
@@ -1258,7 +1258,7 @@
   <span class="md-ellipsis">
     
   
-    Mobilité, Cycle de vie & Multi-réseaux
+    Mobility & Multi-Network Lifecycle
   
 
     
@@ -1286,7 +1286,7 @@
   <span class="md-ellipsis">
     
   
-    Mode Standalone
+    Standalone Mode
   
 
     
@@ -1342,7 +1342,7 @@
   <span class="md-ellipsis">
     
   
-    Docker & PyInstaller
+    Docker & Packaging
   
 
     
@@ -1370,7 +1370,7 @@
   <span class="md-ellipsis">
     
   
-    Commandes Bettercap
+    Bettercap Commands
   
 
     
@@ -1398,7 +1398,7 @@
   <span class="md-ellipsis">
     
   
-    Audit Email & DNS
+    Email & DNS Audits
   
 
     
@@ -1426,7 +1426,7 @@
   <span class="md-ellipsis">
     
   
-    Ciblage Granulaire du Deep Scan
+    Granular Deep Scan Targeting
   
 
     
@@ -1454,7 +1454,7 @@
   <span class="md-ellipsis">
     
   
-    Ressources & Tests HTTP
+    Resources & HTTP Diagnostics
   
 
     
@@ -1544,7 +1544,63 @@
   <span class="md-ellipsis">
     
   
-    Documentation technique
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
   
 
     
@@ -1572,7 +1628,7 @@
   <span class="md-ellipsis">
     
   
-    Déploiement Nginx & Frontend
+    Production Nginx & Frontend Setup
   
 
     
@@ -1600,7 +1656,7 @@
   <span class="md-ellipsis">
     
   
-    Guide SSO Keycloak & OIDC
+    Enterprise SSO Keycloak & OIDC
   
 
     
@@ -1628,7 +1684,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage
+    Backend Startup Guide
   
 
     
@@ -1718,7 +1774,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture technique
+    Agent Architecture
   
 
     
@@ -1746,7 +1802,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1836,7 +1892,7 @@
   <span class="md-ellipsis">
     
   
-    Documentation NVD
+    NVD Technical Documentation
   
 
     
@@ -1864,7 +1920,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'installation
+    NVD Installation Guide
   
 
     
@@ -1892,7 +1948,7 @@
   <span class="md-ellipsis">
     
   
-    Démarrage & Ingestion
+    Startup & Ingestion Sequence
   
 
     
@@ -1920,7 +1976,7 @@
   <span class="md-ellipsis">
     
   
-    Exportation de rapports CVE
+    Exporting CVE Data
   
 
     
@@ -2010,7 +2066,7 @@
   <span class="md-ellipsis">
     
   
-    Guide d'administration
+    Admin & Licensing Workflow
   
 
     
@@ -2107,7 +2163,7 @@
   <span class="md-ellipsis">
     
   
-    Spécification & Développement
+    Plugin Specifications & Dev Guide
   
 
     
@@ -2160,7 +2216,7 @@
   <span class="md-ellipsis">
     
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
     
@@ -2176,7 +2232,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Conformité & Légal
+    Governance & Legal Compliance
   
 
           </label>
@@ -2196,7 +2252,7 @@
   <span class="md-ellipsis">
     
   
-    Directive NIS2
+    NIS 2 Compliance
   
 
     
@@ -2252,7 +2308,7 @@
   <span class="md-ellipsis">
     
   
-    Stratégie de Release
+    Release Strategy
   
 
     
@@ -2280,7 +2336,7 @@
   <span class="md-ellipsis">
     
   
-    Licences
+    Software Licenses & Copyrights
   
 
     
@@ -2326,7 +2382,7 @@
   <span class="md-ellipsis">
     
   
-    Documents Légaux
+    Legal Documents
   
 
     
@@ -2342,7 +2398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Documents Légaux
+    Legal Documents
   
 
           </label>
@@ -2362,7 +2418,7 @@
   <span class="md-ellipsis">
     
   
-    EULA
+    End User License Agreement
   
 
     
@@ -2390,7 +2446,7 @@
   <span class="md-ellipsis">
     
   
-    Normes appliquées
+    Applied Standards
   
 
     
@@ -2418,7 +2474,7 @@
   <span class="md-ellipsis">
     
   
-    Déclaration UE
+    EU Declaration of Conformity
   
 
     
@@ -2446,7 +2502,7 @@
   <span class="md-ellipsis">
     
   
-    Évaluation des risques
+    Risk Assessment
   
 
     
@@ -2502,10 +2558,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-prerequis-systeme" class="md-nav__link">
+  <a href="#1-system-prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Prérequis Système
+        1. System Prerequisites
       
     </span>
   </a>
@@ -2513,10 +2569,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-etape-1-installation-de-postgresql" class="md-nav__link">
+  <a href="#2-step-1-install-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Étape 1 : Installation de PostgreSQL
+        2. Step 1: Install PostgreSQL
       
     </span>
   </a>
@@ -2524,10 +2580,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-etape-2-initialisation-de-la-base-et-des-schemas" class="md-nav__link">
+  <a href="#3-step-2-database-schemas-initialization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Étape 2 : Initialisation de la Base et des Schémas
+        3. Step 2: Database &amp; Schemas Initialization
       
     </span>
   </a>
@@ -2535,22 +2591,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-etape-3-application-du-durcissement-rbac-moindre-privilege" class="md-nav__link">
+  <a href="#4-step-3-enforce-rbac-hardening-least-privilege" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Étape 3 : Application du Durcissement RBAC (Moindre Privilège)
+        4. Step 3: Enforce RBAC Hardening (Least Privilege)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Étape 3 : Application du Durcissement RBAC (Moindre Privilège)">
+    <nav class="md-nav" aria-label="4. Step 3: Enforce RBAC Hardening (Least Privilege)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#execution-du-script-de-securisation" class="md-nav__link">
+  <a href="#running-the-hardening-script" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exécution du script de sécurisation :
+        Running the Hardening Script:
       
     </span>
   </a>
@@ -2563,22 +2619,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-etape-4-durcissement-du-serveur-postgresql-au-niveau-systeme" class="md-nav__link">
+  <a href="#5-step-4-system-level-postgresql-hardening" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Étape 4 : Durcissement du Serveur PostgreSQL au niveau Système
+        5. Step 4: System-Level PostgreSQL Hardening
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Étape 4 : Durcissement du Serveur PostgreSQL au niveau Système">
+    <nav class="md-nav" aria-label="5. Step 4: System-Level PostgreSQL Hardening">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-restriction-de-lecoute-reseau-postgresqlconf" class="md-nav__link">
+  <a href="#a-network-binding-restrictions-postgresqlconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. Restriction de l'écoute réseau (postgresql.conf)
+        A. Network Binding Restrictions (postgresql.conf)
       
     </span>
   </a>
@@ -2586,10 +2642,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-controle-dauthentification-pg_hbaconf" class="md-nav__link">
+  <a href="#b-client-authentication-restrictions-pg_hbaconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. Contrôle d'authentification (pg_hba.conf)
+        B. Client Authentication Restrictions (pg_hba.conf)
       
     </span>
   </a>
@@ -2602,22 +2658,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-etape-5-configuration-des-services-rtms" class="md-nav__link">
+  <a href="#6-step-5-rtms-service-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Étape 5 : Configuration des Services RTMS
+        6. Step 5: RTMS Service Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. Étape 5 : Configuration des Services RTMS">
+    <nav class="md-nav" aria-label="6. Step 5: RTMS Service Configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-backend-web-env" class="md-nav__link">
+  <a href="#1-web-backend-env" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Backend Web (.env)
+        1. Web Backend (.env)
       
     </span>
   </a>
@@ -2625,10 +2681,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-service-nvd-scannerproperties-ou-environnement-systeme" class="md-nav__link">
+  <a href="#2-nvd-service-scannerproperties-or-environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Service NVD (scanner.properties ou environnement système)
+        2. NVD Service (scanner.properties or environment variables)
       
     </span>
   </a>
@@ -2636,10 +2692,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-service-scanner" class="md-nav__link">
+  <a href="#3-scanner-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Service Scanner
+        3. Scanner Service
       
     </span>
   </a>
@@ -2652,22 +2708,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-etape-6-tests-de-validation-de-la-securite" class="md-nav__link">
+  <a href="#7-step-6-security-verification-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Étape 6 : Tests de Validation de la Sécurité
+        7. Step 6: Security Verification Tests
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="7. Étape 6 : Tests de Validation de la Sécurité">
+    <nav class="md-nav" aria-label="7. Step 6: Security Verification Tests">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#test-1-verifier-que-rtms-scanner-ne-peut-pas-acceder-a-nvd" class="md-nav__link">
+  <a href="#test-1-confirm-rtms-scanner-cannot-query-nvd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 1 : Vérifier que rtms-scanner ne peut pas accéder à nvd
+        Test 1: Confirm rtms-scanner cannot query nvd
       
     </span>
   </a>
@@ -2675,10 +2731,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#test-2-verifier-que-rtms-web-ne-peut-pas-modifier-la-base-nvd-lecture-seule" class="md-nav__link">
+  <a href="#test-2-confirm-rtms-web-cannot-mutate-nvd-data-read-only" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 2 : Vérifier que rtms-web ne peut pas modifier la base NVD (Lecture Seule)
+        Test 2: Confirm rtms-web cannot mutate NVD data (Read-Only)
       
     </span>
   </a>
@@ -2686,10 +2742,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#test-3-verifier-que-rtms-nvd-ne-peut-pas-acceder-aux-utilisateurs-administrateurs" class="md-nav__link">
+  <a href="#test-3-confirm-rtms-nvd-cannot-read-admin-user-accounts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 3 : Vérifier que rtms-nvd ne peut pas accéder aux utilisateurs administrateurs
+        Test 3: Confirm rtms-nvd cannot read admin user accounts
       
     </span>
   </a>
@@ -2697,10 +2753,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#test-4-verifier-que-rtms-web-peut-lire-les-cves" class="md-nav__link">
+  <a href="#test-4-confirm-rtms-web-can-query-cves" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test 4 : Vérifier que rtms-web peut lire les CVEs
+        Test 4: Confirm rtms-web can query CVEs
       
     </span>
   </a>
@@ -2713,10 +2769,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-sauvegarde-et-restauration" class="md-nav__link">
+  <a href="#8-backup-disaster-recovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Sauvegarde et Restauration
+        8. Backup &amp; Disaster Recovery
       
     </span>
   </a>
@@ -2740,70 +2796,70 @@
 
 
 
-<h1 id="guide-dinstallation-et-de-durcissement-postgresql-vps-production">Guide d'Installation et de Durcissement PostgreSQL (VPS / Production)<a class="headerlink" href="#guide-dinstallation-et-de-durcissement-postgresql-vps-production" title="Permanent link">&para;</a></h1>
-<p>Ce guide fournit une procédure pas-à-pas complète pour déployer, configurer et sécuriser l'infrastructure de base de données PostgreSQL de la plateforme RTMS sur un serveur VPS Linux (Ubuntu / Debian).</p>
-<p>Ce déploiement met en œuvre une architecture <strong>PoLP (<em>Principle of Least Privilege</em>)</strong> stricte conforme aux exigences <strong>NIS 2</strong> et <strong>ISO 27001</strong>.</p>
+<h1 id="postgresql-installation-hardening-guide-vps-production">PostgreSQL Installation &amp; Hardening Guide (VPS / Production)<a class="headerlink" href="#postgresql-installation-hardening-guide-vps-production" title="Permanent link">&para;</a></h1>
+<p>This guide provides a step-by-step procedure to deploy, configure, and secure the PostgreSQL database infrastructure of the RTMS platform on a Linux VPS server (Ubuntu / Debian).</p>
+<p>This deployment enforces a strict <strong>PoLP (<em>Principle of Least Privilege</em>)</strong> architecture in alignment with <strong>NIS 2</strong> and <strong>ISO 27001</strong> regulatory controls.</p>
 <hr />
-<h2 id="1-prerequis-systeme">1. Prérequis Système<a class="headerlink" href="#1-prerequis-systeme" title="Permanent link">&para;</a></h2>
+<h2 id="1-system-prerequisites">1. System Prerequisites<a class="headerlink" href="#1-system-prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Système d'exploitation</strong> : Ubuntu 22.04 LTS / 24.04 LTS ou Debian 12</li>
-<li><strong>Version PostgreSQL</strong> : Version 16 ou supérieure</li>
-<li><strong>Extensions requises</strong> : <code>uuid-ossp</code>, <code>pg_trgm</code></li>
-<li><strong>Accès</strong> : Privilèges <code>sudo</code> / <code>root</code></li>
+<li><strong>Operating System</strong>: Ubuntu 22.04 LTS / 24.04 LTS or Debian 12</li>
+<li><strong>PostgreSQL Version</strong>: Version 16 or newer</li>
+<li><strong>Required Extensions</strong>: <code>uuid-ossp</code>, <code>pg_trgm</code></li>
+<li><strong>Access</strong>: <code>sudo</code> / <code>root</code> administrative privileges</li>
 </ul>
 <hr />
-<h2 id="2-etape-1-installation-de-postgresql">2. Étape 1 : Installation de PostgreSQL<a class="headerlink" href="#2-etape-1-installation-de-postgresql" title="Permanent link">&para;</a></h2>
-<p>Sur le VPS, mettez à jour les dépôts et installez PostgreSQL ainsi que les extensions de contribution :</p>
+<h2 id="2-step-1-install-postgresql">2. Step 1: Install PostgreSQL<a class="headerlink" href="#2-step-1-install-postgresql" title="Permanent link">&para;</a></h2>
+<p>On the target VPS, update repositories and install PostgreSQL alongside standard contrib extensions:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib
 </span></code></pre></div>
-<p>Vérifiez que le service PostgreSQL est actif et s'exécute correctement :</p>
+<p>Verify that the PostgreSQL service is active and running:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>postgresql
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>postgresql<span class="w"> </span>--no-pager
 </span></code></pre></div>
 <hr />
-<h2 id="3-etape-2-initialisation-de-la-base-et-des-schemas">3. Étape 2 : Initialisation de la Base et des Schémas<a class="headerlink" href="#3-etape-2-initialisation-de-la-base-et-des-schemas" title="Permanent link">&para;</a></h2>
-<p>Connectez-vous en tant qu'utilisateur système <code>postgres</code> et créez la base <code>rtms_db</code> ainsi que l'utilisateur propriétaire maître (<code>rtms_user</code>) :</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Définir un mot de passe fort pour l'utilisateur propriétaire</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">RTMS_DB_PASS</span><span class="o">=</span><span class="s2">"VOTRE_MOT_DE_PASSE_TRES_FORT_POUR_RTMS_USER"</span>
+<h2 id="3-step-2-database-schemas-initialization">3. Step 2: Database &amp; Schemas Initialization<a class="headerlink" href="#3-step-2-database-schemas-initialization" title="Permanent link">&para;</a></h2>
+<p>Switch to the <code>postgres</code> system user and create database <code>rtms_db</code> and master owner user (<code>rtms_user</code>):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Define a strong password for the owner account</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">RTMS_DB_PASS</span><span class="o">=</span><span class="s2">"YOUR_STRONG_PASSWORD_FOR_RTMS_USER"</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s">-- Création du propriétaire maître</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s">-- Create master owner user</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s">CREATE USER rtms_user WITH PASSWORD '$RTMS_DB_PASS';</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s">-- Création de la base de données</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s">-- Create database</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s">CREATE DATABASE rtms_db OWNER rtms_user;</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s">EOF</span>
 </span></code></pre></div>
-<p>Activez les extensions requises et créez les 3 schémas étanches :</p>
+<p>Enable required extensions and create the 3 segregated schemas:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s">-- Extension UUID pour les identifiants uniques</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s">-- UUID extension for unique identifiers</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="s">CREATE EXTENSION IF NOT EXISTS "uuid-ossp" SCHEMA public;</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s">-- Extension pg_trgm pour la recherche plein texte et similitude trigramme</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s">-- pg_trgm extension for full-text search and trigram similarity</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s">CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA public;</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="s">-- Création des 3 schémas métier appartenant à rtms_user</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="s">-- Create the 3 business schemas owned by rtms_user</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="s">CREATE SCHEMA IF NOT EXISTS admin AUTHORIZATION rtms_user;</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="s">CREATE SCHEMA IF NOT EXISTS nvd AUTHORIZATION rtms_user;</span>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="s">CREATE SCHEMA IF NOT EXISTS scanner AUTHORIZATION rtms_user;</span>
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="s">EOF</span>
 </span></code></pre></div>
 <hr />
-<h2 id="4-etape-3-application-du-durcissement-rbac-moindre-privilege">4. Étape 3 : Application du Durcissement RBAC (Moindre Privilège)<a class="headerlink" href="#4-etape-3-application-du-durcissement-rbac-moindre-privilege" title="Permanent link">&para;</a></h2>
-<p>Pour éviter qu'un composant compromis ne donne accès à toute la base de données, nous créons 3 comptes de service dédiés avec des droits cloisonnés :</p>
+<h2 id="4-step-3-enforce-rbac-hardening-least-privilege">4. Step 3: Enforce RBAC Hardening (Least Privilege)<a class="headerlink" href="#4-step-3-enforce-rbac-hardening-least-privilege" title="Permanent link">&para;</a></h2>
+<p>To ensure that a compromised probe or microservice cannot jeopardize the entire database, 3 dedicated service roles are provisioned with compartmentalized privileges:</p>
 <ol>
-<li><strong><code>rtms_nvd_user</code></strong> : Synchroniseur NVD (Lecture/Écriture sur <code>nvd</code>, configuration et heartbeat sur <code>admin</code>, <strong>zéro accès</strong> à <code>scanner</code>).</li>
-<li><strong><code>rtms_scanner_user</code></strong> : Moteur de scan (Lecture/Écriture sur <code>scanner</code>, injection d'actifs sur <code>admin</code>, <strong>zéro accès</strong> à <code>nvd</code>).</li>
-<li><strong><code>rtms_web_user</code></strong> : Backend Web / Dashboard (Lecture/Écriture sur <code>admin</code> et <code>scanner</code>, <strong>lecture seule stricte</strong> sur <code>nvd</code>).</li>
+<li><strong><code>rtms_nvd_user</code></strong>: NVD Synchronizer (Read/Write on <code>nvd</code>, configuration and heartbeat on <code>admin</code>, <strong>zero access</strong> to <code>scanner</code>).</li>
+<li><strong><code>rtms_scanner_user</code></strong>: Scanning engine (Read/Write on <code>scanner</code>, asset insertion on <code>admin</code>, <strong>zero access</strong> to <code>nvd</code>).</li>
+<li><strong><code>rtms_web_user</code></strong>: Web Backend / UI (Read/Write on <code>admin</code> and <code>scanner</code>, <strong>strict read-only</strong> on <code>nvd</code>).</li>
 </ol>
-<h3 id="execution-du-script-de-securisation">Exécution du script de sécurisation :<a class="headerlink" href="#execution-du-script-de-securisation" title="Permanent link">&para;</a></h3>
-<p>Définissez les mots de passe pour chaque service et exécutez le script SQL :</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">NVD_PASS</span><span class="o">=</span><span class="s2">"MOT_DE_PASSE_SECURISE_NVD"</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">SCANNER_PASS</span><span class="o">=</span><span class="s2">"MOT_DE_PASSE_SECURISE_SCANNER"</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">WEB_PASS</span><span class="o">=</span><span class="s2">"MOT_DE_PASSE_SECURISE_WEB"</span>
+<h3 id="running-the-hardening-script">Running the Hardening Script:<a class="headerlink" href="#running-the-hardening-script" title="Permanent link">&para;</a></h3>
+<p>Define individual service passwords and execute the provisioning block:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">NVD_PASS</span><span class="o">=</span><span class="s2">"SECURE_PASSWORD_NVD"</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">SCANNER_PASS</span><span class="o">=</span><span class="s2">"SECURE_PASSWORD_SCANNER"</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">WEB_PASS</span><span class="o">=</span><span class="s2">"SECURE_PASSWORD_WEB"</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s">-- 1. Création des rôles</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s">-- 1. Create service roles</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s">DO \$\$</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s">BEGIN</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="s">    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'rtms_nvd_user') THEN</span>
@@ -2818,18 +2874,18 @@
 </span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="s">END</span>
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="s">\$\$;</span>
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="s">-- 2. Connexion et search_paths</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="s">-- 2. Connection and search_paths</span>
 </span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="s">GRANT CONNECT ON DATABASE rtms_db TO rtms_nvd_user, rtms_scanner_user, rtms_web_user;</span>
 </span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
 </span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="s">ALTER ROLE rtms_nvd_user SET search_path TO nvd, admin, public;</span>
 </span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="s">ALTER ROLE rtms_scanner_user SET search_path TO scanner, admin, public;</span>
 </span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="s">ALTER ROLE rtms_web_user SET search_path TO admin, scanner, nvd, public;</span>
 </span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="s">-- Sécurisation du schéma public par défaut</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="s">-- Lock down public schema</span>
 </span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="s">REVOKE CREATE ON SCHEMA public FROM PUBLIC;</span>
 </span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="s">REVOKE CREATE ON SCHEMA public FROM rtms_nvd_user, rtms_scanner_user, rtms_web_user;</span>
 </span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="s">-- 3. Droits RTMS-NVD (nvd_user)</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="s">-- 3. RTMS-NVD Permissions (nvd_user)</span>
 </span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="s">REVOKE ALL ON SCHEMA scanner FROM rtms_nvd_user;</span>
 </span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="s">REVOKE ALL ON ALL TABLES IN SCHEMA scanner FROM rtms_nvd_user;</span>
 </span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="s">REVOKE ALL ON ALL SEQUENCES IN SCHEMA scanner FROM rtms_nvd_user;</span>
@@ -2844,7 +2900,7 @@
 </span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="s">REVOKE ALL ON ALL TABLES IN SCHEMA admin FROM rtms_nvd_user;</span>
 </span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="s">REVOKE ALL ON ALL SEQUENCES IN SCHEMA admin FROM rtms_nvd_user;</span>
 </span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>
-</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="s">-- 4. Droits RTMS-SCANNER (scanner_user)</span>
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="s">-- 4. RTMS-SCANNER Permissions (scanner_user)</span>
 </span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a><span class="s">REVOKE ALL ON SCHEMA nvd FROM rtms_scanner_user;</span>
 </span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a><span class="s">REVOKE ALL ON ALL TABLES IN SCHEMA nvd FROM rtms_scanner_user;</span>
 </span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a><span class="s">REVOKE ALL ON ALL SEQUENCES IN SCHEMA nvd FROM rtms_scanner_user;</span>
@@ -2859,7 +2915,7 @@
 </span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a><span class="s">REVOKE ALL ON ALL TABLES IN SCHEMA admin FROM rtms_scanner_user;</span>
 </span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a><span class="s">REVOKE ALL ON ALL SEQUENCES IN SCHEMA admin FROM rtms_scanner_user;</span>
 </span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>
-</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a><span class="s">-- 5. Droits RTMS-WEB (web_user)</span>
+</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a><span class="s">-- 5. RTMS-WEB Permissions (web_user)</span>
 </span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a><span class="s">GRANT USAGE ON SCHEMA admin, scanner, nvd TO rtms_web_user;</span>
 </span><span id="__span-4-64"><a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a><span class="s">GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA admin TO rtms_web_user;</span>
 </span><span id="__span-4-65"><a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a><span class="s">GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA scanner TO rtms_web_user;</span>
@@ -2868,34 +2924,34 @@
 </span><span id="__span-4-68"><a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a><span class="s">ALTER DEFAULT PRIVILEGES IN SCHEMA admin GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO rtms_web_user;</span>
 </span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a><span class="s">ALTER DEFAULT PRIVILEGES IN SCHEMA scanner GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO rtms_web_user;</span>
 </span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a>
-</span><span id="__span-4-71"><a id="__codelineno-4-71" name="__codelineno-4-71" href="#__codelineno-4-71"></a><span class="s">-- NVD en LECTURE SEULE pour le web</span>
+</span><span id="__span-4-71"><a id="__codelineno-4-71" name="__codelineno-4-71" href="#__codelineno-4-71"></a><span class="s">-- NVD strictly READ-ONLY for Web UI</span>
 </span><span id="__span-4-72"><a id="__codelineno-4-72" name="__codelineno-4-72" href="#__codelineno-4-72"></a><span class="s">REVOKE INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA nvd FROM rtms_web_user;</span>
 </span><span id="__span-4-73"><a id="__codelineno-4-73" name="__codelineno-4-73" href="#__codelineno-4-73"></a><span class="s">GRANT SELECT ON ALL TABLES IN SCHEMA nvd TO rtms_web_user;</span>
 </span><span id="__span-4-74"><a id="__codelineno-4-74" name="__codelineno-4-74" href="#__codelineno-4-74"></a><span class="s">ALTER DEFAULT PRIVILEGES IN SCHEMA nvd GRANT SELECT ON TABLES TO rtms_web_user;</span>
 </span><span id="__span-4-75"><a id="__codelineno-4-75" name="__codelineno-4-75" href="#__codelineno-4-75"></a><span class="s">EOF</span>
 </span></code></pre></div>
 <blockquote>
-<p><strong>Astuce :</strong> Vous pouvez également appliquer ou réappliquer ces privilèges à tout moment via l'utilitaire de l'installeur :
+<p><strong>Tip:</strong> You can also apply or re-verify these permissions at any time using the installer utility:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>database/manage_schemas.py<span class="w"> </span>setup-rbac
 </span></code></pre></div></p>
 </blockquote>
 <hr />
-<h2 id="5-etape-4-durcissement-du-serveur-postgresql-au-niveau-systeme">5. Étape 4 : Durcissement du Serveur PostgreSQL au niveau Système<a class="headerlink" href="#5-etape-4-durcissement-du-serveur-postgresql-au-niveau-systeme" title="Permanent link">&para;</a></h2>
-<h3 id="a-restriction-de-lecoute-reseau-postgresqlconf">A. Restriction de l'écoute réseau (<code>postgresql.conf</code>)<a class="headerlink" href="#a-restriction-de-lecoute-reseau-postgresqlconf" title="Permanent link">&para;</a></h3>
-<p>Par défaut sur un VPS hébergeant l'application en local ou via tunnel VPN WireGuard, PostgreSQL ne doit <strong>jamais</strong> écouter sur <code>0.0.0.0</code> sans restriction.</p>
-<p>Éditez le fichier de configuration principal (ex: <code>/etc/postgresql/16/main/postgresql.conf</code>) :</p>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Écouter uniquement en local (si tous les services RTMS sont sur le même VPS)</span>
+<h2 id="5-step-4-system-level-postgresql-hardening">5. Step 4: System-Level PostgreSQL Hardening<a class="headerlink" href="#5-step-4-system-level-postgresql-hardening" title="Permanent link">&para;</a></h2>
+<h3 id="a-network-binding-restrictions-postgresqlconf">A. Network Binding Restrictions (<code>postgresql.conf</code>)<a class="headerlink" href="#a-network-binding-restrictions-postgresqlconf" title="Permanent link">&para;</a></h3>
+<p>By default on a VPS running services locally or through a WireGuard VPN tunnel, PostgreSQL must <strong>never</strong> listen on <code>0.0.0.0</code> unrestricted.</p>
+<p>Edit the primary configuration file (e.g., <code>/etc/postgresql/16/main/postgresql.conf</code>):</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Listen strictly on localhost (if all RTMS services run locally)</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="na">listen_addresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'localhost'</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Paramètres de performance et de sécurité recommandés</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Recommended performance and security directives</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="na">password_encryption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">scram-sha-256</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="na">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">on</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="na">log_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">on</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="na">log_disconnections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">on</span>
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="na">log_line_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'%m [%p] %q%u@%d '</span>
 </span></code></pre></div>
-<h3 id="b-controle-dauthentification-pg_hbaconf">B. Contrôle d'authentification (<code>pg_hba.conf</code>)<a class="headerlink" href="#b-controle-dauthentification-pg_hbaconf" title="Permanent link">&para;</a></h3>
-<p>Éditez <code>/etc/postgresql/16/main/pg_hba.conf</code> pour exiger l'authentification sécurisée <code>scram-sha-256</code> :</p>
+<h3 id="b-client-authentication-restrictions-pg_hbaconf">B. Client Authentication Restrictions (<code>pg_hba.conf</code>)<a class="headerlink" href="#b-client-authentication-restrictions-pg_hbaconf" title="Permanent link">&para;</a></h3>
+<p>Edit <code>/etc/postgresql/16/main/pg_hba.conf</code> to enforce <code>scram-sha-256</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># TYPE  DATABASE        USER            ADDRESS                 METHOD
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>local   all             postgres                                peer
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>local   all             all                                     scram-sha-256
@@ -2904,66 +2960,66 @@
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>host    rtms_db         rtms_scanner_user 127.0.0.1/32          scram-sha-256
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>host    rtms_db         rtms_user       127.0.0.1/32            scram-sha-256
 </span></code></pre></div>
-<p>Rechargez ensuite la configuration :</p>
+<p>Reload PostgreSQL configuration:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>postgresql
 </span></code></pre></div>
 <hr />
-<h2 id="6-etape-5-configuration-des-services-rtms">6. Étape 5 : Configuration des Services RTMS<a class="headerlink" href="#6-etape-5-configuration-des-services-rtms" title="Permanent link">&para;</a></h2>
-<p>Dans le répertoire <code>/opt/rtms/config/</code> :</p>
-<h3 id="1-backend-web-env">1. Backend Web (<code>.env</code>)<a class="headerlink" href="#1-backend-web-env" title="Permanent link">&para;</a></h3>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="na">DATABASE_URL</span><span class="o">=</span><span class="s">postgresql+psycopg://rtms_web_user:VOTRE_MOT_DE_PASSE@localhost:5432/rtms_db</span>
+<h2 id="6-step-5-rtms-service-configuration">6. Step 5: RTMS Service Configuration<a class="headerlink" href="#6-step-5-rtms-service-configuration" title="Permanent link">&para;</a></h2>
+<p>In directory <code>/opt/rtms/config/</code>:</p>
+<h3 id="1-web-backend-env">1. Web Backend (<code>.env</code>)<a class="headerlink" href="#1-web-backend-env" title="Permanent link">&para;</a></h3>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="na">DATABASE_URL</span><span class="o">=</span><span class="s">postgresql+psycopg://rtms_web_user:YOUR_PASSWORD@localhost:5432/rtms_db</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="na">RTMS_DB_HOST</span><span class="o">=</span><span class="s">localhost</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="na">RTMS_DB_PORT</span><span class="o">=</span><span class="s">5432</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="na">RTMS_DB_NAME</span><span class="o">=</span><span class="s">rtms_db</span>
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="na">RTMS_DB_USER</span><span class="o">=</span><span class="s">rtms_web_user</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="na">RTMS_POSTGRES_PASSWORD</span><span class="o">=</span><span class="s">VOTRE_MOT_DE_PASSE</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="na">RTMS_POSTGRES_PASSWORD</span><span class="o">=</span><span class="s">YOUR_PASSWORD</span>
 </span></code></pre></div>
-<h3 id="2-service-nvd-scannerproperties-ou-environnement-systeme">2. Service NVD (<code>scanner.properties</code> ou environnement système)<a class="headerlink" href="#2-service-nvd-scannerproperties-ou-environnement-systeme" title="Permanent link">&para;</a></h3>
+<h3 id="2-nvd-service-scannerproperties-or-environment-variables">2. NVD Service (<code>scanner.properties</code> or environment variables)<a class="headerlink" href="#2-nvd-service-scannerproperties-or-environment-variables" title="Permanent link">&para;</a></h3>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="na">db.host</span><span class="o">=</span><span class="s">localhost</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="na">db.port</span><span class="o">=</span><span class="s">5432</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="na">db.name</span><span class="o">=</span><span class="s">rtms_db</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="na">db.user</span><span class="o">=</span><span class="s">rtms_nvd_user</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="na">db.password</span><span class="o">=</span><span class="s">VOTRE_MOT_DE_PASSE</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="na">db.password</span><span class="o">=</span><span class="s">YOUR_PASSWORD</span>
 </span></code></pre></div>
-<h3 id="3-service-scanner">3. Service Scanner<a class="headerlink" href="#3-service-scanner" title="Permanent link">&para;</a></h3>
+<h3 id="3-scanner-service">3. Scanner Service<a class="headerlink" href="#3-scanner-service" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Mode REST API (recommandé en production)</strong> : Le scanner communique via HTTPS avec le backend via <code>RTMS_SERVER_URL</code> et <code>RTMS_SCANNER_TOKEN</code>.</li>
-<li><strong>Mode Connexion Directe DB (si activé)</strong> : Utilise <code>db.user=rtms_scanner_user</code>.</li>
+<li><strong>REST API Mode (Recommended for production)</strong>: The scanner communicates over HTTPS with the backend via <code>RTMS_SERVER_URL</code> and <code>RTMS_SCANNER_TOKEN</code>.</li>
+<li><strong>Direct DB Mode (if enabled)</strong>: Connects using <code>db.user=rtms_scanner_user</code>.</li>
 </ul>
 <hr />
-<h2 id="7-etape-6-tests-de-validation-de-la-securite">7. Étape 6 : Tests de Validation de la Sécurité<a class="headerlink" href="#7-etape-6-tests-de-validation-de-la-securite" title="Permanent link">&para;</a></h2>
-<p>Pour vérifier que le cloisonnement est opérationnel sur votre VPS, exécutez ces tests de vérification :</p>
-<h3 id="test-1-verifier-que-rtms-scanner-ne-peut-pas-acceder-a-nvd">Test 1 : Vérifier que <code>rtms-scanner</code> ne peut pas accéder à <code>nvd</code><a class="headerlink" href="#test-1-verifier-que-rtms-scanner-ne-peut-pas-acceder-a-nvd" title="Permanent link">&para;</a></h3>
+<h2 id="7-step-6-security-verification-tests">7. Step 6: Security Verification Tests<a class="headerlink" href="#7-step-6-security-verification-tests" title="Permanent link">&para;</a></h2>
+<p>To verify that isolation boundaries are active:</p>
+<h3 id="test-1-confirm-rtms-scanner-cannot-query-nvd">Test 1: Confirm <code>rtms-scanner</code> cannot query <code>nvd</code><a class="headerlink" href="#test-1-confirm-rtms-scanner-cannot-query-nvd" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">PGPASSWORD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$SCANNER_PASS</span><span class="s2">"</span><span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>rtms_scanner_user<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT COUNT(*) FROM nvd.cve;"</span>
 </span></code></pre></div>
 <blockquote>
-<p><strong>Résultat attendu :</strong> <code>ERROR: permission denied for schema nvd</code> ✅</p>
+<p><strong>Expected output:</strong> <code>ERROR: permission denied for schema nvd</code> ✅</p>
 </blockquote>
-<h3 id="test-2-verifier-que-rtms-web-ne-peut-pas-modifier-la-base-nvd-lecture-seule">Test 2 : Vérifier que <code>rtms-web</code> ne peut pas modifier la base NVD (Lecture Seule)<a class="headerlink" href="#test-2-verifier-que-rtms-web-ne-peut-pas-modifier-la-base-nvd-lecture-seule" title="Permanent link">&para;</a></h3>
+<h3 id="test-2-confirm-rtms-web-cannot-mutate-nvd-data-read-only">Test 2: Confirm <code>rtms-web</code> cannot mutate NVD data (Read-Only)<a class="headerlink" href="#test-2-confirm-rtms-web-cannot-mutate-nvd-data-read-only" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">PGPASSWORD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$WEB_PASS</span><span class="s2">"</span><span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>rtms_web_user<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">"DELETE FROM nvd.cve;"</span>
 </span></code></pre></div>
 <blockquote>
-<p><strong>Résultat attendu :</strong> <code>ERROR: permission denied for table cve</code> ✅</p>
+<p><strong>Expected output:</strong> <code>ERROR: permission denied for table cve</code> ✅</p>
 </blockquote>
-<h3 id="test-3-verifier-que-rtms-nvd-ne-peut-pas-acceder-aux-utilisateurs-administrateurs">Test 3 : Vérifier que <code>rtms-nvd</code> ne peut pas accéder aux utilisateurs administrateurs<a class="headerlink" href="#test-3-verifier-que-rtms-nvd-ne-peut-pas-acceder-aux-utilisateurs-administrateurs" title="Permanent link">&para;</a></h3>
+<h3 id="test-3-confirm-rtms-nvd-cannot-read-admin-user-accounts">Test 3: Confirm <code>rtms-nvd</code> cannot read admin user accounts<a class="headerlink" href="#test-3-confirm-rtms-nvd-cannot-read-admin-user-accounts" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">PGPASSWORD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$NVD_PASS</span><span class="s2">"</span><span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>rtms_nvd_user<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT * FROM admin.users;"</span>
 </span></code></pre></div>
 <blockquote>
-<p><strong>Résultat attendu :</strong> <code>ERROR: permission denied for table users</code> ✅</p>
+<p><strong>Expected output:</strong> <code>ERROR: permission denied for table users</code> ✅</p>
 </blockquote>
-<h3 id="test-4-verifier-que-rtms-web-peut-lire-les-cves">Test 4 : Vérifier que <code>rtms-web</code> peut lire les CVEs<a class="headerlink" href="#test-4-verifier-que-rtms-web-peut-lire-les-cves" title="Permanent link">&para;</a></h3>
+<h3 id="test-4-confirm-rtms-web-can-query-cves">Test 4: Confirm <code>rtms-web</code> can query CVEs<a class="headerlink" href="#test-4-confirm-rtms-web-can-query-cves" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">PGPASSWORD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$WEB_PASS</span><span class="s2">"</span><span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>rtms_web_user<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT COUNT(*) FROM nvd.cve;"</span>
 </span></code></pre></div>
 <blockquote>
-<p><strong>Résultat attendu :</strong> Succès (renvoie le nombre d'enregistrements) ✅</p>
+<p><strong>Expected output:</strong> Success (returns row count) ✅</p>
 </blockquote>
 <hr />
-<h2 id="8-sauvegarde-et-restauration">8. Sauvegarde et Restauration<a class="headerlink" href="#8-sauvegarde-et-restauration" title="Permanent link">&para;</a></h2>
-<p>Grâce au découpage des schémas, les sauvegardes peuvent être effectuées de manière modulaire :</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Sauvegarde des données applicatives et des scans (légère)</span>
+<h2 id="8-backup-disaster-recovery">8. Backup &amp; Disaster Recovery<a class="headerlink" href="#8-backup-disaster-recovery" title="Permanent link">&para;</a></h2>
+<p>Thanks to schema segregation, backup jobs can be tailored by criticality and volume:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Application and scan inventory backup (lightweight)</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>pg_dump<span class="w"> </span>-U<span class="w"> </span>rtms_user<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span>-n<span class="w"> </span>admin<span class="w"> </span>-n<span class="w"> </span>scanner<span class="w"> </span>-F<span class="w"> </span>c<span class="w"> </span>-b<span class="w"> </span>-v<span class="w"> </span>-f<span class="w"> </span>rtms_app_backup.dump
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Sauvegarde du référentiel NVD (plus volumineuse, ~1.5 Go)</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># NVD CVE repository backup (~1.5 GB)</span>
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>pg_dump<span class="w"> </span>-U<span class="w"> </span>rtms_user<span class="w"> </span>-d<span class="w"> </span>rtms_db<span class="w"> </span>-n<span class="w"> </span>nvd<span class="w"> </span>-F<span class="w"> </span>c<span class="w"> </span>-b<span class="w"> </span>-v<span class="w"> </span>-f<span class="w"> </span>rtms_nvd_backup.dump
 </span></code></pre></div>
 
