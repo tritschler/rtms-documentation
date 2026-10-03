@@ -48,6 +48,7 @@ plugins:
           build: true
           nav_translations:
             Accueil: Home
+            Architecture & Capacités: Architecture & Capabilities
             1. Utilisateur & Opérateur: 1. User & Operator
             Prise en main & Navigation: Getting Started & Navigation
             Inventaire des actifs: Asset Inventory
@@ -87,6 +88,7 @@ markdown_extensions:
 
 nav:
   - Accueil: index.md
+  - Architecture & Capacités: solution/scanner_architecture.md
   - 1. Utilisateur & Opérateur:
       - Prise en main & Navigation: roles/user/navigation.md
       - Inventaire des actifs: roles/user/inventory.md
