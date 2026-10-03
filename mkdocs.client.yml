@@ -46,6 +46,26 @@ plugins:
         - locale: en
           name: English
           build: true
+          nav_translations:
+            Accueil: Home
+            1. Utilisateur & Opérateur: 1. User & Operator
+            Prise en main & Navigation: Getting Started & Navigation
+            Inventaire des actifs: Asset Inventory
+            Alertes réseau: Network Alerts
+            2. Analyste SOC & Sécurité: 2. SOC & Security Analyst
+            Dashboard de Menaces: Threat Dashboard
+            Corrélation SOC/SIEM: SOC/SIEM Correlation
+            Triage des vulnérabilités: Vulnerability Triage
+            Audits de sécurité intégrés: Integrated Security Audits
+            3. Auditeur & Conformité: 3. Auditor & Compliance
+            Directive NIS2: NIS 2 Compliance
+            Cyber Resilience Act (CRA): Cyber Resilience Act (CRA)
+            Journal d'audit & Exports: Audit Trail & Exports
+            4. Administrateur Client: 4. Client Administrator
+            Utilisateurs & Rôles RBAC: Users & RBAC Roles
+            Gestion des sondes: Probe Management
+            Politiques sous-réseaux & Deep Scan: Subnet Policies & Deep Scan
+            Réconciliation CMDB: CMDB Reconciliation
 
 markdown_extensions:
   - admonition
