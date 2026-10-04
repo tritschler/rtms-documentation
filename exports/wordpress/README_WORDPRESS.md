@@ -33,6 +33,6 @@ Ce dossier contient les fichiers HTML pré-compilés, autonomes et stylisés de 
 
 ## 🎨 Caractéristiques Techniques
 - **CSS Scanné / Isolé** : Tous les styles sont préfixés par `.rtms-wp-container` pour ne pas entrer en conflit avec votre thème WordPress existant.
-- **Diagramme SVG Vectoriel Inclus** : Le diagramme réseau est intégré en pur SVG. Il s'affiche instantanément, est net sur tous les écrans Retina et ne nécessite aucun plugin externe (ni script Mermaid lourd).
+- **Image d'Architecture Optimisée** : Le schéma réseau fait référence à l'image hébergée sur WordPress (3ts.ai), garantissant un affichage immédiat et responsive sans plugin externe.
 - **Responsive Mobile & Desktop** : S'adapte automatiquement à toutes les tailles d'écrans (smartphones, tablettes, moniteurs 4K).
 - **Génération de Leads** : Un bandeau d'appel à l'action (*CTA*) élégant est inclus en bas de page pour rediriger les prospects vers votre formulaire de contact ou de démo.
