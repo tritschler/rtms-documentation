@@ -5,8 +5,8 @@ Ce dossier contient les fichiers HTML pré-compilés, autonomes et stylisés de 
 ---
 
 ## 📁 Fichiers Disponibles
-1. **`scanner_architecture_fr.html`** : Version française complète avec diagramme d'architecture vectoriel (SVG) et boutons d'appel à l'action.
-2. **`scanner_architecture_en.html`** : Version anglaise complète.
+1. **`scanner_architecture_fr_nosvg.html`** : Version française prête pour WordPress avec image hébergée et boutons d'appel à l'action.
+2. **`scanner_architecture_en_nosvg.html`** : Version anglaise prête pour WordPress avec image hébergée et boutons d'appel à l'action.
 
 ---
 
@@ -17,8 +17,8 @@ Ce dossier contient les fichiers HTML pré-compilés, autonomes et stylisés de 
 2. Allez dans **Pages** > **Ajouter une page** (ou modifiez une page existante, ex: `/rtms-scanner/` ou `/solution-rtms/`).
 3. Cliquez sur le bouton **`+`** pour ajouter un bloc.
 4. Recherchez et sélectionnez le bloc **HTML personnalisé** (*Custom HTML*).
-5. Ouvrez le fichier `scanner_architecture_fr.html` (ou la version `.en.html`), copiez **tout le contenu** et collez-le directement dans le bloc HTML.
-6. Cliquez sur **Aperçu** pour voir le résultat : la typographie, les tableaux récapitulatifs, le diagramme d'architecture et les bandeaux s'affichent automatiquement sans interférer avec votre thème WordPress !
+5. Ouvrez le fichier `scanner_architecture_fr_nosvg.html` (ou la version `scanner_architecture_en_nosvg.html`), copiez **tout le contenu** et collez-le directement dans le bloc HTML.
+6. Cliquez sur **Aperçu** pour voir le résultat : la typographie, les tableaux récapitulatifs, l'image d'architecture et les bandeaux s'affichent automatiquement sans interférer avec votre thème WordPress !
 7. Cliquez sur **Publier**.
 
 ---
