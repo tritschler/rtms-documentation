@@ -28,5 +28,5 @@ Clicking any device in the list opens its technical profile:
 
 ## 3. Search & Report Export
 
-* **Instant Search**: Type an IP fragment (e.g. `192.168.1.`) or server name to filter the view instantaneously.
+* **Global Search & Local Filtering**: Leverage the top header magic search bar (`Cmd + K`) or the in-table filter input to immediately pinpoint an IP address fragment (e.g. `192.168.1.`), hardware vendor, or server hostname.
 * **Export Formats**: Download the active inventory state in **CSV** or **JSON** for reporting or CMDB reconciliation.

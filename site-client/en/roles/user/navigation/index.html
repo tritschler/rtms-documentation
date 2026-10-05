@@ -1223,7 +1223,7 @@
 <h2 id="1-workspace-layout">1. Workspace Layout<a class="headerlink" href="#1-workspace-layout" title="Permanent link">&para;</a></h2>
 <p>The RTMS console is organized into three primary areas:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌────────────────────────────────────────────────────────────────────────┐
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│ [3TS RTMS Logo]       Global Search (IP, Host, MAC...)        [Profile]│
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│ [🏢 Tenant / Plan]    [🔍 Search Cmd+K]     [⚙️]  [🌐 EN]  [🌙]  [👤 Profile]│
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├─────────────┬──────────────────────────────────────────────────────────┤
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│ 📊 Dashboard│                                                          │
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ 🖥️ Assets   │                                                          │
@@ -1236,17 +1236,30 @@
 </span></code></pre></div>
 <ol>
 <li><strong>Top Header</strong>:</li>
-<li><strong>Global Search</strong>: Filter instantaneously by IP address, hostname, vendor, or MAC address.</li>
-<li><strong>Theme Switcher</strong>: Toggle between Dark Mode (ideal for SOC environments) and Light Mode.</li>
-<li><strong>Language Selector</strong>: Switch interface and embedded documentation between English and French.</li>
+<li><strong>Magic Global Search (🔍)</strong>:<ul>
+<li><strong>Interactive Behavior</strong>: Appears as a subtle magnifying glass icon that smoothly expands upon clicking or pressing the global keyboard shortcut <strong><code>Cmd + K</code></strong> (macOS) / <strong><code>Ctrl + K</code></strong> (Windows/Linux).</li>
+<li><strong>Asset Searching</strong>: Search instantaneously by IP address (full or partial CIDR), hostname, MAC address, hardware vendor (<em>Cisco</em>, <em>Dell</em>, <em>Apple</em>...), or operating system.</li>
+<li><strong>Instant Module Shortcuts</strong>: Type keywords to navigate directly to any suite module (e.g. <em>"alert"</em> $\rightarrow$ Security Alerts, <em>"cve"</em> $\rightarrow$ Vulnerabilities, <em>"triage"</em> $\rightarrow$ Threats, <em>"users"</em> $\rightarrow$ User Management, <em>"probe"</em> $\rightarrow$ Probe/Scanner Configuration).</li>
+<li><strong>Submit via <code>Enter</code></strong>: Automatically navigates to the full asset inventory (<code>/assets</code>) with your search filter immediately applied.</li>
+<li><strong>Quick Escape</strong>: Press <strong><code>Esc</code></strong> or click outside to collapse the search pill.</li>
+</ul>
+</li>
+<li><strong>Settings Shortcut (⚙️)</strong>: Direct one-click access to probe and network configuration (<code>/scanner</code>).</li>
+<li><strong>Tenant &amp; Subscription (Plan)</strong>: Displays the active client organization and subscribed licensing tier.</li>
+<li><strong>Language Selector</strong>: Real-time language switching across interface and documentation (English, French, Dutch, German).</li>
+<li><strong>Theme Switcher</strong>: Instant toggle between <strong>Dark Mode</strong> (optimized for SOC operations) and <strong>Light Mode (Daylight)</strong>.</li>
 <li>
-<p><strong>Profile &amp; Session Menu</strong>: Inspect account details and assigned RBAC role.</p>
+<p><strong>Profile &amp; Session Menu</strong>: Account inspection, password rotation, and Multi-Factor Authentication (MFA / TOTP) management.</p>
 </li>
 <li>
-<p><strong>Left Navigation Sidebar</strong>:</p>
+<p><strong>Left Navigation Sidebar (Dynamic Sidebar)</strong>:</p>
 </li>
 <li>
-<p>One-click navigation to asset inventories, security alerts, NIS2 dashboards, and system settings.</p>
+<p>The sidebar content is <strong>fully dynamic</strong> and adapts in real time based on:</p>
+<ol>
+<li>The <strong>subscribed license edition</strong> (active modules and enterprise add-ons).</li>
+<li>Your <strong>RBAC user role</strong> (<code>admin</code>, <code>analyst</code>, <code>auditor</code>, <code>user</code>), automatically restricting unauthorized views according to the Principle of Least Privilege.</li>
+</ol>
 </li>
 <li>
 <p><strong>Main Content Workspace</strong>:</p>

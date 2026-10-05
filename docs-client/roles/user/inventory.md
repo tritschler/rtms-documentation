@@ -28,5 +28,5 @@ En cliquant sur n'importe quel équipement dans la liste, vous ouvrez sa fiche t
 
 ## 3. Recherche et Exportation
 
-* **Recherche textuelle** : Tapez une fraction d'adresse IP (ex: `192.168.1.`) ou un nom de serveur pour filtrer instantanément la vue.
+* **Recherche globale & filtre local** : Utilisez la loupe magique de la barre supérieure (`Cmd + K`) ou le champ de recherche du tableau pour filtrer instantanément par fraction d'adresse IP (ex: `192.168.1.`), constructeur ou nom de serveur.
 * **Exportation** : Téléchargez l'état actuel de votre parc informatique au format **CSV** ou **JSON** pour alimenter vos outils bureautiques ou vos réunions d'exploitation.

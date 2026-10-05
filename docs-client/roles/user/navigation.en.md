@@ -10,7 +10,7 @@ The RTMS console is organized into three primary areas:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [3TS RTMS Logo]       Global Search (IP, Host, MAC...)        [Profile]│
+│ [🏢 Tenant / Plan]    [🔍 Search Cmd+K]     [⚙️]  [🌐 EN]  [🌙]  [👤 Profile]│
 ├─────────────┬──────────────────────────────────────────────────────────┤
 │ 📊 Dashboard│                                                          │
 │ 🖥️ Assets   │                                                          │
@@ -23,13 +23,22 @@ The RTMS console is organized into three primary areas:
 ```
 
 1. **Top Header**:
-   * **Global Search**: Filter instantaneously by IP address, hostname, vendor, or MAC address.
-   * **Theme Switcher**: Toggle between Dark Mode (ideal for SOC environments) and Light Mode.
-   * **Language Selector**: Switch interface and embedded documentation between English and French.
-   * **Profile & Session Menu**: Inspect account details and assigned RBAC role.
+   * **Magic Global Search (🔍)**:
+     * **Interactive Behavior**: Appears as a subtle magnifying glass icon that smoothly expands upon clicking or pressing the global keyboard shortcut **`Cmd + K`** (macOS) / **`Ctrl + K`** (Windows/Linux).
+     * **Asset Searching**: Search instantaneously by IP address (full or partial CIDR), hostname, MAC address, hardware vendor (*Cisco*, *Dell*, *Apple*...), or operating system.
+     * **Instant Module Shortcuts**: Type keywords to navigate directly to any suite module (e.g. *"alert"* $\rightarrow$ Security Alerts, *"cve"* $\rightarrow$ Vulnerabilities, *"triage"* $\rightarrow$ Threats, *"users"* $\rightarrow$ User Management, *"probe"* $\rightarrow$ Probe/Scanner Configuration).
+     * **Submit via `Enter`**: Automatically navigates to the full asset inventory (`/assets`) with your search filter immediately applied.
+     * **Quick Escape**: Press **`Esc`** or click outside to collapse the search pill.
+   * **Settings Shortcut (⚙️)**: Direct one-click access to probe and network configuration (`/scanner`).
+   * **Tenant & Subscription (Plan)**: Displays the active client organization and subscribed licensing tier.
+   * **Language Selector**: Real-time language switching across interface and documentation (English, French, Dutch, German).
+   * **Theme Switcher**: Instant toggle between **Dark Mode** (optimized for SOC operations) and **Light Mode (Daylight)**.
+   * **Profile & Session Menu**: Account inspection, password rotation, and Multi-Factor Authentication (MFA / TOTP) management.
 
-2. **Left Navigation Sidebar**:
-   * One-click navigation to asset inventories, security alerts, NIS2 dashboards, and system settings.
+2. **Left Navigation Sidebar (Dynamic Sidebar)**:
+   * The sidebar content is **fully dynamic** and adapts in real time based on:
+     1. The **subscribed license edition** (active modules and enterprise add-ons).
+     2. Your **RBAC user role** (`admin`, `analyst`, `auditor`, `user`), automatically restricting unauthorized views according to the Principle of Least Privilege.
 
 3. **Main Content Workspace**:
    * Interactive tables, deep inspection drawers, and risk analytics charts.
