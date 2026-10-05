@@ -60,7 +60,7 @@
 
 - [ ] **Structure de l'espace de travail :**
   * **Barre supérieure (Header) :**
-    * **Recherche Globale Instantanée :** Barre centrale pour filtrer à tout moment par adresse IP, nom d'hôte (hostname), fabricant ou adresse MAC.
+    * **Recherche Globale Magique (🔍) :** Petite loupe discrète dans la barre du haut qui s'agrandit avec animation au clic (ou via `Cmd+K` / `Ctrl+K`) pour rechercher instantanément un équipement (IP, nom d'hôte, MAC, constructeur) ou naviguer directement vers n'importe quel module de l'application.
     * **Raccourci vers les Paramètres (Settings ⚙️) :** Accès direct aux réglages rapides de l'application et de la console.
     * **Sélecteur de Thème :** Bascule instantanée entre le Mode Sombre (confort SOC) et le Mode Clair.
     * **Sélecteur de Langue :** Bascule à chaud FR / EN.
