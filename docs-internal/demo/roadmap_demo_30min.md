@@ -1,19 +1,20 @@
-# 🧭 Roadmap de Démonstration RTMS (30 minutes)
+# 🧭 Roadmap de Démonstration RTMS (~30-35 min)
 
 **Date :** Jeudi  
 **Format :** Présentation dynamique & guidée de la plateforme RTMS  
-**Objectif :** Démontrer la simplicité de déploiement, la visibilité en temps réel, la sécurité de l'accès et la conformité NIS2 sans surcharger l'audience.
+**Objectif :** Démontrer la simplicité de déploiement, la visibilité en temps réel, la sécurité de l'accès et la conformité NIS2 sans surcharger l'audience.  
+> *Note timing : Le découpage horaire ci-dessous est indicatif et sert de fil conducteur pour cadencer la démonstration sans obligation de blocage strict à 30 minutes pile.*
 
 ---
 
 ## ⏱️ Chronométrage Indicatif
 
 * `[00:00 - 05:00]` — **1. Connexion & 3 Modes d'Authentification**
-* `[05:00 - 10:00]` — **2. Tour d'horizon de la Home Page / Dashboard**
-* `[10:00 - 15:00]` — **3. Rôles & Gestion des Utilisateurs (RBAC)**
-* `[15:00 - 22:00]` — **4. Inventaire Réseau & Cartographie des Vulnérabilités**
-* `[22:00 - 27:00]` — **5. Sécurité Avancée, Audits Intégrés & Conformité NIS2**
-* `[27:00 - 30:00]` — **6. Conclusion & Questions / Réponses**
+* `[05:00 - 09:00]` — **2. Présentation des 4 Rôles Utilisateurs (RBAC)**
+* `[09:00 - 14:00]` — **3. Découverte de l'Interface, Barre Supérieure, Sidebar Dynamique & Dashboard**
+* `[14:00 - 21:00]` — **4. Inventaire Réseau & Cartographie des Vulnérabilités**
+* `[21:00 - 27:00]` — **5. Sécurité Avancée, Audits Intégrés & Conformité NIS2**
+* `[27:00 - 32:00+]` — **6. Synthèse & Questions / Réponses**
 
 ---
 
@@ -36,37 +37,43 @@
 
 ---
 
-## 2. Découverte de la Home Page & Navigation Globale (5 min)
+## 2. Présentation des 4 Rôles Utilisateurs (RBAC) (4 min)
 
-> **Message clé :** Ergonomie moderne pensée pour les exploitants et analystes, prise en main immédiate.
+> **Message clé :** Un modèle d'accès strict (Least Privilege) dès la connexion pour respecter les exigences de gouvernance et NIS2.
+
+- [ ] **Exposer la matrice des 4 rôles natifs de RTMS :**
+  1. **Admin (`admin`) :**
+     * Contrôle intégral de la plateforme : gestion des sondes, politiques de scan, licences, tokens API, utilisateurs et configurations système.
+  2. **Security Analyst (`analyst`) :**
+     * Pilotage opérationnel de la sécurité : triage des vulnérabilités CVE, analyse du dashboard de menaces, acquittement d'alertes et corrélation SIEM/SOC.
+  3. **Normal User (`user`) :**
+     * Utilisation quotidienne réseau : consultation de l'inventaire en temps réel des actifs, recherche d'équipements et visualisation des alertes réseau.
+  4. **Auditor (`auditor`) :**
+     * Vue en lecture seule orientée conformité : consultation des journaux d'audit immutables, suivi des exigences réglementaires (NIS2 / Cyber Resilience Act CRA) et export de rapports opposables.
+- [ ] **Transition vers l'interface :** Préciser que le rôle attribué modifie directement ce que l'utilisateur voit et peut faire à l'écran.
+
+---
+
+## 3. Interface, Navigation & Dashboard (5 min)
+
+> **Message clé :** Une console épurée, réactive et contextuelle, dont l'affichage s'adapte automatiquement à la licence et aux droits de l'utilisateur.
 
 - [ ] **Structure de l'espace de travail :**
   * **Barre supérieure (Header) :**
-    * Recherche globale instantanée (recherche par IP, Hostname, MAC, sous-réseau).
-    * Sélecteur de thème : Mode Sombre (confort SOC) / Mode Clair.
-    * Sélecteur de langue : Bascule instantanée FR / EN.
-  * **Menu latéral gauche :** Vue d'ensemble des modules (Dashboard, Actifs, Alertes, Menaces, Conformité, Administration).
+    * **Recherche Globale Instantanée :** Barre centrale pour filtrer à tout moment par adresse IP, nom d'hôte (hostname), fabricant ou adresse MAC.
+    * **Raccourci vers les Paramètres (Settings ⚙️) :** Accès direct aux réglages rapides de l'application et de la console.
+    * **Sélecteur de Thème :** Bascule instantanée entre le Mode Sombre (confort SOC) et le Mode Clair.
+    * **Sélecteur de Langue :** Bascule à chaud FR / EN.
+    * **Menu Profil :** Rappel du compte connecté et du rôle actif.
+  * **Barre latérale gauche (Sidebar) :**
+    * ⚠️ **Point fondamental à expliquer :** Le contenu de la barre latérale est **entièrement dynamique** ; il dépend directement de deux facteurs :
+      1. Du **type de licence** souscrite (modules et fonctionnalités activés pour le client).
+      2. Du **rôle de l'utilisateur** (filtrage strict RBAC : un *Normal User* ne verra pas l'administration, un *Auditor* verra la conformité sans les actions d'écriture).
 - [ ] **Dashboard Principal (KPIs & Métriques de haut niveau) :**
   * Compteur d'équipements en ligne / hors-ligne.
   * Répartition des vulnérabilités par criticité (Critique, Élevée, Moyenne, Faible).
   * État de santé des sondes de détection en temps réel.
-  * Dernières alertes d'anomalies de sécurité détectées.
-
----
-
-## 3. Rôles d'Accès & Gestion des Utilisateurs (RBAC) (5 min)
-
-> **Message clé :** Cloisonnement strict des responsabilités pour respecter les exigences de gouvernance et NIS2.
-
-- [ ] **Aller dans le menu *Administration > Utilisateurs & Rôles*** (`/admin/users`).
-- [ ] **Présenter les 4 rôles standards :**
-  1. **Administrateur (`admin`) :** Contrôle total (paramétrage sondes, politiques de scan, licences, utilisateurs).
-  2. **Analyste SOC (`analyst`) :** Triage des vulnérabilités CVE, analyse des menaces, corrélation SIEM/SOC.
-  3. **Auditeur (`auditor`) :** Consultation en lecture seule, accès aux journaux d'audit et exports de conformité réglementaire (NIS2/CRA).
-  4. **Opérateur / Utilisateur (`user`) :** Suivi de l'inventaire quotidien des actifs et consultation des alertes réseau.
-- [ ] **Montrer :**
-  * La création / édition d'un utilisateur et l'attribution de son rôle.
-  * L'application de la politique MFA / état d'enrôlement du compte.
+  * Flux des dernières anomalies et alertes de sécurité détectées.
 
 ---
 
@@ -85,7 +92,7 @@
 
 ---
 
-## 5. Sécurité Réseau, Audits Intégrés & Conformité NIS2 (5 min)
+## 5. Sécurité Réseau, Audits Intégrés & Conformité NIS2 (6 min)
 
 > **Message clé :** RTMS n'est pas qu'un scanner passif, c'est un outil d'aide à la décision et à la mise en conformité.
 
@@ -99,7 +106,7 @@
 
 ---
 
-## 6. Synthèse & Clôture (3 min)
+## 6. Synthèse & Clôture (~5 min)
 
 - [ ] **Récapitulatif des points forts à laisser à l'esprit :**
   * **Zéro agent** : Déploiement non invasif et immédiat.
