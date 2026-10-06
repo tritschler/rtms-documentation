@@ -11,7 +11,7 @@
 
 * `[00:00 - 05:00]` — **1. Connexion & 3 Modes d'Authentification**
 * `[05:00 - 09:00]` — **2. Présentation des 4 Rôles Utilisateurs (RBAC)**
-* `[09:00 - 14:00]` — **3. Découverte de l'Interface, Barre Supérieure, Sidebar Dynamique & Dashboard**
+* `[09:00 - 14:00]` — **3. Découverte de l'Interface, Barre Supérieure, Sidebar Dynamique (4 Setups) & Dashboard**
 * `[14:00 - 21:00]` — **4. Inventaire Réseau & Cartographie des Vulnérabilités**
 * `[21:00 - 27:00]` — **5. Sécurité Avancée, Audits Intégrés & Conformité NIS2**
 * `[27:00 - 32:00+]` — **6. Synthèse & Questions / Réponses**
@@ -67,8 +67,17 @@
     * **Menu Profil :** Rappel du compte connecté et du rôle actif.
   * **Barre latérale gauche (Sidebar) :**
     * ⚠️ **Point fondamental à expliquer :** Le contenu de la barre latérale est **entièrement dynamique** ; il dépend directement de deux facteurs :
-      1. Du **type de licence** souscrite (modules et fonctionnalités activés pour le client).
+      1. Du **type de licence souscrite / setup déployé** (modules et fonctionnalités activés pour le client).
       2. Du **rôle de l'utilisateur** (filtrage strict RBAC : un *Normal User* ne verra pas l'administration, un *Auditor* verra la conformité sans les actions d'écriture).
+- [ ] **Présenter les 4 Setups de base (Typologies d'offres / Licences) :**
+  1. **Uniquement le NVD (`NVD` / *Vulnerabilities Only*) :**
+     * Synchronisation locale de la base NIST NVD seule. Recherche autonome de CVE, consultation des vulnérabilités et des composants logiciels (CPE) sans sonde active de découverte réseau.
+  2. **Le scanner uniquement (`Discover` / *Scanner Only*) :**
+     * Découverte réseau continue L2/L3 et inventaire des équipements sans aucun agent. Cartographie des actifs, ports et services ouverts, détection d'anomalies (ex. usurpation ARP), sans corrélation de vulnérabilités CVE.
+  3. **Les deux ensemble (`Secure` / *Scanner + Vulnerabilities*) :**
+     * Combinaison Scanner + NVD. Inventaire dynamique corrélé automatiquement en temps réel aux CVE connues avec scoring CVSS et priorisation opérationnelle du risque.
+  4. **Les deux ensemble + rapports de compliance (`Compliance` / *All Features*) :**
+     * Expérience complète : Scanner + NVD + gouvernance réglementaire (Article 21/23 NIS2, Cyber Resilience Act CRA), audits de sécurité avancés et génération/export de rapports officiels opposables en un clic.
 - [ ] **Dashboard Principal (KPIs & Métriques de haut niveau) :**
   * Compteur d'équipements en ligne / hors-ligne.
   * Répartition des vulnérabilités par criticité (Critique, Élevée, Moyenne, Faible).
@@ -110,6 +119,7 @@
 
 - [ ] **Récapitulatif des points forts à laisser à l'esprit :**
   * **Zéro agent** : Déploiement non invasif et immédiat.
+  * **Modulaire & Évolutif** : 4 setups de base selon les besoins (NVD seul, Scanner seul, combiné, ou avec rapports de conformité).
   * **Souverain & Résilient** : Base de vulnérabilités locale, fonctionnement possible en environnement déconnecté (*air-gapped*).
   * **Conçu pour NIS2** : Traçabilité, audit trail, rôles stricts et rapports intégrés.
 - [ ] **Ouverture aux Questions / Réponses.**
