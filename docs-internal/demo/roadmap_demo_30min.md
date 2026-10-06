@@ -1,24 +1,23 @@
-# 🧭 Roadmap de Démonstration RTMS (~30-35 min)
+# 🧭 Roadmap de Démonstration RTMS
 
 **Date :** Jeudi  
 **Format :** Présentation dynamique & guidée de la plateforme RTMS  
-**Objectif :** Démontrer la simplicité de déploiement, la visibilité en temps réel, la sécurité de l'accès et la conformité NIS2 sans surcharger l'audience.  
-> *Note timing : Le découpage horaire ci-dessous est indicatif et sert de fil conducteur pour cadencer la démonstration sans obligation de blocage strict à 30 minutes pile.*
+**Objectif :** Démontrer la simplicité de déploiement, la visibilité en temps réel, la sécurité de l'accès et la conformité NIS2 sans surcharger l'audience.
 
 ---
 
-## ⏱️ Chronométrage Indicatif
+## 📑 Sommaire
 
-* `[00:00 - 05:00]` — **1. Connexion & 3 Modes d'Authentification**
-* `[05:00 - 09:00]` — **2. Présentation des 4 Rôles Utilisateurs (RBAC)**
-* `[09:00 - 14:00]` — **3. Découverte de l'Interface, Barre Supérieure, Sidebar Dynamique (4 Setups) & Dashboard**
-* `[14:00 - 21:00]` — **4. Inventaire Réseau & Cartographie des Vulnérabilités**
-* `[21:00 - 27:00]` — **5. Sécurité Avancée, Audits Intégrés & Conformité NIS2**
-* `[27:00 - 32:00+]` — **6. Synthèse & Questions / Réponses**
+1. **Connexion & 3 Modes d'Authentification**
+2. **Présentation des 4 Rôles Utilisateurs (RBAC)**
+3. **Découverte de l'Interface, Barre Supérieure, Sidebar Dynamique (4 Setups) & Dashboard**
+4. **Inventaire Réseau & Cartographie des Vulnérabilités**
+5. **Sécurité Avancée, Audits Intégrés & Conformité NIS2**
+6. **Synthèse & Questions / Réponses**
 
 ---
 
-## 1. Connexion & les 3 Modes d'Authentification (5 min)
+## 1. Connexion & les 3 Modes d'Authentification
 
 > **Message clé :** RTMS s'adapte à n'importe quel environnement d'entreprise, du site isolé à la grande organisation avec annuaire centralisé.
 
@@ -37,7 +36,7 @@
 
 ---
 
-## 2. Présentation des 4 Rôles Utilisateurs (RBAC) (4 min)
+## 2. Présentation des 4 Rôles Utilisateurs (RBAC)
 
 > **Message clé :** Un modèle d'accès strict (Least Privilege) dès la connexion pour respecter les exigences de gouvernance et NIS2.
 
@@ -54,7 +53,7 @@
 
 ---
 
-## 3. Interface, Navigation & Dashboard (5 min)
+## 3. Interface, Navigation & Dashboard
 
 > **Message clé :** Une console épurée, réactive et contextuelle, dont l'affichage s'adapte automatiquement à la licence et aux droits de l'utilisateur.
 
@@ -86,7 +85,7 @@
 
 ---
 
-## 4. Inventaire Réseau & Cartographie des Vulnérabilités (7 min)
+## 4. Inventaire Réseau & Cartographie des Vulnérabilités
 
 > **Message clé :** Découverte 100 % automatisée et continue, sans aucun agent logiciel à déployer.
 
@@ -101,7 +100,7 @@
 
 ---
 
-## 5. Sécurité Réseau, Audits Intégrés & Conformité NIS2 (6 min)
+## 5. Sécurité Réseau, Audits Intégrés & Conformité NIS2
 
 > **Message clé :** RTMS n'est pas qu'un scanner passif, c'est un outil d'aide à la décision et à la mise en conformité.
 
@@ -115,7 +114,7 @@
 
 ---
 
-## 6. Synthèse & Clôture (~5 min)
+## 6. Synthèse & Clôture
 
 - [ ] **Récapitulatif des points forts à laisser à l'esprit :**
   * **Zéro agent** : Déploiement non invasif et immédiat.
