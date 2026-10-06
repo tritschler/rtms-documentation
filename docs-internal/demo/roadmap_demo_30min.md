@@ -1,7 +1,5 @@
 # 🧭 Roadmap de Démonstration RTMS
 
-**Date :** Jeudi  
-**Format :** Présentation dynamique & guidée de la plateforme RTMS  
 **Objectif :** Démontrer la simplicité de déploiement, la visibilité en temps réel, la sécurité de l'accès et la conformité NIS2 sans surcharger l'audience.
 
 ---
