@@ -176,3 +176,54 @@ Before applying modifications to production systems, simulate the execution with
 ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml --check --diff
 ```
 
+---
+
+## 5. Operations Quick Reference & Diagnostics (OVH VPS)
+
+These commands run **directly from your Mac** without opening an interactive remote SSH session.
+
+### A. Ad-Hoc Ansible Commands (From `rtms-installer/ansible`)
+
+```bash
+cd rtms-installer/ansible
+
+# 1. Test WireGuard connectivity to the VPS
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m ping
+
+# 2. Check PostgreSQL daemon health (pg_isready)
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "pg_isready"
+
+# 3. Check systemd service status
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "systemctl status nginx --no-pager" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "systemctl status rtms-admin --no-pager" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "systemctl status postgresql --no-pager" --become
+
+# 4. Restart or reload services
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m systemd -a "name=rtms-admin state=restarted" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m systemd -a "name=nginx state=reloaded" --become
+
+# 5. Inspect real-time logs (last 30 entries)
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "journalctl -u rtms-admin -n 30 --no-pager" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "tail -n 30 /var/log/nginx/error.log" --become
+```
+
+### B. Fast SSH One-Liners (From anywhere on your Mac)
+
+```bash
+# 1. NGINX health check (status + configuration syntax test)
+ssh ubuntu@10.0.0.1 "sudo systemctl status nginx --no-pager && sudo nginx -t"
+
+# 2. PostgreSQL health check (connectivity + customers tables inspection)
+ssh ubuntu@10.0.0.1 "pg_isready && sudo -u postgres psql -d customers -c \"SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema IN ('3TS', 'public') ORDER BY table_schema, table_name;\""
+
+# 3. RTMS Admin backend check (service status + listening ports 80, 443, 8090, 5432)
+ssh ubuntu@10.0.0.1 "sudo systemctl status rtms-admin --no-pager && sudo ss -tulpn | grep -E '(80|443|8090|5432)'"
+
+# 4. Quick API healthcheck endpoint test
+ssh ubuntu@10.0.0.1 "curl -s http://127.0.0.1:8090/api/health"
+
+# 5. Query latest received support tickets
+ssh ubuntu@10.0.0.1 "sudo -u postgres psql -d customers -c \"SELECT ticket_id, subject, user_name, status, created_at FROM public.support_tickets ORDER BY created_at DESC LIMIT 5;\""
+```
+
+

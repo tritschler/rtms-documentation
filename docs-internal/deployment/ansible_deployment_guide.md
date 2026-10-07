@@ -176,3 +176,54 @@ Avant d'appliquer des changements en production, vous pouvez tester l'exécution
 ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml --check --diff
 ```
 
+---
+
+## 5. Aide-Mémoire d'Exploitation & Diagnostic Rapide (VPS OVH)
+
+Ces commandes s'exécutent **directement depuis votre Mac** sans avoir à ouvrir une session interactive manuelle sur le serveur.
+
+### A. Commandes Ansible Ad-Hoc (Depuis `rtms-installer/ansible`)
+
+```bash
+cd rtms-installer/ansible
+
+# 1. Tester la connectivité WireGuard vers le VPS
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m ping
+
+# 2. Vérifier l'état de PostgreSQL (pg_isready)
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "pg_isready"
+
+# 3. Vérifier le statut des services systemd
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "systemctl status nginx --no-pager" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "systemctl status rtms-admin --no-pager" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "systemctl status postgresql --no-pager" --become
+
+# 4. Redémarrer ou recharger un service
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m systemd -a "name=rtms-admin state=restarted" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m systemd -a "name=nginx state=reloaded" --become
+
+# 5. Consulter les logs en temps réel (30 dernières lignes)
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "journalctl -u rtms-admin -n 30 --no-pager" --become
+ansible -i inventories/vps_ovh/hosts.yml vps_ovh -m command -a "tail -n 30 /var/log/nginx/error.log" --become
+```
+
+### B. Commandes SSH One-Liners Rapides (Depuis n'importe où sur votre Mac)
+
+```bash
+# 1. Vérification express NGINX (statut + syntaxe configuration)
+ssh ubuntu@10.0.0.1 "sudo systemctl status nginx --no-pager && sudo nginx -t"
+
+# 2. Vérification express PostgreSQL (connexion + liste des tables customers)
+ssh ubuntu@10.0.0.1 "pg_isready && sudo -u postgres psql -d customers -c \"SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema IN ('3TS', 'public') ORDER BY table_schema, table_name;\""
+
+# 3. Vérification express RTMS Admin Backend (service + ports en écoute 80, 443, 8090, 5432)
+ssh ubuntu@10.0.0.1 "sudo systemctl status rtms-admin --no-pager && sudo ss -tulpn | grep -E '(80|443|8090|5432)'"
+
+# 4. Test rapide de l'endpoint Healthcheck
+ssh ubuntu@10.0.0.1 "curl -s http://127.0.0.1:8090/api/health"
+
+# 5. Consulter les derniers tickets reçus dans la base
+ssh ubuntu@10.0.0.1 "sudo -u postgres psql -d customers -c \"SELECT ticket_id, subject, user_name, status, created_at FROM public.support_tickets ORDER BY created_at DESC LIMIT 5;\""
+```
+
+

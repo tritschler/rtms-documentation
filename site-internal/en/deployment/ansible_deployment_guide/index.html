@@ -1031,6 +1031,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-operations-quick-reference-diagnostics-ovh-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Operations Quick Reference &amp; Diagnostics (OVH VPS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Operations Quick Reference &amp; Diagnostics (OVH VPS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-ad-hoc-ansible-commands-from-rtms-installeransible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Ad-Hoc Ansible Commands (From rtms-installer/ansible)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fast-ssh-one-liners-from-anywhere-on-your-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Fast SSH One-Liners (From anywhere on your Mac)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2713,6 +2752,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-operations-quick-reference-diagnostics-ovh-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Operations Quick Reference &amp; Diagnostics (OVH VPS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Operations Quick Reference &amp; Diagnostics (OVH VPS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-ad-hoc-ansible-commands-from-rtms-installeransible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Ad-Hoc Ansible Commands (From rtms-installer/ansible)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fast-ssh-one-liners-from-anywhere-on-your-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Fast SSH One-Liners (From anywhere on your Mac)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2913,6 +2991,47 @@ The script installs Ansible and necessary packages (<code>apt-get install -y ans
 <h2 id="4-simulation-mode-dry-run-validation">4. Simulation Mode (Dry-Run) &amp; Validation<a class="headerlink" href="#4-simulation-mode-dry-run-validation" title="Permanent link">&para;</a></h2>
 <p>Before applying modifications to production systems, simulate the execution without altering target hosts:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml<span class="w"> </span>--check<span class="w"> </span>--diff
+</span></code></pre></div>
+<hr />
+<h2 id="5-operations-quick-reference-diagnostics-ovh-vps">5. Operations Quick Reference &amp; Diagnostics (OVH VPS)<a class="headerlink" href="#5-operations-quick-reference-diagnostics-ovh-vps" title="Permanent link">&para;</a></h2>
+<p>These commands run <strong>directly from your Mac</strong> without opening an interactive remote SSH session.</p>
+<h3 id="a-ad-hoc-ansible-commands-from-rtms-installeransible">A. Ad-Hoc Ansible Commands (From <code>rtms-installer/ansible</code>)<a class="headerlink" href="#a-ad-hoc-ansible-commands-from-rtms-installeransible" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span><span class="w"> </span>rtms-installer/ansible
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># 1. Test WireGuard connectivity to the VPS</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span>ping
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1"># 2. Check PostgreSQL daemon health (pg_isready)</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"pg_isready"</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># 3. Check systemd service status</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"systemctl status nginx --no-pager"</span><span class="w"> </span>--become
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"systemctl status rtms-admin --no-pager"</span><span class="w"> </span>--become
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"systemctl status postgresql --no-pager"</span><span class="w"> </span>--become
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="c1"># 4. Restart or reload services</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span>systemd<span class="w"> </span>-a<span class="w"> </span><span class="s2">"name=rtms-admin state=restarted"</span><span class="w"> </span>--become
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span>systemd<span class="w"> </span>-a<span class="w"> </span><span class="s2">"name=nginx state=reloaded"</span><span class="w"> </span>--become
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="c1"># 5. Inspect real-time logs (last 30 entries)</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"journalctl -u rtms-admin -n 30 --no-pager"</span><span class="w"> </span>--become
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"tail -n 30 /var/log/nginx/error.log"</span><span class="w"> </span>--become
+</span></code></pre></div>
+<h3 id="b-fast-ssh-one-liners-from-anywhere-on-your-mac">B. Fast SSH One-Liners (From anywhere on your Mac)<a class="headerlink" href="#b-fast-ssh-one-liners-from-anywhere-on-your-mac" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 1. NGINX health check (status + configuration syntax test)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ssh<span class="w"> </span>ubuntu@10.0.0.1<span class="w"> </span><span class="s2">"sudo systemctl status nginx --no-pager &amp;&amp; sudo nginx -t"</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># 2. PostgreSQL health check (connectivity + customers tables inspection)</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>ssh<span class="w"> </span>ubuntu@10.0.0.1<span class="w"> </span><span class="s2">"pg_isready &amp;&amp; sudo -u postgres psql -d customers -c \"SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema IN ('3TS', 'public') ORDER BY table_schema, table_name;\""</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># 3. RTMS Admin backend check (service status + listening ports 80, 443, 8090, 5432)</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>ssh<span class="w"> </span>ubuntu@10.0.0.1<span class="w"> </span><span class="s2">"sudo systemctl status rtms-admin --no-pager &amp;&amp; sudo ss -tulpn | grep -E '(80|443|8090|5432)'"</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="c1"># 4. Quick API healthcheck endpoint test</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>ssh<span class="w"> </span>ubuntu@10.0.0.1<span class="w"> </span><span class="s2">"curl -s http://127.0.0.1:8090/api/health"</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="c1"># 5. Query latest received support tickets</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>ssh<span class="w"> </span>ubuntu@10.0.0.1<span class="w"> </span><span class="s2">"sudo -u postgres psql -d customers -c \"SELECT ticket_id, subject, user_name, status, created_at FROM public.support_tickets ORDER BY created_at DESC LIMIT 5;\""</span>
 </span></code></pre></div>
 
 
