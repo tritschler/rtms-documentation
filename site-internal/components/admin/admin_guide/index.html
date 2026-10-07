@@ -2055,6 +2055,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#central-vps-support-hub-client-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Central VPS Support Hub &amp; Client Gateway
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Central VPS Support Hub &amp; Client Gateway">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-network-administration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Network &amp; Administration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-available-client-facing-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Available Client-Facing Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-publishing-new-software-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Publishing New Software Releases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2730,6 +2780,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#central-vps-support-hub-client-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Central VPS Support Hub &amp; Client Gateway
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Central VPS Support Hub &amp; Client Gateway">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-network-administration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Network &amp; Administration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-available-client-facing-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Available Client-Facing Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-publishing-new-software-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Publishing New Software Releases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2879,6 +2979,63 @@ The plaintext token is displayed once in the terminal. Provide it to the client 
 <li><strong>"The payment amount is strictly lower than the required price"</strong>
   The client did not pay enough for the selected Plan and Max Hosts limit according to the <code>pricing</code> table. Check the invoice or adjust the limit.</li>
 </ul>
+<hr />
+<h2 id="central-vps-support-hub-client-gateway">Central VPS Support Hub &amp; Client Gateway<a class="headerlink" href="#central-vps-support-hub-client-gateway" title="Permanent link">&para;</a></h2>
+<p>The central gateway operates on the Ubuntu OVH VPS and connects to customer instances via the <strong><code>customers</code></strong> PostgreSQL database.</p>
+<h3 id="1-network-administration">1. Network &amp; Administration<a class="headerlink" href="#1-network-administration" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>WireGuard VPN</strong>: The VPS is accessible at <code>10.0.0.1</code> for administration and internal routing.</li>
+<li><strong>Service &amp; Proxy</strong>: The backend runs as a systemd service (<code>rtms-admin.service</code>) on port <code>8090</code> proxied by NGINX.</li>
+<li><strong>Backend-Only Mode</strong>: NGINX routes directly to FastAPI endpoints with uploads permitted up to 500 MB.</li>
+</ul>
+<h3 id="2-available-client-facing-endpoints">2. Available Client-Facing Endpoints<a class="headerlink" href="#2-available-client-facing-endpoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Endpoint</th>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Authentication</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>/api/health</code></td>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;">Public</td>
+<td style="text-align: left;">System status and service health check</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/v1/tickets</code></td>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;">Bearer Token / Ed25519 JWT</td>
+<td style="text-align: left;">Ingestion of bug tickets and encrypted logs up to 50 MB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/v1/version</code></td>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;">Bearer Token / API Token</td>
+<td style="text-align: left;">Checking available software releases and update metadata</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/v1/updates/packages/{name}</code></td>
+<td style="text-align: left;"><code>GET</code></td>
+<td style="text-align: left;">Bearer Token / API Token</td>
+<td style="text-align: left;">Streaming package download in 1 MB chunks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/v1/license-requests</code></td>
+<td style="text-align: left;"><code>POST</code></td>
+<td style="text-align: left;">Bearer Token / API Token</td>
+<td style="text-align: left;">Submission of renewal and tier upgrade requests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-publishing-new-software-releases">3. Publishing New Software Releases<a class="headerlink" href="#3-publishing-new-software-releases" title="Permanent link">&para;</a></h3>
+<p>To distribute an update to customer instances:
+1. Place the release tarball/zip in <code>/opt/rtms-admin/packages/&lt;package_filename&gt;</code>.
+2. Register or update the record in <code>public.software_releases</code> in database <code>customers</code>.
+3. Client instances checking <code>GET /api/v1/version</code> will automatically detect the new release and download it.</p>
 
 
 

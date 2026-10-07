@@ -187,3 +187,30 @@ TRUNCATE TABLE "3TS".payments, "3TS".licenses, "3TS".clients CASCADE;
   The client has already used their previous payment for another license. A new payment must be registered.
 - **"The payment amount is strictly lower than the required price"**
   The client did not pay enough for the selected Plan and Max Hosts limit according to the `pricing` table. Check the invoice or adjust the limit.
+
+---
+
+## Central VPS Support Hub & Client Gateway
+
+The central gateway operates on the Ubuntu OVH VPS and connects to customer instances via the **`customers`** PostgreSQL database.
+
+### 1. Network & Administration
+- **WireGuard VPN**: The VPS is accessible at `10.0.0.1` for administration and internal routing.
+- **Service & Proxy**: The backend runs as a systemd service (`rtms-admin.service`) on port `8090` proxied by NGINX.
+- **Backend-Only Mode**: NGINX routes directly to FastAPI endpoints with uploads permitted up to 500 MB.
+
+### 2. Available Client-Facing Endpoints
+| Endpoint | Method | Authentication | Description |
+| :--- | :--- | :--- | :--- |
+| `/api/health` | `GET` | Public | System status and service health check |
+| `/api/v1/tickets` | `POST` | Bearer Token / Ed25519 JWT | Ingestion of bug tickets and encrypted logs up to 50 MB |
+| `/api/v1/version` | `GET` | Bearer Token / API Token | Checking available software releases and update metadata |
+| `/api/v1/updates/packages/{name}` | `GET` | Bearer Token / API Token | Streaming package download in 1 MB chunks |
+| `/api/v1/license-requests` | `POST` | Bearer Token / API Token | Submission of renewal and tier upgrade requests |
+
+### 3. Publishing New Software Releases
+To distribute an update to customer instances:
+1. Place the release tarball/zip in `/opt/rtms-admin/packages/<package_filename>`.
+2. Register or update the record in `public.software_releases` in database `customers`.
+3. Client instances checking `GET /api/v1/version` will automatically detect the new release and download it.
+

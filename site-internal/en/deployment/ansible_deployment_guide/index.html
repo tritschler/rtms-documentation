@@ -955,13 +955,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scenario-3-central-ovh-vps-deployment-rtms-admin-hub" class="md-nav__link">
+  <a href="#scenario-3-central-ovh-vps-deployment-rtms-admin-support-hub" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)
+        Scenario 3: Central OVH VPS Deployment (RTMS Admin &amp; Support Hub)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Scenario 3: Central OVH VPS Deployment (RTMS Admin &amp; Support Hub)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-architecture-network-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architecture &amp; Network Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inventory-secret-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inventory &amp; Secret Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-running-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Running the Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-3-production-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The 3 Production Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2587,13 +2637,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scenario-3-central-ovh-vps-deployment-rtms-admin-hub" class="md-nav__link">
+  <a href="#scenario-3-central-ovh-vps-deployment-rtms-admin-support-hub" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)
+        Scenario 3: Central OVH VPS Deployment (RTMS Admin &amp; Support Hub)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Scenario 3: Central OVH VPS Deployment (RTMS Admin &amp; Support Hub)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-architecture-network-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architecture &amp; Network Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inventory-secret-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inventory &amp; Secret Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-running-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Running the Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-3-production-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The 3 Production Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2772,19 +2872,47 @@ The script installs Ansible and necessary packages (<code>apt-get install -y ans
 </li>
 </ol>
 <hr />
-<h3 id="scenario-3-central-ovh-vps-deployment-rtms-admin-hub">Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)<a class="headerlink" href="#scenario-3-central-ovh-vps-deployment-rtms-admin-hub" title="Permanent link">&para;</a></h3>
-<p>To deploy or upgrade your central support, license, and release gateway:</p>
-<ol>
-<li>Configure <code>inventories/vps_ovh/hosts.yml</code> with the public IP and SSH username (<code>ubuntu</code>).</li>
-<li>Run deployment from your Mac workstation:
-   <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>ansible
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>uv<span class="w"> </span>run<span class="w"> </span>--with<span class="w"> </span>ansible<span class="w"> </span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml
-</span></code></pre></div></li>
-</ol>
+<h3 id="scenario-3-central-ovh-vps-deployment-rtms-admin-support-hub">Scenario 3: Central OVH VPS Deployment (RTMS Admin &amp; Support Hub)<a class="headerlink" href="#scenario-3-central-ovh-vps-deployment-rtms-admin-support-hub" title="Permanent link">&para;</a></h3>
+<p>The central OVH VPS hosts the 3TS administrative gateway and telemetry hub for on-premises client RTMS instances (bug reporting, software release distribution, and license renewals).</p>
+<h4 id="1-architecture-network-security">1. Architecture &amp; Network Security<a class="headerlink" href="#1-architecture-network-security" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Encrypted WireGuard Access</strong>: Management and Ansible deployments run exclusively over the WireGuard VPN mesh (<code>10.0.0.1</code>). Public SSH (port 22) is not exposed to the internet.</li>
+<li><strong>Isolated <code>customers</code> Database</strong>: In contrast to on-premise appliances which run <code>rtms_db</code>, the central hub uses a dedicated PostgreSQL database named <strong><code>customers</code></strong> (holding schema <code>3TS</code> for client accounts, licenses, and tokens, and schema <code>public</code> for support tickets, renewal requests, and software releases).</li>
+<li><strong>API-Only Backend Mode</strong>: No frontend React SPA or Node build is deployed (<code>deploy_admin_frontend: false</code>). NGINX reverse-proxies directly to the FastAPI backend (Uvicorn on port 8090) with <code>client_max_body_size 500M</code>.</li>
+</ul>
+<h4 id="2-inventory-secret-configuration">2. Inventory &amp; Secret Configuration<a class="headerlink" href="#2-inventory-secret-configuration" title="Permanent link">&para;</a></h4>
+<p>Local credentials are kept off Git via <code>.gitignore</code>:
+1. Host inventory <a href="file:///Users/marctritschler/git_projects/rtms-installer/ansible/inventories/vps_ovh/hosts.yml"><code>ansible/inventories/vps_ovh/hosts.yml</code></a>:
+   <div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">all</span><span class="p">:</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">vps_ovh</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="nt">ansible_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0.0.1</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="nt">ansible_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="nt">ansible_ssh_private_key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.ssh/id_ed25519</span>
+</span></code></pre></div>
+2. Variable overrides <a href="file:///Users/marctritschler/git_projects/rtms-installer/ansible/inventories/vps_ovh/group_vars/all.yml"><code>ansible/inventories/vps_ovh/group_vars/all.yml</code></a> (untracked in Git):
+   <div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">rtms_admin_db_user</span><span class="p">:</span><span class="w"> </span><span class="s">"rtms_admin"</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">rtms_admin_db_password</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;SECURE_PASSWORD&gt;"</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">rtms_admin_db_name</span><span class="p">:</span><span class="w"> </span><span class="s">"customers"</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nt">rtms_admin_db_host</span><span class="p">:</span><span class="w"> </span><span class="s">"localhost"</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nt">rtms_admin_db_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nt">rtms_admin_api_token</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;YOUR_API_TOKEN&gt;"</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nt">rtms_admin_jwt_secret</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;JWT_SECRET_KEY&gt;"</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nt">deploy_admin_frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div></p>
+<h4 id="3-running-the-deployment">3. Running the Deployment<a class="headerlink" href="#3-running-the-deployment" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>rtms-installer/ansible
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml
+</span></code></pre></div>
+<h4 id="4-the-3-production-endpoints">4. The 3 Production Endpoints<a class="headerlink" href="#4-the-3-production-endpoints" title="Permanent link">&para;</a></h4>
+<p>Once deployed, the following endpoints are operational:
+* <strong>Bug Submission (<code>POST /api/v1/tickets</code>)</strong>: Ingestion of crash logs and tickets (up to 50 MB), authorized via client bearer token or Ed25519 asymmetric JWT.
+* <strong>Software Updates (<code>GET /api/v1/version</code> &amp; <code>GET /api/v1/updates/packages/{name}</code>)</strong>: Checking releases and streaming 1 MB chunked package downloads from <code>/opt/rtms-admin/packages</code>.
+* <strong>License Renewals (<code>POST /api/v1/license-requests</code>)</strong>: Automated ingestion of renewal and tier upgrade requests.</p>
 <hr />
 <h2 id="4-simulation-mode-dry-run-validation">4. Simulation Mode (Dry-Run) &amp; Validation<a class="headerlink" href="#4-simulation-mode-dry-run-validation" title="Permanent link">&para;</a></h2>
 <p>Before applying modifications to production systems, simulate the execution without altering target hosts:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml<span class="w"> </span>--check<span class="w"> </span>--diff
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>playbooks/deploy_vps_admin.yml<span class="w"> </span>--check<span class="w"> </span>--diff
 </span></code></pre></div>
 
 

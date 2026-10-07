@@ -122,16 +122,49 @@ Pour les environnements d'entreprise avec un serveur central, des scanners dépo
 
 ---
 
-### Scénario 3 : Déploiement VPS Central OVH (RTMS Admin)
+### Scénario 3 : Déploiement VPS Central OVH (RTMS Admin & Support Hub)
 
-Pour administrer et mettre à jour votre serveur central de télé-assistance et de licences :
+Le VPS central OVH héberge la passerelle technique 3TS pour les instances RTMS déployées chez les clients (remontée de bugs, mises à jour logicielles et demandes de licences).
 
-1. Configurer `inventories/vps_ovh/hosts.yml` avec l'IP publique et l'utilisateur SSH (`ubuntu`).
-2. Lancer le déploiement depuis votre Mac :
-   ```bash
-   cd ansible
-   uv run --with ansible ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml
+#### 1. Architecture & Sécurité Réseau
+* **Accès chiffré WireGuard** : Le déploiement et l'administration s'effectuent via le tunnel VPN WireGuard mesh (`10.0.0.1`). L'IP publique OVH et le port SSH 22 ne sont pas exposés sur Internet pour l'administration.
+* **Base de données isolée `customers`** : Contrairement aux appliances clientes qui exécutent `rtms_db`, le VPS central héberge une base PostgreSQL dédiée nommée **`customers`** (schéma `3TS` pour les comptes, licences et tokens, et schéma `public` pour les tickets de bugs, demandes de renouvellement et versions logicielles).
+* **Mode Backend pur (API Only)** : Aucun frontend React ou build Node.js n'est déployé (`deploy_admin_frontend: false`). NGINX reverse-proxy route directement toutes les requêtes (`/` et `/api/`) vers l'API FastAPI (Uvicorn port 8090) avec `client_max_body_size 500M`.
+
+#### 2. Configuration de l'inventaire & Secrets
+Les secrets et mots de passe locaux sont exclus du dépôt Git via `.gitignore` :
+1. Fichier d'inventaire [`ansible/inventories/vps_ovh/hosts.yml`](file:///Users/marctritschler/git_projects/rtms-installer/ansible/inventories/vps_ovh/hosts.yml) :
+   ```yaml
+   all:
+     hosts:
+       vps_ovh:
+         ansible_host: 10.0.0.1
+         ansible_user: ubuntu
+         ansible_ssh_private_key_file: ~/.ssh/id_ed25519
    ```
+2. Fichier de variables [`ansible/inventories/vps_ovh/group_vars/all.yml`](file:///Users/marctritschler/git_projects/rtms-installer/ansible/inventories/vps_ovh/group_vars/all.yml) (non suivi par Git) :
+   ```yaml
+   rtms_admin_db_user: "rtms_admin"
+   rtms_admin_db_password: "<MOT_DE_PASSE_SECURISE>"
+   rtms_admin_db_name: "customers"
+   rtms_admin_db_host: "localhost"
+   rtms_admin_db_port: 5432
+   rtms_admin_api_token: "<VOTRE_API_TOKEN>"
+   rtms_admin_jwt_secret: "<CLE_SECRETE_JWT>"
+   deploy_admin_frontend: false
+   ```
+
+#### 3. Exécution du déploiement
+```bash
+cd rtms-installer/ansible
+ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml
+```
+
+#### 4. Les 3 Endpoints Centraux Opérationnels
+Une fois déployé, le serveur expose immédiatement :
+* **Remontée de bugs (`POST /api/v1/tickets`)** : Réception des rapports de tickets et logs chiffrés (jusqu'à 50 Mo), authentifiés par token client Bearer ou signature asymétrique Ed25519 JWT.
+* **Mises à jour logicielles (`GET /api/v1/version` & `GET /api/v1/updates/packages/{name}`)** : Détection et téléchargement par chunk de 1 Mo des paquets déposés dans `/opt/rtms-admin/packages`.
+* **Renouvellement de licences (`POST /api/v1/license-requests`)** : Soumission automatisée des demandes de licences et renouvellements depuis les appliances clientes.
 
 ---
 
@@ -142,3 +175,4 @@ Avant d'appliquer des changements en production, vous pouvez tester l'exécution
 ```bash
 ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml --check --diff
 ```
+

@@ -122,16 +122,49 @@ For enterprise environments featuring a central cluster, remote DMZ network prob
 
 ---
 
-### Scenario 3: Central OVH VPS Deployment (RTMS Admin Hub)
+### Scenario 3: Central OVH VPS Deployment (RTMS Admin & Support Hub)
 
-To deploy or upgrade your central support, license, and release gateway:
+The central OVH VPS hosts the 3TS administrative gateway and telemetry hub for on-premises client RTMS instances (bug reporting, software release distribution, and license renewals).
 
-1. Configure `inventories/vps_ovh/hosts.yml` with the public IP and SSH username (`ubuntu`).
-2. Run deployment from your Mac workstation:
-   ```bash
-   cd ansible
-   uv run --with ansible ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml
+#### 1. Architecture & Network Security
+* **Encrypted WireGuard Access**: Management and Ansible deployments run exclusively over the WireGuard VPN mesh (`10.0.0.1`). Public SSH (port 22) is not exposed to the internet.
+* **Isolated `customers` Database**: In contrast to on-premise appliances which run `rtms_db`, the central hub uses a dedicated PostgreSQL database named **`customers`** (holding schema `3TS` for client accounts, licenses, and tokens, and schema `public` for support tickets, renewal requests, and software releases).
+* **API-Only Backend Mode**: No frontend React SPA or Node build is deployed (`deploy_admin_frontend: false`). NGINX reverse-proxies directly to the FastAPI backend (Uvicorn on port 8090) with `client_max_body_size 500M`.
+
+#### 2. Inventory & Secret Configuration
+Local credentials are kept off Git via `.gitignore`:
+1. Host inventory [`ansible/inventories/vps_ovh/hosts.yml`](file:///Users/marctritschler/git_projects/rtms-installer/ansible/inventories/vps_ovh/hosts.yml):
+   ```yaml
+   all:
+     hosts:
+       vps_ovh:
+         ansible_host: 10.0.0.1
+         ansible_user: ubuntu
+         ansible_ssh_private_key_file: ~/.ssh/id_ed25519
    ```
+2. Variable overrides [`ansible/inventories/vps_ovh/group_vars/all.yml`](file:///Users/marctritschler/git_projects/rtms-installer/ansible/inventories/vps_ovh/group_vars/all.yml) (untracked in Git):
+   ```yaml
+   rtms_admin_db_user: "rtms_admin"
+   rtms_admin_db_password: "<SECURE_PASSWORD>"
+   rtms_admin_db_name: "customers"
+   rtms_admin_db_host: "localhost"
+   rtms_admin_db_port: 5432
+   rtms_admin_api_token: "<YOUR_API_TOKEN>"
+   rtms_admin_jwt_secret: "<JWT_SECRET_KEY>"
+   deploy_admin_frontend: false
+   ```
+
+#### 3. Running the Deployment
+```bash
+cd rtms-installer/ansible
+ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml
+```
+
+#### 4. The 3 Production Endpoints
+Once deployed, the following endpoints are operational:
+* **Bug Submission (`POST /api/v1/tickets`)**: Ingestion of crash logs and tickets (up to 50 MB), authorized via client bearer token or Ed25519 asymmetric JWT.
+* **Software Updates (`GET /api/v1/version` & `GET /api/v1/updates/packages/{name}`)**: Checking releases and streaming 1 MB chunked package downloads from `/opt/rtms-admin/packages`.
+* **License Renewals (`POST /api/v1/license-requests`)**: Automated ingestion of renewal and tier upgrade requests.
 
 ---
 
@@ -142,3 +175,4 @@ Before applying modifications to production systems, simulate the execution with
 ```bash
 ansible-playbook -i inventories/vps_ovh/hosts.yml playbooks/deploy_vps_admin.yml --check --diff
 ```
+
