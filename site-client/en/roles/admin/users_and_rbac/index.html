@@ -1256,12 +1256,20 @@
 <hr />
 <h2 id="2-password-governance-multi-factor-authentication-mfa">2. Password Governance &amp; Multi-Factor Authentication (MFA)<a class="headerlink" href="#2-password-governance-multi-factor-authentication-mfa" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Password Complexity &amp; Server-Side Verification Policy</strong>:
+  Every password configured or updated (initial forced reset, periodic rotation, profile self-service update, administrator creation or reset) must comply with strict server-enforced security rules:</li>
+<li><strong>Minimum Length</strong>: 8 characters (12 characters recommended).</li>
+<li><strong>Character Composition</strong>: At least one uppercase letter (<code>A-Z</code>), one lowercase letter (<code>a-z</code>), and one number (<code>0-9</code>).</li>
+<li><strong>Contextual Restrictions</strong>: Cannot match the current password and cannot contain the user's login username.</li>
+<li><strong>Interactive Validation</strong>: Real-time interactive compliance badges guide users directly in both the login reset and profile management views.</li>
+<li><strong>Cryptographic Temporary Password Generator</strong>:
+  Within the User Management console (<code>Create User</code> and <code>Modify User</code>), a one-click <strong>Generate</strong> action provisions a 12-character high-entropy temporary password containing uppercase, lowercase, numbers, and special characters (<code>!@#$%*-_=+</code>), automatically setting the forced reset on next login (<code>must_change_password</code>).</li>
 <li><strong>Multi-Factor Authentication (MFA / TOTP)</strong>:
   Mandatory for administrative access. Enrolled via standard authenticator apps (Google Authenticator, Microsoft Authenticator, FreeOTP).</li>
 <li><strong>Adaptive Risk-Based Password Expiration</strong>:
   Enforces a 90-day expiration window with J-14 advance notifications for accounts without MFA. Accounts protected by MFA are permanently exempt from periodic rotation in alignment with NIST SP 800-63B and ISO 27001.</li>
 <li><strong>Corporate Directory &amp; SSO Integration (LDAP / OIDC)</strong>:
-  Direct integration with Active Directory, OpenLDAP, or enterprise identity providers (Keycloak, Okta, Microsoft Entra ID).</li>
+  Direct integration with Active Directory, OpenLDAP, or enterprise identity providers (Keycloak, Okta, Microsoft Entra ID). Password governance for federated accounts is managed directly by the corporate identity provider.</li>
 </ul>
 
 

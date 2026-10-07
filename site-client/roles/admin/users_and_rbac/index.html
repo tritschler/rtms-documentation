@@ -1256,12 +1256,20 @@
 <hr />
 <h2 id="2-politiques-de-securite-des-mots-de-passe-mfa">2. Politiques de Sécurité des Mots de Passe &amp; MFA<a class="headerlink" href="#2-politiques-de-securite-des-mots-de-passe-mfa" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Politique de Complexité &amp; Validation Centralisée</strong> :
+  Tout mot de passe défini ou modifié (premier login, renouvellement, changement via profil, création ou réinitialisation par un administrateur) doit respecter la politique stricte de sécurité validée côté serveur :</li>
+<li><strong>Longueur minimale</strong> : 8 caractères (recommandé 12 caractères).</li>
+<li><strong>Composition</strong> : Au moins une majuscule (<code>A-Z</code>), une minuscule (<code>a-z</code>) et un chiffre (<code>0-9</code>).</li>
+<li><strong>Sécurité contextuelle</strong> : Le mot de passe ne peut pas être identique au mot de passe actuel et ne doit pas contenir le nom d'utilisateur.</li>
+<li><strong>Validation interactive</strong> : Une checklist visuelle dynamique valide chaque critère en temps réel sur l'écran de profil et de réinitialisation.</li>
+<li><strong>Génération Automatique de Mot de Passe Temporaire</strong> :
+  Depuis la console d'administration (<code>Créer un utilisateur</code> ou <code>Modifier un utilisateur</code>), un bouton <strong>Générer</strong> permet de produire un mot de passe temporaire cryptographiquement robuste de 12 caractères (majuscules, minuscules, chiffres et caractères spéciaux). L'option de renouvellement forcé à la première connexion (<code>must_change_password</code>) est automatiquement activée.</li>
 <li><strong>Authentification Multi-Facteurs (MFA/TOTP)</strong> :
   Obligatoire pour les comptes administrateurs. Configurable via une application standard (Google Authenticator, Microsoft Authenticator, FreeOTP).</li>
 <li><strong>Expiration Adaptative des Mots de Passe</strong> :
   Expiration tous les 90 jours avec préavis d'avertissement à J-14 pour les comptes sans MFA. Les comptes sécurisés par MFA sont exemptés de rotation forcée conformément aux recommandations NIST SP 800-63B et ISO 27001.</li>
 <li><strong>Intégration d'Annuaire d'Entreprise (LDAP / SSO)</strong> :
-  Connexion possible à Active Directory, OpenLDAP, ou à un fournisseur d'identité OIDC/SAML (ex : Keycloak, Okta, Azure AD / Entra ID).</li>
+  Connexion possible à Active Directory, OpenLDAP, ou à un fournisseur d'identité OIDC/SAML (ex : Keycloak, Okta, Azure AD / Entra ID). Pour ces comptes, la politique de mot de passe est déléguée au fournisseur d'identité d'entreprise.</li>
 </ul>
 
 

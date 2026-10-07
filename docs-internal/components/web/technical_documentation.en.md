@@ -75,6 +75,33 @@ The RTMS backend utilizes a Strategy Pattern to support multiple authentication 
 
 Regardless of the active provider, successful authentications generate the standard JWT session token, record an entry in the `admin.login_audit` table, and update the `last_login` timestamp for the user.
 
+## Password Security Policy & Cryptographic Verification
+
+RTMS implements a centralized, API-first password validation policy to enforce consistent cybersecurity hygiene across all entry points:
+
+### 1. Centralized Backend Validation (`backend/auth/utils.py`)
+The `validate_password_policy(password, username=None, current_password=None)` function guarantees compliance with NIST SP 800-63B and ISO 27001 guidelines:
+* **Minimum Length**: 8 characters (rejects empty or whitespace-padded inputs).
+* **Upper & Lowercase**: Enforces at least one uppercase letter (`[A-Z]`) and at least one lowercase letter (`[a-z]`).
+* **Numeric Character**: Requires at least one numeric digit (`[0-9]`).
+* **Contextual Restrictions**:
+  * Cannot be identical to the user's existing password (`new_password != current_password`).
+  * Cannot contain the user's login username (case-insensitive substring check for usernames $\ge$ 3 characters).
+
+### 2. Systematic API Route Enforcement (`backend/main.py`)
+The verification function is strictly executed before any password hashing (`bcrypt.hashpw`):
+* `POST /api/auth/change-password`: Self-service profile updates and forced login renewals.
+* `POST /api/users`: Administrative local account creation.
+* `PUT /api/users/{username}`: Administrative user edits and credential resets.
+* `POST /api/auth/setup`: First-run initial setup wizard for the super-administrator account.
+
+### 3. High-Entropy Temporary Password Generator
+* **Function**: `generate_secure_temporary_password(length=12)` in `backend/auth/utils.py`.
+* **Entropy & Diversity**: Guarantees at least 2 uppercase, 2 lowercase, 2 digits, and 1 special character (`!@#$%*-_=+`), shuffled cryptographically via `secrets.SystemRandom()`.
+* **Endpoint**: `GET /api/auth/generate-password` exposes this generator to authenticated users and administrators.
+* **Frontend Integration**: One-click generation in `UserManagement.tsx` automatically pre-fills the input field, unmasks the password for immediate operator review, and sets `must_change_password = true`.
+
+
 ## Data Lifecycle & Telemetry Purge vs. Factory Reset
 
 RTMS strictly separates operational scan telemetry from persistent system configurations:

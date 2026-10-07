@@ -2,560 +2,574 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>None./</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="None"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
     </url>
     <url>
         <loc>Nonearchitecture/database_rbac/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/database_rbac/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/database_rbac/"/>
     </url>
     <url>
         <loc>Nonearchitecture/overview/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/overview/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/overview/"/>
     </url>
     <url>
         <loc>Nonearchitecture/rbac/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/rbac/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/rbac/"/>
     </url>
     <url>
         <loc>Nonearchitecture/wireguard/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/wireguard/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/wireguard/"/>
     </url>
     <url>
         <loc>Nonearchitecture/data_models/nvd_data_model/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/data_models/nvd_data_model/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/data_models/nvd_data_model/"/>
     </url>
     <url>
         <loc>Nonearchitecture/data_models/scanner_data_model/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/data_models/scanner_data_model/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/data_models/scanner_data_model/"/>
     </url>
     <url>
         <loc>Nonecompliance/cra/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/cra/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/cra/"/>
     </url>
     <url>
         <loc>Nonecompliance/licenses/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/licenses/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/licenses/"/>
     </url>
     <url>
         <loc>Nonecompliance/nis2/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/nis2/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/nis2/"/>
     </url>
     <url>
         <loc>Nonecompliance/release_strategy/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/release_strategy/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/release_strategy/"/>
     </url>
     <url>
         <loc>Nonecompliance/legal/Applied_standards/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/Applied_standards/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/Applied_standards/"/>
     </url>
     <url>
         <loc>Nonecompliance/legal/EULA/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/EULA/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/EULA/"/>
     </url>
     <url>
         <loc>Nonecompliance/legal/EU_declaration_template/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/EU_declaration_template/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/EU_declaration_template/"/>
     </url>
     <url>
         <loc>Nonecompliance/legal/risk_assessmnent/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/risk_assessmnent/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/risk_assessmnent/"/>
     </url>
     <url>
         <loc>Nonecomponents/admin/admin_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/admin/admin_guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/admin/admin_guide/"/>
     </url>
     <url>
         <loc>Nonecomponents/local-agent/install/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/local-agent/install/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/local-agent/install/"/>
     </url>
     <url>
         <loc>Nonecomponents/local-agent/technical_doc/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/local-agent/technical_doc/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/local-agent/technical_doc/"/>
     </url>
     <url>
         <loc>Nonecomponents/nvd/install/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/install/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/install/"/>
     </url>
     <url>
         <loc>Nonecomponents/nvd/readme_export_cve/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/readme_export_cve/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/readme_export_cve/"/>
     </url>
     <url>
         <loc>Nonecomponents/nvd/readme_startup/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/readme_startup/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/readme_startup/"/>
     </url>
     <url>
         <loc>Nonecomponents/nvd/rtms_nvd_documentation/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/rtms_nvd_documentation/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/rtms_nvd_documentation/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/bettercap_commands/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/bettercap_commands/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/bettercap_commands/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/deep_scan_targeting/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/deep_scan_targeting/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/deep_scan_targeting/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/docker/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/docker/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/docker/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/email_and_dns_audits/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/email_and_dns_audits/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/email_and_dns_audits/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/mobility_lifecycle/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/mobility_lifecycle/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/mobility_lifecycle/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/resources/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/resources/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/resources/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/stand_alone/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/stand_alone/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/stand_alone/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/technical_requirements/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/technical_requirements/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/technical_requirements/"/>
     </url>
     <url>
         <loc>Nonecomponents/scanner/versions/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/versions/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/versions/"/>
     </url>
     <url>
         <loc>Nonecomponents/web/frontend_nginx_setup/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/frontend_nginx_setup/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/frontend_nginx_setup/"/>
     </url>
     <url>
         <loc>Nonecomponents/web/soc_threat_correlation_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/soc_threat_correlation_guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/soc_threat_correlation_guide/"/>
     </url>
     <url>
         <loc>Nonecomponents/web/sso_keycloak_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/sso_keycloak_guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/sso_keycloak_guide/"/>
     </url>
     <url>
         <loc>Nonecomponents/web/startup/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/startup/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/startup/"/>
     </url>
     <url>
         <loc>Nonecomponents/web/technical_documentation/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/technical_documentation/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/technical_documentation/"/>
     </url>
     <url>
         <loc>Nonecomponents/web/user_guide_threat_dashboard/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/user_guide_threat_dashboard/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/user_guide_threat_dashboard/"/>
     </url>
     <url>
+        <loc>Nonedemo/roadmap_demo_30min/</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Nonedemo/roadmap_demo_30min/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/demo/roadmap_demo_30min/"/>
+    </url>
+    <url>
         <loc>Nonedeployment/ansible_deployment_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonedeployment/ansible_deployment_guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/deployment/ansible_deployment_guide/"/>
     </url>
     <url>
         <loc>Nonedeployment/postgres_hardening_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonedeployment/postgres_hardening_guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/deployment/postgres_hardening_guide/"/>
     </url>
     <url>
         <loc>Noneplugins/plugin_specification/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="Noneplugins/plugin_specification/"/>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/plugins/plugin_specification/"/>
     </url>
     <url>
         <loc>Noneen/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="None"/>
     </url>
     <url>
         <loc>Noneen/architecture/database_rbac/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/database_rbac/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/database_rbac/"/>
     </url>
     <url>
         <loc>Noneen/architecture/overview/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/overview/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/overview/"/>
     </url>
     <url>
         <loc>Noneen/architecture/rbac/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/rbac/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/rbac/"/>
     </url>
     <url>
         <loc>Noneen/architecture/wireguard/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/wireguard/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/wireguard/"/>
     </url>
     <url>
         <loc>Noneen/architecture/data_models/nvd_data_model/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/data_models/nvd_data_model/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/data_models/nvd_data_model/"/>
     </url>
     <url>
         <loc>Noneen/architecture/data_models/scanner_data_model/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/architecture/data_models/scanner_data_model/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonearchitecture/data_models/scanner_data_model/"/>
     </url>
     <url>
         <loc>Noneen/compliance/cra/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/cra/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/cra/"/>
     </url>
     <url>
         <loc>Noneen/compliance/licenses/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/licenses/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/licenses/"/>
     </url>
     <url>
         <loc>Noneen/compliance/nis2/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/nis2/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/nis2/"/>
     </url>
     <url>
         <loc>Noneen/compliance/release_strategy/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/release_strategy/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/release_strategy/"/>
     </url>
     <url>
         <loc>Noneen/compliance/legal/Applied_standards/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/Applied_standards/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/Applied_standards/"/>
     </url>
     <url>
         <loc>Noneen/compliance/legal/EULA/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/EULA/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/EULA/"/>
     </url>
     <url>
         <loc>Noneen/compliance/legal/EU_declaration_template/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/EU_declaration_template/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/EU_declaration_template/"/>
     </url>
     <url>
         <loc>Noneen/compliance/legal/risk_assessmnent/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/compliance/legal/risk_assessmnent/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecompliance/legal/risk_assessmnent/"/>
     </url>
     <url>
         <loc>Noneen/components/admin/admin_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/admin/admin_guide/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/admin/admin_guide/"/>
     </url>
     <url>
         <loc>Noneen/components/local-agent/install/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/local-agent/install/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/local-agent/install/"/>
     </url>
     <url>
         <loc>Noneen/components/local-agent/technical_doc/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/local-agent/technical_doc/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/local-agent/technical_doc/"/>
     </url>
     <url>
         <loc>Noneen/components/nvd/install/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/install/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/install/"/>
     </url>
     <url>
         <loc>Noneen/components/nvd/readme_export_cve/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/readme_export_cve/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/readme_export_cve/"/>
     </url>
     <url>
         <loc>Noneen/components/nvd/readme_startup/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/readme_startup/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/readme_startup/"/>
     </url>
     <url>
         <loc>Noneen/components/nvd/rtms_nvd_documentation/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/nvd/rtms_nvd_documentation/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/nvd/rtms_nvd_documentation/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/bettercap_commands/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/bettercap_commands/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/bettercap_commands/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/deep_scan_targeting/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/deep_scan_targeting/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/deep_scan_targeting/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/docker/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/docker/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/docker/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/email_and_dns_audits/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/email_and_dns_audits/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/email_and_dns_audits/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/mobility_lifecycle/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/mobility_lifecycle/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/mobility_lifecycle/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/resources/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/resources/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/resources/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/stand_alone/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/stand_alone/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/stand_alone/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/technical_requirements/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/technical_requirements/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/technical_requirements/"/>
     </url>
     <url>
         <loc>Noneen/components/scanner/versions/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/scanner/versions/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/scanner/versions/"/>
     </url>
     <url>
         <loc>Noneen/components/web/frontend_nginx_setup/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/frontend_nginx_setup/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/frontend_nginx_setup/"/>
     </url>
     <url>
         <loc>Noneen/components/web/soc_threat_correlation_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/soc_threat_correlation_guide/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/soc_threat_correlation_guide/"/>
     </url>
     <url>
         <loc>Noneen/components/web/sso_keycloak_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/sso_keycloak_guide/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/sso_keycloak_guide/"/>
     </url>
     <url>
         <loc>Noneen/components/web/startup/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/startup/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/startup/"/>
     </url>
     <url>
         <loc>Noneen/components/web/technical_documentation/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/technical_documentation/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/technical_documentation/"/>
     </url>
     <url>
         <loc>Noneen/components/web/user_guide_threat_dashboard/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/components/web/user_guide_threat_dashboard/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonecomponents/web/user_guide_threat_dashboard/"/>
     </url>
     <url>
+        <loc>Noneen/demo/roadmap_demo_30min/</loc>
+        <lastmod>2026-10-07</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/demo/roadmap_demo_30min/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Nonedemo/roadmap_demo_30min/"/>
+    </url>
+    <url>
         <loc>Noneen/deployment/ansible_deployment_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/deployment/ansible_deployment_guide/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonedeployment/ansible_deployment_guide/"/>
     </url>
     <url>
         <loc>Noneen/deployment/postgres_hardening_guide/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/deployment/postgres_hardening_guide/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Nonedeployment/postgres_hardening_guide/"/>
     </url>
     <url>
         <loc>Noneen/plugins/plugin_specification/</loc>
-        <lastmod>2026-10-03</lastmod>
+        <lastmod>2026-10-07</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/plugins/plugin_specification/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Noneplugins/plugin_specification/"/>
