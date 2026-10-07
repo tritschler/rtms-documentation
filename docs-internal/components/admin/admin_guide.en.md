@@ -112,17 +112,19 @@ To allow the client's on-premises RTMS Web instance to connect to the Central Su
 At installation time, the client's instance generates an Ed25519 keypair (`/opt/rtms/config/instance.key` and `/opt/rtms/config/instance.pub`). The private key **never leaves the client server**.
 
 1. **Client Action:** The client copies their public key (`instance.pub`) from their terminal or from the RTMS Web portal (**Support & Diagnostic** → **Identité Cryptographique d'Instance**).
-2. **Administrator Action (Web Portal):**
-   - Open **RTMS Admin** → **Tokens & Clés Client** (tab **Clés Asymétriques Ed25519**).
-   - Click **Enregistrer Clé Publique**, enter the `tenant_id` and paste the PEM public key.
-3. **Administrator Action (API):**
+2. **Administrator Action (CLI on VPS or workstation):**
    ```bash
-   curl -X POST https://support-api.3ts-consulting.com/api/v1/admin/tokens/keys \
-     -H "Authorization: Bearer <ADMIN_JWT>" \
+   python main.py register_client_key <tenant_id> <path/to/instance_public.key_or_pem>
+   ```
+3. **Administrator Action (REST API):**
+   ```bash
+   curl -X POST http://10.0.0.1/api/v1/tokens/keys \
+     -H "Authorization: Bearer <MASTER_API_TOKEN>" \
      -H "Content-Type: application/json" \
      -d '{"tenant_id": "acme-corp", "public_key_pem": "-----BEGIN PUBLIC KEY-----\n..."}'
    ```
 4. **Result:** The client instance immediately signs all outgoing requests using ephemeral 15-minute JWTs validated against this public key. No static secrets circulate on the wire, and no annual expiration renewal is required.
+
 
 #### Fallback: Legacy Static Bearer Tokens
 If the client is on an older version or prefers a static API key:
