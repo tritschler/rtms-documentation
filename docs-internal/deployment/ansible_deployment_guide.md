@@ -166,7 +166,16 @@ Une fois déployé, le serveur expose immédiatement :
 * **Mises à jour logicielles (`GET /api/v1/version` & `GET /api/v1/updates/packages/{name}`)** : Détection et téléchargement par chunk de 1 Mo des paquets déposés dans `/opt/rtms-admin/packages`.
 * **Renouvellement de licences (`POST /api/v1/license-requests`)** : Soumission automatisée des demandes de licences et renouvellements depuis les appliances clientes.
 
+#### 5. Architecture Réseau Dual-Zone (Sécurisation & Isolation)
+Le serveur NGINX applique un cloisonnement strict entre l'administration interne et les requêtes des clients externes :
+
+| Zone Réseau | Adresse / Domaine | Rôle & Composants Exposés | Sécurisation |
+| :--- | :--- | :--- | :--- |
+| **Zone Privée Interne** | `10.0.0.1:80`<br>(VPN WireGuard) | • Console Admin React (`http://10.0.0.1/`)<br>• Documentation Technique 3TS (`http://10.0.0.1/docs/`)<br>• API administrative complète (`/api/`) | Strictement réservée à Marc et l'équipe 3TS via le tunnel chiffré WireGuard. Inaccessible depuis l'extérieur. |
+| **Zone Publique Externe** | `https://updates.3ts.ai`<br>(IP `135.125.102.194:443`) | • **Uniquement les API clientes** (`/api/v1/...`) pour les scanners et appliances distantes | Certificat SSL Let's Encrypt, TLS 1.2/1.3, Auth Token Bearer / Signature asymétrique Ed25519. **Tout le reste (web, doc) est bloqué (404)**. |
+
 ---
+
 
 ## 4. Mode Simulation (Dry-Run) & Validation
 

@@ -166,6 +166,14 @@ Once deployed, the following endpoints are operational:
 * **Software Updates (`GET /api/v1/version` & `GET /api/v1/updates/packages/{name}`)**: Checking releases and streaming 1 MB chunked package downloads from `/opt/rtms-admin/packages`.
 * **License Renewals (`POST /api/v1/license-requests`)**: Automated ingestion of renewal and tier upgrade requests.
 
+#### 5. Dual-Zone Network Architecture (Security & Isolation)
+The NGINX reverse proxy enforces strict segmentation between internal administration and client appliances:
+
+| Network Zone | Address / Domain | Exposed Components & Roles | Security & Isolation |
+| :--- | :--- | :--- | :--- |
+| **Internal Private Zone** | `10.0.0.1:80`<br>(WireGuard VPN) | • React Admin Console (`http://10.0.0.1/`)<br>• 3TS Technical Docs (`http://10.0.0.1/docs/`)<br>• Full Administrative API (`/api/`) | Exclusively accessible by Marc & 3TS staff over the WireGuard encrypted tunnel. Completely hidden from Internet. |
+| **External Public Zone** | `https://updates.3ts.ai`<br>(IP `135.125.102.194:443`) | • **Client APIs only** (`/api/v1/...`) for remote customer scanners and appliances | Let's Encrypt SSL/TLS 1.2/1.3, Client Bearer Token / Ed25519 asymmetric signature. **All other paths (web, docs) return 404**. |
+
 ---
 
 ## 4. Simulation Mode (Dry-Run) & Validation

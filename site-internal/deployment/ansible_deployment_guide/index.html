@@ -1010,6 +1010,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#5-architecture-reseau-dual-zone-securisation-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Architecture Réseau Dual-Zone (Sécurisation &amp; Isolation)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2731,6 +2742,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#5-architecture-reseau-dual-zone-securisation-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Architecture Réseau Dual-Zone (Sécurisation &amp; Isolation)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2987,6 +3009,32 @@ Le script installera lui-même Ansible et les dépendances nécessaires (<code>a
 * <strong>Remontée de bugs (<code>POST /api/v1/tickets</code>)</strong> : Réception des rapports de tickets et logs chiffrés (jusqu'à 50 Mo), authentifiés par token client Bearer ou signature asymétrique Ed25519 JWT.
 * <strong>Mises à jour logicielles (<code>GET /api/v1/version</code> &amp; <code>GET /api/v1/updates/packages/{name}</code>)</strong> : Détection et téléchargement par chunk de 1 Mo des paquets déposés dans <code>/opt/rtms-admin/packages</code>.
 * <strong>Renouvellement de licences (<code>POST /api/v1/license-requests</code>)</strong> : Soumission automatisée des demandes de licences et renouvellements depuis les appliances clientes.</p>
+<h4 id="5-architecture-reseau-dual-zone-securisation-isolation">5. Architecture Réseau Dual-Zone (Sécurisation &amp; Isolation)<a class="headerlink" href="#5-architecture-reseau-dual-zone-securisation-isolation" title="Permanent link">&para;</a></h4>
+<p>Le serveur NGINX applique un cloisonnement strict entre l'administration interne et les requêtes des clients externes :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Zone Réseau</th>
+<th style="text-align: left;">Adresse / Domaine</th>
+<th style="text-align: left;">Rôle &amp; Composants Exposés</th>
+<th style="text-align: left;">Sécurisation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Zone Privée Interne</strong></td>
+<td style="text-align: left;"><code>10.0.0.1:80</code><br>(VPN WireGuard)</td>
+<td style="text-align: left;">• Console Admin React (<code>http://10.0.0.1/</code>)<br>• Documentation Technique 3TS (<code>http://10.0.0.1/docs/</code>)<br>• API administrative complète (<code>/api/</code>)</td>
+<td style="text-align: left;">Strictement réservée à Marc et l'équipe 3TS via le tunnel chiffré WireGuard. Inaccessible depuis l'extérieur.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Zone Publique Externe</strong></td>
+<td style="text-align: left;"><code>https://updates.3ts.ai</code><br>(IP <code>135.125.102.194:443</code>)</td>
+<td style="text-align: left;">• <strong>Uniquement les API clientes</strong> (<code>/api/v1/...</code>) pour les scanners et appliances distantes</td>
+<td style="text-align: left;">Certificat SSL Let's Encrypt, TLS 1.2/1.3, Auth Token Bearer / Signature asymétrique Ed25519. <strong>Tout le reste (web, doc) est bloqué (404)</strong>.</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="4-mode-simulation-dry-run-validation">4. Mode Simulation (Dry-Run) &amp; Validation<a class="headerlink" href="#4-mode-simulation-dry-run-validation" title="Permanent link">&para;</a></h2>
 <p>Avant d'appliquer des changements en production, vous pouvez tester l'exécution sans rien modifier sur les machines distantes :</p>
