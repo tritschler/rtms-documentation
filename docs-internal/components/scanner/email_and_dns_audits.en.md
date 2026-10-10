@@ -4,7 +4,7 @@ The **RTMS (Real-Time Monitoring System)** suite incorporates comprehensive emai
 
 ---
 
-## 1. DNS Audit & Anti-Spoofing Verification (SPF, DKIM, DMARC)
+## 1. DNS Audit & Anti-Spoofing Verification (SPF, DKIM, DMARC, DNSSEC, MTA-STS)
 
 The `dns_audits/dns_integrity.py` module evaluates DNS resolution integrity and validates domain email security policies against spoofing.
 
@@ -13,9 +13,12 @@ The `dns_audits/dns_integrity.py` module evaluates DNS resolution integrity and 
 In an isolated intranet environment (without egress to public DNS servers like `1.1.1.1` or `8.8.8.8`):
 * The scanner queries the **designated internal enterprise DNS server** or the operating system resolver (`/etc/resolv.conf` / Active Directory DNS).
 * It verifies the syntax, presence, and alignment of email security records:
-  * **SPF (`v=spf1 ...`)**: Validates internal and external IP addresses authorized to send mail.
-  * **DMARC (`_dmarc.<domain>`)**: Verifies alignment policies (`p=none`, `quarantine`, or `reject`).
+  * **SPF (`v=spf1 ...`)**: Validates internal and external IP addresses authorized to send mail. Flags dangerous `+all` directives (`CRITICAL`), neutral `?all` policies (`LOW`), and RFC 7208 10-lookup limits exceeded (`HIGH`).
+  * **DMARC (`_dmarc.<domain>`)**: Verifies alignment policies (`p=none`, `quarantine`, or `reject`). Warns on passive monitoring mode (`p=none`) and missing aggregate reporting (`rua=`).
   * **DKIM (`<selector>._domainkey.<domain>`)**: Probes published public keys across standard and custom enterprise selectors.
+  * **DNSSEC**: Verifies zone cryptographic signing (presence of `DS` and `DNSKEY` records).
+  * **MTA-STS (RFC 8461) & TLS-RPT (RFC 8460)**: Probes `_mta-sts` policy records and `_smtp._tls` reporting to mitigate in-transit STARTTLS downgrade attacks.
+  * **FCrDNS (Forward-Confirmed Reverse DNS)**: Verifies consistency between MX records, IP addresses, reverse PTR records, and forward re-resolution.
 
 ### Configuration Properties
 
@@ -46,14 +49,18 @@ The internal security plugin [`internal_plugins/smtp_security.py`](file:///Users
 
 ### Security Checks Performed
 
-1. **In-Transit Encryption (STARTTLS)**:
-   * Probes whether the server advertises `STARTTLS`.
+1. **In-Transit Encryption (STARTTLS / SMTPS)**:
+   * Probes whether the server advertises `STARTTLS` or supports implicit SMTPS.
    * Flags a `MEDIUM` severity vulnerability if absent (unencrypted password transmission or plaintext eavesdropping on the LAN).
-2. **Open Mail Relay Detection (RFC 5321)**:
+2. **Obsolete Protocol Probing**:
+   * Detects whether the server accepts deprecated **TLS 1.0 or TLS 1.1** handshakes (vulnerable to BEAST, POODLE, and downgrade attacks - severity `HIGH`).
+3. **TLS Certificate Expiry & Integrity**:
+   * Inspects peer certificates for impending expiration (< 30 days) or expired validity periods.
+4. **Open Mail Relay Detection (RFC 5321)**:
    * Initiates an unauthenticated `MAIL FROM` transaction to an external mailbox via `RCPT TO:<untrusted-relay-test@example.org>`.
    * **Safe Probing Guarantee:** The scanner immediately issues an `RSET` (Reset) command. **No email is ever sent.**
    * If the relay accepts the recipient without requiring prior authentication, a `CRITICAL` alert is generated.
-3. **User Account Enumeration (`VRFY` / `EXPN`)**:
+5. **User Account Enumeration (`VRFY` / `EXPN`)**:
    * Tests whether directory harvesting commands are permitted (generates a `LOW` finding).
 
 ### Plugin Configuration
