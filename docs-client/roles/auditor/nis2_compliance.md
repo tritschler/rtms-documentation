@@ -15,7 +15,7 @@ RTMS employs a **hybrid, multi-layered identity architecture** supporting Local 
 | **Art. 21.2(j)** | **Multi-Factor Authentication (MFA)** for privileged / administrative access | Mandatory TOTP (6-digit RFC 6238) QR code enrollment for all `admin` accounts (Local & LDAP). Configurable for standard users. | **Compliant (100%)** |
 | **Art. 21.2(c)** | **Business Continuity & Crisis Management** | Local "Break-Glass" emergency administration accounts ensuring platform availability during Active Directory / network outages. | **Compliant (100%)** |
 | **Art. 21.2(a)** | **Risk Analysis & Credential Security** | Forced password renewal (`must_change_password`) on first login; real-time password complexity enforcement (min 8 chars, uppercase, lowercase, numbers); first-run setup wizard; **adaptive 90-day password expiration** for non-MFA accounts with **J-14 early warning**; full rotation exemption for MFA-secured accounts (NIST SP 800-63B / ISO 27001). | **Compliant (100%)** |
-| **Art. 21.2(g)** | **Cyber Hygiene & Cryptography** | Bcrypt hashing with dynamic salt for local credentials; PyJWT signed tokens with differential session timeouts (15 min for admins, 30 min for users); TLS 1.2/1.3 reverse proxy encryption for all transport data and bearer tokens. | **Compliant (100%)** |
+| **Art. 21.2(g)** | **Cyber Hygiene & Cryptography** | Bcrypt hashing with dynamic salt for local credentials; PyJWT signed tokens with differential session timeouts (15 min for admins, 30 min for users); TLS 1.2/1.3 reverse proxy encryption for all transport data and bearer tokens; **Automated Continuous Email & Transport Cyber Hygiene Engine** evaluating the 5 pillars (Anti-Spoofing SPF/DKIM/DMARC, TLS 1.3/DANE, DNSSEC, IPv6, RPKI) with autonomous 12h backend worker scheduling, dashboard scoring, and automatic remediation finding lifecycle management in `admin.security_findings`. | **Compliant (100%)** |
 | **Art. 21.2(b)** | **Incident Handling, Audit & Logging** | Immutable audit trails in `admin.login_audit` and `admin.system_audit` recording source IP, timestamp, auth provider, status, and failure reason. | **Compliant (100%)** |
 
 ---
@@ -142,6 +142,37 @@ Recorded metadata includes:
 
 ---
 
-## 8. Summary for Compliance Auditors
+## 8. Continuous Cyber Hygiene & Transport Security Architecture (Art. 21.2.g)
 
-RTMS fulfills all access control, cryptographic, resilience, and multi-factor requirements of the **EU NIS 2 Directive**. The combination of **mandatory administrative MFA**, **resilient Break-Glass local administration**, **secure LDAP group gating**, and **immutable audit logging** provides enterprise-grade security suitable for Essential and Important entities across the European Union.
+Pursuant to **NIS 2 Article 21.2(g)** ("basic cyber hygiene practices and cybersecurity training") and cryptographic requirements, RTMS incorporates an automated email perimeter and cryptographic transport inspection engine.
+
+### A. The 5 Cryptographic & Transport Pillars
+The audit continuously scores corporate domains against 5 fundamental security pillars:
+1. **Anti-Spoofing & Domain Authenticity (25 points)**: Validates that outgoing mail sources are strictly restricted via SPF (`-all` enforcement), authenticated with DKIM cryptographic signatures, and protected against domain spoofing via DMARC (`p=reject` or `quarantine`).
+2. **In-Transit Transport Encryption & DANE (35 points)**: Inspects inbound MX servers for mandatory opportunistic STARTTLS, TLS 1.3 protocol negotiation, Perfect Forward Secrecy (PFS) cipher suites, and TLSA records (DANE - RFC 6698) or MTA-STS (RFC 8461) to prevent Man-in-the-Middle (MitM) eavesdropping.
+3. **DNSSEC Zone Integrity (20 points)**: Validates cryptographic DNS zone signing and trust chains (DS and DNSKEY records) for both the primary domain and all authoritative mail exchangers.
+4. **IPv6 Dual-Stack Transport (10 points)**: Verifies end-to-end IPv6 reachability across mail servers.
+5. **RPKI BGP Route Authorisation (10 points)**: Verifies that Autonomous System (AS) announcements for MX IPv4/IPv6 prefixes match valid Route Origin Authorizations (ROAs).
+
+### B. Autonomous Backend Scheduling (`email_security_audit_worker`)
+Rather than relying on manual user queries or depending on distributed network probes, the RTMS FastAPI backend operates an autonomous background worker:
+* **Background Loop**: Initiated 15 seconds after system startup, the worker executes a full audit cycle every 12 hours.
+* **Persistent Cache**: Audit reports, granular pillar scores, and testing timestamps are stored in `scanner.scanner_config`, providing instantaneous dashboard rendering without query latency.
+* **On-Demand Execution**: System administrators can trigger real-time on-demand audits via `POST /api/settings/dns-audit/test` from the web interface.
+
+### C. Automated Security Finding & Remediation Lifecycle (`admin.security_findings`)
+When an audit detects insufficient posture (< 80%) or critical flaws (e.g. spoofable SPF/DMARC):
+* **Actionable Task Creation**: An actionable finding is dynamically registered in `admin.security_findings` under the `CYBER_HYGIENE` category and assigned to the primary system administrator or security officer (`get_default_security_assignee`).
+* **Dynamic SLA & Due Date**:
+  * Score < 50% or failed anti-spoofing: **CRITICAL** (CVSS 8.5, 7-day remediation SLA).
+  * Score between 50% and 70%: **HIGH** (CVSS 6.8, 14-day remediation SLA).
+  * Score between 70% and 80%: **MEDIUM** (CVSS 4.5, 30-day remediation SLA).
+* **Detailed Remediation Guidance**: The finding provides exact, copy-paste DNS record templates (SPF, DMARC, DKIM, TLSA, DNSSEC) to guide administrators through remediation.
+* **Automated Resolution (Self-Healing)**: As soon as the administrator publishes the required DNS records and the subsequent scheduled or manual audit confirms compliance (Score ≥ 80%), the task is automatically updated to `status = 'RESOLVED'` with an automated audit verification log.
+
+---
+
+## 9. Summary for Compliance Auditors
+
+RTMS fulfills all access control, cryptographic, resilience, and multi-factor requirements of the **EU NIS 2 Directive**. The combination of **mandatory administrative MFA**, **resilient Break-Glass local administration**, **secure LDAP group gating**, **automated continuous cyber hygiene auditing**, and **immutable audit logging** provides enterprise-grade security suitable for Essential and Important entities across the European Union.
+

@@ -829,6 +829,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-cyber-hygiene-email-security-continuous-nis-2-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cyber Hygiene &amp; Email Security (Continuous NIS 2 Audit)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cyber Hygiene &amp; Email Security (Continuous NIS 2 Audit)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-the-5-evaluated-pillars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. The 5 Evaluated Pillars
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-autonomous-backend-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Autonomous Backend Scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-automated-remediation-task-lifecycle-security-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Automated Remediation Task Lifecycle (Security Findings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1222,6 +1272,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-cyber-hygiene-email-security-continuous-nis-2-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cyber Hygiene &amp; Email Security (Continuous NIS 2 Audit)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cyber Hygiene &amp; Email Security (Continuous NIS 2 Audit)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-the-5-evaluated-pillars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. The 5 Evaluated Pillars
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-autonomous-backend-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Autonomous Backend Scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-automated-remediation-task-lifecycle-security-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Automated Remediation Task Lifecycle (Security Findings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1267,6 +1367,31 @@
   Triggers immediate alerts upon detecting legacy SMBv1 (vector for <em>WannaCry</em> / <em>EternalBlue</em>) or missing mandatory SMB message signing (susceptible to NTLM Relay attacks).</li>
 <li><strong>Unauthenticated Databases</strong>:<br />
   Flags exposed PostgreSQL, MySQL/MariaDB, Redis, or MongoDB instances operating with default credentials or zero password authentication.</li>
+</ul>
+<hr />
+<h2 id="4-cyber-hygiene-email-security-continuous-nis-2-audit">4. Cyber Hygiene &amp; Email Security (Continuous NIS 2 Audit)<a class="headerlink" href="#4-cyber-hygiene-email-security-continuous-nis-2-audit" title="Permanent link">&para;</a></h2>
+<p>RTMS features a continuous evaluation engine for email security posture and transport encryption, displayed directly on the dashboard (<strong>Cyber Hygiene &amp; Email Security</strong>).</p>
+<h3 id="a-the-5-evaluated-pillars">A. The 5 Evaluated Pillars<a class="headerlink" href="#a-the-5-evaluated-pillars" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>🛡️ Anti-Spoofing (25 pts)</strong>: Presence and strictness of SPF (<code>-all</code> or <code>~all</code>), DMARC enforcement (<code>p=reject</code> or <code>quarantine</code>), and DKIM selector cryptographic integrity.</li>
+<li><strong>🔒 Transport &amp; DANE (35 pts)</strong>: Mandatory STARTTLS with modern encryption (TLS 1.3), Perfect Forward Secrecy (PFS) cipher suites, and TLSA (DANE) or MTA-STS certificate pinning.</li>
+<li><strong>🔏 DNSSEC Zone (20 pts)</strong>: Cryptographic signing of domain and MX DNS records (DS/DNSKEY chain of trust).</li>
+<li><strong>🌐 IPv6 Dual-Stack (10 pts)</strong>: Availability and IPv6 reachability of inbound mail servers.</li>
+<li><strong>🛣️ RPKI Route Authorisations (10 pts)</strong>: Validation of BGP Route Origin Authorizations (ROA) to prevent BGP hijacking.</li>
+</ol>
+<h3 id="b-autonomous-backend-scheduling">B. Autonomous Backend Scheduling<a class="headerlink" href="#b-autonomous-backend-scheduling" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Background Worker Loop</strong>: The RTMS backend executes automatic re-evaluations <strong>every 12 hours</strong> autonomously, guaranteeing fresh scores without requiring user interaction or depending on local sensor probes.</li>
+<li><strong>On-Demand Audit</strong>: Operators can trigger an instantaneous recalculation at any time via the <strong>"Detailed Audit"</strong> button or in the scanner settings.</li>
+</ul>
+<h3 id="c-automated-remediation-task-lifecycle-security-findings">C. Automated Remediation Task Lifecycle (Security Findings)<a class="headerlink" href="#c-automated-remediation-task-lifecycle-security-findings" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Finding Generation</strong>: If the cyber hygiene score is below <strong>80%</strong> or exhibits critical vulnerabilities (e.g. spoofing risk), the platform automatically creates an actionable remediation task in <strong>Security Findings</strong> (<code>/findings</code>), assigned to the system administrator or security officer.</li>
+<li><strong>Dynamic Severity &amp; Deadlines</strong>:</li>
+<li>Score &lt; 50% or broken anti-spoofing: <strong>CRITICAL</strong> (due within 7 days).</li>
+<li>Score between 50% and 70%: <strong>HIGH</strong> (due within 14 days).</li>
+<li>Score between 70% and 80%: <strong>MEDIUM</strong> (due within 30 days).</li>
+<li><strong>Auto-Resolution</strong>: Once the DNS or mail server remediation steps are published and validated by the next audit cycle (Score ≥ 80%), the task is automatically marked as <strong><code>RESOLVED</code></strong>.</li>
 </ul>
 
 

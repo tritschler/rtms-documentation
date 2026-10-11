@@ -829,6 +829,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-cyberhygiene-securite-des-echanges-audit-continu-nis-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cyberhygiène &amp; Sécurité des Échanges (Audit Continu NIS 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cyberhygiène &amp; Sécurité des Échanges (Audit Continu NIS 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-les-5-piliers-evalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Les 5 Piliers Évalués
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-execution-autonome-par-le-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Exécution Autonome par le Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-attribution-automatique-de-taches-de-remediation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Attribution Automatique de Tâches de Remédiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1222,6 +1272,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-cyberhygiene-securite-des-echanges-audit-continu-nis-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cyberhygiène &amp; Sécurité des Échanges (Audit Continu NIS 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cyberhygiène &amp; Sécurité des Échanges (Audit Continu NIS 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-les-5-piliers-evalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Les 5 Piliers Évalués
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-execution-autonome-par-le-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Exécution Autonome par le Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-attribution-automatique-de-taches-de-remediation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Attribution Automatique de Tâches de Remédiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1267,6 +1367,31 @@
   Alerte immédiate en cas de détection du protocole vulnérable SMBv1 (vecteur d'attaques de type <em>WannaCry</em> / <em>EternalBlue</em>) ou d'absence de signature SMB obligatoire.</li>
 <li><strong>Bases de Données Non Authentifiées</strong> :<br />
   Détecte les instances PostgreSQL, MySQL/MariaDB, Redis ou MongoDB exposées sur le réseau avec les comptes par défaut ou sans mot de passe d'administration.</li>
+</ul>
+<hr />
+<h2 id="4-cyberhygiene-securite-des-echanges-audit-continu-nis-2">4. Cyberhygiène &amp; Sécurité des Échanges (Audit Continu NIS 2)<a class="headerlink" href="#4-cyberhygiene-securite-des-echanges-audit-continu-nis-2" title="Permanent link">&para;</a></h2>
+<p>RTMS intègre un moteur d'évaluation continue de la posture de messagerie et de chiffrement des transports, directement visible sur le tableau de bord d'accueil (<strong>Cyberhygiène &amp; Sécurité des Échanges</strong>).</p>
+<h3 id="a-les-5-piliers-evalues">A. Les 5 Piliers Évalués<a class="headerlink" href="#a-les-5-piliers-evalues" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>🛡️ Anti-Spoofing (25 pts)</strong> : Présence et fermeté de la politique SPF (<code>-all</code> ou <code>~all</code>), alignement DMARC (<code>p=reject</code> ou <code>quarantine</code>), et intégrité des sélecteurs DKIM.</li>
+<li><strong>🔒 Transport &amp; DANE (35 pts)</strong> : Support obligatoire de STARTTLS avec chiffrement moderne (TLS 1.3), ciphers avec confidentialité persistante (PFS), et validation des certificats TLSA (DANE) ou MTA-STS.</li>
+<li><strong>🔏 Zone DNSSEC (20 pts)</strong> : Signature cryptographique de la zone DNS du domaine et des serveurs MX (chaîne de confiance DS/DNSKEY).</li>
+<li><strong>🌐 IPv6 Dual-Stack (10 pts)</strong> : Disponibilité et connectivité IPv6 sur les serveurs de messagerie.</li>
+<li><strong>🛣️ Autorisations RPKI (10 pts)</strong> : Validation des annonces de routage BGP (ROA) pour empêcher le détournement d'itinéraires réseau.</li>
+</ol>
+<h3 id="b-execution-autonome-par-le-backend">B. Exécution Autonome par le Backend<a class="headerlink" href="#b-execution-autonome-par-le-backend" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Ordonnancement en tâche de fond</strong> : Le backend RTMS exécute une réévaluation automatique <strong>toutes les 12 heures</strong> de manière autonome, garantissant la fraîcheur du score sans nécessiter d'intervention humaine ni dépendre de sondes locales.</li>
+<li><strong>Audit à la demande</strong> : Les opérateurs peuvent forcer un recalcul instantané à tout moment via le bouton <strong>« Audit Détaillé »</strong> ou depuis la configuration du scanner.</li>
+</ul>
+<h3 id="c-attribution-automatique-de-taches-de-remediation">C. Attribution Automatique de Tâches de Remédiation<a class="headerlink" href="#c-attribution-automatique-de-taches-de-remediation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Génération de Finding</strong> : Si le score de cyberhygiène est inférieur à <strong>80%</strong> ou présente des vulnérabilités critiques (ex. usurpation d'identité possible), le système génère automatiquement une tâche dans <strong>Security Findings</strong> (<code>/findings</code>), assignée à l'administrateur système ou au responsable sécurité.</li>
+<li><strong>Échéance et sévérité dynamiques</strong> :</li>
+<li>Score &lt; 50% ou anti-spoofing défaillant : <strong>CRITICAL</strong> (échéance sous 7 jours).</li>
+<li>Score entre 50% et 70% : <strong>HIGH</strong> (échéance sous 14 jours).</li>
+<li>Score entre 70% et 80% : <strong>MEDIUM</strong> (échéance sous 30 jours).</li>
+<li><strong>Auto-Résolution</strong> : Dès que les correctifs DNS ou serveurs sont appliqués et validés par le prochain audit (Score ≥ 80%), la tâche passe automatiquement au statut <strong><code>RESOLVED</code></strong>.</li>
 </ul>
 
 
