@@ -90,6 +90,9 @@ nav:
           - Ressources & Tests HTTP: components/scanner/resources.md
       - Web:
           - Documentation technique: components/web/technical_documentation.md
+          - Guide Utilisateur - Thèmes & Personnalisation CSS: components/web/user_guide_custom_theme.md
+          - Guide Utilisateur - Dashboard Menaces & SOC: components/web/user_guide_threat_dashboard.md
+          - Guide d'Intégration SOC & SIEM: components/web/soc_threat_correlation_guide.md
           - Déploiement Nginx & Frontend: components/web/frontend_nginx_setup.md
           - Guide SSO Keycloak & OIDC: components/web/sso_keycloak_guide.md
           - Démarrage: components/web/startup.md
