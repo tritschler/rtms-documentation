@@ -519,5 +519,69 @@ Each correlated finding is assigned an operational threat status:
 | `POST` | `/api/settings/soc` | Persists SOC provider configuration and credentials with audit logging | Admin Only (`verify_admin`) |
 | `POST` | `/api/settings/soc/test` | Performs live probe and authentication handshake against selected SOC provider | Admin Only (`verify_admin`) |
 
+---
 
+## Enterprise Theming & Custom CSS (White-Labeling)
 
+### 1. Architectural Overview
+RTMS features an integrated White-Labeling and Enterprise Theming engine allowing administrators to adapt the application's visual styling to match corporate brand guidelines.
+
+```
+┌────────────────────────────────┐
+│   Admin Operator Interface     │
+│ (ScannerConfiguration.tsx UI)  │
+└───────────────┬────────────────┘
+                │ 1. Edit / Upload .css / Pick Colors
+                ▼
+┌────────────────────────────────┐
+│      FastAPI Backend           │
+│   (/api/settings/custom-css)   │
+└───────────────┬────────────────┘
+                │ 2. Sanitize & Persist
+                ▼
+┌────────────────────────────────┐
+│  PostgreSQL admin.system_config │
+│  - custom_css_enabled (bool)   │
+│  - custom_css_content (TEXT)   │
+│  - custom_css_vars (JSON)      │
+└───────────────┬────────────────┘
+                │ 3. Fetch on startup & Broadcast
+                ▼
+┌────────────────────────────────┐
+│  Frontend (customTheme.ts)     │
+│  - Check Safe Mode URL flag    │
+│  - Inject <style id="...">     │
+│  - Dynamic Live Preview        │
+└────────────────────────────────┘
+```
+
+### 2. Supported Design Tokens & CSS Variables
+All standard RTMS components are built on CSS custom properties defined at `:root` level in [index.css](file:///Users/marctritschler/git_projects/rtms-web/frontend/src/index.css) and [theme-light.css](file:///Users/marctritschler/git_projects/rtms-web/frontend/src/theme-light.css):
+
+| CSS Variable | Default Dark | Default Light | Description |
+| :--- | :--- | :--- | :--- |
+| `--accent-primary` | `#3b82f6` | `#2563eb` | Primary brand accent for action buttons, links, active tabs |
+| `--accent-secondary` | `#60a5fa` | `#3b82f6` | Secondary accent for subtle badges, hover glows, and highlights |
+| `--accent-glow` | `rgba(59, 130, 246, 0.2)` | `rgba(37, 99, 235, 0.15)` | Box-shadow glow for primary cards and focus states |
+| `--bg-primary` | `#0a0a0f` | `#f8fafc` | Deep background of the entire dashboard view |
+| `--bg-secondary` | `#13131a` | `#f1f5f9` | Background of panels, sidebar, and container cards |
+| `--bg-tertiary` | `#1c1c24` | `#ffffff` | Elevated elements, modals, dropdown menus |
+| `--text-primary` | `#f3f4f6` | `#0f172a` | High-contrast body and heading text |
+| `--text-secondary` | `#9ca3af` | `#475569` | Secondary descriptive labels and metadata |
+| `--border-color` | `rgba(255, 255, 255, 0.08)` | `rgba(0, 0, 0, 0.1)` | Subtle structural divider lines and card borders |
+| `--glass-bg` | `rgba(19, 19, 26, 0.7)` | `rgba(255, 255, 255, 0.9)` | Semi-transparent frosted glass backdrop |
+| `--radius-md` | `0.5rem` | `0.5rem` | Standard border radius for panels and input controls |
+
+### 3. REST API Specification
+
+| Method | Path | Description | Access Control |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/settings/custom-css` | Returns current custom CSS stylesheet and design token dictionary | Public / Authenticated |
+| `GET` | `/api/settings/branding/css` | Alias for `/api/settings/custom-css` | Public / Authenticated |
+| `POST` | `/api/settings/custom-css` | Validates, sanitizes, and persists custom CSS configuration | Administrator (`verify_admin`) |
+| `DELETE` | `/api/settings/custom-css` | Deletes custom CSS rules and restores default RTMS styling | Administrator (`verify_admin`) |
+
+### 4. Emergency Safe Mode Bypass
+To prevent accidental lockouts where malformed CSS rules could hide navigation menus or modal dialogs:
+- Operators can append `?safe_mode=true` (or `?disable_custom_css=true`) to any RTMS URL in their browser (e.g. `https://rtms.internal:8000/scanner?safe_mode=true`).
+- When detected, the application automatically disables custom `<style>` injection and presents a floating recovery banner with a one-click exit link.
