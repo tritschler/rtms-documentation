@@ -521,7 +521,7 @@ Each correlated finding is assigned an operational threat status:
 
 ---
 
-## Enterprise Theming & Custom CSS (White-Labeling)
+## Enterprise Theming & Custom CSS
 
 ### 1. Architectural Overview
 RTMS features an integrated White-Labeling and Enterprise Theming engine allowing administrators to adapt the application's visual styling to match corporate brand guidelines.
