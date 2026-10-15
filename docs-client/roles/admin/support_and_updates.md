@@ -17,6 +17,7 @@ flowchart LR
 
 ### Fonctionnalités disponibles :
 * **Création directe de tickets** : Renseignement du sujet, de la criticité (*Faible, Normale, Haute, Critique*) et de la description détaillée du problème.
+* **Politique de protection & quotas** : Un quota de 10 tickets par tranche de 24h protège la disponibilité du service contre les boucles logicielles, tandis que les incidents majeurs de priorité *Critique* bénéficient d'un canal d'urgence dédié.
 * **Diagnostics techniques optionnels** : Possibilité de joindre un état de santé synthétique de l'appliance (version de l'OS, version RTMS, volumétrie des actifs inventoriés).
   > [!NOTE]
   > Aucune donnée confidentielle d'entreprise (mots de passe, flux réseau sensibles ou données nominatives) n'est transmise dans les diagnostics techniques.
