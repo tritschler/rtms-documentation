@@ -288,6 +288,20 @@
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/plugins/plugin_specification/"/>
     </url>
     <url>
+        <loc>Nonetests/test_plan_overview/</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Nonetests/test_plan_overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/tests/test_plan_overview/"/>
+    </url>
+    <url>
+        <loc>Nonetests/vps_gateway_endpoints/</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="Nonetests/vps_gateway_endpoints/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/tests/vps_gateway_endpoints/"/>
+    </url>
+    <url>
         <loc>Noneen/</loc>
         <lastmod>2026-10-15</lastmod>
         <changefreq>daily</changefreq>
@@ -573,5 +587,19 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="Noneen/plugins/plugin_specification/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="Noneplugins/plugin_specification/"/>
+    </url>
+    <url>
+        <loc>Noneen/tests/test_plan_overview/</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/tests/test_plan_overview/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Nonetests/test_plan_overview/"/>
+    </url>
+    <url>
+        <loc>Noneen/tests/vps_gateway_endpoints/</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneen/tests/vps_gateway_endpoints/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="Nonetests/vps_gateway_endpoints/"/>
     </url>
 </urlset>

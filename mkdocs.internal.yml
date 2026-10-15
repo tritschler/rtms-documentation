@@ -97,6 +97,9 @@ plugins:
             Normes appliquées: Applied Standards
             Déclaration UE: EU Declaration of Conformity
             Évaluation des risques: Risk Assessment
+            Plan de Tests & Validation: Platform Validation & Tests
+            Stratégie & Plan Directeur: Strategy & Master Test Plan
+            Passerelle Cloud VPS OVH: Central Cloud VPS Gateway
 
 markdown_extensions:
   - admonition
@@ -169,3 +172,6 @@ nav:
           - Normes appliquées: compliance/legal/Applied_standards.md
           - Déclaration UE: compliance/legal/EU_declaration_template.md
           - Évaluation des risques: compliance/legal/risk_assessmnent.md
+  - Plan de Tests & Validation:
+      - Stratégie & Plan Directeur: tests/test_plan_overview.md
+      - Passerelle Cloud VPS OVH: tests/vps_gateway_endpoints.md

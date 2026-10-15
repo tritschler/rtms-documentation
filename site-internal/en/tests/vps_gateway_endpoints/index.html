@@ -1,0 +1,3510 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation technique interne, d'architecture, de déploiement et de conformité de la plateforme RTMS.">
+      
+      
+        <meta name="author" content="3TS Consulting SRL">
+      
+      
+      
+        <link rel="prev" href="../test_plan_overview/">
+      
+      
+      
+        
+          <link rel="alternate" href="../../../tests/vps_gateway_endpoints/" hreflang="fr">
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Central Cloud VPS Gateway - RTMS Documentation Technique (3TS Consulting)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-specification-central-vps-gateway-endpoints-tickets-updates-licenses" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="RTMS Documentation Technique (3TS Consulting)" class="md-header__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RTMS Documentation Technique (3TS Consulting)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Central Cloud VPS Gateway
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../tests/vps_gateway_endpoints/" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deployment/ansible_deployment_guide/" class="md-tabs__link">
+          
+  
+  
+  Deployment & Installation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../components/scanner/technical_requirements/" class="md-tabs__link">
+          
+  
+  
+  Components & Internals
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../plugins/plugin_specification/" class="md-tabs__link">
+          
+  
+  
+  Plugins
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../compliance/nis2/" class="md-tabs__link">
+          
+  
+  
+  Governance & Legal Compliance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../test_plan_overview/" class="md-tabs__link">
+          
+  
+  
+  Platform Validation & Tests
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="RTMS Documentation Technique (3TS Consulting)" class="md-nav__button md-logo" aria-label="RTMS Documentation Technique (3TS Consulting)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RTMS Documentation Technique (3TS Consulting)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/wireguard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network & WireGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RBAC Security Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/database_rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security & RBAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data_models/scanner_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data_models/nvd_data_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment & Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deployment & Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/ansible_deployment_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible Deployment Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/postgres_hardening_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PostgreSQL Hardening Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Components & Internals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Components & Internals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scanner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/technical_requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/mobility_lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobility & Multi-Network Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/stand_alone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standalone Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions & Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker & Packaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/bettercap_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bettercap Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/email_and_dns_audits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email & DNS Audits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/deep_scan_targeting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Granular Deep Scan Targeting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/scanner/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources & HTTP Diagnostics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/technical_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/soc_threat_correlation_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC / SIEM Threat Correlation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/user_guide_threat_dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Dashboard User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/frontend_nginx_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production Nginx & Frontend Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/sso_keycloak_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise SSO Keycloak & OIDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/web/startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Startup Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local Agent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Local Agent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/local-agent/technical_doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/local-agent/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Installation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Microservice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NVD Microservice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/rtms_nvd_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVD Installation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/readme_startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup & Ingestion Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/nvd/readme_export_cve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting CVE Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Admin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/admin/admin_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin & Licensing Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/plugin_specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Specifications & Dev Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance & Legal Compliance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Governance & Legal Compliance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/nis2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIS 2 Compliance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/cra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Resilience Act (CRA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/release_strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Strategy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Licenses & Copyrights
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Legal Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Legal Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/legal/EULA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End User License Agreement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/legal/Applied_standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/legal/EU_declaration_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EU Declaration of Conformity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compliance/legal/risk_assessmnent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risk Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform Validation & Tests
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platform Validation & Tests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test_plan_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategy & Master Test Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Central Cloud VPS Gateway
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Central Cloud VPS Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-architectural-security-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architectural &amp; Security Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-test-cases-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Test Cases Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-detailed-step-by-step-test-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Detailed Step-by-Step Test Procedures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Detailed Step-by-Step Test Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-1-support-ticket-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 1: Support Ticket Ingestion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 1: Support Ticket Ingestion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-01-submission-via-rtms-web-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-01: Submission via RTMS Web UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-02-direct-api-submission-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-02: Direct API Submission (cURL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-03-security-rejection-of-unauthorized-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-03: Security Rejection of Unauthorized Calls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-04-database-verification-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-04: Database Verification on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-2-software-release-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 2: Software Release Distribution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 2: Software Release Distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-01-release-staging-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-01: Release Staging on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-02-version-discovery-via-rtms-web-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-02: Version Discovery via RTMS Web UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-03-download-sha-256-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-03: Download &amp; SHA-256 Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-04-direct-binary-stream-via-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-04: Direct Binary Stream via cURL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-3-license-renewal-expansion-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 3: License Renewal &amp; Expansion Requests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 3: License Renewal &amp; Expansion Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-01-ui-submission-from-rtms-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-01: UI Submission from RTMS Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-02-direct-api-submission-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-02: Direct API Submission (cURL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-03-postgresql-verification-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-03: PostgreSQL Verification on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-04-1-click-approval-in-rtms-admin-backoffice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-04: 1-Click Approval in RTMS Admin Backoffice
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-4-network-security-ssl-partitioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 4: Network Security, SSL &amp; Partitioning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 4: Network Security, SSL &amp; Partitioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-net-01-ssl-tls-13-hsts-inspection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-NET-01: SSL / TLS 1.3 &amp; HSTS Inspection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-net-02-public-wan-routing-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-NET-02: Public WAN Routing Audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-net-03-public-zone-access-restriction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-NET-03: Public Zone Access Restriction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-execution-sign-off-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Execution Sign-off Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-architectural-security-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architectural &amp; Security Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-test-cases-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Test Cases Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-detailed-step-by-step-test-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Detailed Step-by-Step Test Procedures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Detailed Step-by-Step Test Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-1-support-ticket-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 1: Support Ticket Ingestion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 1: Support Ticket Ingestion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-01-submission-via-rtms-web-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-01: Submission via RTMS Web UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-02-direct-api-submission-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-02: Direct API Submission (cURL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-03-security-rejection-of-unauthorized-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-03: Security Rejection of Unauthorized Calls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-tickets-04-database-verification-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-TICKETS-04: Database Verification on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-2-software-release-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 2: Software Release Distribution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 2: Software Release Distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-01-release-staging-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-01: Release Staging on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-02-version-discovery-via-rtms-web-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-02: Version Discovery via RTMS Web UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-03-download-sha-256-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-03: Download &amp; SHA-256 Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-updates-04-direct-binary-stream-via-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-UPDATES-04: Direct Binary Stream via cURL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-3-license-renewal-expansion-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 3: License Renewal &amp; Expansion Requests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 3: License Renewal &amp; Expansion Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-01-ui-submission-from-rtms-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-01: UI Submission from RTMS Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-02-direct-api-submission-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-02: Direct API Submission (cURL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-03-postgresql-verification-on-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-03: PostgreSQL Verification on VPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-licenses-04-1-click-approval-in-rtms-admin-backoffice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-LICENSES-04: 1-Click Approval in RTMS Admin Backoffice
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-suite-4-network-security-ssl-partitioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Suite 4: Network Security, SSL &amp; Partitioning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Suite 4: Network Security, SSL &amp; Partitioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-net-01-ssl-tls-13-hsts-inspection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-NET-01: SSL / TLS 1.3 &amp; HSTS Inspection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-net-02-public-wan-routing-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-NET-02: Public WAN Routing Audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-tc-vps-net-03-public-zone-access-restriction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case TC-VPS-NET-03: Public Zone Access Restriction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-execution-sign-off-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Execution Sign-off Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="test-specification-central-vps-gateway-endpoints-tickets-updates-licenses">Test Specification: Central VPS Gateway Endpoints (Tickets, Updates, Licenses)<a class="headerlink" href="#test-specification-central-vps-gateway-endpoints-tickets-updates-licenses" title="Permanent link">&para;</a></h1>
+<p>This document specifies the complete test procedure for verifying the functionality, cryptographic security, and network isolation of the <strong>three central client-facing endpoints</strong> hosted on the OVH VPS (<code>https://updates.3ts.ai</code>).</p>
+<hr />
+<h2 id="1-architectural-security-context">1. Architectural &amp; Security Context<a class="headerlink" href="#1-architectural-security-context" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Client as RTMS Web (Customer Appliance)
+    participant Nginx as NGINX VPS OVH (443 SSL)
+    participant Hub as FastAPI Backend (127.0.0.1:8090)
+    participant DB as PostgreSQL (customers)
+
+    Note over Client,Nginx: Secure Public Zone (TLS 1.3 / updates.3ts.ai)
+    Client-&gt;&gt;Nginx: HTTPS Request with Authorization: Bearer &lt;JWT_Ed25519 / Token&gt;
+    Nginx-&gt;&gt;Hub: Reverse Proxy to FastAPI
+    Hub-&gt;&gt;Hub: verify_client_token() : Ed25519 Signature or SHA-256 Hash
+    Hub-&gt;&gt;DB: Write / Read (support_tickets, software_releases, license_requests)
+    Hub--&gt;&gt;Client: Encrypted JSON Response</code></pre>
+<ul>
+<li><strong>Public FQDN</strong>: <code>https://updates.3ts.ai</code></li>
+<li><strong>Public VPS IP</strong>: <code>135.125.102.194</code></li>
+<li><strong>Listening Port</strong>: <code>443</code> (HTTPS - Strong TLS 1.3 cipher suites)</li>
+<li><strong>Unified Authentication Guard</strong>: FastAPI dependency <code>verify_client_token</code> accepting either an ephemeral (15-min) <strong>Ed25519</strong> asymmetric signed JWT or a hashed <strong>Bearer Token</strong> stored in <code>"3TS".client_tokens</code>.</li>
+</ul>
+<hr />
+<h2 id="2-test-cases-matrix">2. Test Cases Matrix<a class="headerlink" href="#2-test-cases-matrix" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Test ID</th>
+<th style="text-align: left;">Target Component</th>
+<th style="text-align: left;">Method &amp; Endpoint</th>
+<th style="text-align: left;">Validated Objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-TICKETS-01</code></strong></td>
+<td style="text-align: left;">Support &amp; Bug Reports</td>
+<td style="text-align: left;"><code>POST /api/v1/tickets</code></td>
+<td style="text-align: left;">Ticket submission with telemetry from RTMS Web UI</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-TICKETS-02</code></strong></td>
+<td style="text-align: left;">Support &amp; Bug Reports</td>
+<td style="text-align: left;"><code>POST /api/v1/tickets</code></td>
+<td style="text-align: left;">Direct cURL call with Bearer Token</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-TICKETS-03</code></strong></td>
+<td style="text-align: left;">Support &amp; Bug Reports</td>
+<td style="text-align: left;"><code>POST /api/v1/tickets</code></td>
+<td style="text-align: left;">Security rejections (HTTP 401 missing / HTTP 403 invalid token)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-TICKETS-04</code></strong></td>
+<td style="text-align: left;">Support &amp; Bug Reports</td>
+<td style="text-align: left;">Database <code>customers</code> &amp; SMTP</td>
+<td style="text-align: left;">SQL persistence and email alert via <code>ssl0.ovh.net</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-UPDATES-01</code></strong></td>
+<td style="text-align: left;">Software Releases</td>
+<td style="text-align: left;"><code>/opt/rtms-admin/packages</code></td>
+<td style="text-align: left;">Package staging (<code>.tar.gz</code>) and release publishing on VPS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-UPDATES-02</code></strong></td>
+<td style="text-align: left;">Software Releases</td>
+<td style="text-align: left;"><code>GET /api/v1/version</code></td>
+<td style="text-align: left;">Automated version discovery from UI <code>/security/software</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-UPDATES-03</code></strong></td>
+<td style="text-align: left;">Software Releases</td>
+<td style="text-align: left;"><code>POST /api/system/updates/apply</code></td>
+<td style="text-align: left;">Package download and SHA-256 integrity validation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-UPDATES-04</code></strong></td>
+<td style="text-align: left;">Software Releases</td>
+<td style="text-align: left;"><code>GET /api/v1/updates/packages/...</code></td>
+<td style="text-align: left;">Direct streaming download via authenticated cURL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-LICENSES-01</code></strong></td>
+<td style="text-align: left;">Licenses &amp; Quotas</td>
+<td style="text-align: left;"><code>POST /api/license/generate-renewal-request</code></td>
+<td style="text-align: left;">Renewal request submission via UI <code>/license</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-LICENSES-02</code></strong></td>
+<td style="text-align: left;">Licenses &amp; Quotas</td>
+<td style="text-align: left;"><code>POST /api/v1/license-requests</code></td>
+<td style="text-align: left;">Direct cURL submission with full hardware telemetry payload</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-LICENSES-03</code></strong></td>
+<td style="text-align: left;">Licenses &amp; Quotas</td>
+<td style="text-align: left;">Database <code>customers</code></td>
+<td style="text-align: left;">Confirmation of pending request in database table</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-LICENSES-04</code></strong></td>
+<td style="text-align: left;">Licenses &amp; Quotas</td>
+<td style="text-align: left;">RTMS Admin</td>
+<td style="text-align: left;">1-click Approval workflow and <code>.key</code> bundle emission</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-NET-01</code></strong></td>
+<td style="text-align: left;">Network &amp; Crypto</td>
+<td style="text-align: left;">TLS 1.3 / Port 443</td>
+<td style="text-align: left;">SSL encryption, valid Let's Encrypt cert, and HSTS header</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-NET-02</code></strong></td>
+<td style="text-align: left;">Network &amp; Routing</td>
+<td style="text-align: left;">WAN vs VPN Routing</td>
+<td style="text-align: left;">Public WAN IP logged in <code>/var/log/nginx/access.log</code> (not 10.0.0.1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>TC-VPS-NET-03</code></strong></td>
+<td style="text-align: left;">Network &amp; Partitioning</td>
+<td style="text-align: left;">NGINX Public Server</td>
+<td style="text-align: left;">Strict block (404) of admin web console on public port</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-detailed-step-by-step-test-procedures">3. Detailed Step-by-Step Test Procedures<a class="headerlink" href="#3-detailed-step-by-step-test-procedures" title="Permanent link">&para;</a></h2>
+<h3 id="test-suite-1-support-ticket-ingestion">Test Suite 1: Support Ticket Ingestion<a class="headerlink" href="#test-suite-1-support-ticket-ingestion" title="Permanent link">&para;</a></h3>
+<h4 id="case-tc-vps-tickets-01-submission-via-rtms-web-ui">Case <code>TC-VPS-TICKETS-01</code>: Submission via RTMS Web UI<a class="headerlink" href="#case-tc-vps-tickets-01-submission-via-rtms-web-ui" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Access</strong>: Log into RTMS Web as an Administrator and navigate to <code>/help/support</code>.</li>
+<li><strong>Action</strong>:</li>
+<li>Subject: <code>Platform qualification test VPS</code></li>
+<li>Category: <code>incident</code> | Priority: <code>high</code></li>
+<li>Description: <code>Validating public support gateway over WAN.</code></li>
+<li>Check the option <em>"Include diagnostic data"</em>.</li>
+<li>Click <strong>"Submit Support Ticket"</strong>.</li>
+<li><strong>Expected Result</strong>:</li>
+<li>Green toast showing the assigned reference ID (e.g. <code>RTMS-2026-XXXX</code>).</li>
+<li>Ticket appears in the history table with status <code>open</code> or <code>submitted</code>.</li>
+</ol>
+<h4 id="case-tc-vps-tickets-02-direct-api-submission-curl">Case <code>TC-VPS-TICKETS-02</code>: Direct API Submission (cURL)<a class="headerlink" href="#case-tc-vps-tickets-02-direct-api-submission-curl" title="Permanent link">&para;</a></h4>
+<p>Run from a terminal:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://updates.3ts.ai/api/v1/tickets<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer 2c47b3eaad6f415c565556ba5146701195d5bd27320c21781e29ad2614e01242"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s1">    "user_name": "Marc Tritschler",</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="s1">    "user_email": "support@3tsconsulting.be",</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="s1">    "company_name": "3TS Client Qualification",</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="s1">    "instance_id": "INSTANCE-TEST-01",</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="s1">    "subject": "Direct cURL ticket",</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="s1">    "category": "incident",</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="s1">    "priority": "normal",</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="s1">    "description": "Validating direct API payload delivery",</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="s1">    "diagnostic_data": {"rtms_version": "0.1.0", "assets_count": 42}</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="s1">  }'</span>
+</span></code></pre></div>
+* <strong>Expected Result</strong>: <code>HTTP 201 Created</code> with JSON: <code>{"success": true, "ticket_id": "RTMS-2026-XXXX", "status": "open"}</code>.</p>
+<h4 id="case-tc-vps-tickets-03-security-rejection-of-unauthorized-calls">Case <code>TC-VPS-TICKETS-03</code>: Security Rejection of Unauthorized Calls<a class="headerlink" href="#case-tc-vps-tickets-03-security-rejection-of-unauthorized-calls" title="Permanent link">&para;</a></h4>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Missing token -&gt; must return 401</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">"%{http_code}\n"</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://updates.3ts.ai/api/v1/tickets<span class="w"> </span>-d<span class="w"> </span><span class="s1">'{}'</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Invalid token -&gt; must return 403</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">"%{http_code}\n"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer invalid_token"</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://updates.3ts.ai/api/v1/tickets<span class="w"> </span>-d<span class="w"> </span><span class="s1">'{}'</span>
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>: HTTP 401 for the first, HTTP 403 for the second.</p>
+<h4 id="case-tc-vps-tickets-04-database-verification-on-vps">Case <code>TC-VPS-TICKETS-04</code>: Database Verification on VPS<a class="headerlink" href="#case-tc-vps-tickets-04-database-verification-on-vps" title="Permanent link">&para;</a></h4>
+<p>From your Mac (via Ansible):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>rtms-installer/ansible
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-a<span class="w"> </span><span class="s2">"su - postgres -c \"psql -d customers -c 'SELECT ticket_id, company_name, subject, priority, status, created_at FROM support_tickets ORDER BY created_at DESC LIMIT 3;'\""</span><span class="w"> </span>--become
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>: Row exists with valid <code>ticket_id</code> and correct metadata.</p>
+<hr />
+<h3 id="test-suite-2-software-release-distribution">Test Suite 2: Software Release Distribution<a class="headerlink" href="#test-suite-2-software-release-distribution" title="Permanent link">&para;</a></h3>
+<h4 id="case-tc-vps-updates-01-release-staging-on-vps">Case <code>TC-VPS-UPDATES-01</code>: Release Staging on VPS<a class="headerlink" href="#case-tc-vps-updates-01-release-staging-on-vps" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Create compiled archive package on VPS</strong>:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"bash -c '</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s2">  mkdir -p /opt/rtms-admin/packages /tmp/pkg-tmp</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="s2">  echo \"RTMS Scanner Binary Release v0.2.0\" &gt; /tmp/pkg-tmp/scanner</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s2">  tar -czf /opt/rtms-admin/packages/rtms-scanner-release.tar.gz -C /tmp/pkg-tmp scanner</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s2">  rm -rf /tmp/pkg-tmp</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s2">  chmod 644 /opt/rtms-admin/packages/rtms-scanner-release.tar.gz</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="s2">'"</span><span class="w"> </span>--become
+</span></code></pre></div></li>
+<li><strong>Publish version record in database</strong>:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"su - postgres -c \"psql -d customers -c \\\"</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s2">  INSERT INTO software_releases (version, release_notes, manifest, is_active)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s2">  VALUES ('0.2.0', 'Release 0.2.0 : Optimisations du scan réseau et conformité NIS 2', '{\\\\\\\"version\\\\\\\": \\\\\\\"0.2.0\\\\\\\", \\\\\\\"components\\\\\\\": [{\\\\\\\"name\\\\\\\": \\\\\\\"rtms-scanner\\\\\\\", \\\\\\\"version\\\\\\\": \\\\\\\"0.2.0\\\\\\\"}], \\\\\\\"packages\\\\\\\": {\\\\\\\"rtms-scanner\\\\\\\": {\\\\\\\"filename\\\\\\\": \\\\\\\"rtms-scanner-release.tar.gz\\\\\\\", \\\\\\\"url\\\\\\\": \\\\\\\"/api/v1/updates/packages/rtms-scanner-release.tar.gz\\\\\\\"}}}', true)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s2">  ON CONFLICT (version) DO UPDATE SET is_active = true, updated_at = NOW();</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">\\\"\""</span><span class="w"> </span>--become
+</span></code></pre></div></li>
+</ol>
+<h4 id="case-tc-vps-updates-02-version-discovery-via-rtms-web-ui">Case <code>TC-VPS-UPDATES-02</code>: Version Discovery via RTMS Web UI<a class="headerlink" href="#case-tc-vps-updates-02-version-discovery-via-rtms-web-ui" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Navigate to <strong>Administration &gt; Software Updates</strong> (<code>/security/software</code>).</li>
+<li><strong>Pass Criteria</strong>:</li>
+<li>Banner turns blue: <strong>"Update Available: v0.2.0"</strong>.</li>
+<li>Release notes are clearly displayed.</li>
+<li><code>rtms-scanner</code> appears in the components list.</li>
+</ol>
+<h4 id="case-tc-vps-updates-03-download-sha-256-verification">Case <code>TC-VPS-UPDATES-03</code>: Download &amp; SHA-256 Verification<a class="headerlink" href="#case-tc-vps-updates-03-download-sha-256-verification" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Click <strong>"Download and Stage Update"</strong>.</li>
+<li><strong>Pass Criteria</strong>:</li>
+<li>Package downloaded over HTTPS into <code>rtms-web/backend/updates/downloads/rtms-scanner-release.tar.gz</code>.</li>
+<li>SHA-256 hash computed and verified.</li>
+<li>UI displays green "Staged" badge.</li>
+</ol>
+<h4 id="case-tc-vps-updates-04-direct-binary-stream-via-curl">Case <code>TC-VPS-UPDATES-04</code>: Direct Binary Stream via cURL<a class="headerlink" href="#case-tc-vps-updates-04-direct-binary-stream-via-curl" title="Permanent link">&para;</a></h4>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer 2c47b3eaad6f415c565556ba5146701195d5bd27320c21781e29ad2614e01242"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>https://updates.3ts.ai/api/v1/updates/packages/rtms-scanner-release.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-tzv
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>: Tar archive lists contents cleanly (<code>-rw-r--r-- scanner</code>).</p>
+<hr />
+<h3 id="test-suite-3-license-renewal-expansion-requests">Test Suite 3: License Renewal &amp; Expansion Requests<a class="headerlink" href="#test-suite-3-license-renewal-expansion-requests" title="Permanent link">&para;</a></h3>
+<h4 id="case-tc-vps-licenses-01-ui-submission-from-rtms-web">Case <code>TC-VPS-LICENSES-01</code>: UI Submission from RTMS Web<a class="headerlink" href="#case-tc-vps-licenses-01-ui-submission-from-rtms-web" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Open <strong>Subscriptions &amp; Licenses</strong> (<code>/license</code>).</li>
+<li>Scroll to <strong>"License Renewal &amp; Upgrade Request"</strong> (⚡ icon).</li>
+<li>Click <strong>"Request Renewal"</strong>.</li>
+<li>Choose target plan (e.g. <code>SECURE</code>) and asset quota (e.g. <code>250 assets</code>), then submit.</li>
+<li><strong>Pass Criteria</strong>:</li>
+<li>Green banner: <code>Renewal request (RTMS-LIC-2026-XXXX) successfully sent to 3TS Central Support Hub !</code>.</li>
+<li>A local JSON backup file <code>rtms_renewal_request_&lt;tenant&gt;.json</code> downloads automatically.</li>
+</ol>
+<h4 id="case-tc-vps-licenses-02-direct-api-submission-curl">Case <code>TC-VPS-LICENSES-02</code>: Direct API Submission (cURL)<a class="headerlink" href="#case-tc-vps-licenses-02-direct-api-submission-curl" title="Permanent link">&para;</a></h4>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://updates.3ts.ai/api/v1/license-requests<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer 2c47b3eaad6f415c565556ba5146701195d5bd27320c21781e29ad2614e01242"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s1">    "tenant_id": "CLIENT-QUALIF-2026",</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="s1">    "company_name": "Entreprise de Qualification",</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="s1">    "contact_name": "Marc Tritschler",</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="s1">    "contact_email": "admin@qualif.be",</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="s1">    "requested_plan": "COMPLIANCE",</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="s1">    "requested_assets": 500,</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="s1">    "notes": "Automated renewal test",</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="s1">    "request_payload": {</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="s1">      "scanners": [{"name": "probe-principal", "hardware_id": "hw-qualif-8888"}],</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="s1">      "components": {"core": "0.1.0"},</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="s1">      "format_version": "1.0"</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="s1">    }</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="s1">  }'</span>
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>: <code>HTTP 201 Created</code> with unique request ID:<br />
+<code>{"success": true, "request_id": "RTMS-LIC-2026-XXXX", "status": "pending"}</code>.</p>
+<h4 id="case-tc-vps-licenses-03-postgresql-verification-on-vps">Case <code>TC-VPS-LICENSES-03</code>: PostgreSQL Verification on VPS<a class="headerlink" href="#case-tc-vps-licenses-03-postgresql-verification-on-vps" title="Permanent link">&para;</a></h4>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-a<span class="w"> </span><span class="s2">"su - postgres -c \"psql -d customers -c 'SELECT id, request_id, tenant_id, requested_plan, requested_assets, status, created_at FROM license_requests ORDER BY created_at DESC LIMIT 2;'\""</span><span class="w"> </span>--become
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>: New row exists with <code>pending</code> status.</p>
+<h4 id="case-tc-vps-licenses-04-1-click-approval-in-rtms-admin-backoffice">Case <code>TC-VPS-LICENSES-04</code>: 1-Click Approval in RTMS Admin Backoffice<a class="headerlink" href="#case-tc-vps-licenses-04-1-click-approval-in-rtms-admin-backoffice" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Connect to 3TS Admin Portal over WireGuard: <code>http://10.0.0.1/</code>.</li>
+<li>Open <strong>License Requests</strong>.</li>
+<li>Click <strong>"Approve"</strong>: The generator signs the RSA license and outputs the <code>.key</code> bundle file.</li>
+</ol>
+<hr />
+<h3 id="test-suite-4-network-security-ssl-partitioning">Test Suite 4: Network Security, SSL &amp; Partitioning<a class="headerlink" href="#test-suite-4-network-security-ssl-partitioning" title="Permanent link">&para;</a></h3>
+<h4 id="case-tc-vps-net-01-ssl-tls-13-hsts-inspection">Case <code>TC-VPS-NET-01</code>: SSL / TLS 1.3 &amp; HSTS Inspection<a class="headerlink" href="#case-tc-vps-net-01-ssl-tls-13-hsts-inspection" title="Permanent link">&para;</a></h4>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>updates.3ts.ai:443<span class="w"> </span>-servername<span class="w"> </span>updates.3ts.ai<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"Protocol|Cipher|Verify return code"</span>
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>:
+  * <code>Protocol: TLSv1.3</code>
+  * <code>Cipher: TLS_AES_256_GCM_SHA384</code>
+  * <code>Verify return code: 0 (ok)</code>.</p>
+<h4 id="case-tc-vps-net-02-public-wan-routing-audit">Case <code>TC-VPS-NET-02</code>: Public WAN Routing Audit<a class="headerlink" href="#case-tc-vps-net-02-public-wan-routing-audit" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Execute a curl request to <code>https://updates.3ts.ai/api/v1/version</code>.</li>
+<li>Inspect NGINX logs on the VPS:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>inventories/vps_ovh/hosts.yml<span class="w"> </span>vps_ovh<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">"tail -n 2 /var/log/nginx/access.log"</span><span class="w"> </span>--become
+</span></code></pre></div></li>
+<li><strong>Pass Criteria</strong>: Logged source IP is the external WAN IP of your connection, <strong>not the 10.0.0.2</strong> WireGuard IP.</li>
+</ol>
+<h4 id="case-tc-vps-net-03-public-zone-access-restriction">Case <code>TC-VPS-NET-03</code>: Public Zone Access Restriction<a class="headerlink" href="#case-tc-vps-net-03-public-zone-access-restriction" title="Permanent link">&para;</a></h4>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">"%{http_code}\n"</span><span class="w"> </span>https://updates.3ts.ai/
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">"%{http_code}\n"</span><span class="w"> </span>https://updates.3ts.ai/docs/
+</span></code></pre></div>
+* <strong>Pass Criteria</strong>: Returns <strong>HTTP 404</strong> <code>{"detail": "Not Found"}</code>. The web admin console is strictly unreachable from the internet.</p>
+<hr />
+<h2 id="4-execution-sign-off-matrix">4. Execution Sign-off Matrix<a class="headerlink" href="#4-execution-sign-off-matrix" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Test Case</th>
+<th style="text-align: left;">Observed Result</th>
+<th style="text-align: left;">Verdict</th>
+<th style="text-align: left;">Date &amp; Engineer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-TICKETS-01</code></td>
+<td style="text-align: left;">Ticket created, reference displayed in UI</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - Marc Tritschler</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-TICKETS-02</code></td>
+<td style="text-align: left;">HTTP 201, <code>ticket_id</code> returned</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-TICKETS-03</code></td>
+<td style="text-align: left;">Strict HTTP 401 &amp; 403 rejection</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-TICKETS-04</code></td>
+<td style="text-align: left;">Recorded in <code>support_tickets</code> table</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-UPDATES-01</code></td>
+<td style="text-align: left;">Package tar.gz &amp; SQL version 0.2.0 active</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-UPDATES-02</code></td>
+<td style="text-align: left;">v0.2.0 detected in Web UI</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-UPDATES-03</code></td>
+<td style="text-align: left;">Local download &amp; SHA-256 verified</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-UPDATES-04</code></td>
+<td style="text-align: left;">Streamed binary unpacked successfully</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-LICENSES-01</code></td>
+<td style="text-align: left;">UI submission &amp; backup JSON saved</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-LICENSES-02</code></td>
+<td style="text-align: left;">HTTP 201 <code>RTMS-LIC-2026-9189</code></td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-LICENSES-03</code></td>
+<td style="text-align: left;">Recorded in <code>license_requests</code> table</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-LICENSES-04</code></td>
+<td style="text-align: left;">Admin 1-click approval validated</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-NET-01</code></td>
+<td style="text-align: left;">TLS 1.3 / AES-256-GCM / Let's Encrypt valid</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-NET-02</code></td>
+<td style="text-align: left;">Client WAN IP in NGINX access log</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TC-VPS-NET-03</code></td>
+<td style="text-align: left;">HTTP 404 on external Web / Docs paths</td>
+<td style="text-align: left;">✅ PASSED</td>
+<td style="text-align: left;">15/10/2026 - 3TS Automation</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025-2026 3TS Consulting SRL. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
