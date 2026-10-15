@@ -67,6 +67,7 @@ plugins:
             Gestion des sondes: Probe Management
             Politiques sous-réseaux & Deep Scan: Subnet Policies & Deep Scan
             Réconciliation CMDB: CMDB Reconciliation
+            Support, Passerelle & Mises à jour: Support, Gateway & Updates
 
 markdown_extensions:
   - admonition
@@ -107,3 +108,4 @@ nav:
       - Gestion des sondes: roles/admin/scanners_management.md
       - Politiques sous-réseaux & Deep Scan: roles/admin/network_policies.md
       - Réconciliation CMDB: roles/admin/cmdb_sync.md
+      - Support, Passerelle & Mises à jour: roles/admin/support_and_updates.md

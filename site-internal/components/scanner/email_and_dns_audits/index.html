@@ -1187,15 +1187,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc" class="md-nav__link">
+  <a href="#1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc-dnssec-mta-sts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Audit DNS &amp; Protection contre l'Usurpation (SPF, DKIM, DMARC)
+        1. Audit DNS &amp; Protection contre l'Usurpation (SPF, DKIM, DMARC, DNSSEC, MTA-STS)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Audit DNS &amp; Protection contre l&#39;Usurpation (SPF, DKIM, DMARC)">
+    <nav class="md-nav" aria-label="1. Audit DNS &amp; Protection contre l&#39;Usurpation (SPF, DKIM, DMARC, DNSSEC, MTA-STS)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2492,15 +2492,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc" class="md-nav__link">
+  <a href="#1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc-dnssec-mta-sts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Audit DNS &amp; Protection contre l'Usurpation (SPF, DKIM, DMARC)
+        1. Audit DNS &amp; Protection contre l'Usurpation (SPF, DKIM, DMARC, DNSSEC, MTA-STS)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Audit DNS &amp; Protection contre l&#39;Usurpation (SPF, DKIM, DMARC)">
+    <nav class="md-nav" aria-label="1. Audit DNS &amp; Protection contre l&#39;Usurpation (SPF, DKIM, DMARC, DNSSEC, MTA-STS)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2650,15 +2650,18 @@
 <h1 id="audit-de-securite-email-dns-spf-dkim-dmarc-smtp">Audit de Sécurité Email &amp; DNS (SPF, DKIM, DMARC, SMTP)<a class="headerlink" href="#audit-de-securite-email-dns-spf-dkim-dmarc-smtp" title="Permanent link">&para;</a></h1>
 <p>La suite <strong>RTMS (Real-Time Monitoring System)</strong> intègre une stratégie de vérification de la sécurité de la messagerie électronique et de la résolution DNS adaptée aussi bien aux environnements d'entreprise fermés (Zero Trust / intranet) qu'aux infrastructures exposées sur Internet.</p>
 <hr />
-<h2 id="1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc">1. Audit DNS &amp; Protection contre l'Usurpation (SPF, DKIM, DMARC)<a class="headerlink" href="#1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc" title="Permanent link">&para;</a></h2>
+<h2 id="1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc-dnssec-mta-sts">1. Audit DNS &amp; Protection contre l'Usurpation (SPF, DKIM, DMARC, DNSSEC, MTA-STS)<a class="headerlink" href="#1-audit-dns-protection-contre-lusurpation-spf-dkim-dmarc-dnssec-mta-sts" title="Permanent link">&para;</a></h2>
 <p>Le module <code>dns_audits/dns_integrity.py</code> effectue une analyse de l'intégrité de la résolution DNS et valide la conformité des politiques de sécurité e-mail du domaine.</p>
 <h3 id="fonctionnement-en-reseau-dentreprise-ferme">Fonctionnement en Réseau d'Entreprise Fermé<a class="headerlink" href="#fonctionnement-en-reseau-dentreprise-ferme" title="Permanent link">&para;</a></h3>
 <p>Dans un réseau d'entreprise isolé (sans accès direct aux DNS publics comme <code>1.1.1.1</code> ou <code>8.8.8.8</code>) :
 * Le scanner interroge en priorité le <strong>serveur DNS interne</strong> spécifié dans la configuration ou le résolveur système (<code>/etc/resolv.conf</code> / Active Directory DNS).
 * Il vérifie la présence et la syntaxe des enregistrements de sécurité :
-  * <strong>SPF (<code>v=spf1 ...</code>)</strong> : autorisations d'adresses IP internes/externes autorisées à émettre.
-  * <strong>DMARC (<code>_dmarc.&lt;domaine&gt;</code>)</strong> : politique d'alignement (<code>p=none</code>, <code>quarantine</code> ou <code>reject</code>).
-  * <strong>DKIM (<code>&lt;selector&gt;._domainkey.&lt;domaine&gt;</code>)</strong> : validation des clés publiques publiées. Supporte les sélecteurs courants et les sélecteurs personnalisés d'entreprise.</p>
+  * <strong>SPF (<code>v=spf1 ...</code>)</strong> : autorisations d'adresses IP. Détecte la présence de la directive permissive ou dangereuse <code>+all</code> (alerte <code>CRITICAL</code>), les politiques neutres <code>?all</code> (<code>LOW</code>), et le dépassement de la limite RFC 7208 des 10 lookups DNS (<code>HIGH</code>).
+  * <strong>DMARC (<code>_dmarc.&lt;domaine&gt;</code>)</strong> : politique d'alignement (<code>p=none</code>, <code>quarantine</code> ou <code>reject</code>). Signale le mode passif/surveillance seule (<code>p=none</code>) et l'absence de boîte de reporting d'agrégation <code>rua=</code>.
+  * <strong>DKIM (<code>&lt;selector&gt;._domainkey.&lt;domaine&gt;</code>)</strong> : validation des clés publiques publiées. Supporte les sélecteurs courants et les sélecteurs personnalisés d'entreprise.
+  * <strong>DNSSEC</strong> : vérifie la signature cryptographique de la zone (enregistrements <code>DS</code> et <code>DNSKEY</code>).
+  * <strong>MTA-STS (RFC 8461) &amp; TLS-RPT (RFC 8460)</strong> : vérifie la présence de politiques <code>_mta-sts</code> et de reporting TLS <code>_smtp._tls</code> pour contrer le déclassement STARTTLS en transit.
+  * <strong>FCrDNS (Forward-Confirmed Reverse DNS)</strong> : vérifie la cohérence entre les serveurs MX, leurs adresses IP, leurs enregistrements PTR inverses et la résolution aller-retour.</p>
 <h3 id="parametres-de-configuration">Paramètres de Configuration<a class="headerlink" href="#parametres-de-configuration" title="Permanent link">&para;</a></h3>
 <p>Ces paramètres peuvent être définis dans <code>scanner.properties</code> ou injectés dynamiquement via la console Web :</p>
 <table>
@@ -2713,9 +2716,13 @@ Conformément à la politique d'audit non intrusif de RTMS, ce plugin <strong>ne
 </ul>
 <h3 id="verifications-realisees">Vérifications Réalisées<a class="headerlink" href="#verifications-realisees" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Chiffrement en Transit (STARTTLS)</strong> :</li>
-<li>Vérifie si le serveur annonce l'extension <code>STARTTLS</code>.</li>
+<li><strong>Chiffrement en Transit (STARTTLS / SMTPS)</strong> :</li>
+<li>Vérifie si le serveur annonce l'extension <code>STARTTLS</code> ou propose SMTPS direct.</li>
 <li>En cas d'absence, une vulnérabilité <code>MEDIUM</code> est signalée (transmission de mots de passe ou d'e-mails en clair sur le LAN).</li>
+<li><strong>Contrôle des Protocoles Obsolètes</strong> :</li>
+<li>Détecte si le serveur accepte des négociations avec <strong>TLS 1.0 ou TLS 1.1</strong> (vulnérabilités aux attaques de downgrade / BEAST / POODLE - sévérité <code>HIGH</code>).</li>
+<li><strong>Validité du Certificat TLS</strong> :</li>
+<li>Contrôle l'expiration imminente du certificat SSL/TLS (&lt; 30 jours) ou les certificats déjà expirés.</li>
 <li><strong>Vulnérabilité Open Mail Relay (RFC 5321)</strong> :</li>
 <li>Tente une transaction non authentifiée <code>MAIL FROM</code> vers une boîte externe via <code>RCPT TO:&lt;untrusted-relay-test@example.org&gt;</code>.</li>
 <li><strong>Sécurité garantie :</strong> Le scanner envoie immédiatement la commande <code>RSET</code> (Reset). <strong>Aucun e-mail n'est jamais transmis</strong>.</li>

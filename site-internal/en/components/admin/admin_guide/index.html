@@ -2984,9 +2984,10 @@ The plaintext token is displayed once in the terminal. Provide it to the client 
 <p>The central gateway operates on the Ubuntu OVH VPS and connects to customer instances via the <strong><code>customers</code></strong> PostgreSQL database.</p>
 <h3 id="1-network-administration">1. Network &amp; Administration<a class="headerlink" href="#1-network-administration" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>WireGuard VPN</strong>: The VPS is accessible at <code>10.0.0.1</code> for administration and internal routing.</li>
+<li><strong>WireGuard VPN</strong>: The VPS is accessible at <code>10.0.0.1</code> for internal administration, React Backoffice, and MkDocs portals.</li>
+<li><strong>Public Client Gateway</strong>: Client appliances communicate over the public internet at <code>https://updates.3ts.ai</code> (<code>135.125.102.194:443</code>) with Let's Encrypt SSL/TLS 1.3 and HSTS.</li>
 <li><strong>Service &amp; Proxy</strong>: The backend runs as a systemd service (<code>rtms-admin.service</code>) on port <code>8090</code> proxied by NGINX.</li>
-<li><strong>Backend-Only Mode</strong>: NGINX routes directly to FastAPI endpoints with uploads permitted up to 500 MB.</li>
+<li><strong>Dual-Zone Security</strong>: NGINX routes directly to FastAPI endpoints for <code>/api/</code> with uploads permitted up to 500 MB, while denying public access to internal web consoles.</li>
 </ul>
 <h3 id="2-available-client-facing-endpoints">2. Available Client-Facing Endpoints<a class="headerlink" href="#2-available-client-facing-endpoints" title="Permanent link">&para;</a></h3>
 <table>

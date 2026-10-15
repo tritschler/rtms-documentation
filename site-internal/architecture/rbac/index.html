@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#modele-de-controle-dacces-base-sur-les-roles-rbac" class="md-skip">
+        <a href="#modele-de-controle-dacces-base-sur-les-roles-rbac-perimetres-evolutifs-dual-tier" class="md-skip">
           Aller au contenu
         </a>
       
@@ -619,10 +619,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-definition-des-4-roles" class="md-nav__link">
+  <a href="#2-definition-des-6-roles-operationnels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Définition des 4 Rôles
+        2. Définition des 6 Rôles Opérationnels
       
     </span>
   </a>
@@ -641,13 +641,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-implementation-backend-fastapi" class="md-nav__link">
+  <a href="#4-architecture-technique-des-perimetres-scopes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Implémentation Backend (FastAPI)
+        4. Architecture Technique des Périmètres (Scopes)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. Architecture Technique des Périmètres (Scopes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-de-donnees-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schéma de données PostgreSQL :
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2416,10 +2433,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-definition-des-4-roles" class="md-nav__link">
+  <a href="#2-definition-des-6-roles-operationnels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Définition des 4 Rôles
+        2. Définition des 6 Rôles Opérationnels
       
     </span>
   </a>
@@ -2438,13 +2455,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-implementation-backend-fastapi" class="md-nav__link">
+  <a href="#4-architecture-technique-des-perimetres-scopes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Implémentation Backend (FastAPI)
+        4. Architecture Technique des Périmètres (Scopes)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. Architecture Technique des Périmètres (Scopes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-de-donnees-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schéma de données PostgreSQL :
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2487,16 +2521,19 @@
 
 
 
-<h1 id="modele-de-controle-dacces-base-sur-les-roles-rbac">Modèle de Contrôle d'Accès Basé sur les Rôles (RBAC)<a class="headerlink" href="#modele-de-controle-dacces-base-sur-les-roles-rbac" title="Permanent link">&para;</a></h1>
-<p>La plateforme RTMS implémente un modèle <strong>RBAC (Role-Based Access Control)</strong> granulaire à 4 rôles opérationnels, conçu pour refléter l'organisation réelle des centres des opérations de sécurité (SOC), des équipes réseau/système et des auditeurs de conformité réglementaire (<strong>NIS 2 / ISO 27001</strong>).</p>
+<h1 id="modele-de-controle-dacces-base-sur-les-roles-rbac-perimetres-evolutifs-dual-tier">Modèle de Contrôle d'Accès Basé sur les Rôles (RBAC) &amp; Périmètres Évolutifs (Dual-Tier)<a class="headerlink" href="#modele-de-controle-dacces-base-sur-les-roles-rbac-perimetres-evolutifs-dual-tier" title="Permanent link">&para;</a></h1>
+<p>La plateforme RTMS implémente un modèle <strong>RBAC (Role-Based Access Control) Dual-Tier</strong>, conçu pour couvrir avec la même efficacité :
+1. <strong>Les TPE / PME</strong> (Mode Standard) : attribution simple et directe d'un rôle avec portée globale (<code>*</code>), sans charge administrative ni formation requise.
+2. <strong>Les Grandes Entreprises &amp; Groupes Multi-sites</strong> (Mode Entreprise) : ségrégation fine avec périmètres d'assignation contextuels (<strong>Scopes</strong> : site géographique, sous-réseau CIDR, tag d'actifs) et synchronisation dynamique avec les annuaires d'entreprise (<strong>SSO / IdP Group Mappings</strong> via Microsoft Entra ID, Okta, Keycloak).</p>
 <hr />
 <h2 id="1-principes-fondamentaux">1. Principes Fondamentaux<a class="headerlink" href="#1-principes-fondamentaux" title="Permanent link">&para;</a></h2>
-<p>Le modèle repose sur trois piliers de sécurité :
+<p>Le modèle repose sur quatre piliers de sécurité :
 1. <strong>Principe du Moindre Privilège (<em>Least Privilege</em>)</strong> : chaque utilisateur dispose uniquement des habilitations strictement requises pour sa mission.
-2. <strong>Ségrégation des Tâches (<em>Segregation of Duties</em>)</strong> : les tâches de gestion réseau (opérateur) sont séparées du triage des risques et de l'acceptation des vulnérabilités (analyste SOC).
-3. <strong>Piste d'Audit Immuable et Isolée</strong> : l'accès aux journaux d'audit de sécurité et de conformité (<code>/api/audit/*</code>) est strictement protégé. Les opérateurs réseau n'ont pas accès aux logs d'audit pour éviter tout risque de dissimulation, tandis que les auditeurs (<code>viewer</code>) y ont accès sans posséder aucun droit d'écriture.</p>
+2. <strong>Ségrégation des Tâches (<em>Segregation of Duties</em>)</strong> : les tâches de gestion réseau (opérateur) sont séparées du triage des risques (analyste SOC) et de la validation souveraine des dérogations (CISO / RSSI).
+3. <strong>Piste d'Audit Immuable et Isolée</strong> : l'accès aux journaux d'audit de sécurité et de conformité (<code>/api/audit/*</code>) est strictement protégé. Les opérateurs réseau n'ont pas accès aux logs d'audit pour éviter tout risque de dissimulation, tandis que les auditeurs (<code>viewer</code>) et le RSSI y ont accès sans aucun droit d'écriture.
+4. <strong>Cloisonnement Contextuel par Périmètre (<em>Scoped Enforcement</em>)</strong> : en environnement multi-sites, les habilitations d'un opérateur ou d'un remédiateur sont bornées à leur périmètre technique (ex: <code>site:paris</code>, <code>subnet:10.10.0.0/16</code>, <code>tag:env:prod</code>).</p>
 <hr />
-<h2 id="2-definition-des-4-roles">2. Définition des 4 Rôles<a class="headerlink" href="#2-definition-des-4-roles" title="Permanent link">&para;</a></h2>
+<h2 id="2-definition-des-6-roles-operationnels">2. Définition des 6 Rôles Opérationnels<a class="headerlink" href="#2-definition-des-6-roles-operationnels" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2509,21 +2546,31 @@
 <tr>
 <td style="text-align: left;"><strong><code>admin</code></strong></td>
 <td style="text-align: left;">Administrateur Système</td>
-<td style="text-align: left;">Contrôle total de la plateforme. Gestion des utilisateurs, licences, paramètres système, démarrage/arrêt des services, et purge des données orphelines.</td>
+<td style="text-align: left;">Contrôle total de la plateforme. Gestion des utilisateurs, licences, paramètres système, cycle de vie des briques logicielles, et purge des données orphelines.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>ciso</code></strong></td>
+<td style="text-align: left;">RSSI / CISO / Risk Officer</td>
+<td style="text-align: left;">Gouvernance de sécurité et validation souveraine des dérogations CVE (<code>accept_risk</code>), supervision transverse des vulnérabilités et consultation des pistes d'audit réglementaires.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>security_analyst</code></strong></td>
 <td style="text-align: left;">Analyste SOC / Sécurité</td>
-<td style="text-align: left;">Triage des vulnérabilités CVE, acceptation formelle des risques avec justification, création et assignation des <em>findings</em>, gestion des alertes d'intrusion et déclenchement de scans de vérification.</td>
+<td style="text-align: left;">Triage des vulnérabilités CVE, création et assignation des <em>findings</em>, qualification des alertes d'intrusion et déclenchement de scans de vérification.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>remediator</code></strong></td>
+<td style="text-align: left;">Remédiateur / Asset Owner</td>
+<td style="text-align: left;">Responsable applicatif ou DevOps : suivi et mise à jour de l'état de remédiation des tickets/findings sur son périmètre, sans privilège d'administration réseau.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>operator</code></strong></td>
 <td style="text-align: left;">Opérateur Réseau / Scanners</td>
-<td style="text-align: left;">Gestion opérationnelle du parc d'actifs (édition, exclusion IP, renommage de sous-réseaux, suppression), configuration des scanners, redémarrage direct des scanners (<code>RESTART</code>), gestion des tokens d'agents locaux (révocation/réactivation) et lancement de scans de découverte.</td>
+<td style="text-align: left;">Gestion opérationnelle du parc d'actifs (édition, exclusion IP, renommage de sous-réseaux, suppression), configuration des scanners, redémarrage direct des scanners (<code>RESTART</code>), gestion des tokens d'agents locaux et scans de découverte.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong><code>viewer</code></strong></td>
-<td style="text-align: left;">Auditeur / Conformité</td>
+<td style="text-align: left;">Auditeur / Conformité / DPO</td>
 <td style="text-align: left;">Consultation en lecture seule complète de la cartographie, de l'inventaire, des vulnérabilités et <strong>des journaux d'audit de conformité</strong> (<code>/api/audit/*</code>) à des fins de preuve réglementaire (NIS 2 / ISO 27001). <strong>Zéro droit de mutation ou d'action.</strong></td>
 </tr>
 </tbody>
@@ -2535,8 +2582,10 @@
 <tr>
 <th style="text-align: left;">Domaine Fonctionnel / Endpoint</th>
 <th style="text-align: center;"><code>admin</code></th>
+<th style="text-align: center;"><code>ciso</code></th>
 <th style="text-align: center;"><code>security_analyst</code></th>
 <th style="text-align: center;"><code>operator</code></th>
+<th style="text-align: center;"><code>remediator</code></th>
 <th style="text-align: center;"><code>viewer</code> (Auditeur)</th>
 </tr>
 </thead>
@@ -2547,6 +2596,8 @@
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Configuration Système &amp; Licences</strong> (<code>/api/license*</code>, <code>/api/system/*</code>)</td>
@@ -2554,17 +2605,23 @@
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Journaux d'Audit Système &amp; Connexions</strong> (<code>/api/audit/*</code>)</td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">✅ <strong>Oui (Gouv)</strong></td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">✅ <strong>Oui (Preuves NIS 2)</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Démarrer / Arrêter / Mettre en pause les Services</strong></td>
+<td style="text-align: left;"><strong>Démarrer / Arrêter / Services</strong></td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
@@ -2573,127 +2630,127 @@
 <td style="text-align: left;"><strong>Redémarrage Scanner Réseau (<code>RESTART</code>)</strong></td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Gestion Tokens Agents Locaux</strong> (Révocation / Réactivation)</td>
+<td style="text-align: left;"><strong>Gestion Tokens Agents Locaux</strong></td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">❌ 403</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Déclenchement Scans Réseau</strong> (<code>/api/services/scanner/trigger</code>)</td>
-<td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">❌ 403</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Gestion des Actifs</strong> (Édition Hostname, Exclusion IP, Ports)</td>
+<td style="text-align: left;"><strong>Déclenchement Scans Réseau</strong></td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Gestion des Actifs</strong> (Hostname, Exclusions)</td>
 <td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ Lecture Seule</td>
 <td style="text-align: center;">❌ Lecture Seule</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Suppression d'Actifs &amp; Renommage Sous-réseaux</strong></td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">❌ 403</td>
-<td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">❌ 403</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Purge des Actifs Orphelins</strong> (<code>/api/assets/purge-orphans</code>)</td>
 <td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Inventaire Logiciel</strong> (Ajout, Édition Version, Suppression)</td>
+<td style="text-align: left;"><strong>Purge des Actifs Orphelins</strong></td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Inventaire Logiciel</strong> (Ajout, Édition)</td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">❌ Lecture Seule</td>
 <td style="text-align: center;">❌ Lecture Seule</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Acceptation des Risques CVE</strong> (<code>/api/vulnerabilities/accept_risk</code>)</td>
 <td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">✅ <strong>Oui (SOC)</strong></td>
+<td style="text-align: center;">✅ <strong>Oui (Souverain)</strong></td>
+<td style="text-align: center;">✅ Oui (SOC)</td>
 <td style="text-align: center;">❌ 403</td>
-<td style="text-align: center;">❌ 403</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Création &amp; Gestion des Security Findings</strong> (<code>/api/findings*</code>)</td>
-<td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">✅ <strong>Oui (SOC)</strong></td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Mise à Jour Statut Finding</strong> (Remédiation en cours, Résolu)</td>
+<td style="text-align: left;"><strong>Création &amp; Escalade des Findings</strong></td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">✅ Oui</td>
-<td style="text-align: center;">✅ Oui (Opérations)</td>
+<td style="text-align: center;">✅ <strong>Oui (SOC)</strong></td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+<td style="text-align: center;">❌ 403</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mise à Jour Statut Finding / Remédiation</strong></td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">✅ Oui</td>
+<td style="text-align: center;">✅ <strong>Oui (Remédiation)</strong></td>
 <td style="text-align: center;">❌ Lecture Seule</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Gestion Alertes Sécurité</strong> (Clôture globale, Résolution, Whitelist MAC)</td>
+<td style="text-align: left;"><strong>Gestion Alertes Sécurité</strong> (Clôture, Whitelist)</td>
+<td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">✅ Oui</td>
 <td style="text-align: center;">✅ <strong>Oui (SOC)</strong></td>
+<td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 <td style="text-align: center;">❌ 403</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="4-implementation-backend-fastapi">4. Implémentation Backend (FastAPI)<a class="headerlink" href="#4-implementation-backend-fastapi" title="Permanent link">&para;</a></h2>
-<p>Dans <code>backend/main.py</code>, le contrôle d'accès est garanti au niveau du routeur HTTP via le système d'injection de dépendances de FastAPI (<code>Depends(...)</code>).</p>
-<p>Chaque requête authentifiée vérifie le jeton JWT, interroge l'état actuel de l'utilisateur dans <code>admin.users</code> (statut actif, rôle), et applique les gardes stricts :</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_current_user_profile</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">"""Valide l'utilisateur actif et résout son rôle RBAC."""</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            <span class="n">text</span><span class="p">(</span><span class="s2">"SELECT role, is_active FROM admin.users WHERE username = :u"</span><span class="p">),</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="p">{</span><span class="s2">"u"</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">401</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"User not active or not found"</span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="n">raw_role</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">"viewer"</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="n">role</span> <span class="o">=</span> <span class="s2">"viewer"</span> <span class="k">if</span> <span class="n">raw_role</span> <span class="o">==</span> <span class="s2">"user"</span> <span class="k">else</span> <span class="n">raw_role</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">"username"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s2">"role"</span><span class="p">:</span> <span class="n">role</span><span class="p">}</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_admin</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user_profile</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'admin'</span><span class="p">:</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"Not authorized. Admin role required."</span><span class="p">)</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">user</span><span class="p">[</span><span class="s2">"username"</span><span class="p">]</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_security_analyst_or_admin</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user_profile</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'security_analyst'</span><span class="p">):</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"Not authorized. Security Analyst or Admin role required."</span><span class="p">)</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">return</span> <span class="n">user</span><span class="p">[</span><span class="s2">"username"</span><span class="p">]</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_operator_or_admin</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user_profile</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'operator'</span><span class="p">):</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"Not authorized. Operator or Admin role required."</span><span class="p">)</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="k">return</span> <span class="n">user</span><span class="p">[</span><span class="s2">"username"</span><span class="p">]</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_can_operate</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user_profile</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'security_analyst'</span><span class="p">,</span> <span class="s1">'operator'</span><span class="p">):</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"Not authorized. Read-write role required."</span><span class="p">)</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="k">return</span> <span class="n">user</span><span class="p">[</span><span class="s2">"username"</span><span class="p">]</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_can_scan</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user_profile</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'security_analyst'</span><span class="p">,</span> <span class="s1">'operator'</span><span class="p">):</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"Not authorized. Scan execution role required."</span><span class="p">)</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="k">return</span> <span class="n">user</span><span class="p">[</span><span class="s2">"username"</span><span class="p">]</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_can_view_audit</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user_profile</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'security_analyst'</span><span class="p">,</span> <span class="s1">'viewer'</span><span class="p">):</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">"Not authorized to inspect audit logs."</span><span class="p">)</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="k">return</span> <span class="n">user</span><span class="p">[</span><span class="s2">"username"</span><span class="p">]</span>
+<h2 id="4-architecture-technique-des-perimetres-scopes">4. Architecture Technique des Périmètres (Scopes)<a class="headerlink" href="#4-architecture-technique-des-perimetres-scopes" title="Permanent link">&para;</a></h2>
+<h3 id="schema-de-donnees-postgresql">Schéma de données PostgreSQL :<a class="headerlink" href="#schema-de-donnees-postgresql" title="Permanent link">&para;</a></h3>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Habilitations contextuelles</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">user_role_scopes</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">role</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">scope_type</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'global'</span><span class="p">,</span><span class="w"> </span><span class="c1">-- 'global', 'site', 'subnet', 'tag'</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">scope_value</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'*'</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">unique_user_role_scope</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="k">role</span><span class="p">,</span><span class="w"> </span><span class="n">scope_type</span><span class="p">,</span><span class="w"> </span><span class="n">scope_value</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">);</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1">-- Mappings dynamiques de groupes SSO</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">admin</span><span class="p">.</span><span class="n">sso_group_mappings</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">idp_group_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">mapped_role</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="n">scope_type</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'global'</span><span class="p">,</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">scope_value</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'*'</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="n">is_active</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">TRUE</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">);</span>
 </span></code></pre></div>
 <hr />
 <h2 id="5-protection-du-compte-administrateur-racine">5. Protection du Compte Administrateur Racine<a class="headerlink" href="#5-protection-du-compte-administrateur-racine" title="Permanent link">&para;</a></h2>
@@ -2704,7 +2761,7 @@
 <hr />
 <h2 id="6-conformite-reglementaire-nis-2-iso-27001">6. Conformité Réglementaire (NIS 2 &amp; ISO 27001)<a class="headerlink" href="#6-conformite-reglementaire-nis-2-iso-27001" title="Permanent link">&para;</a></h2>
 <p>L'introduction de ce modèle satisfait explicitement aux exigences :
-* <strong>NIS 2 Article 21 (2.i)</strong> : Hygiène informatique de base et formation en cybersécurité, gestion des droits d'accès.
+* <strong>NIS 2 Article 21 (2.i)</strong> : Hygiène informatique de base et gestion rigoureuse des droits d'accès.
 * <strong>ISO/IEC 27001 - Contrôle A.9.2</strong> : Gestion des accès utilisateurs et attribution de droits d'accès privilégiés.
 * <strong>ISO/IEC 27001 - Contrôle A.12.4</strong> : Journalisation et surveillance, avec protection des journaux contre la falsification par les opérateurs ou tiers non habilités.</p>
 

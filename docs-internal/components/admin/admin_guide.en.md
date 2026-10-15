@@ -197,9 +197,10 @@ TRUNCATE TABLE "3TS".payments, "3TS".licenses, "3TS".clients CASCADE;
 The central gateway operates on the Ubuntu OVH VPS and connects to customer instances via the **`customers`** PostgreSQL database.
 
 ### 1. Network & Administration
-- **WireGuard VPN**: The VPS is accessible at `10.0.0.1` for administration and internal routing.
+- **WireGuard VPN**: The VPS is accessible at `10.0.0.1` for internal administration, React Backoffice, and MkDocs portals.
+- **Public Client Gateway**: Client appliances communicate over the public internet at `https://updates.3ts.ai` (`135.125.102.194:443`) with Let's Encrypt SSL/TLS 1.3 and HSTS.
 - **Service & Proxy**: The backend runs as a systemd service (`rtms-admin.service`) on port `8090` proxied by NGINX.
-- **Backend-Only Mode**: NGINX routes directly to FastAPI endpoints with uploads permitted up to 500 MB.
+- **Dual-Zone Security**: NGINX routes directly to FastAPI endpoints for `/api/` with uploads permitted up to 500 MB, while denying public access to internal web consoles.
 
 ### 2. Available Client-Facing Endpoints
 | Endpoint | Method | Authentication | Description |

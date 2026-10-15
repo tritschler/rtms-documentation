@@ -330,7 +330,7 @@ CREATE INDEX IF NOT EXISTS idx_scanner_tokens_hash ON admin.scanner_tokens(token
 
 ## Central VPS Support, Licensing & Distribution Hub
 
-RTMS includes an integrated, enterprise-grade connection to the **3TS Central Support Hub** hosted on an OVH Cloud VPS (`vps-054fcfa2.vps.ovh.net` / `support-api.3ts-consulting.com`).
+RTMS includes an integrated, enterprise-grade connection to the **3TS Central Support Hub** hosted on an OVH Cloud VPS (`https://updates.3ts.ai` / IP `135.125.102.194` / `vps-fcaf09fb.vps.ovh.net`).
 
 ### Architecture & Capabilities
 - **Central Gateway**: Provides a high-availability cloud interface (`rtms-admin/vps-support-hub`) for support ticketing, license renewals, and software releases.

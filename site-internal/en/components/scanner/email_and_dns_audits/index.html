@@ -1187,15 +1187,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc" class="md-nav__link">
+  <a href="#1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc-dnssec-mta-sts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC)
+        1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC, DNSSEC, MTA-STS)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC)">
+    <nav class="md-nav" aria-label="1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC, DNSSEC, MTA-STS)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2492,15 +2492,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc" class="md-nav__link">
+  <a href="#1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc-dnssec-mta-sts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC)
+        1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC, DNSSEC, MTA-STS)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC)">
+    <nav class="md-nav" aria-label="1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC, DNSSEC, MTA-STS)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2650,15 +2650,18 @@
 <h1 id="email-dns-security-audit-spf-dkim-dmarc-smtp">Email &amp; DNS Security Audit (SPF, DKIM, DMARC, SMTP)<a class="headerlink" href="#email-dns-security-audit-spf-dkim-dmarc-smtp" title="Permanent link">&para;</a></h1>
 <p>The <strong>RTMS (Real-Time Monitoring System)</strong> suite incorporates comprehensive email security and DNS resolution audit capabilities, engineered for both air-gapped / enterprise intranets and Internet-facing email architectures.</p>
 <hr />
-<h2 id="1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc">1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC)<a class="headerlink" href="#1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc" title="Permanent link">&para;</a></h2>
+<h2 id="1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc-dnssec-mta-sts">1. DNS Audit &amp; Anti-Spoofing Verification (SPF, DKIM, DMARC, DNSSEC, MTA-STS)<a class="headerlink" href="#1-dns-audit-anti-spoofing-verification-spf-dkim-dmarc-dnssec-mta-sts" title="Permanent link">&para;</a></h2>
 <p>The <code>dns_audits/dns_integrity.py</code> module evaluates DNS resolution integrity and validates domain email security policies against spoofing.</p>
 <h3 id="operation-in-isolated-enterprise-networks">Operation in Isolated Enterprise Networks<a class="headerlink" href="#operation-in-isolated-enterprise-networks" title="Permanent link">&para;</a></h3>
 <p>In an isolated intranet environment (without egress to public DNS servers like <code>1.1.1.1</code> or <code>8.8.8.8</code>):
 * The scanner queries the <strong>designated internal enterprise DNS server</strong> or the operating system resolver (<code>/etc/resolv.conf</code> / Active Directory DNS).
 * It verifies the syntax, presence, and alignment of email security records:
-  * <strong>SPF (<code>v=spf1 ...</code>)</strong>: Validates internal and external IP addresses authorized to send mail.
-  * <strong>DMARC (<code>_dmarc.&lt;domain&gt;</code>)</strong>: Verifies alignment policies (<code>p=none</code>, <code>quarantine</code>, or <code>reject</code>).
-  * <strong>DKIM (<code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code>)</strong>: Probes published public keys across standard and custom enterprise selectors.</p>
+  * <strong>SPF (<code>v=spf1 ...</code>)</strong>: Validates internal and external IP addresses authorized to send mail. Flags dangerous <code>+all</code> directives (<code>CRITICAL</code>), neutral <code>?all</code> policies (<code>LOW</code>), and RFC 7208 10-lookup limits exceeded (<code>HIGH</code>).
+  * <strong>DMARC (<code>_dmarc.&lt;domain&gt;</code>)</strong>: Verifies alignment policies (<code>p=none</code>, <code>quarantine</code>, or <code>reject</code>). Warns on passive monitoring mode (<code>p=none</code>) and missing aggregate reporting (<code>rua=</code>).
+  * <strong>DKIM (<code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code>)</strong>: Probes published public keys across standard and custom enterprise selectors.
+  * <strong>DNSSEC</strong>: Verifies zone cryptographic signing (presence of <code>DS</code> and <code>DNSKEY</code> records).
+  * <strong>MTA-STS (RFC 8461) &amp; TLS-RPT (RFC 8460)</strong>: Probes <code>_mta-sts</code> policy records and <code>_smtp._tls</code> reporting to mitigate in-transit STARTTLS downgrade attacks.
+  * <strong>FCrDNS (Forward-Confirmed Reverse DNS)</strong>: Verifies consistency between MX records, IP addresses, reverse PTR records, and forward re-resolution.</p>
 <h3 id="configuration-properties">Configuration Properties<a class="headerlink" href="#configuration-properties" title="Permanent link">&para;</a></h3>
 <p>These parameters can be configured in <code>scanner.properties</code> or dynamically provisioned via the Web Console:</p>
 <table>
@@ -2713,9 +2716,13 @@ Adhering strictly to RTMS non-intrusive scanning principles, this plugin <strong
 </ul>
 <h3 id="security-checks-performed">Security Checks Performed<a class="headerlink" href="#security-checks-performed" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>In-Transit Encryption (STARTTLS)</strong>:</li>
-<li>Probes whether the server advertises <code>STARTTLS</code>.</li>
+<li><strong>In-Transit Encryption (STARTTLS / SMTPS)</strong>:</li>
+<li>Probes whether the server advertises <code>STARTTLS</code> or supports implicit SMTPS.</li>
 <li>Flags a <code>MEDIUM</code> severity vulnerability if absent (unencrypted password transmission or plaintext eavesdropping on the LAN).</li>
+<li><strong>Obsolete Protocol Probing</strong>:</li>
+<li>Detects whether the server accepts deprecated <strong>TLS 1.0 or TLS 1.1</strong> handshakes (vulnerable to BEAST, POODLE, and downgrade attacks - severity <code>HIGH</code>).</li>
+<li><strong>TLS Certificate Expiry &amp; Integrity</strong>:</li>
+<li>Inspects peer certificates for impending expiration (&lt; 30 days) or expired validity periods.</li>
 <li><strong>Open Mail Relay Detection (RFC 5321)</strong>:</li>
 <li>Initiates an unauthenticated <code>MAIL FROM</code> transaction to an external mailbox via <code>RCPT TO:&lt;untrusted-relay-test@example.org&gt;</code>.</li>
 <li><strong>Safe Probing Guarantee:</strong> The scanner immediately issues an <code>RSET</code> (Reset) command. <strong>No email is ever sent.</strong></li>
