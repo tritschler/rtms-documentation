@@ -2140,13 +2140,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-creation-on-your-mac" class="md-nav__link">
+  <a href="#1-administrative-license-creation-modes-3ts-internal-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Creation (On your Mac)
+        1. Administrative License Creation Modes (3TS Internal Operations)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Administrative License Creation Modes (3TS Internal Operations)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cryptographic-signing-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cryptographic Signing Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2296,10 +2313,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-key-generation-3ts-admin-machine" class="md-nav__link">
+  <a href="#3-key-bundle-generation-3ts-admin-web-backoffice-or-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Key Generation (3TS Admin Machine)
+        3. Key &amp; Bundle Generation (3TS Admin: Web Backoffice or CLI)
       
     </span>
   </a>
@@ -2742,13 +2759,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-creation-on-your-mac" class="md-nav__link">
+  <a href="#1-administrative-license-creation-modes-3ts-internal-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Creation (On your Mac)
+        1. Administrative License Creation Modes (3TS Internal Operations)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Administrative License Creation Modes (3TS Internal Operations)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cryptographic-signing-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cryptographic Signing Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2898,10 +2932,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-key-generation-3ts-admin-machine" class="md-nav__link">
+  <a href="#3-key-bundle-generation-3ts-admin-web-backoffice-or-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Key Generation (3TS Admin Machine)
+        3. Key &amp; Bundle Generation (3TS Admin: Web Backoffice or CLI)
       
     </span>
   </a>
@@ -3025,14 +3059,24 @@
 
 
 <h1 id="rtms-licensing-system">RTMS Licensing System<a class="headerlink" href="#rtms-licensing-system" title="Permanent link">&para;</a></h1>
-<h2 id="1-creation-on-your-mac">1. Creation (On your Mac)<a class="headerlink" href="#1-creation-on-your-mac" title="Permanent link">&para;</a></h2>
-<p>The license is generated asymmetrically via your generation script.</p>
+<h2 id="1-administrative-license-creation-modes-3ts-internal-operations">1. Administrative License Creation Modes (3TS Internal Operations)<a class="headerlink" href="#1-administrative-license-creation-modes-3ts-internal-operations" title="Permanent link">&para;</a></h2>
+<p>3TS internal operations support two official procedures for issuing RSA-2048 cryptographically signed licenses:</p>
 <ul>
-<li><strong>Inputs:</strong> The script takes the <code>machine_id</code> (the DMI UUID of the target machine), the plan type (<code>PRO</code>), the maximum number of hosts, and the expiration date.</li>
-<li><strong>Canonical Serialization:</strong> The dictionary containing this information (the <code>raw_payload</code>) is converted into an ultra-strict JSON string. Keys are sorted alphabetically (<code>sort_keys=True</code>) and unnecessary whitespaces are removed (<code>separators=(',', ':')</code>). This is crucial: any extra space or key reordering would alter the final hash.</li>
-<li><strong>Cryptographic Signature:</strong> This character string is hashed using <strong>SHA-256</strong>, then encrypted (signed) with your RSA-2048 private key (<code>private_key.pem</code>).</li>
-<li><strong>Output (<code>license.key</code>):</strong> The script generates the final JSON file containing the <code>raw_payload</code>, the Base64-encoded signature (<code>cryptographic_signature</code>), and surface metadata.</li>
+<li><strong>Option A — Direct Manual Issuance (Web Backoffice <code>/licenses</code> or CLI):</strong><br />
+  Used for initial on-boarding, standalone machine activations, lab testing, or emergency overrides. The administrator enters the target <code>machine_id</code> (DMI UUID / IOPlatformUUID), plan, and asset capacity directly. In the RTMS-Admin web portal, clicking <strong>« Émettre une Licence RSA »</strong> generates a signed individual <code>license_&lt;tenant_id&gt;.key</code> file ready for delivery.</li>
+<li><strong>Option B — Automated Customer Renewal &amp; Bundle Issuance (Web Backoffice or CLI):</strong><br />
+  Used for customer renewals and multi-probe enterprise expansions. The customer triggers a renewal request from their RTMS Web interface (<code>/license</code>), and the 3TS administrator approves it with 1 click in RTMS-Admin (<strong>« Approuver &amp; Bundle »</strong>), generating a consolidated <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code> file.</li>
 </ul>
+<blockquote>
+<p>[!NOTE]
+<strong>Client vs. Internal Boundary:</strong> End-user customer organizations only have access to the client side of <strong>Option B</strong> (generating renewal requests and uploading signed keys/bundles). Direct license signing and financial payment bypass (Option A) are strictly restricted to 3TS internal personnel.</p>
+</blockquote>
+<h3 id="cryptographic-signing-fundamentals">Cryptographic Signing Fundamentals<a class="headerlink" href="#cryptographic-signing-fundamentals" title="Permanent link">&para;</a></h3>
+<p>Whether issued via Option A or Option B, the license payload is signed asymmetrically:
+* <strong>Inputs:</strong> The generator takes the <code>machine_id</code>, plan type (<code>NVD</code>, <code>DISCOVERY</code>, <code>SECURE</code>, <code>COMPLIANCE</code>), maximum host count, and expiration date.
+* <strong>Canonical Serialization:</strong> The dictionary containing this information (the <code>raw_payload</code>) is converted into an ultra-strict JSON string. Keys are sorted alphabetically (<code>sort_keys=True</code>) and unnecessary whitespaces are removed (<code>separators=(',', ':')</code>). This is crucial: any extra space or key reordering would alter the final hash.
+* <strong>Cryptographic Signature:</strong> This character string is hashed using <strong>SHA-256</strong>, then encrypted (signed) with the RSA-2048 private key (<code>private_key.pem</code>).
+* <strong>Output Artifact:</strong> The system generates the final JSON structure containing the <code>raw_payload</code>, the Base64-encoded signature (<code>cryptographic_signature</code>), and surface metadata.</p>
 <hr />
 <h2 id="2-import-and-db-injection-on-the-dell-server">2. Import and DB Injection (On the Dell Server)<a class="headerlink" href="#2-import-and-db-injection-on-the-dell-server" title="Permanent link">&para;</a></h2>
 <p>Database import is not handled by an external script; it is <strong>automatically managed by the binary at startup</strong>.</p>
@@ -3140,16 +3184,21 @@
 <li>It records the request in PostgreSQL (<code>license_requests</code>) and assigns a reference ID (<code>RTMS-LIC-YYYY-XXXX</code>).</li>
 <li>An automated email alert is immediately sent to <code>support@3ts-consulting.com</code> detailing the requested plan, asset count, and all detected hardware footprints.</li>
 </ul>
-<h3 id="3-key-generation-3ts-admin-machine">3. Key Generation (3TS Admin Machine)<a class="headerlink" href="#3-key-generation-3ts-admin-machine" title="Permanent link">&para;</a></h3>
+<h3 id="3-key-bundle-generation-3ts-admin-web-backoffice-or-cli">3. Key &amp; Bundle Generation (3TS Admin: Web Backoffice or CLI)<a class="headerlink" href="#3-key-bundle-generation-3ts-admin-web-backoffice-or-cli" title="Permanent link">&para;</a></h3>
+<p>The 3TS administrator processes the received request using either the web management console or the CLI:</p>
 <ul>
-<li>The 3TS administrator uses their offline workstation where <code>private_key.pem</code> is stored.</li>
-<li>Generation is executed in 1 command without manual Hardware ID re-entry:
-  <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>license_generator.py<span class="w"> </span>--request<span class="w"> </span>rtms_renewal_request_&lt;tenant_id&gt;.json
-</span></code></pre></div></li>
-<li>The generator:</li>
-<li>Automatically matches target machines.</li>
-<li>Validates client payment records in <code>customers</code> DB.</li>
-<li>Produces individual <code>license-&lt;id&gt;.key</code> files and a unified <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code>.</li>
+<li><strong>Method 1: RTMS-Admin Web Backoffice (Recommended)</strong></li>
+<li>Open the RTMS-Admin console and navigate to <strong>Gestion des Licences</strong> (<code>/licenses</code>) → tab <strong>« Demandes de Renouvellement »</strong>.</li>
+<li>Locate the pending request (<code>RTMS-LIC-YYYY-XXXX</code>) and click <strong>« Approuver &amp; Bundle »</strong>.</li>
+<li>
+<p>The system validates the client record, cryptographically signs individual RSA-2048 licenses for every attached scanner/engine, and downloads <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code>.</p>
+</li>
+<li>
+<p><strong>Method 2: Offline Command Line (CLI)</strong>
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>license_manager/license_generator.py<span class="w"> </span>--request<span class="w"> </span>rtms_renewal_request_&lt;tenant_id&gt;.json
+</span></code></pre></div>
+  The script automatically matches machines, validates client records in the <code>customers</code> DB, and outputs individual <code>.key</code> files plus the unified <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code>.</p>
+</li>
 </ul>
 <h3 id="4-client-import-activation">4. Client Import &amp; Activation<a class="headerlink" href="#4-client-import-activation" title="Permanent link">&para;</a></h3>
 <ul>

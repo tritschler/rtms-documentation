@@ -1191,13 +1191,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-renouvellement-et-extension-de-licence" class="md-nav__link">
+  <a href="#4-renouvellement-et-extension-de-licence-procedure-utilisateur" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Renouvellement et Extension de Licence
+        4. Renouvellement et Extension de Licence (Procédure Utilisateur)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. Renouvellement et Extension de Licence (Procédure Utilisateur)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-consultation-de-letat-de-la-licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Consultation de l'état de la licence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-declenchement-de-la-demande-de-renouvellement-ou-dupgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Déclenchement de la demande de renouvellement ou d'upgrade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-generation-et-transmission-de-la-demande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Génération et transmission de la demande
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-importation-et-activation-de-la-nouvelle-licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Importation et activation de la nouvelle licence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1294,13 +1344,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-renouvellement-et-extension-de-licence" class="md-nav__link">
+  <a href="#4-renouvellement-et-extension-de-licence-procedure-utilisateur" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Renouvellement et Extension de Licence
+        4. Renouvellement et Extension de Licence (Procédure Utilisateur)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. Renouvellement et Extension de Licence (Procédure Utilisateur)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-consultation-de-letat-de-la-licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : Consultation de l'état de la licence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-declenchement-de-la-demande-de-renouvellement-ou-dupgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : Déclenchement de la demande de renouvellement ou d'upgrade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-generation-et-transmission-de-la-demande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : Génération et transmission de la demande
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-importation-et-activation-de-la-nouvelle-licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 : Importation et activation de la nouvelle licence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1363,10 +1463,47 @@ Aucune donnée confidentielle d'entreprise (mots de passe, flux réseau sensible
 <li><strong>Contrôle d'intégrité cryptographique</strong> : Tout paquet téléchargé est vérifié via son empreinte cryptographique SHA-256 avant déploiement, interdisant toute altération en transit.</li>
 </ol>
 <hr />
-<h2 id="4-renouvellement-et-extension-de-licence">4. Renouvellement et Extension de Licence<a class="headerlink" href="#4-renouvellement-et-extension-de-licence" title="Permanent link">&para;</a></h2>
-<p>Lorsqu'une licence arrive à échéance ou que le périmètre des équipements supervisés s'élargit :
-* Une demande de renouvellement ou d'extension de palier peut être soumise en 1 clic.
-* L'empreinte technique des sondes actives est compilée de façon sécurisée et transmise au centre technique pour l'émission immédiate du nouveau certificat de licence.</p>
+<h2 id="4-renouvellement-et-extension-de-licence-procedure-utilisateur">4. Renouvellement et Extension de Licence (Procédure Utilisateur)<a class="headerlink" href="#4-renouvellement-et-extension-de-licence-procedure-utilisateur" title="Permanent link">&para;</a></h2>
+<p>L'administration des licences d'exploitation pour les clients et organisations s'effectue intégralement depuis le portail RTMS Web via l'écran <strong>Paramètres &gt; Souscription &amp; Licence</strong> (<code>/license</code>). </p>
+<p>Les organisations clientes n'ont pas accès à la génération de clés brutes (processus cryptographique réservé à l'autorité 3TS) : la procédure officielle repose sur le <strong>cycle de demande de renouvellement et d'importation de bundle (Option B)</strong>.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Admin as Administrateur Client
+    participant Web as RTMS Web (/license)
+    participant Support as Passerelle 3TS Consulting
+
+    Admin-&gt;&gt;Web: 1. Demande de renouvellement / extension
+    Web-&gt;&gt;Web: 2. Résolution auto des Hardware IDs (sondes, NVD)
+    Web--&gt;&gt;Admin: 3. Téléchargement rtms_renewal_request_&lt;tenant&gt;.json
+    Web-&gt;&gt;Support: 4. Transmission sécurisée de la demande
+    Note over Support: Traitement commercial &amp; signature RSA
+    Support--&gt;&gt;Admin: 5. Remise du bundle / fichier licence (.key ou .json)
+    Admin-&gt;&gt;Web: 6. Clic "Upload New License"
+    Web-&gt;&gt;Web: 7. Validation cryptographique locale
+    Web--&gt;&gt;Admin: 8. Activation immédiate sans redémarrage</code></pre>
+<h3 id="etape-1-consultation-de-letat-de-la-licence">Étape 1 : Consultation de l'état de la licence<a class="headerlink" href="#etape-1-consultation-de-letat-de-la-licence" title="Permanent link">&para;</a></h3>
+<p>Depuis l'écran <code>/license</code> :
+* Visualisez la formule active (<strong>NVD</strong>, <strong>Discovery</strong>, <strong>Secure</strong> ou <strong>Compliance</strong>) et sa date d'échéance.
+* Vérifiez la jauge d'actifs monitorés par rapport au plafond souscrit (ex. 248 / 250 IPs).
+* Consultez la liste des sondes matérielles et microservices enregistrés avec leurs identifiants matériels (<em>Hardware IDs</em>).</p>
+<h3 id="etape-2-declenchement-de-la-demande-de-renouvellement-ou-dupgrade">Étape 2 : Déclenchement de la demande de renouvellement ou d'upgrade<a class="headerlink" href="#etape-2-declenchement-de-la-demande-de-renouvellement-ou-dupgrade" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Cliquez sur le bouton <strong>« Mettre à niveau la licence »</strong> (ou <strong>« Demander une mise à niveau anticipée »</strong> si votre volumétrie approche de la limite).</li>
+<li>Sélectionnez la <strong>Formule souhaitée</strong> ainsi que le <strong>Palier d'actifs</strong> cible (ex: 50, 250, 500 ou 1000+ adresses IP).</li>
+<li>Ajoutez d'éventuelles notes ou spécifications dans le champ prévu à cet effet.</li>
+</ol>
+<h3 id="etape-3-generation-et-transmission-de-la-demande">Étape 3 : Génération et transmission de la demande<a class="headerlink" href="#etape-3-generation-et-transmission-de-la-demande" title="Permanent link">&para;</a></h3>
+<p>Cliquez sur <strong>« Générer la demande de renouvellement »</strong> :
+* <strong>Résolution automatique des identifiants matériels</strong> : La plateforme compile automatiquement les empreintes uniques de votre instance, de vos sondes actives et de votre moteur CVE local, évitant toute saisie manuelle d'UUID.
+* <strong>Téléchargement du fichier de demande</strong> : Un fichier nommé <code>rtms_renewal_request_&lt;tenant_id&gt;.json</code> est automatiquement téléchargé dans votre dossier local de téléchargements.
+* <strong>Transmission automatique</strong> : Si la liaison avec la passerelle technique 3TS est configurée, la demande est instantanément transmise de manière chiffrée avec accusé de réception (<code>RTMS-LIC-YYYY-XXXX</code>). Dans le cas contraire, transmettez ce fichier <code>.json</code> par courriel à votre interlocuteur 3TS Consulting.</p>
+<h3 id="etape-4-importation-et-activation-de-la-nouvelle-licence">Étape 4 : Importation et activation de la nouvelle licence<a class="headerlink" href="#etape-4-importation-et-activation-de-la-nouvelle-licence" title="Permanent link">&para;</a></h3>
+<p>Dès réception de votre nouvelle licence émise et signée par 3TS (fichier individuel <code>.key</code> ou bundle multi-sondes <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code>) :
+1. Retournez sur l'écran <strong>Paramètres &gt; Souscription &amp; Licence</strong> (<code>/license</code>).
+2. En haut à droite de l'écran, cliquez sur <strong>« Upload New License »</strong>.
+3. Sélectionnez le fichier <code>.key</code> ou <code>.json</code> fourni par 3TS.
+4. L'instance procède instantanément au contrôle cryptographique de la signature RSA-2048.
+5. <strong>Prise d'effet immédiate</strong> : Dès validation, les nouveaux plafonds et dates d'échéance s'affichent à l'écran. Aucune coupure de service ni redémarrage des sondes ou de la machine n'est nécessaire.</p>
 
 
 

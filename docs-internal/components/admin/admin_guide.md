@@ -66,41 +66,68 @@ uv run python main.py add_payment
 
 ---
 
-### Step 4: Generate the License
+### Step 4: License Issuance & Management Workflows (Options A & B)
 
-This step generates cryptographically signed license keys using your offline RSA private key (`private_key.pem`). Two workflows are available:
+This step generates cryptographically signed license keys using your offline RSA-2048 private key (`private_key.pem`). 3TS administrators have two complementary operational pathways available both via the **RTMS-Admin Web Backoffice (`/licenses`)** and the **Command-Line Interface (CLI)**:
 
-#### Mode A: Interactive Manual Creation
-Use this when issuing a license for a new customer or single machine manually.
+| Feature / Criteria | Option A: Direct Manual Issuance | Option B: Renewal Request Ingestion |
+| :--- | :--- | :--- |
+| **Primary Interface** | Web UI (`Émettre une Licence RSA`) or CLI | Web UI (`Demandes de Renouvellement`) or CLI |
+| **Typical Use Case** | Initial deployments, single-machine setup, emergency fixes, lab tests | Annual renewals, tier expansions (True-Up), multi-probe setups |
+| **Hardware ID Entry** | Manual input / copy-pasted Machine ID | 100% automated resolution from customer telemetry |
+| **Financial Validation** | Checked against `customers` DB (or administrative bypass) | Checked against `customers` DB / sales agreement |
+| **Output Artifact** | Individual `license_<tenant_id>.key` file | Unified `rtms_license_bundle_<tenant_id>.json` |
 
-**Command:**
+---
+
+#### Option A: Direct / Manual License Issuance (Single Node or Emergency)
+
+Use this when issuing a license for a new customer, single machine, or when performing administrative testing without prior submission of a renewal request from RTMS Web.
+
+##### 1. Web Backoffice Procedure (`/licenses`)
+1. Open the RTMS Admin portal and navigate to **Gestion des Licences** (`/licenses`).
+2. Click the primary button **« Émettre une Licence RSA »** (`#btn-open-issue-license`).
+3. Select the target **Client** from the dropdown (must be an active client in `3TS.clients`).
+4. Select the desired **Plan** (`NVD`, `DISCOVERY`, `SECURE`, `COMPLIANCE`) and **Max Hosts** capacity (`50`, `250`, `1000` IPs).
+5. Enter the target host's **Machine ID** (e.g. `EDD6DC2E-9485-5FAF-9990-268E4A39B4A2`).
+6. *Optional*: Check **« Dérogation administrative »** (`bypass_payment`) if issuing for testing or before formal accounting ingestion.
+7. Click **« Générer et Signer la Licence »**.
+8. In the success modal, click **« Télécharger la Clé (.key) »** to obtain `license_<tenant_id>.key`.
+9. Deliver this file to the client administrator for direct upload via RTMS Web.
+
+##### 2. CLI Procedure
 ```bash
 uv run python main.py create_license
 ```
+* **Client Verification**: Prompts for `Client ID` and verifies `"active"` status.
+* **Payment Check**: Interrogates the `pricing` matrix and verifies an unclaimed payment (unless bypassed).
+* **Generation**: Generates and signs `license.key`, saves metadata to PostgreSQL `"3TS".licenses`, and marks the payment as consumed.
 
-**What happens:**
-1. **Client Verification:** The script asks for the `Client ID` and verifies that the client exists and is `"active"`.
-2. **Payment Verification:** The script searches the database for an "unclaimed" payment. If none is found, generation is blocked.
-3. **Pricing Matrix Validation:** 
-   - You select a `Plan` (NVD, DISCOVERY, SECURE, COMPLIANCE) and `Max Hosts`.
-   - The script interrogates the internal `pricing` table to calculate the exact price required.
-   - **Strict Block:** If the payment amount is strictly lower than the expected price, generation is aborted.
-4. **Generation & Tracking:** The `license.key` file is generated. The script securely records the license metadata in the `"3TS"` schema and updates the payment row to mark the payment as "consumed".
+---
 
-#### Mode B: Ingest Customer Renewal / Upgrade Request (Automated)
-Use this when renewing existing client licenses or processing multi-scanner deployments without manual Hardware ID re-entry.
+#### Option B: Automated Ingestion of Renewal / Upgrade Requests (Multi-Component Bundle)
 
-**Command:**
+Use this for annual renewals, capacity upgrades, or multi-probe enterprise topologies. Hardware IDs for all distributed scanners, agents, and microservices are automatically resolved without human error.
+
+##### 1. Web Backoffice Procedure (`/licenses` → Onglet *Demandes de Renouvellement*)
+1. In RTMS-Admin, switch to the tab **« Demandes de Renouvellement »**.
+2. All pending requests submitted from customer instances via the Central Support Hub (`POST /api/v1/license-requests`) are displayed with reference (`RTMS-LIC-YYYY-XXXX`), tenant, contact details, requested tier, and component count.
+3. Click **« Approuver & Bundle »** on the desired pending request:
+   * The backend validates the client in `"3TS".clients`.
+   * Automatically iterates through all detected hardware components (Scanners, NVD Engine, Local Agents).
+   * Generates and cryptographically signs an RSA-2048 license for each hardware target.
+   * Compiles the unified bundle `rtms_license_bundle_<tenant_id>.json`.
+   * Transitions the request status to `processed` with administrative audit timestamps.
+   * Triggers an automatic browser download of the completed bundle JSON file.
+4. Transmit this bundle file to the client; they upload it to RTMS Web (`/license`) in 1 click.
+
+##### 2. CLI Procedure
 ```bash
 python license_manager/license_generator.py --request rtms_renewal_request_<tenant_id>.json
 ```
-
-**What happens:**
-1. **Request Ingestion:** The generator reads the JSON file exported from the customer's RTMS Web portal (or received via the Central VPS Support Hub).
-2. **Automatic Hardware Resolution:** Resolves all registered Hardware IDs for Scanners, NVD Engine, and Local Agents.
-3. **Database Validation:** Checks client status and unclaimed payments in the `customers` database.
-4. **Multi-License Generation:** Generates signed keys for each distinct hardware footprint and creates a unified bundle file `rtms_license_bundle_<tenant_id>.json`.
-5. **Customer Delivery:** Deliver the bundle file to the client; they upload it directly on their portal in 1 click.
+* **Request Parsing**: Reads the JSON file generated by the customer's RTMS Web portal.
+* **Batch Signing**: Generates cryptographic RSA-2048 envelopes for every registered hardware footprint.
+* **Output**: Writes individual `.key` files and the consolidated `rtms_license_bundle_<tenant_id>.json`.
 
 ---
 

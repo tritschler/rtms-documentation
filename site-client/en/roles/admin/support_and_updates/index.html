@@ -1191,13 +1191,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-license-lifecycle-expansion-requests" class="md-nav__link">
+  <a href="#4-license-lifecycle-expansion-requests-user-procedure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. License Lifecycle &amp; Expansion Requests
+        4. License Lifecycle &amp; Expansion Requests (User Procedure)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. License Lifecycle &amp; Expansion Requests (User Procedure)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-review-current-license-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Review Current License Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-trigger-renewal-or-tier-upgrade-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Trigger Renewal or Tier Upgrade Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-generate-and-transmit-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Generate and Transmit Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-import-and-activate-renewed-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Import and Activate Renewed License
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1294,13 +1344,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-license-lifecycle-expansion-requests" class="md-nav__link">
+  <a href="#4-license-lifecycle-expansion-requests-user-procedure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. License Lifecycle &amp; Expansion Requests
+        4. License Lifecycle &amp; Expansion Requests (User Procedure)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. License Lifecycle &amp; Expansion Requests (User Procedure)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-review-current-license-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Review Current License Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-trigger-renewal-or-tier-upgrade-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Trigger Renewal or Tier Upgrade Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-generate-and-transmit-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Generate and Transmit Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-import-and-activate-renewed-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Import and Activate Renewed License
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1362,10 +1462,47 @@ No confidential client data (passwords, cleartext network payloads, or personal 
 <li><strong>Cryptographic Integrity Validation</strong>: Every staged package is verified against its SHA-256 hash before installation, ensuring tamper-proof delivery.</li>
 </ol>
 <hr />
-<h2 id="4-license-lifecycle-expansion-requests">4. License Lifecycle &amp; Expansion Requests<a class="headerlink" href="#4-license-lifecycle-expansion-requests" title="Permanent link">&para;</a></h2>
-<p>When an annual license approaches expiration or additional network assets require monitoring:
-* A renewal or tier expansion request can be submitted with 1 click.
-* Hardware footprint metrics from authorized probes are compiled and securely transmitted to the technical center for instant license generation and activation.</p>
+<h2 id="4-license-lifecycle-expansion-requests-user-procedure">4. License Lifecycle &amp; Expansion Requests (User Procedure)<a class="headerlink" href="#4-license-lifecycle-expansion-requests-user-procedure" title="Permanent link">&para;</a></h2>
+<p>Subscription license administration for customer organizations is managed entirely from the RTMS Web portal via <strong>Settings &gt; Subscription &amp; License</strong> (<code>/license</code>).</p>
+<p>Customer organizations do not have direct access to raw RSA key signing tools (which remain strictly restricted to 3TS internal authorities): the official customer procedure relies on the <strong>renewal request and bundle import cycle (Option B)</strong>.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Admin as Customer Administrator
+    participant Web as RTMS Web (/license)
+    participant Support as 3TS Consulting Support Gateway
+
+    Admin-&gt;&gt;Web: 1. Request renewal / tier upgrade
+    Web-&gt;&gt;Web: 2. Auto-resolve hardware fingerprints (probes, NVD)
+    Web--&gt;&gt;Admin: 3. Download rtms_renewal_request_&lt;tenant&gt;.json
+    Web-&gt;&gt;Support: 4. Encrypted transmission to support hub
+    Note over Support: Order processing &amp; RSA key signing
+    Support--&gt;&gt;Admin: 5. Deliver signed bundle / key file (.key or .json)
+    Admin-&gt;&gt;Web: 6. Click "Upload New License"
+    Web-&gt;&gt;Web: 7. Instant local cryptographic verification
+    Web--&gt;&gt;Admin: 8. Zero-downtime hot activation</code></pre>
+<h3 id="step-1-review-current-license-status">Step 1: Review Current License Status<a class="headerlink" href="#step-1-review-current-license-status" title="Permanent link">&para;</a></h3>
+<p>From the <code>/license</code> dashboard:
+* Check your active plan tier (<strong>NVD</strong>, <strong>Discovery</strong>, <strong>Secure</strong>, or <strong>Compliance</strong>) and its expiration date.
+* Monitor your asset utilization gauge against the licensed node cap (e.g., 248 / 250 IPs).
+* Inspect the list of registered network probes, local agents, and microservices along with their Hardware IDs.</p>
+<h3 id="step-2-trigger-renewal-or-tier-upgrade-request">Step 2: Trigger Renewal or Tier Upgrade Request<a class="headerlink" href="#step-2-trigger-renewal-or-tier-upgrade-request" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Click <strong>"Upgrade License"</strong> (or <strong>"Request Early Upgrade"</strong> if asset count approaches capacity).</li>
+<li>Choose the <strong>Desired Plan</strong> and target <strong>Asset Tier</strong> (e.g., 50, 250, 500, or 1000+ monitored IP addresses).</li>
+<li>Optionally enter business or architecture notes in the provided field.</li>
+</ol>
+<h3 id="step-3-generate-and-transmit-request">Step 3: Generate and Transmit Request<a class="headerlink" href="#step-3-generate-and-transmit-request" title="Permanent link">&para;</a></h3>
+<p>Click <strong>"Generate Request File"</strong>:
+* <strong>Automatic Hardware Fingerprint Binding</strong>: The system automatically queries your appliance to resolve the unique hardware UUIDs of all active network probes and local services without requiring manual command-line extraction.
+* <strong>Local Request File Download</strong>: A backup file named <code>rtms_renewal_request_&lt;tenant_id&gt;.json</code> is automatically saved to your downloads folder.
+* <strong>Automated Gateway Transmission</strong>: If configured with the 3TS Central Support Hub, the request is dispatched immediately over TLS 1.3 with an acknowledgment reference (<code>RTMS-LIC-YYYY-XXXX</code>). Otherwise, simply email the <code>.json</code> file to your designated 3TS account representative.</p>
+<h3 id="step-4-import-and-activate-renewed-license">Step 4: Import and Activate Renewed License<a class="headerlink" href="#step-4-import-and-activate-renewed-license" title="Permanent link">&para;</a></h3>
+<p>Upon receiving your renewed license issued by 3TS (either an individual <code>.key</code> file or a unified multi-probe bundle <code>rtms_license_bundle_&lt;tenant_id&gt;.json</code>):
+1. Navigate back to <strong>Settings &gt; Subscription &amp; License</strong> (<code>/license</code>).
+2. In the top-right corner, click <strong>"Upload New License"</strong>.
+3. Select the <code>.key</code> or <code>.json</code> file received from 3TS.
+4. The appliance performs immediate offline RSA-2048 cryptographic validation.
+5. <strong>Instant Live Activation</strong>: Upon verification, updated expiration dates and higher asset caps are applied instantly without service disruption or restart of scanning engines.</p>
 
 
 

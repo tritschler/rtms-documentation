@@ -50,8 +50,51 @@ La section **Administration > Mises à jour logicielles** assure la maintenance 
 
 ---
 
-## 4. Renouvellement et Extension de Licence
+## 4. Renouvellement et Extension de Licence (Procédure Utilisateur)
 
-Lorsqu'une licence arrive à échéance ou que le périmètre des équipements supervisés s'élargit :
-* Une demande de renouvellement ou d'extension de palier peut être soumise en 1 clic.
-* L'empreinte technique des sondes actives est compilée de façon sécurisée et transmise au centre technique pour l'émission immédiate du nouveau certificat de licence.
+L'administration des licences d'exploitation pour les clients et organisations s'effectue intégralement depuis le portail RTMS Web via l'écran **Paramètres > Souscription & Licence** (`/license`). 
+
+Les organisations clientes n'ont pas accès à la génération de clés brutes (processus cryptographique réservé à l'autorité 3TS) : la procédure officielle repose sur le **cycle de demande de renouvellement et d'importation de bundle (Option B)**.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Admin as Administrateur Client
+    participant Web as RTMS Web (/license)
+    participant Support as Passerelle 3TS Consulting
+    
+    Admin->>Web: 1. Demande de renouvellement / extension
+    Web->>Web: 2. Résolution auto des Hardware IDs (sondes, NVD)
+    Web-->>Admin: 3. Téléchargement rtms_renewal_request_<tenant>.json
+    Web->>Support: 4. Transmission sécurisée de la demande
+    Note over Support: Traitement commercial & signature RSA
+    Support-->>Admin: 5. Remise du bundle / fichier licence (.key ou .json)
+    Admin->>Web: 6. Clic "Upload New License"
+    Web->>Web: 7. Validation cryptographique locale
+    Web-->>Admin: 8. Activation immédiate sans redémarrage
+```
+
+### Étape 1 : Consultation de l'état de la licence
+Depuis l'écran `/license` :
+* Visualisez la formule active (**NVD**, **Discovery**, **Secure** ou **Compliance**) et sa date d'échéance.
+* Vérifiez la jauge d'actifs monitorés par rapport au plafond souscrit (ex. 248 / 250 IPs).
+* Consultez la liste des sondes matérielles et microservices enregistrés avec leurs identifiants matériels (*Hardware IDs*).
+
+### Étape 2 : Déclenchement de la demande de renouvellement ou d'upgrade
+1. Cliquez sur le bouton **« Mettre à niveau la licence »** (ou **« Demander une mise à niveau anticipée »** si votre volumétrie approche de la limite).
+2. Sélectionnez la **Formule souhaitée** ainsi que le **Palier d'actifs** cible (ex: 50, 250, 500 ou 1000+ adresses IP).
+3. Ajoutez d'éventuelles notes ou spécifications dans le champ prévu à cet effet.
+
+### Étape 3 : Génération et transmission de la demande
+Cliquez sur **« Générer la demande de renouvellement »** :
+* **Résolution automatique des identifiants matériels** : La plateforme compile automatiquement les empreintes uniques de votre instance, de vos sondes actives et de votre moteur CVE local, évitant toute saisie manuelle d'UUID.
+* **Téléchargement du fichier de demande** : Un fichier nommé `rtms_renewal_request_<tenant_id>.json` est automatiquement téléchargé dans votre dossier local de téléchargements.
+* **Transmission automatique** : Si la liaison avec la passerelle technique 3TS est configurée, la demande est instantanément transmise de manière chiffrée avec accusé de réception (`RTMS-LIC-YYYY-XXXX`). Dans le cas contraire, transmettez ce fichier `.json` par courriel à votre interlocuteur 3TS Consulting.
+
+### Étape 4 : Importation et activation de la nouvelle licence
+Dès réception de votre nouvelle licence émise et signée par 3TS (fichier individuel `.key` ou bundle multi-sondes `rtms_license_bundle_<tenant_id>.json`) :
+1. Retournez sur l'écran **Paramètres > Souscription & Licence** (`/license`).
+2. En haut à droite de l'écran, cliquez sur **« Upload New License »**.
+3. Sélectionnez le fichier `.key` ou `.json` fourni par 3TS.
+4. L'instance procède instantanément au contrôle cryptographique de la signature RSA-2048.
+5. **Prise d'effet immédiate** : Dès validation, les nouveaux plafonds et dates d'échéance s'affichent à l'écran. Aucune coupure de service ni redémarrage des sondes ou de la machine n'est nécessaire.

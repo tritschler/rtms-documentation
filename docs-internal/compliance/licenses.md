@@ -1,13 +1,23 @@
 # RTMS Licensing System
 
-## 1. Creation (On your Mac)
+## 1. Administrative License Creation Modes (3TS Internal Operations)
 
-The license is generated asymmetrically via your generation script.
+3TS internal operations support two official procedures for issuing RSA-2048 cryptographically signed licenses:
 
-* **Inputs:** The script takes the `machine_id` (the DMI UUID of the target machine), the plan type (`PRO`), the maximum number of hosts, and the expiration date.
+* **Option A — Direct Manual Issuance (Web Backoffice `/licenses` or CLI):**  
+  Used for initial on-boarding, standalone machine activations, lab testing, or emergency overrides. The administrator enters the target `machine_id` (DMI UUID / IOPlatformUUID), plan, and asset capacity directly. In the RTMS-Admin web portal, clicking **« Émettre une Licence RSA »** generates a signed individual `license_<tenant_id>.key` file ready for delivery.
+* **Option B — Automated Customer Renewal & Bundle Issuance (Web Backoffice or CLI):**  
+  Used for customer renewals and multi-probe enterprise expansions. The customer triggers a renewal request from their RTMS Web interface (`/license`), and the 3TS administrator approves it with 1 click in RTMS-Admin (**« Approuver & Bundle »**), generating a consolidated `rtms_license_bundle_<tenant_id>.json` file.
+
+> [!NOTE]
+> **Client vs. Internal Boundary:** End-user customer organizations only have access to the client side of **Option B** (generating renewal requests and uploading signed keys/bundles). Direct license signing and financial payment bypass (Option A) are strictly restricted to 3TS internal personnel.
+
+### Cryptographic Signing Fundamentals
+Whether issued via Option A or Option B, the license payload is signed asymmetrically:
+* **Inputs:** The generator takes the `machine_id`, plan type (`NVD`, `DISCOVERY`, `SECURE`, `COMPLIANCE`), maximum host count, and expiration date.
 * **Canonical Serialization:** The dictionary containing this information (the `raw_payload`) is converted into an ultra-strict JSON string. Keys are sorted alphabetically (`sort_keys=True`) and unnecessary whitespaces are removed (`separators=(',', ':')`). This is crucial: any extra space or key reordering would alter the final hash.
-* **Cryptographic Signature:** This character string is hashed using **SHA-256**, then encrypted (signed) with your RSA-2048 private key (`private_key.pem`).
-* **Output (`license.key`):** The script generates the final JSON file containing the `raw_payload`, the Base64-encoded signature (`cryptographic_signature`), and surface metadata.
+* **Cryptographic Signature:** This character string is hashed using **SHA-256**, then encrypted (signed) with the RSA-2048 private key (`private_key.pem`).
+* **Output Artifact:** The system generates the final JSON structure containing the `raw_payload`, the Base64-encoded signature (`cryptographic_signature`), and surface metadata.
 
 ---
 
@@ -124,16 +134,19 @@ RTMS provides an automated, end-to-end renewal cycle that eliminates the need fo
 * It records the request in PostgreSQL (`license_requests`) and assigns a reference ID (`RTMS-LIC-YYYY-XXXX`).
 * An automated email alert is immediately sent to `support@3ts-consulting.com` detailing the requested plan, asset count, and all detected hardware footprints.
 
-### 3. Key Generation (3TS Admin Machine)
-* The 3TS administrator uses their offline workstation where `private_key.pem` is stored.
-* Generation is executed in 1 command without manual Hardware ID re-entry:
+### 3. Key & Bundle Generation (3TS Admin: Web Backoffice or CLI)
+The 3TS administrator processes the received request using either the web management console or the CLI:
+
+* **Method 1: RTMS-Admin Web Backoffice (Recommended)**
+  1. Open the RTMS-Admin console and navigate to **Gestion des Licences** (`/licenses`) → tab **« Demandes de Renouvellement »**.
+  2. Locate the pending request (`RTMS-LIC-YYYY-XXXX`) and click **« Approuver & Bundle »**.
+  3. The system validates the client record, cryptographically signs individual RSA-2048 licenses for every attached scanner/engine, and downloads `rtms_license_bundle_<tenant_id>.json`.
+
+* **Method 2: Offline Command Line (CLI)**
   ```bash
-  python license_generator.py --request rtms_renewal_request_<tenant_id>.json
+  python license_manager/license_generator.py --request rtms_renewal_request_<tenant_id>.json
   ```
-* The generator:
-  * Automatically matches target machines.
-  * Validates client payment records in `customers` DB.
-  * Produces individual `license-<id>.key` files and a unified `rtms_license_bundle_<tenant_id>.json`.
+  The script automatically matches machines, validates client records in the `customers` DB, and outputs individual `.key` files plus the unified `rtms_license_bundle_<tenant_id>.json`.
 
 ### 4. Client Import & Activation
 * The customer receives the bundle file and clicks **"Upload New License"** on their RTMS Web portal.
